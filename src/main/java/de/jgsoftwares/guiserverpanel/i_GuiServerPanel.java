@@ -11,17 +11,16 @@ import javax.swing.JFrame;
 public interface i_GuiServerPanel
 {
 
+    JFrame frame = null;
+    JPanel centerpanel = null;
+    JPanel northpanel = null;
+    JPanel southpanel = null;
+
+
     public static void main(String[] args)
     {
 
-        try
-        {
-            JFrame frame = null;
-            GUIServerPanel.showFrame(frame);
-        } catch(Exception e)
-        {
-            System.out.print("Fehler" + e);
-        }
+        GUIServerPanel.showFrame(frame, centerpanel, northpanel, southpanel);
 
         SpringApplication.run(GUIServerPanel.class, args);
 
