@@ -1,8 +1,6 @@
 package de.jgsoftwares.guiserverpanel;
 
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
-import com.jgoodies.looks.plastic.theme.DesertBluer;
-import com.jgoodies.looks.plastic.theme.ExperienceBlue;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.swing.*;
@@ -51,7 +49,7 @@ public class GUIServerPanel implements i_GuiServerPanel
             //UIManager.setLookAndFeel(new PlasticLookAndFeel());
           //  UIManager.setLookAndFeel(new PlasticLookAndFeel());
 
-        } catch (Exception ex) {
+            } catch (Exception ex) {
         }
     }
 }
