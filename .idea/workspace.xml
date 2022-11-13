@@ -35,16 +35,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add BorderLayout to JFrame">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_16_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jgoodies_looks_2_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_7_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_1_5_RELEASE.xml" afterDir="false" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="remove jgoodies lib">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/guipanel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/guipanel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -493,7 +485,7 @@
       <workItem from="1668238925306" duration="127000" />
       <workItem from="1668239073960" duration="3106000" />
       <workItem from="1668243846651" duration="7571000" />
-      <workItem from="1668327734712" duration="126000" />
+      <workItem from="1668327734712" duration="266000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -516,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668250284233</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="remove jgoodies lib">
+      <created>1668327877179</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668327877179</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -554,7 +553,8 @@
     <MESSAGE value="init commit &#10;GUI Server Panel for Docker" />
     <MESSAGE value="add simple JFrame to Application by start&#10;Application over interface main method" />
     <MESSAGE value="add BorderLayout to JFrame" />
-    <option name="LAST_COMMIT_MESSAGE" value="add BorderLayout to JFrame" />
+    <MESSAGE value="remove jgoodies lib" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove jgoodies lib" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

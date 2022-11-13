@@ -43,13 +43,16 @@ public class GUIServerPanel implements i_GuiServerPanel
 
     public GUIServerPanel()
     {
-        try {
 
-            //PlasticLookAndFeel.setPlasticTheme(new DesertBluer());
-            //UIManager.setLookAndFeel(new PlasticLookAndFeel());
-          //  UIManager.setLookAndFeel(new PlasticLookAndFeel());
-
-            } catch (Exception ex) {
+        /*
+                set look and Feel to Nimbus
+         */
+        try
+        {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e)
+        {
+            System.out.print("LookAndFeel Error Nimbus !");
         }
     }
 }
