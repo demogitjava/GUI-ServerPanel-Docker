@@ -11,10 +11,6 @@ import javax.swing.JFrame;
 public interface i_GuiServerPanel
 {
 
-    JFrame frame = null;
-    JPanel centerpanel = null;
-    JPanel northpanel = null;
-    JPanel southpanel = null;
 
 
     public static void main(String[] args)
