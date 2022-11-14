@@ -2,9 +2,11 @@
   <dictionary name="root">
     <words>
       <w>centerpanel</w>
+      <w>dockerclient</w>
       <w>mpanel</w>
       <w>northpanel</w>
       <w>southpanel</w>
+      <w>startdockerclient</w>
     </words>
   </dictionary>
 </component>
