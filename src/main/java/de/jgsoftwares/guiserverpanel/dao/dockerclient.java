@@ -23,10 +23,12 @@ public class dockerclient
     }
 
 
-    public void startdockerclient()
+    public void startdockerclient(String username, String password)
     {
        clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
                 .withDockerHost("tcp://127.0.0.1:2375")
+                .withRegistryEmail(username)
+                .withRegistryPassword(password)
                 .withDockerTlsVerify(false)
                 .build();
 
