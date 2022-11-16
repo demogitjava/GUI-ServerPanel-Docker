@@ -35,10 +35,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit layout for jPanel3 &#10;component">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/root.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/root.xml" afterDir="false" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="init docker instace">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -561,7 +559,7 @@
       <workItem from="1668574554781" duration="226000" />
       <workItem from="1668576069071" duration="2727000" />
       <workItem from="1668578815830" duration="1421000" />
-      <workItem from="1668580238442" duration="4819000" />
+      <workItem from="1668580238442" duration="5837000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -640,7 +638,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668582289471</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="init docker instace">
+      <created>1668597063529</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668597063529</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -687,17 +692,11 @@
     <MESSAGE value="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
     <MESSAGE value="add a simple jTree component to &#10;MainPanel" />
     <MESSAGE value="edit layout for jPanel3 &#10;component" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit layout for jPanel3 &#10;component" />
+    <MESSAGE value="init docker instace" />
+    <option name="LAST_COMMIT_MESSAGE" value="init docker instace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>
