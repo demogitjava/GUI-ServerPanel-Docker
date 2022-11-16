@@ -35,10 +35,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add a simple jTree component to &#10;MainPanel">
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit layout for jPanel3 &#10;component">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/root.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/root.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -406,9 +407,10 @@
       </method>
     </configuration>
     <configuration name="MainPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="graalvm-11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="de.jgsoftwares.guiserverpanel.frames.MainPanel" />
       <module name="guipanel" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="de.jgsoftwares.guiserverpanel.frames.*" />
@@ -559,7 +561,7 @@
       <workItem from="1668574554781" duration="226000" />
       <workItem from="1668576069071" duration="2727000" />
       <workItem from="1668578815830" duration="1421000" />
-      <workItem from="1668580238442" duration="1017000" />
+      <workItem from="1668580238442" duration="4819000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -631,7 +633,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668580510405</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="edit layout for jPanel3 &#10;component">
+      <created>1668582289471</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668582289471</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -677,10 +686,18 @@
     <MESSAGE value="edit docker client" />
     <MESSAGE value="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
     <MESSAGE value="add a simple jTree component to &#10;MainPanel" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a simple jTree component to &#10;MainPanel" />
+    <MESSAGE value="edit layout for jPanel3 &#10;component" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit layout for jPanel3 &#10;component" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>
@@ -690,6 +707,7 @@
         <watch expression="objectname" language="JAVA" custom="" />
         <watch expression="clientConfig" language="JAVA" />
         <watch expression="mframe" language="JAVA" custom="" />
+        <watch expression="client" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

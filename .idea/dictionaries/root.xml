@@ -3,6 +3,8 @@
     <words>
       <w>centerpanel</w>
       <w>dockerclient</w>
+      <w>dockercontainer</w>
+      <w>listcontainers</w>
       <w>mpanel</w>
       <w>northpanel</w>
       <w>southpanel</w>

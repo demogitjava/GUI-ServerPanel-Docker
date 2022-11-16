@@ -12,16 +12,27 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.model.Container;
+import com.github.dockerjava.core.DefaultDockerClientConfig;
+import com.github.dockerjava.core.DockerClientBuilder;
+
 public class dockerclient
 {
 
     DefaultDockerClientConfig clientConfig;
+    public static DockerClient client;
 
     public dockerclient()
     {
 
     }
 
+    public void listContainers()
+    {
+
+    }
 
     public void startdockerclient(String username, String password)
     {
@@ -31,7 +42,9 @@ public class dockerclient
                 .withRegistryPassword(password)
                 .withDockerTlsVerify(false)
                 .build();
+        client = DockerClientBuilder.getInstance(clientConfig).build();
 
+        listContainers();
 
     }
 }
