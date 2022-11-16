@@ -35,7 +35,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add a simple jTree component to &#10;MainPanel">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -555,6 +559,7 @@
       <workItem from="1668574554781" duration="226000" />
       <workItem from="1668576069071" duration="2727000" />
       <workItem from="1668578815830" duration="1421000" />
+      <workItem from="1668580238442" duration="1017000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -619,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668509466004</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add a simple jTree component to &#10;MainPanel">
+      <created>1668580510405</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1668580510405</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -664,7 +676,8 @@
     <MESSAGE value="edit pom.xml to &#10;dependency &#10;&#9;&lt;dependency&gt;&#10;&#9;&#9;&#9;&lt;groupId&gt;com.github.docker-java&lt;/groupId&gt;&#10;&#9;&#9;&#9;&lt;artifactId&gt;docker-java&lt;/artifactId&gt;&#10;&#9;&#9;&#9;&lt;version&gt;3.2.13&lt;/version&gt;&#10;&#9;&#9;&lt;/dependency&gt;&#10;&#9;&#9;&#10;add start docker client by default &#10;over ip 127.0.0.1" />
     <MESSAGE value="edit docker client" />
     <MESSAGE value="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
-    <option name="LAST_COMMIT_MESSAGE" value="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
+    <MESSAGE value="add a simple jTree component to &#10;MainPanel" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a simple jTree component to &#10;MainPanel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
