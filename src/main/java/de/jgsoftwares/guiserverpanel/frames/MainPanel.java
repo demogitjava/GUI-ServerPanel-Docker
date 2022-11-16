@@ -34,6 +34,9 @@ public class MainPanel extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTree2 = new javax.swing.JTree();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -76,6 +79,14 @@ public class MainPanel extends javax.swing.JFrame {
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane2.setViewportView(jTree2);
+
+        jPanel4.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel4);
 
         jSplitPane1.setLeftComponent(jPanel2);
 
@@ -258,9 +269,12 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTree jTree2;
     // End of variables declaration//GEN-END:variables
 }

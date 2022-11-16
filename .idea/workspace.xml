@@ -35,13 +35,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit docker client">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/GUIServerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,9 +96,9 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;210&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/root/IdeaProjects/GUI-ServerPanel-Docker&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/root/Downloads/nimbus-0.0.3.zip&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;DockerRegistry&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;IntelliLang.Advanced&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -504,9 +498,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainPanel" />
+        <item itemvalue="Docker.Docker Image" />
         <item itemvalue="Docker.Docker Image (2)" />
         <item itemvalue="Docker.Docker Image (1)" />
-        <item itemvalue="Docker.Docker Image" />
       </list>
     </recent_temporary>
   </component>
@@ -553,7 +547,14 @@
       <workItem from="1668333576328" duration="1853000" />
       <workItem from="1668338803384" duration="12111000" />
       <workItem from="1668438873119" duration="11316000" />
-      <workItem from="1668508737071" duration="653000" />
+      <workItem from="1668508737071" duration="3133000" />
+      <workItem from="1668513295587" duration="1845000" />
+      <workItem from="1668515415948" duration="849000" />
+      <workItem from="1668516283657" duration="1199000" />
+      <workItem from="1668517484684" duration="791000" />
+      <workItem from="1668574554781" duration="226000" />
+      <workItem from="1668576069071" duration="2727000" />
+      <workItem from="1668578815830" duration="1421000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -611,7 +612,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668420672521</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images">
+      <created>1668509466004</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668509466004</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -655,22 +663,11 @@
     <MESSAGE value="edit MainPanel GUI" />
     <MESSAGE value="edit pom.xml to &#10;dependency &#10;&#9;&lt;dependency&gt;&#10;&#9;&#9;&#9;&lt;groupId&gt;com.github.docker-java&lt;/groupId&gt;&#10;&#9;&#9;&#9;&lt;artifactId&gt;docker-java&lt;/artifactId&gt;&#10;&#9;&#9;&#9;&lt;version&gt;3.2.13&lt;/version&gt;&#10;&#9;&#9;&lt;/dependency&gt;&#10;&#9;&#9;&#10;add start docker client by default &#10;over ip 127.0.0.1" />
     <MESSAGE value="edit docker client" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit docker client" />
+    <MESSAGE value="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
+    <option name="LAST_COMMIT_MESSAGE" value="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dao/dockerclient.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java</url>
-          <line>197</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>
