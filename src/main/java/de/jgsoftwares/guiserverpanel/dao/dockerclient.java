@@ -4,18 +4,25 @@ package de.jgsoftwares.guiserverpanel.dao;
 import com.fasterxml.jackson.databind.deser.std.JsonNodeDeserializer;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.BuildImageResultCallback;
+import com.github.dockerjava.api.command.CreateContainerCmd;
+import com.github.dockerjava.api.command.PullImageResultCallback;
 import com.github.dockerjava.api.model.BuildResponseItem;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
-import com.github.dockerjava.core.DefaultDockerClientConfig;
-import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import com.github.dockerjava.api.command.DockerCmdExecFactory;
+import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
+import com.github.dockerjava.jaxrs.JerseyDockerCmdExecFactory;
+
+import com.github.dockerjava.transport.DockerHttpClient;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
@@ -28,6 +35,10 @@ public class dockerclient
     DefaultDockerClientConfig clientConfig;
     public static DockerClient client;
 
+    private DockerCmdExecFactory dockerCmdExecFactory;
+
+    private DockerHttpClient dockerHttpClient;
+
     public dockerclient()
     {
 
@@ -36,7 +47,8 @@ public class dockerclient
     public void listContainers()
     {
 
-
+        client.listContainersCmd();
+        System.out.print("Container images");
     }
 
     public void startdockerclient(String username, String password)
@@ -47,9 +59,31 @@ public class dockerclient
                 .withRegistryPassword(password)
                 .withDockerTlsVerify(false)
                 .build();
-        client = DockerClientBuilder.getInstance(clientConfig).build();
+       // client = DockerClientBuilder.getInstance(clientConfig).build();
+
+        DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
+                .dockerHost(clientConfig.getDockerHost())
+                .maxConnections(100)
+                .connectionTimeout(Duration.ofSeconds(30))
+                .responseTimeout(Duration.ofSeconds(45))
+                .build();
+        DockerClient dockerClient = DockerClientBuilder.getInstance(clientConfig).build();
+
+        CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd("homme/cesium-terrain-builder")
+                //.withHostConfig(hostConfig)
+                .withStdinOpen(true)
+                .withTty(true)
+                .withCmd("");
 
         listContainers();
+
+    }
+
+
+    public void pullImage(String imageName)
+    {
+        client.pullImageCmd(imageName)
+                .exec(new PullImageResultCallback());
 
     }
 }
