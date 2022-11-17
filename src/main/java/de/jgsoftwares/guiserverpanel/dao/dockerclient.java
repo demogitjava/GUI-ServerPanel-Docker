@@ -69,11 +69,11 @@ public class dockerclient
                 .build();
         DockerClient dockerClient = DockerClientBuilder.getInstance(clientConfig).build();
 
-        CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd("homme/cesium-terrain-builder")
+       // CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd("")
                 //.withHostConfig(hostConfig)
-                .withStdinOpen(true)
-                .withTty(true)
-                .withCmd("");
+       //         .withStdinOpen(true)
+        //        .withTty(true)
+        //        .withCmd("");
 
         listContainers();
 
