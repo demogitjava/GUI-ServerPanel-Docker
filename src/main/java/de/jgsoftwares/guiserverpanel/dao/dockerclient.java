@@ -3,9 +3,7 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 import com.fasterxml.jackson.databind.deser.std.JsonNodeDeserializer;
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.BuildImageResultCallback;
-import com.github.dockerjava.api.command.CreateContainerCmd;
-import com.github.dockerjava.api.command.PullImageResultCallback;
+import com.github.dockerjava.api.command.*;
 import com.github.dockerjava.api.model.BuildResponseItem;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
@@ -18,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import com.github.dockerjava.api.command.DockerCmdExecFactory;
 import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
 import com.github.dockerjava.jaxrs.JerseyDockerCmdExecFactory;
 
@@ -69,13 +66,15 @@ public class dockerclient
                 .build();
         DockerClient dockerClient = DockerClientBuilder.getInstance(clientConfig).build();
 
-       // CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd("")
-                //.withHostConfig(hostConfig)
-       //         .withStdinOpen(true)
-        //        .withTty(true)
-        //        .withCmd("");
+        CreateContainerCmd createContainerCmd = dockerClient.createContainerCmd("")
+                .withStdinOpen(true)
+                .withTty(true)
+                .withCmd("test_cmd");
 
-        listContainers();
+       // CreateContainerResponse container = createContainerCmd.exec();
+       // dockerClient.startContainerCmd(container.getId()).exec();
+
+      //  listContainers();
 
     }
 
