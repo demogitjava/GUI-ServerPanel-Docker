@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
 import com.github.dockerjava.jaxrs.JerseyDockerCmdExecFactory;
 
 import com.github.dockerjava.transport.DockerHttpClient;
@@ -48,13 +49,22 @@ public class dockerclient
     public void startdockerclient(String username, String password)
     {
        clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .withDockerHost("tcp://127.0.0.1:2375")
+                .withDockerHost("tcp://127.0.0.1:2376")
                 .withRegistryEmail(username)
                 .withRegistryPassword(password)
                 .withDockerTlsVerify(false)
                 .build();
 
-        dockerClient = DockerClientBuilder.getInstance(clientConfig).build();
+
+        DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
+                .dockerHost( clientConfig.getDockerHost())
+                .maxConnections(100)
+                .connectionTimeout(Duration.ofSeconds(30))
+                .responseTimeout(Duration.ofSeconds(45))
+                .build();
+        dockerClient = DockerClientImpl.getInstance( clientConfig, httpClient);
+
+        //dockerClient = DockerClientBuilder.getInstance(clientConfig).build();
 
 
     }
