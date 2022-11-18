@@ -26,8 +26,8 @@ public class GUIServerPanel implements i_GuiServerPanel
         mpanel.setVisible(true);
         mpanel.setSize(640,400);
 
-       // de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-       // dockerclient.startdockerclient();
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        dockerclient.startdockerclient();
 
 
     }
