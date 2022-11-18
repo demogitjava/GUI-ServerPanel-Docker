@@ -54,6 +54,8 @@ public class dockerclient
                 .withDockerTlsVerify(false)
                 .build();
 
+        dockerClient = DockerClientBuilder.getInstance(clientConfig).build();
+
 
     }
 
