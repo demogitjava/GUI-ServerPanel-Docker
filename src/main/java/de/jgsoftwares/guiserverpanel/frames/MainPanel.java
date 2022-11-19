@@ -4,12 +4,20 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  *
  * @author root
  */
 public class MainPanel extends javax.swing.JFrame {
 
+    
+    public static DefaultMutableTreeNode rootNode;
+
+    public static DefaultMutableTreeNode dockerimages;
+    public static DefaultMutableTreeNode dockercontainers;
     /**
      * Creates new form MainPanel
      */
@@ -53,6 +61,13 @@ public class MainPanel extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
+        rootNode = new DefaultMutableTreeNode("Docker Client");
+        dockerimages = new DefaultMutableTreeNode("Images");
+        dockercontainers = new DefaultMutableTreeNode("Containers");
+
+        jTree2 = new JTree(rootNode);
+        rootNode.add(dockerimages);
+        rootNode.add(dockercontainers);
         jScrollPane2.setViewportView(jTree2);
 
         jPanel4.add(jScrollPane2, java.awt.BorderLayout.CENTER);

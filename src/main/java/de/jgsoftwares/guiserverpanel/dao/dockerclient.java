@@ -9,8 +9,10 @@ import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.core.*;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
@@ -25,15 +27,16 @@ import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
+import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class dockerclient
 {
 
-    DefaultDockerClientConfig clientConfig;
-    public static DockerClient dockerClient;
+    Process process;
+    BufferedReader reader;
 
-    private DockerCmdExecFactory dockerCmdExecFactory;
-    private DockerHttpClient dockerHttpClient;
 
     public dockerclient()
     {
@@ -48,24 +51,39 @@ public class dockerclient
 
     public void startdockerclient()
     {
-       clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .withDockerHost("tcp://127.0.0.1:2375")
-                //.withRegistryEmail(username)
-                //.withRegistryPassword(password)
-                .withDockerTlsVerify(false)
-                .build();
 
 
-        DockerHttpClient httpClient = new ApacheDockerHttpClient.Builder()
-                .dockerHost( clientConfig.getDockerHost())
-                .maxConnections(100)
-                .connectionTimeout(Duration.ofSeconds(30))
-                .responseTimeout(Duration.ofSeconds(45))
-                .build();
-        dockerClient = DockerClientImpl.getInstance( clientConfig, httpClient);
+        // list images
+        try {
+            process = Runtime.getRuntime().exec("docker images");
 
-        //dockerClient = DockerClientBuilder.getInstance(clientConfig).build();
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                MainPanel.dockerimages.add(new DefaultMutableTreeNode(line));
+               // System.out.println(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+
+
+
+
+        // list containers
+        try {
+            process = Runtime.getRuntime().exec("docker container ls");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                MainPanel.dockercontainers.add(new DefaultMutableTreeNode(line));
+                // System.out.println(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
