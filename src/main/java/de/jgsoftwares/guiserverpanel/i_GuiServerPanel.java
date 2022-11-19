@@ -18,7 +18,7 @@ public interface i_GuiServerPanel
 
         GUIServerPanel.showFrame();
 
-        SpringApplication.run(GUIServerPanel.class, args);
+       // SpringApplication.run(GUIServerPanel.class, args);
 
 
     }

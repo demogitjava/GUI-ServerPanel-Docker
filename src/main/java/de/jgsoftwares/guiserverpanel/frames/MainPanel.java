@@ -23,6 +23,7 @@ public class MainPanel extends javax.swing.JFrame {
      * Creates new form MainPanel
      */
     public MainPanel() {
+
         initComponents();
     }
 
