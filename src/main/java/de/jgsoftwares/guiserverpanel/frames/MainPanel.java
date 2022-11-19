@@ -18,6 +18,7 @@ public class MainPanel extends javax.swing.JFrame {
 
     public static DefaultMutableTreeNode dockerimages;
     public static DefaultMutableTreeNode dockercontainers;
+
     /**
      * Creates new form MainPanel
      */
@@ -112,6 +113,11 @@ public class MainPanel extends javax.swing.JFrame {
         jButton7.setBounds(6, 209, 72, 25);
 
         jButton8.setText("--> restart");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton8);
         jButton8.setBounds(84, 54, 99, 25);
 
@@ -146,7 +152,15 @@ public class MainPanel extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        // create container de
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+
+        // restart container de
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
