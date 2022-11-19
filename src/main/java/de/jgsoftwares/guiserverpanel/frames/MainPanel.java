@@ -55,6 +55,10 @@ public class MainPanel extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,23 +90,23 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton2);
-        jButton2.setBounds(6, 54, 72, 25);
+        jButton2.setBounds(0, 110, 72, 25);
 
         jButton3.setText("FR");
         jPanel3.add(jButton3);
-        jButton3.setBounds(6, 85, 72, 25);
+        jButton3.setBounds(0, 140, 72, 25);
 
         jButton4.setText("GB");
         jPanel3.add(jButton4);
-        jButton4.setBounds(6, 116, 72, 25);
+        jButton4.setBounds(0, 170, 72, 25);
 
         jButton5.setText("ES");
         jPanel3.add(jButton5);
-        jButton5.setBounds(6, 147, 72, 25);
+        jButton5.setBounds(0, 200, 72, 25);
 
         jButton6.setText("IT");
         jPanel3.add(jButton6);
-        jButton6.setBounds(6, 178, 72, 25);
+        jButton6.setBounds(0, 230, 72, 25);
 
         jLabel1.setText("start Docker Containers");
         jPanel3.add(jLabel1);
@@ -110,7 +114,7 @@ public class MainPanel extends javax.swing.JFrame {
 
         jButton7.setText("TR");
         jPanel3.add(jButton7);
-        jButton7.setBounds(6, 209, 72, 25);
+        jButton7.setBounds(0, 260, 72, 25);
 
         jButton8.setText("--> restart");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -119,27 +123,47 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton8);
-        jButton8.setBounds(84, 54, 99, 25);
+        jButton8.setBounds(80, 110, 99, 25);
 
         jButton9.setText("--> restart");
         jPanel3.add(jButton9);
-        jButton9.setBounds(84, 85, 99, 25);
+        jButton9.setBounds(80, 140, 99, 25);
 
         jButton10.setText("--> restart");
         jPanel3.add(jButton10);
-        jButton10.setBounds(84, 116, 99, 25);
+        jButton10.setBounds(80, 170, 99, 25);
 
         jButton11.setText("--> restart");
         jPanel3.add(jButton11);
-        jButton11.setBounds(84, 147, 99, 25);
+        jButton11.setBounds(80, 200, 99, 25);
 
         jButton12.setText("--> restart");
         jPanel3.add(jButton12);
-        jButton12.setBounds(84, 178, 99, 25);
+        jButton12.setBounds(80, 230, 99, 25);
 
         jButton13.setText("--> restart");
         jPanel3.add(jButton13);
-        jButton13.setBounds(84, 209, 99, 25);
+        jButton13.setBounds(80, 260, 99, 25);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel3.add(jScrollPane1);
+        jScrollPane1.setBounds(190, 40, 200, 240);
+
+        jButton1.setText("install nginx proxy");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1);
+        jButton1.setBounds(0, 40, 180, 25);
+
+        jButton14.setText("restart nginx");
+        jPanel3.add(jButton14);
+        jButton14.setBounds(0, 70, 180, 25);
 
         jSplitPane1.setRightComponent(jPanel3);
 
@@ -154,6 +178,7 @@ public class MainPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // create container de
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -161,6 +186,12 @@ public class MainPanel extends javax.swing.JFrame {
 
         // restart container de
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        // install nginx
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,10 +229,12 @@ public class MainPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -215,8 +248,10 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTree jTree2;
     // End of variables declaration//GEN-END:variables
 }
