@@ -162,6 +162,11 @@ public class MainPanel extends javax.swing.JFrame {
         jButton1.setBounds(0, 40, 180, 25);
 
         jButton14.setText("restart nginx");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton14);
         jButton14.setBounds(0, 70, 180, 25);
 
@@ -192,6 +197,12 @@ public class MainPanel extends javax.swing.JFrame {
 
         // install nginx
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+        
+        // restart nginx
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
      * @param args the command line arguments
