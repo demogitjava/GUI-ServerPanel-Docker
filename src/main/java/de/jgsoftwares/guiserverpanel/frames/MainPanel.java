@@ -6,6 +6,9 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -18,6 +21,10 @@ public class MainPanel extends javax.swing.JFrame {
 
     public static DefaultMutableTreeNode dockerimages;
     public static DefaultMutableTreeNode dockercontainers;
+
+
+    Process process;
+    BufferedReader reader;
 
     /**
      * Creates new form MainPanel
@@ -60,6 +67,8 @@ public class MainPanel extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,7 +160,7 @@ public class MainPanel extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(190, 40, 200, 240);
+        jScrollPane1.setBounds(190, 110, 390, 170);
 
         jButton1.setText("install nginx proxy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +179,12 @@ public class MainPanel extends javax.swing.JFrame {
         });
         jPanel3.add(jButton14);
         jButton14.setBounds(0, 70, 180, 25);
+        jPanel3.add(jTextField1);
+        jTextField1.setBounds(280, 70, 300, 30);
+
+        jLabel2.setText("your ip here:");
+        jPanel3.add(jLabel2);
+        jLabel2.setBounds(190, 69, 150, 30);
 
         jSplitPane1.setRightComponent(jPanel3);
 
@@ -196,7 +211,20 @@ public class MainPanel extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
+
         // install nginx
+        try {
+            process = Runtime.getRuntime().exec("docker pull nginx");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.setText(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -256,6 +284,7 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -264,6 +293,7 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree2;
     // End of variables declaration//GEN-END:variables
 }
