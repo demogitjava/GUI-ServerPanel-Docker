@@ -214,7 +214,8 @@ public class MainPanel extends javax.swing.JFrame {
 
         // install nginx
         try {
-            process = Runtime.getRuntime().exec("docker pull nginx");
+            String myip = jTextField1.getText();
+            process = Runtime.getRuntime().exec("docker run --name reverseproxynginx -p" + myip + ":80:80 -d nginx");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = "";
