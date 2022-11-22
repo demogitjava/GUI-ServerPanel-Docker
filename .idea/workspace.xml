@@ -35,9 +35,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add jTextField for ip expose container">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/root.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/root.xml" afterDir="false" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="start nginx docker container with string &#10;from jTextField1">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/de_docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,24 +88,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "210",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/root/IdeaProjects/GUI-ServerPanel-Docker",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "build.tools"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;210&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/root/IdeaProjects/GUI-ServerPanel-Docker&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="guiserverpanel" />
@@ -342,7 +343,7 @@
       <command value="mvn deploy" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.i_GuiServerPanel">
+  <component name="RunManager" selected="Spring Boot.Unnamed">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -440,6 +441,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="landingpage-0.0.1-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/landingpage-0.0.1-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
     <configuration name="guipanel [compile]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -451,7 +456,7 @@
             </option>
             <option name="goals">
               <list>
-                <option value="compile" />
+                <option value="deploy" />
               </list>
             </option>
             <option name="pomFileName" value="pom.xml" />
@@ -483,15 +488,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Docker Image (2)" type="docker-deploy" factoryName="docker-image" temporary="true" server-name="Docker">
-      <deployment type="docker-image">
-        <settings>
-          <option name="imageTag" value="ustcmirror/freebsd-ports:latest" />
-          <option name="containerName" value="freebsd" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="Docker Image (3)" type="docker-deploy" factoryName="docker-image" temporary="true" server-name="Docker">
       <deployment type="docker-image">
         <settings>
@@ -501,11 +497,15 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="Docker Image" type="docker-deploy" factoryName="docker-image" temporary="true" server-name="Docker">
-      <deployment type="docker-image">
+    <configuration name="de_docker-compose.yml.landingpage: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
         <settings>
-          <option name="imageTag" value="auchida/freebsd:latest" />
-          <option name="containerName" value="freebsd" />
+          <option name="services">
+            <list>
+              <option value="landingpage" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="de_docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -522,19 +522,19 @@
     <list>
       <item itemvalue="Application.GUISeverPanel" />
       <item itemvalue="Application.i_GuiServerPanel" />
+      <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
       <item itemvalue="Docker.Docker Image (3)" />
-      <item itemvalue="Docker.Docker Image (2)" />
-      <item itemvalue="Docker.Docker Image" />
+      <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
       <item itemvalue="Maven.guipanel [compile]" />
       <item itemvalue="Spring Boot.Unnamed" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.i_GuiServerPanel" />
+        <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
+        <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="Maven.guipanel [compile]" />
+        <item itemvalue="Application.i_GuiServerPanel" />
         <item itemvalue="Docker.Docker Image (3)" />
-        <item itemvalue="Docker.Docker Image" />
-        <item itemvalue="Docker.Docker Image (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -598,7 +598,11 @@
       <workItem from="1668846262267" duration="6301000" />
       <workItem from="1668856515762" duration="2261000" />
       <workItem from="1668858785002" duration="6086000" />
-      <workItem from="1668961329907" duration="3037000" />
+      <workItem from="1668961329907" duration="7185000" />
+      <workItem from="1669023027505" duration="11876000" />
+      <workItem from="1669155797644" duration="176000" />
+      <workItem from="1669155979311" duration="34000" />
+      <workItem from="1669156071615" duration="1537000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -775,7 +779,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668861033575</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="start nginx docker container with string &#10;from jTextField1">
+      <created>1668965642017</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1668965642017</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView">
@@ -833,10 +844,18 @@
     <MESSAGE value="." />
     <MESSAGE value="edit main method to start JFrame" />
     <MESSAGE value="add jTextField for ip expose container" />
-    <option name="LAST_COMMIT_MESSAGE" value="add jTextField for ip expose container" />
+    <MESSAGE value="start nginx docker container with string &#10;from jTextField1" />
+    <option name="LAST_COMMIT_MESSAGE" value="start nginx docker container with string &#10;from jTextField1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java</url>
+          <line>202</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>

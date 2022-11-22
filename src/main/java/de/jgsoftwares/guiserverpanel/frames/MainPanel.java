@@ -199,6 +199,18 @@ public class MainPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // create container de
+        try {
+            String myip = jTextField1.getText();
+            process = Runtime.getRuntime().exec("docker compose -f docker-compose.yml run");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.setText(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
