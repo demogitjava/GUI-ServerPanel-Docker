@@ -201,7 +201,7 @@ public class MainPanel extends javax.swing.JFrame {
         // create container de
         try {
             String myip = jTextField1.getText();
-            process = Runtime.getRuntime().exec("docker compose -f docker-compose.yml run");
+            process = Runtime.getRuntime().exec("/bin/docker compose -f /root/IdeaProjects/GUI-ServerPanel-Docker/de_docker-compose.yml up -d");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = "";
