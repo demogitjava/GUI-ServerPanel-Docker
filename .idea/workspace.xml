@@ -35,11 +35,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add dockerfile for germany">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/root.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/root.xml" afterDir="false" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/de_docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/de_docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +72,6 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="$USER_HOME$/Dokumente/apache-maven-3.8.6-bin/apache-maven-3.8.6" />
-        <option name="workOffline" value="true" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -103,7 +101,7 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/root/IdeaProjects/landingpage",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "build.tools"
+    "settings.editor.selected.configurable": "MavenSettings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -416,19 +414,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="i_GuiServerPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="de.jgsoftwares.guiserverpanel.i_GuiServerPanel" />
-      <module name="guipanel" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="de.jgsoftwares.guiserverpanel.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -488,6 +473,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="de_docker-compose.yml: Compose Deployment (1)" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="de_docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="de_docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -520,7 +513,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.GUISeverPanel" />
-      <item itemvalue="Application.i_GuiServerPanel" />
+      <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment (1)" />
       <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
       <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
       <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
@@ -529,11 +522,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment (1)" />
         <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
-        <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
         <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
+        <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
         <item itemvalue="Maven.guipanel [compile]" />
-        <item itemvalue="Application.i_GuiServerPanel" />
       </list>
     </recent_temporary>
   </component>
@@ -601,7 +594,7 @@
       <workItem from="1669023027505" duration="11876000" />
       <workItem from="1669155797644" duration="176000" />
       <workItem from="1669155979311" duration="34000" />
-      <workItem from="1669156071615" duration="5537000" />
+      <workItem from="1669156071615" duration="12869000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -792,7 +785,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669157640640</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="add README.md">
+      <created>1669191888935</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1669191888935</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView">
@@ -852,7 +852,8 @@
     <MESSAGE value="add jTextField for ip expose container" />
     <MESSAGE value="start nginx docker container with string &#10;from jTextField1" />
     <MESSAGE value="add dockerfile for germany" />
-    <option name="LAST_COMMIT_MESSAGE" value="add dockerfile for germany" />
+    <MESSAGE value="add README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="add README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -860,7 +861,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java</url>
           <line>202</line>
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
