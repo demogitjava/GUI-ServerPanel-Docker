@@ -35,10 +35,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add README.md">
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment=".">
+      <change afterPath="$PROJECT_DIR$/de_Container" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/de_docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/de_docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,9 +99,14 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;210&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/root/IdeaProjects/landingpage&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/root/IdeaProjects/GUI-ServerPanel-Docker&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -447,10 +452,10 @@
       <method v="2" />
     </configuration>
     <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ACTIVE_PROFILES" />
       <option name="HIDE_BANNER" value="true" />
       <module name="guipanel" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="de.jgsoftwares.guiserverpanel.i_GuiServerPanel" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -473,7 +478,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="de_docker-compose.yml: Compose Deployment (1)" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="de_docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="sourceFilePath" value="de_docker-compose.yml" />
@@ -513,7 +518,6 @@
     </configuration>
     <list>
       <item itemvalue="Application.GUISeverPanel" />
-      <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment (1)" />
       <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
       <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
       <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
@@ -522,7 +526,6 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment (1)" />
         <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
         <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
@@ -595,6 +598,13 @@
       <workItem from="1669155797644" duration="176000" />
       <workItem from="1669155979311" duration="34000" />
       <workItem from="1669156071615" duration="12869000" />
+      <workItem from="1669473276924" duration="827000" />
+      <workItem from="1669626466553" duration="410000" />
+      <workItem from="1669626913105" duration="138000" />
+      <workItem from="1669627070915" duration="2034000" />
+      <workItem from="1669630581163" duration="485000" />
+      <workItem from="1669631084426" duration="3026000" />
+      <workItem from="1669635284092" duration="1613000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -792,7 +802,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669191888935</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary=".">
+      <created>1669473452476</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1669473452477</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView">
@@ -847,23 +864,16 @@
     <MESSAGE value="add running containers&#10;and list images to jTree" />
     <MESSAGE value="update docker client" />
     <MESSAGE value="edit MainPanel Java Form" />
-    <MESSAGE value="." />
     <MESSAGE value="edit main method to start JFrame" />
     <MESSAGE value="add jTextField for ip expose container" />
     <MESSAGE value="start nginx docker container with string &#10;from jTextField1" />
     <MESSAGE value="add dockerfile for germany" />
     <MESSAGE value="add README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="add README.md" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java</url>
-          <line>202</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>
