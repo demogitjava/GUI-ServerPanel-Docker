@@ -6,9 +6,7 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  *
@@ -208,9 +206,17 @@ public class MainPanel extends javax.swing.JFrame {
             while ((line = reader.readLine()) != null) {
                 jTextArea1.setText(line);
             }
+            reader.close();
+
+            process = Runtime.getRuntime().exec("sh de_Container.sh");
+
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -36,9 +36,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment=".">
-      <change afterPath="$PROJECT_DIR$/de_Container" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/de_Container.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/de_Container" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +66,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="6d890999-74be-4370-825d-048fab76a49f" />
+        <option name="url" value="https://github.com/demogitjava/GUI-ServerPanel-Docker.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -99,13 +114,13 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;210&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/root/IdeaProjects/GUI-ServerPanel-Docker&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/root/IdeaProjects/landingpage&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -451,6 +466,21 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="de_Container.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/de_Container.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="HIDE_BANNER" value="true" />
       <module name="guipanel" />
@@ -522,10 +552,12 @@
       <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
       <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
       <item itemvalue="Maven.guipanel [compile]" />
+      <item itemvalue="Shell Script.de_Container.sh" />
       <item itemvalue="Spring Boot.Unnamed" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Shell Script.de_Container.sh" />
         <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
         <item itemvalue="JAR Application.landingpage-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="Docker.de_docker-compose.yml.landingpage: Compose Deployment" />
@@ -605,6 +637,20 @@
       <workItem from="1669630581163" duration="485000" />
       <workItem from="1669631084426" duration="3026000" />
       <workItem from="1669635284092" duration="1613000" />
+      <workItem from="1669637128273" duration="1091000" />
+      <workItem from="1669650102395" duration="174000" />
+      <workItem from="1669650304938" duration="459000" />
+      <workItem from="1669651208207" duration="71000" />
+      <workItem from="1669651299535" duration="1416000" />
+      <workItem from="1669653955112" duration="3866000" />
+      <workItem from="1669661564616" duration="1408000" />
+      <workItem from="1669663000535" duration="143000" />
+      <workItem from="1669664557080" duration="145000" />
+      <workItem from="1669664723053" duration="55000" />
+      <workItem from="1669664799766" duration="1736000" />
+      <workItem from="1669728214957" duration="2422000" />
+      <workItem from="1669882416265" duration="3771000" />
+      <workItem from="1670021985459" duration="19000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -809,7 +855,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669473452477</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary=".">
+      <created>1669637292058</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1669637292058</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView">
@@ -874,6 +927,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java</url>
+          <line>201</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>
