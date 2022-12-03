@@ -202,13 +202,16 @@ public class MainPanel extends javax.swing.JFrame {
             process = Runtime.getRuntime().exec("/bin/docker compose -f /root/IdeaProjects/GUI-ServerPanel-Docker/de_docker-compose.yml up -d");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.setText(line);
+            String line = null;
+            while ((line = reader.readLine()) != null)
+            {
+                jTextArea1.setText(line + "\n");
+                line = "";
             }
+
+
             reader.close();
 
-            process = Runtime.getRuntime().exec("sh de_Container.sh");
 
 
 

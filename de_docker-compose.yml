@@ -3,7 +3,7 @@ services:
 
   delandingpage:
     image: de_landingpage:latest
-    container_name: de_test_landingpage
+    container_name: de_landingpage
     ports:
       - "127.0.0.1:80:80"
     networks:
