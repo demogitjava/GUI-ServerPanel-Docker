@@ -35,11 +35,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment=".">
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit docker-compose file">
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/root.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/root.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DE_Dockerfile.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DE_Dockerfile.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/de_docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/de_docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,13 +113,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "210",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/root/IdeaProjects/landingpage",
+    "last_opened_file_path": "/root/IdeaProjects/GUI-ServerPanel-Docker",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "DockerRegistry",
+    "settings.editor.selected.configurable": "configurable.group.language",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -493,7 +492,9 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-image" temporary="true">
-      <deployment type="docker-image" />
+      <deployment type="docker-image">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="de_docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
@@ -639,7 +640,9 @@
       <workItem from="1669728214957" duration="2422000" />
       <workItem from="1669882416265" duration="3771000" />
       <workItem from="1670021985459" duration="19000" />
-      <workItem from="1670078575713" duration="3306000" />
+      <workItem from="1670078575713" duration="3792000" />
+      <workItem from="1670082468923" duration="2551000" />
+      <workItem from="1670090624723" duration="1484000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -851,7 +854,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669637292058</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="edit docker-compose file">
+      <created>1670082123971</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1670082123971</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView">
@@ -887,7 +897,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="init commit &#10;GUI Server Panel for Docker" />
     <MESSAGE value="add simple JFrame to Application by start&#10;Application over interface main method" />
     <MESSAGE value="add BorderLayout to JFrame" />
     <MESSAGE value="remove jgoodies lib" />
@@ -912,17 +921,11 @@
     <MESSAGE value="add dockerfile for germany" />
     <MESSAGE value="add README.md" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="edit docker-compose file" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit docker-compose file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java</url>
-          <line>200</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>

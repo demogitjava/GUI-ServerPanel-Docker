@@ -22,5 +22,5 @@ ADD https://github.com/demogitjava/demodatabase/raw/master/mawi.mv.db /root/mawi
 ADD https://github.com/demogitjava/demodatabase/raw/master/shopdb.mv.db /root/shopdb.mv.db
 
 ADD /root/IdeaProjects/landingpage/target /root/IdeaProjects/landingpage
-WORKDIR /root/IdeaProjects/landingpage/target/classes/de/jgsoftware/landingpage/
+CMD ["./mvnw", "spring-boot:run"]
 
