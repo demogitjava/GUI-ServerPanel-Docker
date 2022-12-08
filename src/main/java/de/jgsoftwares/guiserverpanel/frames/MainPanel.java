@@ -95,7 +95,7 @@ public class MainPanel extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
+            };
         });
         jPanel3.add(jButton2);
         jButton2.setBounds(0, 110, 72, 25);
@@ -204,10 +204,12 @@ public class MainPanel extends javax.swing.JFrame {
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = null;
+            jTextArea1.setText("");
             while ((line = reader.readLine()) != null)
             {
-                jTextArea1.setText(line + "\n");
-                line = "";
+
+                System.out.print(" " + line + "\n");
+                jTextArea1.append(line + "\n");
             }
 
 
