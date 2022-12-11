@@ -242,10 +242,17 @@ public class MainPanel extends javax.swing.JFrame {
             process = Runtime.getRuntime().exec("docker run --name reverseproxynginx -p" + myip + ":80:80 -d nginx");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.setText(line);
+
+            String line = null;
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null)
+            {
+
+                System.out.print(" " + line + "\n");
+                jTextArea1.append(line + "\n");
             }
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

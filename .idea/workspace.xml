@@ -35,9 +35,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit jTextArea1&#10;add Text from Console by run docker-compose file">
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit docker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DE_Dockerfile.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DE_Dockerfile.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -659,7 +659,7 @@
       <workItem from="1670090624723" duration="3133000" />
       <workItem from="1670487225533" duration="1699000" />
       <workItem from="1670489056617" duration="4880000" />
-      <workItem from="1670578456191" duration="1199000" />
+      <workItem from="1670578456191" duration="2930000" />
     </task>
     <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
       <created>1668239767914</created>
@@ -899,7 +899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670491434987</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="edit docker">
+      <created>1670618894925</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1670618894925</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TodoView">
@@ -935,7 +942,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add BorderLayout to JFrame" />
     <MESSAGE value="remove jgoodies lib" />
     <MESSAGE value="set Look And Feel to Nimbus" />
     <MESSAGE value="edit MainPanel GUI" />
@@ -960,7 +966,8 @@
     <MESSAGE value="edit docker-compose file" />
     <MESSAGE value="." />
     <MESSAGE value="edit jTextArea1&#10;add Text from Console by run docker-compose file" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit jTextArea1&#10;add Text from Console by run docker-compose file" />
+    <MESSAGE value="edit docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit docker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
