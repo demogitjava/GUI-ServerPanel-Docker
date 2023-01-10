@@ -1,9 +1,11 @@
-Docker Client Server Panel
+
+Simple GUI Docker Client Panel
+============================================================
 
 
-The client starts the docker containers with a simple command line from terminal
+This Docker GUI Client run the 
+java modules with terminal command
+in a simple container on docker.
 
-The Projects have to be in folder on the server on 
 
-/root/IdeaProjects
 
