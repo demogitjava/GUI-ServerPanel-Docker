@@ -77,7 +77,7 @@
 				<version>2.5.3</version>
 
 				<configuration>
-					<mainClass>de.jgsoftwares.guiserverpanel.i_</mainClass>
+					<mainClass>de.jgsoftwares.guiserverpanel.i_GuiServerPanel</mainClass>
 				</configuration>
 			</plugin>
 		 <plugin>
