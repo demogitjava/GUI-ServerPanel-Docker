@@ -7,6 +7,10 @@ package de.jgsoftwares.guiserverpanel.frames;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +33,20 @@ public class MainPanel extends javax.swing.JFrame {
      */
     public MainPanel() {
 
+      
         initComponents();
+        
+        
+        try
+        {
+              String stremoteip = (String) Inet4Address.getLocalHost().getHostAddress();
+            jTextField1.setText(stremoteip);
+            jTextArea1.setText("");
+            jTextArea1.setText("Remote ip4 " + stremoteip + "\n");
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " +e);
+        }
     }
 
     /**
