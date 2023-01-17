@@ -253,8 +253,9 @@ public class MainPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
 
 
-            Runnable runnable = () -> {
-            System.out.println("Inside : " + Thread.currentThread().getName());
+        Runnable runnable = () -> {
+        System.out.println("Inside : " + Thread.currentThread().getName());
+        
         // install nginx
         try {
             String myip = jTextField1.getText();
@@ -268,7 +269,7 @@ public class MainPanel extends javax.swing.JFrame {
             {
 
                 System.out.print(" " + line + "\n");
-                jTextArea1.append(line + "\n");
+                jTextArea1.append("nginx running: " + "\n" + line + "\n");
             }
 
 
@@ -277,9 +278,8 @@ public class MainPanel extends javax.swing.JFrame {
         }
         };
 
-        Thread thread = new Thread(runnable);
-
-        thread.start();
+        Thread th = new Thread(runnable);
+        th.start();
         
       
         
@@ -292,6 +292,8 @@ public class MainPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // restart nginx
+        
+        
     }//GEN-LAST:event_jButton14ActionPerformed
 
 
