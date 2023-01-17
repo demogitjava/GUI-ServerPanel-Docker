@@ -253,6 +253,8 @@ public class MainPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
 
 
+            Runnable runnable = () -> {
+            System.out.println("Inside : " + Thread.currentThread().getName());
         // install nginx
         try {
             String myip = jTextField1.getText();
@@ -273,6 +275,16 @@ public class MainPanel extends javax.swing.JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        };
+
+        Thread thread = new Thread(runnable);
+
+        thread.start();
+        
+      
+        
+        
+      
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
