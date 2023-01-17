@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,13 +28,15 @@ public class MainPanel extends javax.swing.JFrame {
 
     Process process;
     BufferedReader reader;
+    
+    HashMap dockercontainerhashmap;
 
     /**
      * Creates new form MainPanel
      */
     public MainPanel() {
 
-      
+        dockercontainerhashmap = new HashMap();
         initComponents();
         
         
@@ -269,13 +272,14 @@ public class MainPanel extends javax.swing.JFrame {
             {
 
                 System.out.print(" " + line + "\n");
+                dockercontainerhashmap.put(line, "reverseproxynginx");
                 jTextArea1.append("nginx running: " + "\n" + line + "\n");
             }
 
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         };
 
         Thread th = new Thread(runnable);
@@ -292,6 +296,49 @@ public class MainPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // restart nginx
+            /*
+            docker run -d --name baeldung baeldung
+        */
+            
+        Runnable runnable = () -> {
+        System.out.println("Inside : " + Thread.currentThread().getName());
+        
+        
+        // get docker container id from hashmap 
+     
+        
+        // restart nginx proxy
+        try {
+           
+            String dockercontainerid = (String) dockercontainerhashmap.keySet().toArray()[0];
+            
+            
+            //Object key = dockercontainerhashmap.keySet().toArray()[0];
+            //System.out.println(key);
+            
+            String dockerun = "docker restart " + dockercontainerid;
+            process = Runtime.getRuntime().exec(dockerun);
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line = null;
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null)
+            {
+
+               
+                
+                System.out.print(" " + line + "\n");
+                jTextArea1.append("nginx restart: " + "\n" + line + "\n");
+            }
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
+
+        Thread th = new Thread(runnable);
+        th.start();
         
         
     }//GEN-LAST:event_jButton14ActionPerformed
