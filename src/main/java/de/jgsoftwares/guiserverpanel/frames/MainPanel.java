@@ -302,19 +302,14 @@ public class MainPanel extends javax.swing.JFrame {
             
         Runnable runnable = () -> {
         System.out.println("Inside : " + Thread.currentThread().getName());
-        
-        
-        // get docker container id from hashmap 
-     
-        
+          
+       
         // restart nginx proxy
         try {
            
+            // get docker container id from hashmap 
             String dockercontainerid = (String) dockercontainerhashmap.keySet().toArray()[0];
-            
-            
-            //Object key = dockercontainerhashmap.keySet().toArray()[0];
-            //System.out.println(key);
+                 
             
             String dockerun = "docker restart " + dockercontainerid;
             process = Runtime.getRuntime().exec(dockerun);
