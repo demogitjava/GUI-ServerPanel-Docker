@@ -4,6 +4,10 @@ Simple GUI Docker Client Panel
 
 used operating system in CENTOS Linux7
 
+The used IDE is 
+Apache NetBeans 
+https://netbeans.apache.org/download/index.html
+
 required is docker on the maschine
 https://www.docker.com/
 
