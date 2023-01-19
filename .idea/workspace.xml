@@ -415,12 +415,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="docker-deploy" factoryName="docker-image" temporary="true">
-      <deployment type="docker-image">
-        <settings />
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -533,6 +527,12 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-image" temporary="true">
+      <deployment type="docker-image">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="de_docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -551,6 +551,11 @@
     </configuration>
     <list>
       <item itemvalue="Application.GUISeverPanel" />
+      <item itemvalue="Docker.Docker Image (1)" />
+      <item itemvalue="Docker.Docker Image (2)" />
+      <item itemvalue="Docker.Docker Image (3)" />
+      <item itemvalue="Docker.Docker Image (4)" />
+      <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />

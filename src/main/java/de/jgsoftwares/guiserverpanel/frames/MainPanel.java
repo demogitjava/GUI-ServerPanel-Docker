@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -87,6 +88,8 @@ public class MainPanel extends javax.swing.JFrame {
         jButton14 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+	JTabbedPane tabpane = new JTabbedPane();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,8 +207,24 @@ public class MainPanel extends javax.swing.JFrame {
         jPanel3.add(jLabel2);
         jLabel2.setBounds(190, 69, 150, 30);
 
-        jSplitPane1.setRightComponent(jPanel3);
+	
+ 	
+	tabpane.add(jPanel3, "Landingpage");
+		
+	// DNS JPanel
+ 	DNS_Panel dnspanel = new DNS_Panel();
+	tabpane.add(dnspanel, "DNS Server config");
 
+	// add JRemote Panel
+	JRemoteDesktop jremotedesktop = new JRemoteDesktop();
+	tabpane.add(jremotedesktop, "Remote Desktop");	
+
+	// add h2 panel for clutering database
+	clusteringh2database panelh2database = new clusteringh2database();
+	tabpane.add(panelh2database, "Clutering H2 Database Docker");
+
+
+        jSplitPane1.setRightComponent(tabpane);
         jPanel1.add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
