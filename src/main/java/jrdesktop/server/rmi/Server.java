@@ -67,7 +67,7 @@ public class Server extends Thread {
         if (running) {
             running = false;
             disconnectAllViewers();
-            SysTray.updateServerStatus(SysTray.SERVER_STOPPED);            
+        
         }
         else
             SysTray.updateServerStatus(SysTray.CONNECTION_FAILED);
