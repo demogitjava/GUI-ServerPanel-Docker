@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
-import jrdesktop.main;
+//import jrdesktop.main;
 import jrdesktop.utilities.InetAdrUtility;
 
 /**
