@@ -35,9 +35,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="disable display Icon on ActiveConnectionsGUI">
-      <change beforePath="$PROJECT_DIR$/src/main/java/jrdesktop/SysTray.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jrdesktop/server/rmi/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jrdesktop/server/rmi/Server.java" afterDir="false" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit config for jrdestkop server">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -947,7 +947,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674484217192</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="edit config for jrdestkop server">
+      <created>1674484391346</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1674484391346</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView">
@@ -983,7 +990,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="edit docker client" />
     <MESSAGE value="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images" />
     <MESSAGE value="add a simple jTree component to &#10;MainPanel" />
     <MESSAGE value="edit layout for jPanel3 &#10;component" />
@@ -1008,7 +1014,8 @@
     <MESSAGE value="delete systray to run the remote server" />
     <MESSAGE value="." />
     <MESSAGE value="disable display Icon on ActiveConnectionsGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="disable display Icon on ActiveConnectionsGUI" />
+    <MESSAGE value="edit config for jrdestkop server" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit config for jrdestkop server" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

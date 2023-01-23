@@ -27,6 +27,8 @@ public class JRemoteDesktop extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaStatus = new javax.swing.JTextArea();
 
         jButton1.setText("start remote desktop server");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -35,19 +37,30 @@ public class JRemoteDesktop extends javax.swing.JPanel {
             }
         });
 
+        jTextAreaStatus.setEditable(false);
+        jTextAreaStatus.setColumns(20);
+        jTextAreaStatus.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        jTextAreaStatus.setRows(4);
+        jTextAreaStatus.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
+        jScrollPane1.setViewportView(jTextAreaStatus);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(255, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
@@ -62,5 +75,7 @@ public class JRemoteDesktop extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaStatus;
     // End of variables declaration//GEN-END:variables
 }
