@@ -5,7 +5,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import jrdesktop.main;
+//import jrdesktop.main;
 import jrdesktop.server.rmi.Server;
 
 /**
@@ -42,7 +42,7 @@ public class ActiveConnectionsGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Active Connections");
-        setIconImage(new ImageIcon(main.IDLE_ICON).getImage());
+        //setIconImage(new ImageIcon(main.IDLE_ICON).getImage());
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Active Connections"));
