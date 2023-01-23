@@ -1,7 +1,7 @@
 package jrdesktop.server;
 
 import javax.swing.ImageIcon;
-import jrdesktop.main;
+//import jrdesktop.main;
 
 import jrdesktop.utilities.InetAdrUtility;
 
@@ -42,7 +42,7 @@ public class ConfigGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Server configuration");
-        setIconImage(new ImageIcon(main.IDLE_ICON).getImage());
+        //setIconImage(new ImageIcon(main.IDLE_ICON).getImage());
         setResizable(false);
 
         jButtonCancel.setText("Cancel");
