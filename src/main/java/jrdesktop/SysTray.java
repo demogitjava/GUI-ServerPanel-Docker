@@ -7,7 +7,7 @@ import java.awt.event.*;
 import jrdesktop.server.ActiveConnectionsGUI;
 import jrdesktop.server.ConfigGUI;
 import jrdesktop.server.rmi.Server;
-import jrdesktop.viewer.ConnectionDialog;
+//import jrdesktop.viewer.ConnectionDialog;
 
 /**
  * SysTray.java
@@ -186,7 +186,7 @@ public class SysTray {
                 item.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                        ConnectionDialog.main(null);
+                        //ConnectionDialog.main(null);
                     }
                 });
                 popup.add(item);
