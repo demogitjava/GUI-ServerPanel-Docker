@@ -10,7 +10,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.swing.JOptionPane;
 
-import jrdesktop.SysTray;
+
 import jrdesktop.Config;
 import jrdesktop.robot;
 import jrdesktop.utilities.ZipUtility;
@@ -70,7 +70,7 @@ public class Server extends Thread {
         
         }
         else
-            SysTray.updateServerStatus(SysTray.CONNECTION_FAILED);
+          //  SysTray.updateServerStatus(SysTray.CONNECTION_FAILED);
         try {            
             if (registry != null)
                 UnicastRemoteObject.unexportObject(registry, true);            
@@ -125,7 +125,7 @@ public class Server extends Thread {
         int index = viewers.size();        
         viewers.put(index, inetAddress);            
 
-        SysTray.displayViewer(inetAddress.toString(), index, true);        
+       // SysTray.displayViewer(inetAddress.toString(), index, true);        
         return index;
     }
          
@@ -134,7 +134,7 @@ public class Server extends Thread {
         
         viewers.remove(index);
         
-        SysTray.displayViewer(viewer, viewers.size(), false);        
+        //SysTray.displayViewer(viewer, viewers.size(), false);        
         return index;
     } 
     
