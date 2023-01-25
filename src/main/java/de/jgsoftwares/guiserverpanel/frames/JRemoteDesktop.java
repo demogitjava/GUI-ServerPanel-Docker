@@ -4,12 +4,19 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import javax.swing.ImageIcon;
+import jrdesktop.main;
+import jrdesktop.server.rmi.Server;
+
 /**
  *
  * @author root
  */
 public class JRemoteDesktop extends javax.swing.JPanel {
 
+    
+    jrdesktop.server.rmi.Server remoteserver;
+    
     /**
      * Creates new form JRemoteDesktop
      */
@@ -68,11 +75,28 @@ public class JRemoteDesktop extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-         jrdesktop.server.rmi.Server remoteserver = new jrdesktop.server.rmi.Server();
+         remoteserver = new jrdesktop.server.rmi.Server();
          remoteserver.Start();
+         
+      
+
+         updateStatus();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
+      public void updateStatus() {
+       
+          if(remoteserver.isRunning())
+          {
+              jTextAreaStatus.setText( "Server is running" + "\n" + Server.getStatus());
+          }
+          else if(remoteserver.isDaemon())
+          {
+              jTextAreaStatus.setText("Server Daemon is started" + "\n");
+          }
+          
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
