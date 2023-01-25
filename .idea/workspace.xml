@@ -35,9 +35,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add status panel on JRemoteDesktop to display status &#10;on panel">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.java" afterDir="false" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add status method for jRemoteDesktop">
+      <change beforePath="$PROJECT_DIR$/src/main/java/jrdesktop/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jrdesktop/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jrdesktop/server/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jrdesktop/server/Config.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -961,7 +961,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674484704342</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="add status method for jRemoteDesktop">
+      <created>1674638622744</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1674638622744</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TodoView">
@@ -997,7 +1004,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add a simple jTree component to &#10;MainPanel" />
     <MESSAGE value="edit layout for jPanel3 &#10;component" />
     <MESSAGE value="init docker instace" />
     <MESSAGE value="edit docker client &#10;&#10;init DockerHttpClient" />
@@ -1022,7 +1028,8 @@
     <MESSAGE value="disable display Icon on ActiveConnectionsGUI" />
     <MESSAGE value="edit config for jrdestkop server" />
     <MESSAGE value="add status panel on JRemoteDesktop to display status &#10;on panel" />
-    <option name="LAST_COMMIT_MESSAGE" value="add status panel on JRemoteDesktop to display status &#10;on panel" />
+    <MESSAGE value="add status method for jRemoteDesktop" />
+    <option name="LAST_COMMIT_MESSAGE" value="add status method for jRemoteDesktop" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

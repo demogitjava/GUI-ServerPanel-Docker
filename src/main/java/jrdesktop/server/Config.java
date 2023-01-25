@@ -16,7 +16,7 @@ import jrdesktop.utilities.InetAdrUtility;
 public class Config {
 
     public static String server_address = "127.0.0.1";
-    public static int server_port = 6666;     
+    public static int server_port = 3390;     
     public static boolean default_address = false;
     
     public static void loadConfiguration() {
