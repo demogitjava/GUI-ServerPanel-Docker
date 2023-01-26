@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.jgsoftware.guiserverpanel</groupId>
-	<artifactId>landingpage</artifactId>
+	<artifactId>Guiserverpanel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>guiserverpanel</name>
+	<name>Guiserverpanel</name>
 	<description>GUI ServerPanel</description>
 	<packaging>jar</packaging>
 

@@ -4,11 +4,8 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-import javax.swing.ImageIcon;
-import jrdesktop.main;
 import jrdesktop.server.rmi.Server;
 
-import jrdesktop.Config;
 
 /**
  *

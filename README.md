@@ -59,8 +59,6 @@ module on command line with
 Tab JRemoteDesktop
 SIMPLE Java RMI SERVER
 
-
-
 The Server starts on default port 3389 without 
 username and password or authentication over a 
 sip server but a implementation is possible
