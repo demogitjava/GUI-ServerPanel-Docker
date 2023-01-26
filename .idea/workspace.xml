@@ -35,11 +35,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add jTextFields for jrdesktop &#10;to set ip and port to start the remote Desktop">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/JRemoteDesktop.java" afterDir="false" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add components to JPanel &#10;clusteringh2database">
       <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/clusteringh2database.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/clusteringh2database.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/clusteringh2database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/clusteringh2database.java" afterDir="false" />
     </list>
@@ -986,7 +982,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674640616884</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="add components to JPanel &#10;clusteringh2database">
+      <created>1674725290016</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1674725290016</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1022,7 +1025,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="edit docker client &#10;&#10;init DockerHttpClient" />
     <MESSAGE value="init instace for dockerClient" />
     <MESSAGE value="init instance for dockerClient" />
     <MESSAGE value="add DockerHttpClient" />
@@ -1047,7 +1049,8 @@
     <MESSAGE value="add status method for jRemoteDesktop" />
     <MESSAGE value="edit remote port for jrdesktop to 3390" />
     <MESSAGE value="add jTextFields for jrdesktop &#10;to set ip and port to start the remote Desktop" />
-    <option name="LAST_COMMIT_MESSAGE" value="add jTextFields for jrdesktop &#10;to set ip and port to start the remote Desktop" />
+    <MESSAGE value="add components to JPanel &#10;clusteringh2database" />
+    <option name="LAST_COMMIT_MESSAGE" value="add components to JPanel &#10;clusteringh2database" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

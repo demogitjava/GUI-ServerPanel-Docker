@@ -86,6 +86,9 @@ public class MainPanel extends javax.swing.JFrame {
         Landingpage landingpage = new Landingpage();
         jTabbedPane1.add(landingpage, "Landingapge");
 
+        Ebay ebaypanel = new Ebay();
+        jTabbedPane1.add(ebaypanel, "Ebay");
+
         jSplitPane1.setRightComponent(jTabbedPane1);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
