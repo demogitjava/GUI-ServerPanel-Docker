@@ -22,6 +22,9 @@ create a folder
 
 /root/IdeaProjects
 
+
+
+Tab Landingpage:
 ------------------------------------------------
 NGINX PROXY
 to use nginx proxy you have to edit the 
@@ -51,6 +54,22 @@ module on command line with
 --network=192.168.178.0 
 
 ------------------------------------------------
+
+
+Tab JRemoteDesktop
+SIMPLE Java RMI SERVER
+
+
+
+The Server starts on default port 3389 without 
+username and password or authentication over a 
+sip server but a implementation is possible
+for security.
+
+
+------------------------------------------------
+
+
 
 
 
