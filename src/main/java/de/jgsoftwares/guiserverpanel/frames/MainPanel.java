@@ -62,19 +62,19 @@ public class MainPanel extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jTree1 = new javax.swing.JTree(rootNode);
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTree1 = new JTree(rootNode);
+        //jTree1 = new JTree(rootNode);
         rootNode.add(dockerimages);
         rootNode.add(dockercontainers);
         jScrollPane1.setViewportView(jTree1);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
 
-        DNSPanel dnspanel = new DNSPanel();
+        de.jgsoftwares.guiserverpanel.frames.DNSPanel dnspanel = new de.jgsoftwares.guiserverpanel.frames.DNSPanel();
         jTabbedPane1.add(dnspanel, "DNS Panel");
 
         JRemoteDesktop jremotedesktop = new JRemoteDesktop();

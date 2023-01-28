@@ -46,7 +46,8 @@
           <SubComponents>
             <Component class="javax.swing.JTree" name="jTree1">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTree1 = new JTree(rootNode);&#xa;rootNode.add(dockerimages);&#xa;rootNode.add(dockercontainers);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree(rootNode)"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//jTree1 = new JTree(rootNode);&#xa;rootNode.add(dockerimages);&#xa;rootNode.add(dockercontainers);"/>
               </AuxValues>
             </Component>
           </SubComponents>
