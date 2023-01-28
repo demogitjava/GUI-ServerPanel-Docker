@@ -37,18 +37,27 @@ public class MainPanel extends javax.swing.JFrame {
      */
     public MainPanel() {
 
-        dockercontainerhashmap = new HashMap();
+      
+
+
+   
+            try
+        {
+                dockercontainerhashmap = new HashMap();
         
-        rootNode = new DefaultMutableTreeNode("Docker Client");
-        dockerimages = new DefaultMutableTreeNode("Images");
-        dockercontainers = new DefaultMutableTreeNode("Containers");
-
-
+                rootNode = new DefaultMutableTreeNode("Docker Client");
+                dockerimages = new DefaultMutableTreeNode("Images");
+                dockercontainers = new DefaultMutableTreeNode("Containers");
+                
+                
+        } catch(Exception e)
+        {
+            System.out.print("Error init components" + e);
+        }
 
         
         initComponents();
-        
-       
+      this.pack();
     }
 
     /**
