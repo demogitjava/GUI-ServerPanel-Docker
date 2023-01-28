@@ -36,28 +36,19 @@ public class MainPanel extends javax.swing.JFrame {
      * Creates new form MainPanel
      */
     public MainPanel() {
-
-      
-
-
-   
-            try
-        {
-                dockercontainerhashmap = new HashMap();
+    
+              
+        dockercontainerhashmap = new HashMap();
         
-                rootNode = new DefaultMutableTreeNode("Docker Client");
-                dockerimages = new DefaultMutableTreeNode("Images");
-                dockercontainers = new DefaultMutableTreeNode("Containers");
-                
-                
-        } catch(Exception e)
-        {
-            System.out.print("Error init components" + e);
-        }
-
+        rootNode = new DefaultMutableTreeNode("Docker Client");
+        dockerimages = new DefaultMutableTreeNode("Images");
+        dockercontainers = new DefaultMutableTreeNode("Containers");
+        initComponents();  
+         
+            this.pack();
         
-        initComponents();
-      this.pack();
+        
+    
     }
 
     /**
