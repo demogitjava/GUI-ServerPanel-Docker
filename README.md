@@ -17,10 +17,6 @@ The used java jdk is
 https://www.graalvm.org/downloads/
 in this case i use graalvm jdk 17
 
-to run the modules over gui panel 
-create a folder 
-
-/root/IdeaProjects
 
 
 

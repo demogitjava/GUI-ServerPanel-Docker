@@ -2,7 +2,6 @@ package de.jgsoftwares.guiserverpanel;
 
 
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.swing.*;
 
 
