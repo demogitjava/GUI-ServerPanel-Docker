@@ -74,8 +74,8 @@ public class MainPanel extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jScrollPane1);
 
-        DNS_Panel dnspanel = new DNS_Panel();
-        jTabbedPane1.add(dnspanel, "DNS_Panel");
+        DNSPanel dnspanel = new DNSPanel();
+        jTabbedPane1.add(dnspanel, "DNS Panel");
 
         JRemoteDesktop jremotedesktop = new JRemoteDesktop();
         jTabbedPane1.add(jremotedesktop, "JRemoteDesktop");
