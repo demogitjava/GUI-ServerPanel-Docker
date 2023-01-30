@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class DNSPanel extends javax.swing.JPanel {
 
     
-     Runnable runnable;
+     public static Runnable dnsrunnable;
      org.xbill.DNS.SimpleResolver dnsserver;
      
      
@@ -52,6 +52,7 @@ public class DNSPanel extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         jLabel1.setText("Fqdn");
 
@@ -89,6 +90,13 @@ public class DNSPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText("stop DNS Server");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,18 +110,21 @@ public class DNSPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                        .addComponent(jTextField1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,7 +133,9 @@ public class DNSPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -152,7 +165,7 @@ public class DNSPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-         runnable = () -> {
+         dnsrunnable = () -> {
             System.out.println("start dns server with a thread: " + Thread.currentThread().getName());
 
             
@@ -169,15 +182,38 @@ public class DNSPanel extends javax.swing.JPanel {
            
         };
 
-        Thread thdns = new Thread(runnable);
+        Thread thdns = new Thread(dnsrunnable);
         thdns.start();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+         try {
+             // TODO add your handling code here:
+
+             //dnsserver.wait();
+             dnsserver.setTimeout(1);
+             jLabel4.setText("-> DNS Server is stopped");
+         } catch (Exception ex) {
+           System.out.print("Error" + ex);
+         }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public static Runnable getDnsrunnable() {
+        return dnsrunnable;
+    }
+
+    public static void setDnsrunnable(Runnable dnsrunnable) {
+        DNSPanel.dnsrunnable = dnsrunnable;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

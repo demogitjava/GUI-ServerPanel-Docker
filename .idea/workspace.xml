@@ -35,8 +35,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="update methods from simple dns resolver">
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit method to start DNS Server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -644,13 +646,6 @@
       <workItem from="1670489056617" duration="4880000" />
       <workItem from="1670578456191" duration="2930000" />
     </task>
-    <task id="LOCAL-00003" summary="add BorderLayout to JFrame">
-      <created>1668250284233</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1668250284233</updated>
-    </task>
     <task id="LOCAL-00004" summary="remove jgoodies lib">
       <created>1668327877179</created>
       <option name="number" value="00004" />
@@ -987,7 +982,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675066087963</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="edit method to start DNS Server">
+      <created>1675069631350</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1675069631350</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1023,7 +1025,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add running containers&#10;and list images to jTree" />
     <MESSAGE value="update docker client" />
     <MESSAGE value="edit MainPanel Java Form" />
     <MESSAGE value="edit main method to start JFrame" />
@@ -1048,7 +1049,8 @@
     <MESSAGE value="edit readme.md" />
     <MESSAGE value="add org.xbill.DNS&#10;to module" />
     <MESSAGE value="update methods from simple dns resolver" />
-    <option name="LAST_COMMIT_MESSAGE" value="update methods from simple dns resolver" />
+    <MESSAGE value="edit method to start DNS Server" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit method to start DNS Server" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
