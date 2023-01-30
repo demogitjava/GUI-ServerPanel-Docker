@@ -22,6 +22,8 @@ public class DNSPanel extends javax.swing.JPanel {
      public static Runnable dnsrunnable;
      org.xbill.DNS.SimpleResolver dnsserver;
      
+     String stdnsname;
+     
      
     /**
      * Creates new form DNS_Panel
@@ -164,7 +166,11 @@ public class DNSPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+
+
+        stdnsname = jTextField2.getText();
+        dnsserver.setDefaultResolver(stdnsname);
+         
          dnsrunnable = () -> {
             System.out.println("start dns server with a thread: " + Thread.currentThread().getName());
 
