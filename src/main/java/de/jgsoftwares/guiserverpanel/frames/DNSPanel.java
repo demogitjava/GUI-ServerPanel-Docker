@@ -85,7 +85,7 @@ public class DNSPanel extends javax.swing.JPanel {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3600", "7200" }));
 
-        jButton3.setText("start dns server | IP WAN | Port:53");
+        jButton3.setText("start dns server | hostname | Port:53");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
