@@ -4,6 +4,14 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author root
@@ -69,6 +77,11 @@ public class DNSPanel extends javax.swing.JPanel {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3600", "7200" }));
 
         jButton3.setText("start dns server | IP WAN | Port:53");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -126,6 +139,31 @@ public class DNSPanel extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+         Runnable runnable = () -> {
+            System.out.println("start dns server with a thread: " + Thread.currentThread().getName());
+
+            org.xbill.DNS.SimpleResolver dnsserver;
+             try {
+                 dnsserver = new org.xbill.DNS.SimpleResolver();
+              
+                 
+
+                System.out.print("Config DNS Server" + "\n");
+                System.out.print("get address" + dnsserver.getAddress());
+              
+                 
+             } catch (UnknownHostException ex) {
+                 Logger.getLogger(DNSPanel.class.getName()).log(Level.SEVERE, null, ex);
+             }
+           
+        };
+
+        Thread thdns = new Thread(runnable);
+        thdns.start();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

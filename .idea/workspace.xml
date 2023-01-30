@@ -35,145 +35,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add org.xbill.DNS&#10;to module">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/A6Record.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/AAAARecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/AFSDBRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/APLRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ARecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/CAARecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/CERTRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/CNAMERecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Cache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ClientSubnetOption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Compression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Credibility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DHCIDRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DLVRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DNAMERecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DNSInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DNSKEYRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DNSOutput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DNSSEC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/DSRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/EDNSOption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/EmptyRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ExtendedFlags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ExtendedResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Flags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/FormattedTime.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/GPOSRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Generator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/GenericEDNSOption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/HINFORecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Header.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/IPSECKEYRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ISDNRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/InvalidDClassException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/InvalidTTLException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/InvalidTypeException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/KEYBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/KEYRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/KXRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/LOCRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Lookup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/MBRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/MDRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/MFRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/MGRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/MINFORecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/MRRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/MXRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Master.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Mnemonic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NAPTRRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NSAPRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NSAP_PTRRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NSEC3PARAMRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NSEC3Record.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NSECRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NSIDOption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NSRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NULLRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NXTRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Name.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/NameTooLongException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/OPENPGPKEYRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/OPTRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Opcode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Options.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/PTRRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/PXRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/PacketLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/RPRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/RRSIGRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/RRset.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/RTRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Rcode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Record.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/RelativeNameException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ResolveThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Resolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ResolverConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ResolverListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ReverseMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SIG0.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SIGBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SIGRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SMIMEARecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SOARecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SPFRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SRVRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SSHFPRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Section.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Serial.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SetResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SimpleResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SingleCompressedNameBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/SingleNameBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TCPClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TKEYRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TLSARecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TSIG.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TSIGRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TTL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TXTBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TXTRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TextParseException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Tokenizer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/TypeBitmap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/U16NameBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/UDPClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/UNKRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/URIRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Update.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/WKSRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/WireParseException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/X25Record.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Zone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ZoneTransferException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/ZoneTransferIn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/spi/DNSJavaNameService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/spi/services/sun.net.spi.nameservice.NameServiceDescriptor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/utils/base16.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/utils/base32.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/utils/base64.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/utils/hexdump.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/windows/DNSServer.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/windows/DNSServer_de.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/windows/DNSServer_fr.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/windows/DNSServer_ja.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/windows/DNSServer_pl.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add org.xbill.DNS&#10;to module" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,34 +95,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "210",
-    "WebServerToolWindowFactoryState": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/root/NetBeansProjects/GUI-ServerPanel-Docker",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "http.proxy",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;210&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/root/NetBeansProjects/demodatabase&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="guiserverpanel" />
@@ -675,11 +537,11 @@
     </configuration>
     <list>
       <item itemvalue="Application.GUISeverPanel" />
+      <item itemvalue="JAR Application.Guiserverpanel-0.0.1-SNAPSHOT.jar" />
       <item itemvalue="Docker.Docker Image (2)" />
       <item itemvalue="Docker.Docker Image (3)" />
       <item itemvalue="Docker.Docker Image (4)" />
       <item itemvalue="Docker.de_docker-compose.yml: Compose Deployment" />
-      <item itemvalue="JAR Application.Guiserverpanel-0.0.1-SNAPSHOT.jar" />
     </list>
     <recent_temporary>
       <list>
@@ -779,13 +641,6 @@
       <workItem from="1670487225533" duration="1699000" />
       <workItem from="1670489056617" duration="4880000" />
       <workItem from="1670578456191" duration="2930000" />
-    </task>
-    <task id="LOCAL-00001" summary="init commit &#10;GUI Server Panel for Docker">
-      <created>1668239767914</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1668239767914</updated>
     </task>
     <task id="LOCAL-00002" summary="add simple JFrame to Application by start&#10;Application over interface main method">
       <created>1668248148352</created>
@@ -1123,7 +978,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674909503087</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="add org.xbill.DNS&#10;to module">
+      <created>1674984355030</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1674984355033</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView">
