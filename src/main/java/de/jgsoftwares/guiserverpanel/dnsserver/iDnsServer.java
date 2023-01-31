@@ -10,4 +10,10 @@ package de.jgsoftwares.guiserverpanel.dnsserver;
  */
 public interface iDnsServer {
     
+    public void addARecord();
+   
+    public void addCNAMERecord();
+    
+    public void addTxtRecord();
+    
 }

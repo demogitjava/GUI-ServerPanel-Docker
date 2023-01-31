@@ -12,6 +12,24 @@ public class DNSServer implements iDnsServer
        
     }
     
+    @Override
+    public void addARecord()
+    {
+        
+    }
+    
+    @Override
+    public void addCNAMERecord()
+    {
+        
+    }
+    
+    @Override
+    public void addTxtRecord()
+    {
+        
+    }
+    
     
     
 }

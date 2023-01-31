@@ -19,6 +19,10 @@ private int addr;
 
 ARecord() {}
 
+    public ARecord(Name name, DClass dclass, TTL ttl, Address address) {
+      
+    }
+
 Record
 getObject() {
 	return new ARecord();
@@ -44,33 +48,39 @@ toArray(int addr) {
 
 /**
  * Creates an A Record from the given data
+     * @param name
+     * @param dclass
+     * @param ttl
  * @param address The address that the name refers to
  */
-public
-ARecord(Name name, int dclass, long ttl, InetAddress address) {
+public ARecord(Name name, int dclass, long ttl, InetAddress address) {
 	super(name, Type.A, dclass, ttl);
 	if (Address.familyOf(address) != Address.IPv4)
 		throw new IllegalArgumentException("invalid IPv4 address");
 	addr = fromArray(address.getAddress());
 }
 
+@Override
 void
 rrFromWire(DNSInput in) throws IOException {
 	addr = fromArray(in.readByteArray(4));
 }
 
+@Override
 void
 rdataFromString(Tokenizer st, Name origin) throws IOException {
 	addr = fromArray(st.getAddressBytes(Address.IPv4));
 }
 
 /** Converts rdata to a String */
+@Override
 String
 rrToString() {
 	return (Address.toDottedQuad(toArray(addr)));
 }
 
-/** Returns the Internet address */
+/** Returns the Internet address
+     * @return  */
 public InetAddress
 getAddress() {
 	try {
@@ -84,6 +94,7 @@ getAddress() {
 	}
 }
 
+@Override
 void
 rrToWire(DNSOutput out, Compression c, boolean canonical) {
 	out.writeU32(((long)addr) & 0xFFFFFFFFL);

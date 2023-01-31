@@ -12,6 +12,12 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.xbill.DNS.ARecord;
+import org.xbill.DNS.Name;
+import org.xbill.DNS.TTL;
+import org.xbill.DNS.DClass;
+import org.xbill.DNS.Address;
+
 /**
  *
  * @author root
@@ -23,12 +29,16 @@ public class DNSPanel extends javax.swing.JPanel {
      org.xbill.DNS.SimpleResolver dnsserver;
      
      String stdnsname;
-     
+     Name name;
+     DClass dclass;
+     TTL ttl;
+     Address address;
      
     /**
      * Creates new form DNS_Panel
      */
     public DNSPanel() {
+        
         initComponents();
     }
 
@@ -67,14 +77,14 @@ public class DNSPanel extends javax.swing.JPanel {
         jLabel2.setText("release time:");
 
         jButton1.setText("add record");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("edit");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TYPE.A", "TYPE.CNAME", "TYPE.TXT" }));
@@ -204,6 +214,15 @@ public class DNSPanel extends javax.swing.JPanel {
          }
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        String stcombo = (String) jComboBox2.getSelectedItem();
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static Runnable getDnsrunnable() {
         return dnsrunnable;

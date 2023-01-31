@@ -289,12 +289,13 @@ Name(String s) throws TextParseException {
 }
 
 /**
- * Create a new name from a string and an origin.  This does not automatically
- * make the name absolute; it will be absolute if it has a trailing dot or an
- * absolute origin is appended.  This is identical to the constructor, except
- * that it will avoid creating new objects in some cases.
+ * Create a new name from a string and an origin.This does not automatically
+ make the name absolute; it will be absolute if it has a trailing dot or an
+ absolute origin is appended.  This is identical to the constructor, except
+ that it will avoid creating new objects in some cases.
  * @param s The string to be converted
  * @param origin If the name is not absolute, the origin to be appended.
+     * @return 
  * @throws TextParseException The name is invalid.
  */
 public static Name
