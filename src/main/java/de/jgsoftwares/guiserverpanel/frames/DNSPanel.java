@@ -189,9 +189,16 @@ public class DNSPanel extends javax.swing.JPanel {
                 dnsserver = new org.xbill.DNS.SimpleResolver();
               
                 System.out.print("Config DNS Server" + "\n");
-                System.out.print("get address" + dnsserver.getAddress());
+                System.out.print("get address" + dnsserver.getAddress() + "\n");
                 jLabel4.setText("DNS Server is started " + dnsserver.getAddress());
                  
+                
+                // start Resolver for goolge
+                // with 8.8.8.8
+                // and  8.8.4.4
+                de.jgsoftwares.guiserverpanel.dnsserver.DNSServer dnsserver = new de.jgsoftwares.guiserverpanel.dnsserver.DNSServer();           
+                dnsserver.addGoogleResolver();
+                
              } catch (Exception ex) {
                 System.out.print("Error from " + ex);
              }
