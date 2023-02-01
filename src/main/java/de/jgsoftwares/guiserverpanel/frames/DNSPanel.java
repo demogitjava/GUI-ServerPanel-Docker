@@ -199,6 +199,11 @@ public class DNSPanel extends javax.swing.JPanel {
                 de.jgsoftwares.guiserverpanel.dnsserver.DNSServer dnsserver = new de.jgsoftwares.guiserverpanel.dnsserver.DNSServer();           
                 dnsserver.addGoogleResolver();
                 
+                
+                String stip4 = "217.160.255.254";
+                dnsserver.reverseip4(stip4);
+                
+                
              } catch (Exception ex) {
                 System.out.print("Error from " + ex);
              }
