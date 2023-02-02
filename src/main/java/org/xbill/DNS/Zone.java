@@ -54,11 +54,13 @@ class ZoneIterator implements Iterator {
 		}
 	}
 
+        @Override
 	public boolean
 	hasNext() {
 		return (current != null || wantLastSOA);
 	}
 
+        @Override
 	public Object
 	next() {
 		if (!hasNext()) {
@@ -86,6 +88,7 @@ class ZoneIterator implements Iterator {
 		return set;
 	}
 
+        @Override
 	public void
 	remove() {
 		throw new UnsupportedOperationException();
@@ -202,25 +205,29 @@ throws IOException, ZoneTransferException
 	fromXFR(xfrin);
 }
 
-/** Returns the Zone's origin */
+/** Returns the Zone's origin
+     * @return  */
 public Name
 getOrigin() {
 	return origin;
 }
 
-/** Returns the Zone origin's NS records */
+/** Returns the Zone origin's NS records
+     * @return  */
 public RRset
 getNS() {
 	return NS;
 }
 
-/** Returns the Zone's SOA record */
+/** Returns the Zone's SOA record
+     * @return  */
 public SOARecord
 getSOA() {
 	return SOA;
 }
 
-/** Returns the Zone's class */
+/** Returns the Zone's class
+     * @return  */
 public int
 getDClass() {
 	return dclass;

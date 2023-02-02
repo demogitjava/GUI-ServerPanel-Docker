@@ -1,5 +1,6 @@
 package de.jgsoftwares.guiserverpanel.dnsserver;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import org.xbill.DNS.ExtendedResolver;
@@ -8,13 +9,14 @@ import org.xbill.DNS.Resolver;
 import org.xbill.DNS.SimpleResolver;
 import org.xbill.DNS.*;
 import org.xbill.DNS.Record;
-
+import org.xbill.DNS.Master;
+import org.xbill.DNS.Name;
 
 public class DNSServer
 {
     String reverseip4;
     
-    
+    Master master;
     
     
     public DNSServer()
@@ -25,43 +27,38 @@ public class DNSServer
   
     
    
-    public void addARecord(String reverseip4, String stfqdn)
+    public void addARecord(String reverseip4, String stfqdn) 
     {
-         try {
-            String[] dnslist = new String[1];
+       
+           
+            String dnslist = new String();
           // dnslist[0] = "permblock.easynet.net";
             
-             dnslist[0] = stfqdn;
-          Resolver resolver = null;
-            try {
-                resolver = new ExtendedResolver(dnslist);
-            } catch (UnknownHostException ee) {
-                ee.printStackTrace();
-            }
+             dnslist = stfqdn;
+         // Resolver resolver = null;
+           // try {
+             //   resolver = new ExtendedResolver(dnslist);
+            //} catch (UnknownHostException ee) {
+             //   ee.printStackTrace();
+           // }
+          
             Name name = null;
             try {
                 // name = Name.fromString("67.80.1.69.permblock.easynet.net.");
-                
-                name = Name.fromString( reverseip4 + "." + stfqdn);
+                name = Name.fromString( stfqdn);
+                //name = Name.fromString( reverseip4 + "." + stfqdn);
+               
+            
             } catch (Exception e) {
                 e.printStackTrace();
             }
             Record question = Record.newRecord(name, Type.A, DClass.IN);
+         
             Message query = Message.newQuery(question);
-            Message response = null;
-            try {
-                response = resolver.send(query);
-            }
-            catch (IOException e) {
-                // A network error occurred.  Press on.
-                e.printStackTrace();
-                System.exit(0);
-            }
-            short rcode = (short) response.getHeader().getRcode();
-            System.out.println("RCODE = " + rcode);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+          
+           
+        
+      
     }
    
     public void addCNAMERecord()

@@ -17,6 +17,8 @@ import org.xbill.DNS.Name;
 import org.xbill.DNS.TTL;
 import org.xbill.DNS.DClass;
 import org.xbill.DNS.Address;
+import org.xbill.DNS.Lookup;
+import org.xbill.DNS.Type;
 
 /**
  *
@@ -235,6 +237,9 @@ public class DNSPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        Lookup lookup = new Lookup(Name.root, Type.A);
+        lookup.setCache(null);
         
         String stcombo = (String) jComboBox2.getSelectedItem();
         
