@@ -35,7 +35,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="add method in DNSServer for entry &#10;ip4 reverse as string" />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit methods to add a A Record &#10;to dns server">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dnsserver/DNSServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/dnsserver/DNSServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/xbill/DNS/Zone.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -641,13 +645,6 @@
       <workItem from="1670489056617" duration="4880000" />
       <workItem from="1670578456191" duration="2930000" />
     </task>
-    <task id="LOCAL-00008" summary="edit docker client">
-      <created>1668420672521</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1668420672521</updated>
-    </task>
     <task id="LOCAL-00009" summary="get username and password as String&#10;from jTextField and PasswordField &#10;form Toolbar to login to &#10;docker hub for pull images">
       <created>1668509466004</created>
       <option name="number" value="00009" />
@@ -984,7 +981,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675264893293</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="edit methods to add a A Record &#10;to dns server">
+      <created>1675328089354</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1675328089355</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1020,7 +1024,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="start nginx docker container with string &#10;from jTextField1" />
     <MESSAGE value="add dockerfile for germany" />
     <MESSAGE value="add README.md" />
     <MESSAGE value="edit docker-compose file" />
@@ -1045,7 +1048,8 @@
     <MESSAGE value="DNSPanel add String for&#10;method setDefaultResolver&#10;from jTextField2" />
     <MESSAGE value="add Resolver for google by stating &#10;the GUI Server Panel" />
     <MESSAGE value="add method in DNSServer for entry &#10;ip4 reverse as string" />
-    <option name="LAST_COMMIT_MESSAGE" value="add method in DNSServer for entry &#10;ip4 reverse as string" />
+    <MESSAGE value="edit methods to add a A Record &#10;to dns server" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit methods to add a A Record &#10;to dns server" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

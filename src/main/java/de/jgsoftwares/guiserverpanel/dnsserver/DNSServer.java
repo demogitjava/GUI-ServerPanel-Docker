@@ -45,8 +45,8 @@ public class DNSServer
             Name name = null;
             try {
                 // name = Name.fromString("67.80.1.69.permblock.easynet.net.");
-                name = Name.fromString( stfqdn);
-                //name = Name.fromString( reverseip4 + "." + stfqdn);
+                
+                name = Name.fromString( reverseip4 + "." + stfqdn);
                
             
             } catch (Exception e) {
