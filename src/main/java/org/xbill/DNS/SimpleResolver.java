@@ -339,4 +339,8 @@ private Message sendAXFR(Message query) throws IOException {
 	return response;
 }
 
+    public void reverseip4(String stip4, String reverseip4) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

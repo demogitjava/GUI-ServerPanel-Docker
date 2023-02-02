@@ -34,10 +34,15 @@ public class DNSPanel extends javax.swing.JPanel {
      TTL ttl;
      Address address;
      
+     de.jgsoftwares.guiserverpanel.dnsserver.DNSServer daodns;
+     
     /**
      * Creates new form DNS_Panel
      */
     public DNSPanel() {
+        
+        daodns = new de.jgsoftwares.guiserverpanel.dnsserver.DNSServer();
+        
         
         initComponents();
     }
@@ -65,8 +70,9 @@ public class DNSPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
 
-        jLabel1.setText("Fqdn");
+        jLabel1.setText("Fqdn / IP");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +128,9 @@ public class DNSPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -160,7 +168,8 @@ public class DNSPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,11 +207,7 @@ public class DNSPanel extends javax.swing.JPanel {
                 // and  8.8.4.4
                 de.jgsoftwares.guiserverpanel.dnsserver.DNSServer dnsserver = new de.jgsoftwares.guiserverpanel.dnsserver.DNSServer();           
                 dnsserver.addGoogleResolver();
-                
-                
-                String stip4 = "217.160.255.254";
-                dnsserver.reverseip4(stip4);
-                
+             
                 
              } catch (Exception ex) {
                 System.out.print("Error from " + ex);
@@ -220,6 +225,7 @@ public class DNSPanel extends javax.swing.JPanel {
 
              //dnsserver.wait();
              dnsserver.setTimeout(1);
+             System.out.print("Timeout dnsserver " + dnsserver.getAddress().getHostName());
              jLabel4.setText("-> DNS Server is stopped");
          } catch (Exception ex) {
            System.out.print("Error" + ex);
@@ -232,7 +238,20 @@ public class DNSPanel extends javax.swing.JPanel {
         
         String stcombo = (String) jComboBox2.getSelectedItem();
         
+        String stfqdn = jTextField1.getText();
+        String stip4 = jTextField3.getText();
         
+        String strelease = (String) jComboBox2.getSelectedItem();
+        
+        String reverseip4 = null;
+      
+        daodns.reverseip4(stip4, reverseip4);
+        
+        
+        // get value fro daodns
+        reverseip4 = (String) daodns.getReverseip4();
+        
+        daodns.addARecord(reverseip4, stfqdn);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -261,5 +280,6 @@ public class DNSPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
