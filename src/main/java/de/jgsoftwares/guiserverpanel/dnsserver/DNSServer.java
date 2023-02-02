@@ -1,14 +1,18 @@
 package de.jgsoftwares.guiserverpanel.dnsserver;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import org.xbill.DNS.ExtendedResolver;
 import org.xbill.DNS.Lookup;
 import org.xbill.DNS.Resolver;
 import org.xbill.DNS.SimpleResolver;
+import org.xbill.DNS.*;
+import org.xbill.DNS.Record;
 
 
 public class DNSServer
 {
+    String reverseip4;
     
     
     
@@ -21,9 +25,43 @@ public class DNSServer
   
     
    
-    public void addARecord()
+    public void addARecord(String reverseip4, String stfqdn)
     {
-        
+         try {
+            String[] dnslist = new String[1];
+          // dnslist[0] = "permblock.easynet.net";
+            
+             dnslist[0] = stfqdn;
+          Resolver resolver = null;
+            try {
+                resolver = new ExtendedResolver(dnslist);
+            } catch (UnknownHostException ee) {
+                ee.printStackTrace();
+            }
+            Name name = null;
+            try {
+                // name = Name.fromString("67.80.1.69.permblock.easynet.net.");
+                
+                name = Name.fromString( reverseip4 + "." + stfqdn);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Record question = Record.newRecord(name, Type.A, DClass.IN);
+            Message query = Message.newQuery(question);
+            Message response = null;
+            try {
+                response = resolver.send(query);
+            }
+            catch (IOException e) {
+                // A network error occurred.  Press on.
+                e.printStackTrace();
+                System.exit(0);
+            }
+            short rcode = (short) response.getHeader().getRcode();
+            System.out.println("RCODE = " + rcode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
    
     public void addCNAMERecord()
@@ -58,7 +96,9 @@ public class DNSServer
     }
     
     
-    public String reverseip4(String stip4)
+    
+    
+    public void reverseip4(String stip4, String reverseip4)
     {
       
 
@@ -70,10 +110,22 @@ public class DNSServer
         String part3 = outp[2]; 
         String part4 = outp[3]; 
         
-        String reverseip4 = "";
+        
         reverseip4 = part4 + "." + part3 + "." + part2 + "." + part1;
-        return  reverseip4;    
+        
+        setReverseip4(reverseip4);
+        
     }
+
+    public String getReverseip4() {
+        return reverseip4;
+    }
+
+    public void setReverseip4(String reverseip4) {
+        this.reverseip4 = reverseip4;
+    }
+    
+    
     
     
     
