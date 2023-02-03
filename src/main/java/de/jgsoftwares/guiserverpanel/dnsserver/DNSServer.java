@@ -31,31 +31,7 @@ public class DNSServer
     {
        
            
-            String dnslist = new String();
-          // dnslist[0] = "permblock.easynet.net";
-            
-             dnslist = stfqdn;
-         // Resolver resolver = null;
-           // try {
-             //   resolver = new ExtendedResolver(dnslist);
-            //} catch (UnknownHostException ee) {
-             //   ee.printStackTrace();
-           // }
-          
-            Name name = null;
-            try {
-                // name = Name.fromString("67.80.1.69.permblock.easynet.net.");
-                
-                name = Name.fromString( reverseip4 + "." + stfqdn);
-               
-            
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Record question = Record.newRecord(name, Type.A, DClass.IN);
          
-            Message query = Message.newQuery(question);
-          
            
         
       
