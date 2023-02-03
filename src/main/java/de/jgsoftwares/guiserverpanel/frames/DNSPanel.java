@@ -4,6 +4,7 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import com.microsoft.azure.management.dns.DnsZone;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +12,6 @@ import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 
 /**
@@ -85,7 +85,7 @@ public class DNSPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(jList1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TYPE.A", "TYPE.CNAME", "TYPE.TXT" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TYPE.A", "TYPE.CNAME", "TYPE.TXT", "TYPE.WWW" }));
         jComboBox1.setMinimumSize(new java.awt.Dimension(80, 30));
         jComboBox1.setPreferredSize(new java.awt.Dimension(80, 30));
 
@@ -188,7 +188,7 @@ public class DNSPanel extends javax.swing.JPanel {
             
              try {
                
-                
+             
              } catch (Exception ex) {
                 System.out.print("Error from " + ex);
              }
