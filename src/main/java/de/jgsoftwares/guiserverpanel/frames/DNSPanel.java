@@ -180,7 +180,7 @@ public class DNSPanel extends javax.swing.JPanel {
 
 
         stdnsname = jTextField2.getText();
-        dnsserver.setDefaultResolver(stdnsname);
+       
          
          dnsrunnable = () -> {
             System.out.println("start dns server with a thread: " + Thread.currentThread().getName());
@@ -200,16 +200,7 @@ public class DNSPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         try {
-             // TODO add your handling code here:
-
-             //dnsserver.wait();
-             dnsserver.setTimeout(1);
-             System.out.print("Timeout dnsserver " + dnsserver.getAddress().getHostName());
-             jLabel4.setText("-> DNS Server is stopped");
-         } catch (Exception ex) {
-           System.out.print("Error" + ex);
-         }
+         
         
     }//GEN-LAST:event_jButton4ActionPerformed
 

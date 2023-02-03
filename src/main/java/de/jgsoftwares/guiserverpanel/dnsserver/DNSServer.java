@@ -4,21 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import org.xbill.DNS.ExtendedResolver;
-import org.xbill.DNS.Lookup;
-import org.xbill.DNS.Resolver;
-import org.xbill.DNS.SimpleResolver;
-import org.xbill.DNS.*;
-import org.xbill.DNS.Record;
-import org.xbill.DNS.Master;
-import org.xbill.DNS.Name;
+
 
 public class DNSServer
 {
     String reverseip4;
     
-    Master master;
-    
+   
     
     public DNSServer()
     {
