@@ -12,13 +12,7 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.xbill.DNS.ARecord;
-import org.xbill.DNS.Name;
-import org.xbill.DNS.TTL;
-import org.xbill.DNS.DClass;
-import org.xbill.DNS.Address;
-import org.xbill.DNS.Lookup;
-import org.xbill.DNS.Type;
+
 
 /**
  *
@@ -28,13 +22,9 @@ public class DNSPanel extends javax.swing.JPanel {
 
     
      public static Runnable dnsrunnable;
-     org.xbill.DNS.SimpleResolver dnsserver;
-     
+  
      String stdnsname;
-     Name name;
-     DClass dclass;
-     TTL ttl;
-     Address address;
+    
      
      de.jgsoftwares.guiserverpanel.dnsserver.DNSServer daodns;
      
@@ -197,19 +187,7 @@ public class DNSPanel extends javax.swing.JPanel {
 
             
              try {
-                dnsserver = new org.xbill.DNS.SimpleResolver();
-              
-                System.out.print("Config DNS Server" + "\n");
-                System.out.print("get address" + dnsserver.getAddress() + "\n");
-                jLabel4.setText("DNS Server is started " + dnsserver.getAddress());
-                 
-                
-                // start Resolver for goolge
-                // with 8.8.8.8
-                // and  8.8.4.4
-                de.jgsoftwares.guiserverpanel.dnsserver.DNSServer dnsserver = new de.jgsoftwares.guiserverpanel.dnsserver.DNSServer();           
-                dnsserver.addGoogleResolver();
-             
+               
                 
              } catch (Exception ex) {
                 System.out.print("Error from " + ex);
@@ -238,25 +216,7 @@ public class DNSPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        Lookup lookup = new Lookup(Name.root, Type.A);
-        lookup.setCache(null);
-        
-        String stcombo = (String) jComboBox2.getSelectedItem();
-        
-        String stfqdn = jTextField1.getText();
-        String stip4 = jTextField3.getText();
-        
-        String strelease = (String) jComboBox2.getSelectedItem();
-        
-        String reverseip4 = null;
-      
-        daodns.reverseip4(stip4, reverseip4);
-        
-        
-        // get value fro daodns
-        reverseip4 = (String) daodns.getReverseip4();
-        
-        daodns.addARecord(reverseip4, stfqdn);
+  
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

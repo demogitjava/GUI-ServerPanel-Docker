@@ -56,11 +56,12 @@
 			<version>2.7.5</version>
 		</dependency>
                 
-                <dependency>
-                    <groupId>dnsjava</groupId>
-                    <artifactId>dnsjava</artifactId>
-                    <version>3.5.2</version>
-                </dependency>
+              <dependency>
+                    <groupId>com.microsoft.azure</groupId>
+                    <artifactId>azure-mgmt-dns</artifactId>
+                    <version>1.22.0</version>
+              </dependency>
+
 	</dependencies>
 
 	<pluginRepositories>
