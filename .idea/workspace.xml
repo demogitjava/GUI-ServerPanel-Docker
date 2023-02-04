@@ -35,10 +35,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="remove xbill.dns methods&#10;in DNSPanel">
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/jgsoftwares/guiserverpanel/frames/DNSPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +111,7 @@
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "210",
     "WebServerToolWindowFactoryState": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/root/NetBeansProjects/demodatabase",
+    "last_opened_file_path": "/root/NetBeansProjects/dockerdnsserver",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -645,13 +643,6 @@
       <workItem from="1670489056617" duration="4880000" />
       <workItem from="1670578456191" duration="2930000" />
     </task>
-    <task id="LOCAL-00014" summary=".">
-      <created>1668694960798</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1668694960798</updated>
-    </task>
     <task id="LOCAL-00015" summary=".">
       <created>1668781580614</created>
       <option name="number" value="00015" />
@@ -988,7 +979,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675420312854</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary=".">
+      <created>1675422598048</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1675422598048</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1028,7 +1026,6 @@
     <MESSAGE value="add JPanels for config&#10;DNS &#10;JRemote Desktop &#10;and Clustering a h2 database" />
     <MESSAGE value="add a simple remote rmi server &#10;config static &#10;ip 127.0.0.1&#10;and port 6666" />
     <MESSAGE value="delete systray to run the remote server" />
-    <MESSAGE value="." />
     <MESSAGE value="disable display Icon on ActiveConnectionsGUI" />
     <MESSAGE value="edit config for jrdestkop server" />
     <MESSAGE value="add status panel on JRemoteDesktop to display status &#10;on panel" />
@@ -1049,7 +1046,8 @@
     <MESSAGE value="clear method in&#10;DNSServer.java&#10;&#10;public void addARecord(String reverseip4, String stfqdn)" />
     <MESSAGE value="remove xbill.dns package &#10;from project" />
     <MESSAGE value="remove xbill.dns methods&#10;in DNSPanel" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove xbill.dns methods&#10;in DNSPanel" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
