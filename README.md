@@ -27,10 +27,11 @@ In my case it runs a CentOS Stream 9 Server
 
     yum install xrdp
     systemctl enable xrdp --now
-	
-    systemctl restart xrdp
-    
     sudo firewall-cmd --add-port=3389/tcp --permanent
+ 
+    systemctl restart xrdp
+
+
 after reboot
 you can connect via
 **microsoft remote desktop**
