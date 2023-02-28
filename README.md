@@ -17,8 +17,31 @@ The used java jdk is
 https://www.graalvm.org/downloads/
 in this case i use graalvm jdk 17
 
+run the application on a remote server
+------------------------------------------------
+In my case it runs a CentOS Stream 9 Server 
 
+    yum install epel-release
+    yum install "Server with GUI"
+  
 
+    yum install xrdp
+    systemctl enable xrdp --now
+	
+    systemctl restart xrdp
+    
+    sudo firewall-cmd --add-port=3389/tcp --permanent
+after reboot 
+you can connect via
+**microsoft remote desktop**
+ 
+
+    mstsc
+in the window search field.
+
+for **linux** install remmina
+
+    yum install remmina
 
 Tab Landingpage:
 ------------------------------------------------
@@ -55,10 +78,17 @@ module on command line with
 Tab JRemoteDesktop
 SIMPLE Java RMI SERVER
 
+
+
+Over a simple vpn connection the 
+remoteDesktop is available and working.
+
 The Server starts on default port 3389 without 
 username and password or authentication over a 
 sip server but a implementation is possible
 for security.
+
+
 
 
 ------------------------------------------------
@@ -78,6 +108,7 @@ sudo systemctl restart docker
 
 This Docker GUI Client run the 
 java modules with terminal commands.
+
 
 
 
