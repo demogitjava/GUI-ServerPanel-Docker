@@ -35,10 +35,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit readme.md">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -645,20 +642,6 @@
       <workItem from="1670489056617" duration="4880000" />
       <workItem from="1670578456191" duration="2930000" />
     </task>
-    <task id="LOCAL-00019" summary=".">
-      <created>1668851447484</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1668851447484</updated>
-    </task>
-    <task id="LOCAL-00020" summary="update docker client">
-      <created>1668856168586</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1668856168586</updated>
-    </task>
     <task id="LOCAL-00021" summary=".">
       <created>1668857109351</created>
       <option name="number" value="00021" />
@@ -988,7 +971,21 @@
       <option name="project" value="LOCAL" />
       <updated>1677748769420</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="edit readme.md">
+      <created>1677834042773</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1677834042776</updated>
+    </task>
+    <task id="LOCAL-00069" summary=".">
+      <created>1677834054918</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1677834054918</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1046,10 +1043,10 @@
     <MESSAGE value="clear method in&#10;DNSServer.java&#10;&#10;public void addARecord(String reverseip4, String stfqdn)" />
     <MESSAGE value="remove xbill.dns package &#10;from project" />
     <MESSAGE value="remove xbill.dns methods&#10;in DNSPanel" />
-    <MESSAGE value="." />
     <MESSAGE value="delete package org.xbill" />
     <MESSAGE value="edit readme.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit readme.md" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

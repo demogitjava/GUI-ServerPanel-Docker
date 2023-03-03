@@ -21,8 +21,14 @@ run the application on a remote server
 
 In my case it runs a CentOS Stream 9 Server
 
-yum install epel-release yum install "Server with GUI"      
-yum install xrdp systemctl enable xrdp --now sudo firewall-cmd --add-port=3389/tcp --permanent     systemctl restart xrdp
+**-> server**
+
+    yum install epel-release 
+    yum install "Server with GUI"      
+    yum install xrdp systemctl enable xrdp --now 
+    sudo firewall-cmd --add-port=3389/tcp --permanent     
+    systemctl restart xrdp  
+
 
 
 after reboot    
@@ -34,7 +40,12 @@ mstscin the window search field.
 
 for **linux** install remmina
 
-yum install remmina
+on the client site you can connect to the server with remmina:
+
+**-> client**
+
+    yum install remmina  
+
 
 
 install docker engine:
