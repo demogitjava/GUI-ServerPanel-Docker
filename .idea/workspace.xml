@@ -35,7 +35,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="." />
+    <list default="true" id="df835e38-5ead-4bfa-af86-07948b367195" name="Default" comment="edit README.md">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -642,13 +644,6 @@
       <workItem from="1670489056617" duration="4880000" />
       <workItem from="1670578456191" duration="2930000" />
     </task>
-    <task id="LOCAL-00021" summary=".">
-      <created>1668857109351</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1668857109351</updated>
-    </task>
     <task id="LOCAL-00022" summary="edit MainPanel Java Form">
       <created>1668858628241</created>
       <option name="number" value="00022" />
@@ -985,7 +980,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677834054918</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="edit README.md">
+      <created>1677834326597</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1677834326597</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1021,7 +1023,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add JPanels for config&#10;DNS &#10;JRemote Desktop &#10;and Clustering a h2 database" />
     <MESSAGE value="add a simple remote rmi server &#10;config static &#10;ip 127.0.0.1&#10;and port 6666" />
     <MESSAGE value="delete systray to run the remote server" />
     <MESSAGE value="disable display Icon on ActiveConnectionsGUI" />
@@ -1046,7 +1047,8 @@
     <MESSAGE value="delete package org.xbill" />
     <MESSAGE value="edit readme.md" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="edit README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit README.md" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
