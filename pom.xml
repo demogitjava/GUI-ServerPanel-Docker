@@ -88,6 +88,10 @@
 					<mainClass>de.jgsoftwares.guiserverpanel.i_GuiServerPanel</mainClass>
 				</configuration>
 			</plugin>
+                        
+                        
+                        
+                            <!-- disable maven plugin 2.3.2 
                         <plugin>
                          <groupId>org.apache.maven.plugins</groupId>
                          <artifactId>maven-compiler-plugin</artifactId>
@@ -96,9 +100,9 @@
                           <debug>false</debug>
                           <showDeprecation>false</showDeprecation>
                          </configuration>
-                        </plugin>
+                        </plugin>--> 
                         
-                        
+                       <!-- disable tom ee  
                            <plugin>
                         <groupId>org.apache.openejb.maven</groupId>
                         <artifactId>tomee-maven-plugin</artifactId>
@@ -107,13 +111,15 @@
                           <tomeeVersion>1.7.1</tomeeVersion>
                           <tomeeClassifier>plus</tomeeClassifier>
                         </configuration>
-                    </plugin>
+                    </plugin>--> 
                     
+                    
+                     <!-- disable native plugin
                     <plugin>
                         <groupId>org.graalvm.buildtools</groupId>
                         <artifactId>native-maven-plugin</artifactId>
                         <version>0.9.24</version>
-                    </plugin>
+                    </plugin>--> 
             
             
 
@@ -126,7 +132,8 @@
                     <debug>false</debug>
                 </configuration>
             </plugin>
-		</plugins>
+            
+    </plugins>
 
 	</build>
 
