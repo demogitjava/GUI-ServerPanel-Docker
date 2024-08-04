@@ -4,10 +4,6 @@ import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
 
-/**
- * ImageUtility.java
- * @author benbac
- */
 
 public class ImageUtility {
 

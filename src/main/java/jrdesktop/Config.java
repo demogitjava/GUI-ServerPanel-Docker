@@ -8,10 +8,6 @@ import java.util.Properties;
 //import jrdesktop.main;
 import jrdesktop.utilities.InetAdrUtility;
 
-/**
- * Config.java
- * @author benbac
- */
 
 public class Config 
 {

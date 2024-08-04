@@ -4,10 +4,6 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-/**
- *
- * @author root
- */
 public class Ebay extends javax.swing.JPanel {
 
     /**

@@ -6,10 +6,6 @@ import java.rmi.server.RMIClientSocketFactory;
 import java.rmi.server.RMIServerSocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 
-/**
- * ServerImpl.java
- * @author benbac
- */
 
 public class ServerImpl extends UnicastRemoteObject implements ServerInterface {        
      

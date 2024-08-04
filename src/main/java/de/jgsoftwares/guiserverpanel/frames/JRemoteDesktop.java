@@ -7,10 +7,7 @@ package de.jgsoftwares.guiserverpanel.frames;
 import jrdesktop.server.rmi.Server;
 
 
-/**
- *
- * @author root
- */
+
 public class JRemoteDesktop extends javax.swing.JPanel {
 
     

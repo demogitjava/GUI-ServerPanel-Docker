@@ -15,10 +15,6 @@ import jrdesktop.Config;
 import jrdesktop.robot;
 import jrdesktop.utilities.ZipUtility;
 
-/**
- * Server.java
- * @author benbac
- */
 
 public class Server extends Thread {
     

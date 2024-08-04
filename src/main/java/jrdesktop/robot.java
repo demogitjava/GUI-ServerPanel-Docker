@@ -14,10 +14,7 @@ import java.util.ArrayList;
 
 import jrdesktop.utilities.ImageUtility;
 
-/**
- * robot.java
- * @author benbac
- */
+
 
 public class robot {
 

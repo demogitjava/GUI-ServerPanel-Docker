@@ -7,10 +7,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-/**
- * InetAdrUtility.java
- * @author benbac
- */
+
 
 public class InetAdrUtility {
 

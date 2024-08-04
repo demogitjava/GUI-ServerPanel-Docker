@@ -10,10 +10,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-/**
- *
- * @author root
- */
+
 public class Landingpage extends javax.swing.JPanel {
 
     

@@ -14,10 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTabbedPane;
 
-/**
- *
- * @author root
- */
+
 public class MainPanel extends javax.swing.JFrame {
 
     

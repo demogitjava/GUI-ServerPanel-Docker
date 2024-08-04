@@ -4,10 +4,7 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-/**
- *
- * @author root
- */
+
 public class clusteringh2database extends javax.swing.JPanel {
 
     /**

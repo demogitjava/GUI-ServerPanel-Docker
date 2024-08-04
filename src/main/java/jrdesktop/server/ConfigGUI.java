@@ -5,10 +5,6 @@ import javax.swing.ImageIcon;
 
 import jrdesktop.utilities.InetAdrUtility;
 
-/**
- * ConfigGUI.java
- * @author  benbac
- */
 
 public class ConfigGUI extends javax.swing.JFrame {
     

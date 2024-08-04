@@ -14,10 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-/**
- *
- * @author root
- */
 public class DNSPanel extends javax.swing.JPanel {
 
     

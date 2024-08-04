@@ -8,10 +8,7 @@ import javax.swing.JOptionPane;
 //import jrdesktop.main;
 import jrdesktop.server.rmi.Server;
 
-/**
- * ActiveConnectionsGUI.java
- * @author benbac
- */
+
 
 public class ActiveConnectionsGUI extends javax.swing.JFrame {
     
