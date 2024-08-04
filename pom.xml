@@ -85,13 +85,13 @@
 				<version>2.5.3</version>
 
 				<configuration>
-					<mainClass>de.jgsoftwares.guiserverpanel.i_GuiServerPanel</mainClass>
+					<mainClass>de.jgsoftwares.guiserverpanel.GUIServerPanel</mainClass>
 				</configuration>
 			</plugin>
                         
                         
                         
-                            <!-- disable maven plugin 2.3.2 
+                           
                         <plugin>
                          <groupId>org.apache.maven.plugins</groupId>
                          <artifactId>maven-compiler-plugin</artifactId>
@@ -100,7 +100,7 @@
                           <debug>false</debug>
                           <showDeprecation>false</showDeprecation>
                          </configuration>
-                        </plugin>--> 
+                        </plugin> 
                         
                        <!-- disable tom ee  
                            <plugin>
@@ -122,7 +122,7 @@
                     </plugin>--> 
             
             
-
+            <!-- disable maven compile plugin
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -131,7 +131,7 @@
                     <showDeprecation>false</showDeprecation>
                     <debug>false</debug>
                 </configuration>
-            </plugin>
+            </plugin>--> 
             
     </plugins>
 

@@ -9,3 +9,11 @@ Simple GUI Docker  Panel
 
 This Docker GUI Client run the    
 java modules with terminal commands.
+
+
+compile project with
+mvn package
+
+used java jdk is 
+open jdk 11
+
