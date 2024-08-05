@@ -71,31 +71,31 @@ public class Landingpage extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButton2);
-        jButton2.setBounds(0, 110, 72, 26);
+        jButton2.setBounds(0, 110, 60, 25);
 
         jButton3.setText("FR");
         jPanel3.add(jButton3);
-        jButton3.setBounds(0, 140, 72, 26);
+        jButton3.setBounds(0, 140, 60, 25);
 
-        jButton4.setText("GB");
+        jButton4.setText("EN");
         jPanel3.add(jButton4);
-        jButton4.setBounds(0, 170, 72, 26);
+        jButton4.setBounds(0, 170, 60, 25);
 
         jButton5.setText("ES");
         jPanel3.add(jButton5);
-        jButton5.setBounds(0, 200, 72, 26);
+        jButton5.setBounds(0, 200, 60, 25);
 
         jButton6.setText("IT");
         jPanel3.add(jButton6);
-        jButton6.setBounds(0, 230, 72, 26);
+        jButton6.setBounds(0, 230, 60, 25);
 
         jLabel1.setText("start Docker Containers");
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(6, 17, 150, 20);
+        jLabel1.setBounds(6, 17, 170, 15);
 
         jButton7.setText("TR");
         jPanel3.add(jButton7);
-        jButton7.setBounds(0, 260, 72, 26);
+        jButton7.setBounds(0, 260, 60, 25);
 
         jButton8.setText("--> restart");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -104,27 +104,27 @@ public class Landingpage extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButton8);
-        jButton8.setBounds(80, 110, 96, 26);
+        jButton8.setBounds(80, 110, 108, 25);
 
         jButton9.setText("--> restart");
         jPanel3.add(jButton9);
-        jButton9.setBounds(80, 140, 96, 26);
+        jButton9.setBounds(80, 140, 108, 25);
 
         jButton10.setText("--> restart");
         jPanel3.add(jButton10);
-        jButton10.setBounds(80, 170, 96, 26);
+        jButton10.setBounds(80, 170, 108, 25);
 
         jButton11.setText("--> restart");
         jPanel3.add(jButton11);
-        jButton11.setBounds(80, 200, 96, 26);
+        jButton11.setBounds(80, 200, 108, 25);
 
         jButton12.setText("--> restart");
         jPanel3.add(jButton12);
-        jButton12.setBounds(80, 230, 96, 26);
+        jButton12.setBounds(80, 230, 108, 25);
 
         jButton13.setText("--> restart");
         jPanel3.add(jButton13);
-        jButton13.setBounds(80, 260, 96, 26);
+        jButton13.setBounds(80, 260, 108, 25);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -140,7 +140,7 @@ public class Landingpage extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButton1);
-        jButton1.setBounds(0, 40, 180, 26);
+        jButton1.setBounds(0, 40, 180, 25);
 
         jButton14.setText("restart nginx");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +149,7 @@ public class Landingpage extends javax.swing.JPanel {
             }
         });
         jPanel3.add(jButton14);
-        jButton14.setBounds(0, 70, 180, 26);
+        jButton14.setBounds(0, 70, 180, 25);
         jPanel3.add(jTextField1);
         jTextField1.setBounds(280, 70, 300, 30);
 

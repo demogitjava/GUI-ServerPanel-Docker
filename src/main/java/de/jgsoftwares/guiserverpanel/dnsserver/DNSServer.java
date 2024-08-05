@@ -11,7 +11,6 @@ public class DNSServer
     String reverseip4;
     
    
-    
     public DNSServer()
     {
        
