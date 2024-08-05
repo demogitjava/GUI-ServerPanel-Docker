@@ -72,6 +72,17 @@ public class MainPanel extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(jScrollPane1);
 
         de.jgsoftwares.guiserverpanel.frames.DNSPanel dnspanel = new de.jgsoftwares.guiserverpanel.frames.DNSPanel();
+
+        de.jgsoftwares.guiserverpanel.frames.OpenWrt openwrt = new de.jgsoftwares.guiserverpanel.frames.OpenWrt();
+        de.jgsoftwares.guiserverpanel.frames.Databases databases = new de.jgsoftwares.guiserverpanel.frames.Databases();
+
+        // OpenWrt Panel
+        jTabbedPane1.add(openwrt, "OpenWrt -BackFire");
+
+        // Databases - DerbyDB - H2 - MYSql
+        jTabbedPane1.add(databases, "Databases");
+
+        // DNS Server Panel
         jTabbedPane1.add(dnspanel, "DNS Panel");
 
         JRemoteDesktop jremotedesktop = new JRemoteDesktop();

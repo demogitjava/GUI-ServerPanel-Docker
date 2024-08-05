@@ -5,10 +5,7 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-/**
- *
- * @author root
- */
+
 public class Databases extends javax.swing.JPanel {
 
     /**
