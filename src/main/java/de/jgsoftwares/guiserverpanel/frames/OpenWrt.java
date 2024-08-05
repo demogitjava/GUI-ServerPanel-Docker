@@ -38,7 +38,7 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jButton1.setText("install");
 
-        jButton2.setText("restart openwrt - container");
+        jButton2.setText("restart openwrt - docker container");
 
         jPasswordField1.setText("jPasswordField1");
 

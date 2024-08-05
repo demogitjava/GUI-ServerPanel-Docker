@@ -66,7 +66,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="restart openwrt - container"/>
+        <Property name="text" type="java.lang.String" value="restart openwrt - docker container"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField1">
