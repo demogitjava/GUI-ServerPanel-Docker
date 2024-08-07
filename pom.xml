@@ -12,11 +12,7 @@
 
 
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.5.RELEASE</version>
-	</parent>
+	
 
 	<properties>
 		<spring-boot.run.jvmArguments>-Duser.timezone=UTC</spring-boot.run.jvmArguments>
@@ -27,53 +23,16 @@
 	 <maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>repository.spring.release</id>
-			<name>Spring GA Repository</name>
-			<url>http://repo.spring.io/release</url>
-		</repository>
-	</repositories>
+	
 
 	<dependencies>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		 <exclusions>
-		  <exclusion>
-		   <groupId>org.yaml</groupId>
-		   <artifactId>snakeyaml</artifactId>
-		  </exclusion>
-		 </exclusions>
-		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.7.5</version>
-		</dependency>
-                
-              <dependency>
-                    <groupId>com.microsoft.azure</groupId>
-                    <artifactId>azure-mgmt-dns</artifactId>
-                    <version>1.22.0</version>
-              </dependency>
+	
 
 	</dependencies>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<url>https://repo.spring.io/snapshot</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<url>https://repo.spring.io/milestone</url>
-		</pluginRepository>
-	</pluginRepositories>
+	
 
 
 	<build>

@@ -4,7 +4,7 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-import com.microsoft.azure.management.dns.DnsZone;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
