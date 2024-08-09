@@ -5,9 +5,19 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import static java.lang.ProcessBuilder.Redirect.to;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class OpenWrt extends javax.swing.JPanel {
 
+    Process process;
+    BufferedReader reader;
+    
     /**
      * Creates new form OpenWrt
      */
@@ -39,6 +49,11 @@ public class OpenWrt extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("install");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("restart openwrt - docker container");
 
@@ -83,6 +98,27 @@ public class OpenWrt extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+     
+        // list images
+        try {
+            process = Runtime.getRuntime().exec("docker run -it --name openwrtbackfire --runtime runc -e TZ=Europe/Berlin -e NTP_SERVER=\"2.rhel.pool.ntp.org\" -v /etc/resolv.conf:/etc/resolv.conf --blkio-weight 100 --cpu-shares 1024 --cpu-quota 1000 --cpu-period 1000 --net=host --add-host=demogitjava.ddns.net:217.160.255.254 --platform=linux/amd64 --kernel-memory=6M --restart unless-stopped --privileged jgsoftwares/openwrt-x86-backfire:latest /bin/ash");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            jTextArea2.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea2.append(line + "\n");
+               // System.out.println(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
