@@ -80,6 +80,11 @@ public class Databases extends javax.swing.JPanel {
         });
 
         jButton5.setText("set Time");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("set Time");
 
@@ -200,6 +205,7 @@ public class Databases extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
+        // derbydb set systemtime
         de.jgsoftwares.guiserverpanel.NtpClient ntpclient = null;   
         try {
             process = Runtime.getRuntime().exec("docker exec -it oraclederbydb /bin/ash");
@@ -227,6 +233,39 @@ public class Databases extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        
+          // h2db set systemtime
+        de.jgsoftwares.guiserverpanel.NtpClient ntpclient = null;   
+        try {
+            process = Runtime.getRuntime().exec("docker exec -it oraclelinuxh2db /bin/ash");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            try {
+                ntpclient = new de.jgsoftwares.guiserverpanel.NtpClient();
+            } catch (Exception ex) {
+                Logger.getLogger(OpenWrt.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String stsystemtime = (String) ntpclient.getSystemTime().toString();
+            
+            String line = "";
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.append(line + "new systemtime is set - de oraclelinux h2 db -" + "\n");
+               // System.out.println(line);
+            }
+            writer.write(stsystemtime + "\r");
+           
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
