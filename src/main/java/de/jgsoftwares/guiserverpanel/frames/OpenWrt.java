@@ -227,7 +227,7 @@ public class OpenWrt extends javax.swing.JPanel {
             String line = "";
             jTextArea2.setText("");
             while ((line = reader.readLine()) != null) {
-                jTextArea2.append(line + "new password is set " + "\n");
+                jTextArea2.append(line + "new systemtime is set - de -" + "\n");
                // System.out.println(line);
             }
             writer.write(stsystemtime + "\r");
