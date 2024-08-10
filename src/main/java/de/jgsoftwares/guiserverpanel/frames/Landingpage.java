@@ -129,7 +129,7 @@ public class Landingpage extends javax.swing.JPanel {
             String line = "";
             jTextArea1.setText("");
             while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "docker container restarted " + "\n");
+                jTextArea1.append(line + "docker container oraclelinux landingapge restarted " + "\n");
                // System.out.println(line);
             }
             
