@@ -197,7 +197,7 @@ public class OpenWrt extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
               
-          }
+        }
         } catch (Exception e)
         {
             System.out.print("Fehler " +e);
@@ -207,7 +207,34 @@ public class OpenWrt extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         
+           // add systemtime
+           
+        de.jgsoftwares.guiserverpanel.NtpClient ntpclient = null;   
+        try {
+            process = Runtime.getRuntime().exec("docker exec -it openwrtbackfire");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            try {
+                ntpclient = new de.jgsoftwares.guiserverpanel.NtpClient();
+            } catch (Exception ex) {
+                Logger.getLogger(OpenWrt.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String stsystemtime = (String) ntpclient.getSystemTime().toString();
+            
+            String line = "";
+            jTextArea2.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea2.append(line + "new password is set " + "\n");
+               // System.out.println(line);
+            }
+            writer.write(stsystemtime + "\r");
+           
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
