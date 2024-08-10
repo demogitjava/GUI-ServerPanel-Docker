@@ -5,12 +5,23 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import static de.jgsoftwares.guiserverpanel.frames.OpenWrt.jPasswordField1;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
 /**
  *
  * @author root
  */
 public class Landingpage extends javax.swing.JPanel {
 
+    
+    Process process;
+    BufferedReader reader;
+    PrintWriter writer;
+    
     /**
      * Creates new form Landingpage
      */
@@ -33,6 +44,11 @@ public class Landingpage extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
 
         jButton1.setText("install de - landingpage ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -59,6 +75,28 @@ public class Landingpage extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+          // install landingpage
+        try {
+            process = Runtime.getRuntime().exec("docker run -it -p 0.0.0.0:80:80 --add-host=demogitjava.ddns.net:217.160.255.254 --runtime runc --name oraclelinuxlandingpage -e TZ=Europe/Berlin --net=host --hostname demogitjava.ddns.net -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -e NTP_SERVER=\"2.rhel.pool.ntp.org\" jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            String line = "";
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.append(line + "docker container is running " + "\n");
+               // System.out.println(line);
+            }
+            
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
