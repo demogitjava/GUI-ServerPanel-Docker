@@ -12,6 +12,7 @@ public class GUIServerPanel implements i_GuiServerPanel
     {
 
         GUIServerPanel.showFrame();
+   
        // SpringApplication.run(GUIServerPanel.class, args);
     }
 

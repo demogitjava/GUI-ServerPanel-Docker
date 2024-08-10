@@ -41,8 +41,10 @@ public class MainPanel extends javax.swing.JFrame {
         dockerimages = new DefaultMutableTreeNode("Images");
         dockercontainers = new DefaultMutableTreeNode("Containers");
         initComponents();  
-         
-            this.pack();
+        
+        
+        
+        this.pack();
         
         
     
@@ -91,9 +93,6 @@ public class MainPanel extends javax.swing.JFrame {
 
         JRemoteDesktop jremotedesktop = new JRemoteDesktop();
         jTabbedPane1.add(jremotedesktop, "JRemoteDesktop");
-
-        clusteringh2database clusterh2 = new clusteringh2database();
-        jTabbedPane1.add(clusterh2, "H2 Database clustering");
 
         Landingpage landingpage = new Landingpage();
         jTabbedPane1.add(landingpage, "Landingapge");
