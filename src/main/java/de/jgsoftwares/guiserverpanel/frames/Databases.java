@@ -50,6 +50,11 @@ public class Databases extends javax.swing.JPanel {
         });
 
         jButton2.setText("install H2 Database - for Lanserver TCP");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("install MySQL Server - with Database");
 
@@ -110,6 +115,29 @@ public class Databases extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        // install h2 docker container database
+        try {
+            process = Runtime.getRuntime().exec("docker run -it --runtime runc -e TZ=Europe/Berlin --add-host=docker:217.160.255.254 --runtime runc --blkio-weight 100 --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -p 0.0.0.0:8082:8082 -p 0.0.0.0:9092:9092 --network 172.17.0.0 --ip 172.17.0.101 --name oraclelinuxh2db -e NTP_SERVER=\"2.rhel.pool.ntp.org\" -v /var/run/docker.sock:/var/run/docker.sock -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            String line = "";
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.append(line + "docker container h2 is running " + "\n");
+               // System.out.println(line);
+            }
+            
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
