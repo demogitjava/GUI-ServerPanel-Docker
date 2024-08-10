@@ -8,6 +8,7 @@ package de.jgsoftwares.guiserverpanel.frames;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ public class OpenWrt extends javax.swing.JPanel {
 
     Process process;
     BufferedReader reader;
-    
+    PrintWriter writer;
     /**
      * Creates new form OpenWrt
      */
@@ -68,12 +69,22 @@ public class OpenWrt extends javax.swing.JPanel {
         jPasswordField2.setText("jPasswordField2");
 
         jButton3.setText("edit container - password");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
         jButton4.setText("set german systemtime to container ");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,19 +148,68 @@ public class OpenWrt extends javax.swing.JPanel {
         
         // restart openwrt container
         try {
+            process = Runtime.getRuntime().exec("docker exec -it openwrtbackfire");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            String line = "";
+            jTextArea2.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea2.append(line + "new password is set " + "\n");
+               // System.out.println(line);
+            }
+            writer.write(jPasswordField1 + "\r");
+            writer.write(jPasswordField1 + "\r");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        String stpassword1 = null;
+        String stpassword2 = null;
+        
+        
+        try
+        {
+          stpassword1 = jPasswordField1.getText();
+          stpassword2 = jPasswordField2.getText();
+          
+          
+          if(stpassword1 == stpassword2)
+          {
+             // password ist gleich
+              
+               try {
             process = Runtime.getRuntime().exec("docker container restart openwrtbackfire");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = "";
             jTextArea2.setText("");
             while ((line = reader.readLine()) != null) {
-                jTextArea2.append(line + "is restarted " + "\n");
+                jTextArea2.append(line + "container backfire is restarted" + "\n");
                // System.out.println(line);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+              
+          }
+        } catch (Exception e)
+        {
+            System.out.print("Fehler " +e);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+       
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -157,8 +217,8 @@ public class OpenWrt extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    public static javax.swing.JPasswordField jPasswordField1;
+    public static javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
