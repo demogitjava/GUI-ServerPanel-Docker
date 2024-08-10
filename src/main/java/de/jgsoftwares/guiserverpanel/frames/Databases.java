@@ -57,6 +57,11 @@ public class Databases extends javax.swing.JPanel {
         });
 
         jButton3.setText("install MySQL Server - with Database");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -138,6 +143,28 @@ public class Databases extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+           // install mysql database
+        try {
+            process = Runtime.getRuntime().exec("docker container run --name mysqlcontainer -p 0.0.0.0:3306:3306 jgsoftwares/demomysqlserver-ce:latest");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            String line = "";
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.append(line + "docker container is installed" + "\n");
+               // System.out.println(line);
+            }
+            
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
