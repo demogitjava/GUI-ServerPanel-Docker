@@ -55,6 +55,11 @@ public class Landingpage extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton2.setText("restart container - de - landingpage");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,6 +102,29 @@ public class Landingpage extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+            // install landingpage
+        try {
+            process = Runtime.getRuntime().exec("docker container oraclelinuxlandingpage restart");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            String line = "";
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.append(line + "docker container restarted " + "\n");
+               // System.out.println(line);
+            }
+            
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
