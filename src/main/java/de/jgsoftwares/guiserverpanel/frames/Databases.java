@@ -5,9 +5,18 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
 
 public class Databases extends javax.swing.JPanel {
 
+    
+    Process process;
+    BufferedReader reader;
+    PrintWriter writer;
     /**
      * Creates new form Databases
      */
@@ -34,6 +43,11 @@ public class Databases extends javax.swing.JPanel {
         jLabel1.setText("install Databases Docker Container");
 
         jButton1.setText("install DerbyDB - for Web");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("install H2 Database - for Lanserver TCP");
 
@@ -73,6 +87,29 @@ public class Databases extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        // install docker container derbydb web
+          // install landingpage
+        try {
+            process = Runtime.getRuntime().exec("docker run -it -p 0.0.0.0:1527:1527 --ip 172.17.0.2 --name oraclederbydb --runtime runc --blkio-weight 100 --cap-add=NET_ADMIN -e TZ=Europe/Berlin -v /etc/resolv.conf:/etc/resolv.conf -v /var/run/docker.sock:/var/run/docker.sock --network 172.17.0.0 --restart unless-stopped --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -e NTP_SERVER=\"2.rhel.pool.ntp.org\" jgsoftwares/oraclelinux_openjdk_derbydb:latest /bin/bash /root/startderbydb.sh");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
+            String line = "";
+            jTextArea1.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea1.append(line + "docker container derbydb is running " + "\n");
+               // System.out.println(line);
+            }
+            
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
