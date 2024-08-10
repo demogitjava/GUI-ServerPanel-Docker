@@ -148,19 +148,17 @@ public class OpenWrt extends javax.swing.JPanel {
         
         // restart openwrt container
         try {
-            process = Runtime.getRuntime().exec("docker exec -it openwrtbackfire");
+            process = Runtime.getRuntime().exec("docker container openwrtbackfire restart");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
-            
+          
             String line = "";
             jTextArea2.setText("");
             while ((line = reader.readLine()) != null) {
                 jTextArea2.append(line + "new password is set " + "\n");
                // System.out.println(line);
             }
-            writer.write(jPasswordField1 + "\r");
-            writer.write(jPasswordField1 + "\r");
+           
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -183,16 +181,21 @@ public class OpenWrt extends javax.swing.JPanel {
           {
              // password ist gleich
               
-               try {
-            process = Runtime.getRuntime().exec("docker container restart openwrtbackfire");
+          try {
+            process = Runtime.getRuntime().exec("docker exec -it openwrtbackfire /bin/ash");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+            
             String line = "";
             jTextArea2.setText("");
             while ((line = reader.readLine()) != null) {
-                jTextArea2.append(line + "container backfire is restarted" + "\n");
+                jTextArea2.append(line + "container openwrtbackfire password edit" + "\n");
                // System.out.println(line);
             }
+            
+            writer.write(stpassword1 + "\r");
+            writer.write(stpassword2 + "\r");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -211,7 +214,7 @@ public class OpenWrt extends javax.swing.JPanel {
            
         de.jgsoftwares.guiserverpanel.NtpClient ntpclient = null;   
         try {
-            process = Runtime.getRuntime().exec("docker exec -it openwrtbackfire");
+            process = Runtime.getRuntime().exec("docker exec -it openwrtbackfire /bin/ash");
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             writer = new PrintWriter(new PrintWriter(process.getOutputStream()));

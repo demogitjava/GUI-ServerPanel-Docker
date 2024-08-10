@@ -5,12 +5,23 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import static de.jgsoftwares.guiserverpanel.frames.OpenWrt.jPasswordField1;
+import static de.jgsoftwares.guiserverpanel.frames.OpenWrt.jPasswordField2;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
 /**
  *
  * @author root
  */
 public class Docker extends javax.swing.JPanel {
 
+    Process process;
+    BufferedReader reader;
+    PrintWriter writer;
+    
     /**
      * Creates new form Docker
      */
@@ -52,6 +63,11 @@ public class Docker extends javax.swing.JPanel {
         jPasswordField1.setText("jPasswordField1");
 
         jButton1.setText("login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("logout");
 
@@ -91,6 +107,44 @@ public class Docker extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        String stlogin = null;
+        String stpassword2 = null;
+        
+        
+        try
+        {
+          stlogin = jTextField1.getText();
+          stpassword2 = jPasswordField1.getText();
+          
+          
+          if(stlogin == stpassword2)
+          {
+             // password ist gleich
+              
+               try {
+            process = Runtime.getRuntime().exec("docker container login");
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            jTextArea2.setText("");
+            while ((line = reader.readLine()) != null) {
+                jTextArea2.append(line + "container backfire is restarted" + "\n");
+               // System.out.println(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+              
+        }
+        } catch (Exception e)
+        {
+            System.out.print("Fehler " +e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
