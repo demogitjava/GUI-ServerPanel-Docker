@@ -97,6 +97,9 @@ public class MainPanel extends javax.swing.JFrame {
         Landingpage landingpage = new Landingpage();
         jTabbedPane1.add(landingpage, "Landingapge");
 
+        LanServerTCP lanservertcp = new LanServerTCP();
+        jTabbedPane1.add(lanservertcp, "LanServerTCP");
+
         Ebay ebaypanel = new Ebay();
         jTabbedPane1.add(ebaypanel, "Ebay");
 
