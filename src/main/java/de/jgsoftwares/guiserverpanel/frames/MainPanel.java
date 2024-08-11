@@ -79,6 +79,11 @@ public class MainPanel extends javax.swing.JFrame {
         de.jgsoftwares.guiserverpanel.frames.Databases databases = new de.jgsoftwares.guiserverpanel.frames.Databases();
         de.jgsoftwares.guiserverpanel.frames.Docker dockerpanel = new de.jgsoftwares.guiserverpanel.frames.Docker();
 
+        de.jgsoftwares.guiserverpanel.frames.ConfigPanel configpanel = new de.jgsoftwares.guiserverpanel.frames.ConfigPanel();
+
+        // Config Panel
+        jTabbedPane1.add(configpanel, "Config Panel");
+
         // Docker Panel
         jTabbedPane1.add(dockerpanel, "Docker Panel");
 
