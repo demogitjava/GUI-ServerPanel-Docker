@@ -11,6 +11,9 @@ package de.jgsoftwares.guiserverpanel.frames;
  */
 public class ConfigPanel extends javax.swing.JPanel {
 
+    
+    public static String stwanip;
+    public static String styourdomainname;
     /**
      * Creates new form ConfigPanel
      */
@@ -39,6 +42,11 @@ public class ConfigPanel extends javax.swing.JPanel {
         jLabel2.setText("your hostname");
 
         jButton1.setText("save to memory");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("ntp timeserver is set to 2.rhel.pool.ntp.org");
 
@@ -76,6 +84,15 @@ public class ConfigPanel extends javax.swing.JPanel {
                 .addContainerGap(93, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        stwanip = jTextField1.getText();
+        styourdomainname = jTextField2.getText();
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
