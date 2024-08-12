@@ -97,9 +97,37 @@ public class LanServerTCP extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-          // install landingpage
+       
+          
+          
+      
+          
+           // + "'" + stwanip + "'" +
+          
+          //  public static String stwanip;
+          // public static String styourdomainname;
+         
         try {
-            process = Runtime.getRuntime().exec("docker run -it -p 0.0.0.0:80:80 --add-host=demogitjava.ddns.net:217.160.255.254 --runtime runc --name oraclelinuxlandingpage -e TZ=Europe/Berlin --net=host --hostname demogitjava.ddns.net -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -e NTP_SERVER=\"2.rhel.pool.ntp.org\" jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+            
+            String struncontainer = "docker run -it -p 0.0.0.0:80:80" + " " +
+                    "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " + 
+                    "--runtime runc " +
+                    "--name oraclelinuxlandingpage " +
+                    "-e TZ=Europe/Berlin " + 
+                    "--net=host " +
+                    "--hostname " + ConfigPanel.styourdomainname + " " + 
+                    "-v /etc/resolv.conf:/etc/resolv.conf "+
+                    "--restart unless-stopped " +
+                    "--cap-add=NET_ADMIN " +
+                    "--platform=linux/amd64 " +
+                    "--cpu-quota 2000 " +
+                    "--cpu-period 2000 " +
+                    "--cpu-shares 1024 " +
+                    "--kernel-memory=6M " +
+                    "--cpuset-cpus=\"1\"" + " " + 
+                    "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
+                    "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh";
+            process = Runtime.getRuntime().exec(struncontainer);
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
@@ -134,7 +162,7 @@ public class LanServerTCP extends javax.swing.JPanel {
             }
             
         } catch (IOException e) {
-            throw new RuntimeException(e);
+          System.out.print("Fehler " + e);
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
