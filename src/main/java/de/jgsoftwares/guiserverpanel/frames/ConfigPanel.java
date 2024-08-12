@@ -90,7 +90,8 @@ public class ConfigPanel extends javax.swing.JPanel {
         
         stwanip = jTextField1.getText();
         styourdomainname = jTextField2.getText();
-        
+        System.out.print("this is your wan ip " + stwanip + "\n");
+        System.out.print("this is the fqdn " + styourdomainname + "\n");
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

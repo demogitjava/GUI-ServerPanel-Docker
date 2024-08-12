@@ -100,33 +100,57 @@ public class LanServerTCP extends javax.swing.JPanel {
        
           
           
-      
-          
            // + "'" + stwanip + "'" +
           
           //  public static String stwanip;
           // public static String styourdomainname;
          
         try {
+            /*
             
-            String struncontainer = "docker run -it -p 0.0.0.0:80:80" + " " +
-                    "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " + 
+            
+            docker run -it -p 0.0.0.0:8443:8443 
+            --add-host=demolanserver.ddns.net:217.160.255.254 
+            --runtime runc 
+            --blkio-weight 100 
+            -e NTP_SERVER="2.rhel.pool.ntp.org" 
+            --platform=linux/amd64 
+            
+            --hostname demolanserver.ddns.net 
+            --network 172.17.0.0 
+            --ip 172.17.0.104 
+            --name oraclelinuxlanservertcp 
+            -v /var/run/docker.sock:/var/run/docker.sock 
+            -v /etc/resolv.conf:/etc/resolv.conf 
+            --restart unless-stopped 
+            --cap-add=NET_ADMIN 
+            --cap-add SYS_ADMIN 
+            jgsoftwares/oraclelinux_openjdk_lanservertcp:latest /bin/bash /root/LanServer.sh
+            
+            
+            */
+            
+           
+        
+            String struncontainer = new String("docker run -it -p 0.0.0.0:8443:8443 " +
+                    "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " +      
                     "--runtime runc " +
-                    "--name oraclelinuxlandingpage " +
-                    "-e TZ=Europe/Berlin " + 
-                    "--net=host " +
-                    "--hostname " + ConfigPanel.styourdomainname + " " + 
-                    "-v /etc/resolv.conf:/etc/resolv.conf "+
+                    "--blkio-weight 100 " + 
+                    "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
+                    "--platform=linux/amd64 " +
+                    "--hostname " + ConfigPanel.styourdomainname + " " +
+                    "--network 172.17.0.0 " +
+                    "--ip 172.17.0.104 " +
+                    "--name oraclelinuxlanservertcp " +
+                    "-v /var/run/docker.sock:/var/run/docker.sock " +
+                    "-v /etc/resolv.conf:/etc/resolv.conf " +
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
-                    "--platform=linux/amd64 " +
-                    "--cpu-quota 2000 " +
-                    "--cpu-period 2000 " +
-                    "--cpu-shares 1024 " +
-                    "--kernel-memory=6M " +
-                    "--cpuset-cpus=\"1\"" + " " + 
-                    "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
-                    "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh";
+                    "--cap-add SYS_ADMIN " +
+                    "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest /bin/bash /root/LanServer.sh"
+                    );
+           
+
             process = Runtime.getRuntime().exec(struncontainer);
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -134,6 +158,7 @@ public class LanServerTCP extends javax.swing.JPanel {
             
             String line = "";
             jTextArea1.setText("");
+            jTextArea1.setText("DemolanServer" + "\n" + struncontainer);
             while ((line = reader.readLine()) != null) {
                 jTextArea1.append(line + "docker container is running " + "\n");
                // System.out.println(line);
