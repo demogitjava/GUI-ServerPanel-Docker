@@ -158,7 +158,7 @@ public class LanServerTCP extends javax.swing.JPanel {
             
             String line = "";
             jTextArea1.setText("");
-            jTextArea1.setText("DemolanServer" + "\n" + struncontainer);
+            jTextArea1.setText("DemolanServer" + "\n" + "if container is not running paste the string to shell and restart the GUI Server Panel " + "/n" + struncontainer);
             while ((line = reader.readLine()) != null) {
                 jTextArea1.append(line + "docker container is running " + "\n");
                // System.out.println(line);
