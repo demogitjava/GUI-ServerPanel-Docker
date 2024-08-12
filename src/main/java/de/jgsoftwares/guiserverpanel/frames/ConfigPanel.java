@@ -90,7 +90,7 @@ public class ConfigPanel extends javax.swing.JPanel {
         
         stwanip = jTextField1.getText();
         styourdomainname = jTextField2.getText();
-        
+    
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
