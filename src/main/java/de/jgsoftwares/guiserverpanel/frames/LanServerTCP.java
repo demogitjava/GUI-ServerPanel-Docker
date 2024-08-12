@@ -139,8 +139,8 @@ public class LanServerTCP extends javax.swing.JPanel {
                // System.out.println(line);
             }
             
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.print("Fehler " + e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
