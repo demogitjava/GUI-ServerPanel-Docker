@@ -159,7 +159,9 @@ public class LanServerTCP extends javax.swing.JPanel {
             String line = "";
             jTextArea1.setText("");
             while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "docker container oraclelinux landingapge restarted " + "\n");
+                jTextArea1.append(line + "docker container oraclelinux landingapge restarted " + "\n" + "\n");
+                jTextArea1.append("start manually with command " + "\n" + "\n");
+                jTextArea1.append("docker container oraclelinuxlandingpage restart");
                // System.out.println(line);
             }
             
