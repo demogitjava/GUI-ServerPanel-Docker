@@ -134,7 +134,7 @@ public class LanServerTCP extends javax.swing.JPanel {
         
             
             // "/path-to/bash -c \"rm *.foo\""
-            String[] struncontainer = {"sh", "docker run -it -p 0.0.0.0:8443:8443 " +
+            String struncontainer = "docker run -it -p 0.0.0.0:8443:8443 " +
                     "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " +      
                     "--runtime runc " +
                     "--blkio-weight 100 " + 
@@ -149,12 +149,12 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
                     "--cap-add SYS_ADMIN " +
-                    "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest /bin/bash /root/LanServer.sh"
-            };
+                    "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest /bin/bash /root/LanServer.sh";
            
 
-            System.out.print("docker string " + struncontainer + "\n" + "\n");
-            process = Runtime.getRuntime().exec(struncontainer);
+            System.out.println("docker string " + struncontainer + "\n" + "\n");
+            
+            process = Runtime.getRuntime().exec(struncontainer + "/n" + "/r");
             
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -162,13 +162,19 @@ public class LanServerTCP extends javax.swing.JPanel {
             
             String line = "";
             jTextArea1.setText("");
-            jTextArea1.setText("DemolanServer" + "\n" + "if container is not running paste the string to shell and restart the GUI Server Panel " + "\n" +  struncontainer);
+            jTextArea1.setText("DemolanServer" + "\n" + 
+                    "if container is not running paste the string to shell and restart the GUI Server Panel " + "\n" +
+                    "the started container is then visible on the Panel" + "\n" +
+                    "the ntp server is set by default  \"-e NTP_SERVER=\\\"2.rhel.pool.ntp.org\\\" \" " + "\n" +
+                    "################################" + "\n" + "\n" +
+                      struncontainer + "\n" + "\n" +
+                    "################################" + "\n");
             while ((line = reader.readLine()) != null) {
                 jTextArea1.append(line + "docker container is running " + "\n");
                // System.out.println(line);
             }
             
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.print("Fehler " + e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

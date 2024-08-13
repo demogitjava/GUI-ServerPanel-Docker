@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package de.jgsoftwares.guiserverpanel.frames;
 
 /**
  *
- * @author root
+ * @author hoscho
  */
 public class ConfigPanel extends javax.swing.JPanel {
 
@@ -86,8 +82,12 @@ public class ConfigPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+       
+        /*
+                save string 
+                wan ip 
+                fqdn 
+        */
         stwanip = jTextField1.getText();
         styourdomainname = jTextField2.getText();
     
