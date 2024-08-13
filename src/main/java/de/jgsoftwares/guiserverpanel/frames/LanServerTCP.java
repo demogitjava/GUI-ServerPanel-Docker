@@ -95,42 +95,9 @@ public class LanServerTCP extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-       
-          
-          
-           // + "'" + stwanip + "'" +
-          
-          //  public static String stwanip;
-          // public static String styourdomainname;
-         
+     
         try {
-            /*
-            
-            
-            docker run -it -p 0.0.0.0:8443:8443 
-            --add-host=demolanserver.ddns.net:217.160.255.254 
-            --runtime runc 
-            --blkio-weight 100 
-            -e NTP_SERVER="2.rhel.pool.ntp.org" 
-            --platform=linux/amd64 
-            
-            --hostname demolanserver.ddns.net 
-            --network 172.17.0.0 
-            --ip 172.17.0.104 
-            --name oraclelinuxlanservertcp 
-            -v /var/run/docker.sock:/var/run/docker.sock 
-            -v /etc/resolv.conf:/etc/resolv.conf 
-            --restart unless-stopped 
-            --cap-add=NET_ADMIN 
-            --cap-add SYS_ADMIN 
-            jgsoftwares/oraclelinux_openjdk_lanservertcp:latest /bin/bash /root/LanServer.sh
-            
-            
-            */
-            
-           
+                  
         
             
             // "/path-to/bash -c \"rm *.foo\""
