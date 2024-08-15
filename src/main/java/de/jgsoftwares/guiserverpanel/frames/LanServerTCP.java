@@ -5,7 +5,7 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-import static de.jgsoftwares.guiserverpanel.frames.OpenWrt.jPasswordField1;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,13 +19,13 @@ import java.util.logging.Logger;
  */
 public class LanServerTCP extends javax.swing.JPanel {
 
-    
+    Runtime rt;
     Process process;
     BufferedReader reader;
     PrintWriter writer;
     
     /**
-     * Creates new form Landingpage
+     * Creates new form LanServer TCP
      */
     public LanServerTCP() {
         initComponents();
@@ -116,13 +116,22 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
                     "--cap-add SYS_ADMIN " +
-                    "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest /bin/bash /root/LanServer.sh";
+                    "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest bin/bash /root/LanServer.sh";
            
-
+                        ///bin/bash /root/LanServer.sh
             System.out.println("docker string " + struncontainer + "\n" + "\n");
-            
-            process = Runtime.getRuntime().exec(struncontainer + "/n" + "/r");
-            
+         
+           //process = Runtime.getRuntime().exec(struncontainer);
+           
+           
+           /*
+           Runtime.getRuntime().exec( 
+           new String[]{ "bash", "-c", "mysqldump -uxxx -pxxx -hxxx.xxx.xxx mydatabase | mysql -uxxx -pxxx -hxxx.xxx.xxx.xxx targetdatabase" }
+           );
+           */
+             rt = Runtime.getRuntime();
+             process = rt.exec("gnome-terminal" + struncontainer);
+           
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
@@ -136,6 +145,9 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "################################" + "\n" + "\n" +
                       struncontainer + "\n" + "\n" +
                     "################################" + "\n");
+            
+           
+             jTextArea1.append("" + process.info());
             while ((line = reader.readLine()) != null) {
                 jTextArea1.append(line + "docker container is running " + "\n");
                // System.out.println(line);
@@ -143,6 +155,8 @@ public class LanServerTCP extends javax.swing.JPanel {
             
         } catch (IOException e) {
             System.out.print("Fehler " + e);
+           
+         e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
