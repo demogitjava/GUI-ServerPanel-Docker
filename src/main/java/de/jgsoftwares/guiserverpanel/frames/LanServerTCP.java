@@ -130,7 +130,9 @@ public class LanServerTCP extends javax.swing.JPanel {
            );
            */
              rt = Runtime.getRuntime();
-             process = rt.exec("gnome-terminal" + struncontainer);
+             process = rt.exec(struncontainer.toString());
+             
+             
            
 
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
