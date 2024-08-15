@@ -131,6 +131,7 @@ public class LanServerTCP extends javax.swing.JPanel {
            */
              rt = Runtime.getRuntime();
              process = rt.exec(struncontainer.toString());
+             System.out.print("das ist der String " + struncontainer.toString());
              
              
            
