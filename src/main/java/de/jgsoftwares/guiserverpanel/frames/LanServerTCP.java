@@ -96,7 +96,7 @@ public class LanServerTCP extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      
-        try {
+       
                   
         
             
@@ -129,8 +129,8 @@ public class LanServerTCP extends javax.swing.JPanel {
              
            
 
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+         
+            
             
             String line = "";
             jTextArea1.setText("");
@@ -144,16 +144,9 @@ public class LanServerTCP extends javax.swing.JPanel {
             
            
              jTextArea1.append("" + process.info());
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "docker container is running " + "\n");
-               // System.out.println(line);
-            }
-            
-        } catch (IOException e) {
-            System.out.print("Fehler " + e);
            
-         e.printStackTrace();
-        }
+            
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
