@@ -42,7 +42,7 @@ public class dockerclient
                // System.out.println(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.print("Error " + e);
         }
 
         // list containers
@@ -56,9 +56,27 @@ public class dockerclient
                 // System.out.println(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+          System.out.print("Error " + e);
         }
 
+    }
+    
+    public void startlanservercontiner(String struncontainer)
+    {
+          // list start container 
+          // lanserver tcp 
+        try {
+            process = Runtime.getRuntime().exec(struncontainer);
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+               
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.print("Error " + e);
+        }
     }
 
 

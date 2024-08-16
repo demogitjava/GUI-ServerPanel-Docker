@@ -118,21 +118,14 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--cap-add SYS_ADMIN " +
                     "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest bin/bash /root/LanServer.sh";
            
-                        ///bin/bash /root/LanServer.sh
+                     
             System.out.println("docker string " + struncontainer + "\n" + "\n");
          
-           //process = Runtime.getRuntime().exec(struncontainer);
-           
-           
-           /*
-           Runtime.getRuntime().exec( 
-           new String[]{ "bash", "-c", "mysqldump -uxxx -pxxx -hxxx.xxx.xxx mydatabase | mysql -uxxx -pxxx -hxxx.xxx.xxx.xxx targetdatabase" }
-           );
-           */
-             rt = Runtime.getRuntime();
-             process = rt.exec(struncontainer.toString());
-             System.out.print("das ist der String " + struncontainer.toString());
-             
+            
+            // getRuntime start LanServer container
+            de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+            dockerclient.startlanservercontiner(struncontainer);
+            
              
            
 
