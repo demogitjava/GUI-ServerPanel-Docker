@@ -157,28 +157,17 @@ public class LanServerTCP extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         
-            // install landingpage
-        try {
-            process = Runtime.getRuntime().exec("docker container oraclelinuxlandingpage restart");
-
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
-            
-            String line = "";
-            jTextArea1.setText("");
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "docker container oraclelinux landingapge restarted " + "\n" + "\n");
-                jTextArea1.append("start manually with command " + "\n" + "\n");
-                jTextArea1.append("docker container oraclelinuxlandingpage restart");
-               // System.out.println(line);
-            }
-            
-        } catch (IOException e) {
-          System.out.print("Fehler " + e);
-        }
         
+        // restart lanserver container
+        
+            String strestartcontainer = "docker container restart oraclelinuxlanservertcp";
+         
+            // getRuntime start LanServer container
+            de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+            dockerclient.restartlanserver(strestartcontainer);
+            
+             
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

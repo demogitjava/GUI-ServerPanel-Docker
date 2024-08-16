@@ -78,6 +78,27 @@ public class dockerclient
             System.out.print("Error " + e);
         }
     }
+    
+    
+    // lanserver tcp container 
+    // function restart 
+    public void restartlanserver(String strestartcontainer)
+    {
+        
+          try 
+          {
+            process = Runtime.getRuntime().exec(strestartcontainer);
+
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+               
+                System.out.println(line);
+            }
+          } catch (IOException e) {
+            System.out.print("Error " + e);
+          }
+    }
 
 
     public void pullImage(String imageName)
