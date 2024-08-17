@@ -159,6 +159,10 @@ public class LanServerTCP extends javax.swing.JPanel {
             // getRuntime start LanServer container
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
             dockerclient.restartlanserver(strestartcontainer);
+            jTextArea1.setText("");
+            jTextArea1.setText("DemolanServer" + "\n" + 
+                    "restart container with command " + "\n" + 
+                    strestartcontainer + "\n" + "\n");
             
              
     }//GEN-LAST:event_jButton2ActionPerformed
