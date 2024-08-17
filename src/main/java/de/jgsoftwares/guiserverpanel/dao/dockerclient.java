@@ -12,8 +12,8 @@ import de.jgsoftwares.guiserverpanel.frames.MainPanel;
 public class dockerclient
 {
 
-    public static Process process;
-    public static BufferedReader reader;
+    Process process;
+    BufferedReader reader;
 
 
     public dockerclient()
