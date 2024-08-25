@@ -75,15 +75,8 @@ public class dockerclient
           // list start container 
           // lanserver tcp 
         try {
-            
-            
-				
 				process = Runtime.getRuntime().exec("xterm -hold ");
-				BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
 				
-                                out.write(process + struncontainer +"/r" + "/n"); //attempting to remote login in the NEW shell (terminal)..... I guess :|
-		    
 	
         } catch(Exception e)
         {
