@@ -140,9 +140,13 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "the ntp server is set by default  \"-e NTP_SERVER=\\\"2.rhel.pool.ntp.org\\\" \" " + "\n" +
                     "################################" + "\n" + "\n" +
                       struncontainer + "\n" + "\n" +
-                    "################################" + "\n");
+                    "################################" + "\n" + "\n");
             
-           
+             jTextArea1.append("xterm window is started - start docker container with copy paste" + "\n");
+             jTextArea1.append("run command with Shift + Insert" + "\n");
+             jTextArea1.append("close window " + "\n");
+             jTextArea1.append("ps -a " + "\n");
+             jTextArea1.append("kill -9 psid" + "\n");
              jTextArea1.append("" + process.info());
            
             
