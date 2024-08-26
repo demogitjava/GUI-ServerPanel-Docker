@@ -8,6 +8,10 @@ the used java jdk is - oracle open jdk 11
 http://demogitjava.ddns.net:8000/Java_JDK/openjdk-11.0.2_linux-x64_bin.tar.gz
 
 
+The xterm window is in the moment not available over process id
+it stated a xterm window and copy and paste the command over
+the xterm window to run container or set systemtime.
+
 run on operation system oracle linux
 
 to install docker on your maschine 

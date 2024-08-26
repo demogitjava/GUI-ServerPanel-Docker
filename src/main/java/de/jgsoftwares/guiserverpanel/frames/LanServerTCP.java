@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -176,34 +178,28 @@ public class LanServerTCP extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-              // add systemtime
-           
-        de.jgsoftwares.guiserverpanel.NtpClient ntpclient = null;   
-        try {
-            process = Runtime.getRuntime().exec("docker exec -it openwrtbackfire");
-
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
-            
-            try {
-                ntpclient = new de.jgsoftwares.guiserverpanel.NtpClient();
-            } catch (Exception ex) {
-                Logger.getLogger(OpenWrt.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            String stsystemtime = (String) ntpclient.getSystemTime().toString();
-            
-            String line = "";
-            jTextArea1.setText("");
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "new systemtime is set - de -  " + "\n");
-               // System.out.println(line);
-            }
-            writer.write(stsystemtime + "\r");
-           
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+                // add systemtime
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMddyyHHmm"); 
+                //  DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+              
+                LocalDateTime now = LocalDateTime.now();  
+                System.out.println(dtf.format(now));  
+                
+                  jTextArea1.setText("");
+                  jTextArea1.setText(
+                          "set systemdate to docker lanserver tcp" + "\n" +
+                          "access to docker container " + "\n" +
+                           "################################" + "\n" + "\n" +
+                          "docker exec -it oraclelinuxlanservertcp /bin/bash" + "\n" + "\n" +
+                           "date " + dtf.format(now) + "\n" +
+                           "################################" + "\n" + "\n" +
+                           "\n");
+                         
+                           String stsystemtime = dtf.format(now);
+                  
+                          de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+                          dockerclient.setsystemtimetolanservertcp();
+       
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

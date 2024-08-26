@@ -73,7 +73,7 @@ public class dockerclient
 	
         } catch(Exception e)
         {
-            System.out.print("Fehler " +e);
+            System.out.print("Error " +e);
         }
         
         
@@ -95,11 +95,26 @@ public class dockerclient
 	
         } catch(Exception e)
         {
-            System.out.print("Fehler " +e);
+            System.out.print("Error " +e);
         }
     }
 
 
+    // lanserver tcp set systemtime
+    public void setsystemtimetolanservertcp()
+    {
+        
+       
+           try {
+				process = Runtime.getRuntime().exec("xterm -hold ");
+				
+	
+        } catch(Exception e)
+        {
+            System.out.print("Error " +e);
+        }
+    }
+    
     public void pullImage(String imageName)
     {
 
