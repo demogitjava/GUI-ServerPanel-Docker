@@ -8,15 +8,8 @@ import java.io.InputStreamReader;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
+
 
 public class dockerclient
 {
@@ -93,19 +86,17 @@ public class dockerclient
     public void restartlanserver(String strestartcontainer)
     {
         
-          try 
-          {
-            process = Runtime.getRuntime().exec(strestartcontainer);
-
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-               
-                System.out.println(line);
-            }
-          } catch (IOException e) {
-            System.out.print("Error " + e);
-          }
+        
+        // restart docker contaienr 
+        // lanserver tcp
+            try {
+				process = Runtime.getRuntime().exec("xterm -hold ");
+				
+	
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " +e);
+        }
     }
 
 

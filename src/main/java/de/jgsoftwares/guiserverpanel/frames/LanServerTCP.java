@@ -147,9 +147,8 @@ public class LanServerTCP extends javax.swing.JPanel {
              jTextArea1.append("close window " + "\n");
              jTextArea1.append("ps -a " + "\n");
              jTextArea1.append("kill -9 psid" + "\n");
-             jTextArea1.append("" + process.info());
+          
            
-            
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -165,9 +164,11 @@ public class LanServerTCP extends javax.swing.JPanel {
             dockerclient.restartlanserver(strestartcontainer);
             jTextArea1.setText("");
             jTextArea1.setText("DemolanServer" + "\n" + 
-                    "restart container with command " + "\n" + 
-                    strestartcontainer + "\n" + "\n");
-            
+                    "restart container with command " + "\n" + "run command with Shift + Insert" + "\n" +
+                     "################################" + "\n" + "\n" +
+                    strestartcontainer + "\n" + "\n" +
+                    "################################" + "\n" + "\n");
+                               
              
     }//GEN-LAST:event_jButton2ActionPerformed
 
