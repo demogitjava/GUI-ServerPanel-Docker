@@ -99,19 +99,43 @@ public class Landingpage extends javax.swing.JPanel {
         
           // install landingpage
         try {
-            process = Runtime.getRuntime().exec("docker run -it -p 0.0.0.0:80:80 --add-host=demogitjava.ddns.net:217.160.255.254 --runtime runc --name oraclelinuxlandingpage -e TZ=Europe/Berlin --net=host --hostname demogitjava.ddns.net -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -e NTP_SERVER=\"2.rhel.pool.ntp.org\" jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+            
+            
+            String stlandingpage = new String("docker run -it "
+                + "-p 0.0.0.0:80:80 "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime runc "
+                + "--name oraclelinuxlandingpage "
+                + "-e TZ=Europe/Berlin "
+                + "--net=host "
+                + "--hostname " + ConfigPanel.styourdomainname + " " 
+                + "-v /etc/resolv.conf:/etc/resolv.conf "
+                + "--restart unless-stopped "
+                + "--cap-add=NET_ADMIN "
+                + "--platform=linux/amd64 "
+                + "--cpu-quota 2000 "
+                + "--cpu-period 2000 "
+                + "--cpu-shares 1024 "
+                + "--kernel-memory=6M "
+                + "--cpuset-cpus=\\\"1\\\" "
+                + "-e NTP_SERVER=\\\"2.rhel.pool.ntp.org\\\" "
+                + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh\"");
 
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
+                
+                jTextArea1.setText("");
+                jTextArea1.append("start the docker container landingpage " + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append(stlandingpage + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append("copy docker run command with" + "\n");
+                jTextArea1.append("Strg + c" + "\n");
+                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+
+                 // getRuntime start Landingpage container
+                de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+                dockerclient.startlandingpage();
             
-            String line = "";
-            jTextArea1.setText("");
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "docker container is running " + "\n");
-               // System.out.println(line);
-            }
-            
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

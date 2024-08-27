@@ -157,6 +157,19 @@ public class dockerclient
           }
     }
 
+
+    public void startlandingpage()
+    {
+          try {
+                                  process = Runtime.getRuntime().exec("xterm -hold ");
+
+          } catch(Exception e)
+          {
+              System.out.print("Error " +e);
+          }
+    }
+
+
     public void pullImage(String imageName)
     {
 
