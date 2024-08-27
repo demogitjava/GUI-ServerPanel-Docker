@@ -130,24 +130,52 @@ public class Databases extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        // install docker container derbydb web
-          // install landingpage
+        // install docker container 
+        // derbydb web
+       
         try {
             
             
-            process = Runtime.getRuntime().exec("docker run -it -p 0.0.0.0:1527:1527 --ip 172.17.0.2 --name oraclederbydb --runtime runc --blkio-weight 100 --cap-add=NET_ADMIN -e TZ=Europe/Berlin -v /etc/resolv.conf:/etc/resolv.conf -v /var/run/docker.sock:/var/run/docker.sock --network 172.17.0.0 --restart unless-stopped --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -e NTP_SERVER=\"2.rhel.pool.ntp.org\" jgsoftwares/oraclelinux_openjdk_derbydb:latest /bin/bash /root/startderbydb.sh");
+            //process = Runtime.getRuntime().exec("docker run -it -p 0.0.0.0:1527:1527 --ip 172.17.0.2 --name oraclederbydb --runtime runc --blkio-weight 100 --cap-add=NET_ADMIN -e TZ=Europe/Berlin -v /etc/resolv.conf:/etc/resolv.conf -v /var/run/docker.sock:/var/run/docker.sock --network 172.17.0.0 --restart unless-stopped --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -e NTP_SERVER=\"2.rhel.pool.ntp.org\" jgsoftwares/oraclelinux_openjdk_derbydb:latest /bin/bash /root/startderbydb.sh");
 
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
-            
-            String line = "";
-            jTextArea1.setText("");
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "docker container derbydb is running " + "\n");
-               // System.out.println(line);
-            }
-            
-        } catch (IOException e) {
+            String stderbydb = new String(
+                    "docker run -it -p 0.0.0.0:1527:1527 "
+                            + "--ip 172.17.0.2 "
+                            + "--name oraclederbydb "
+                            + "--runtime runc "
+                            + "--blkio-weight 100 "
+                            + "--cap-add=NET_ADMIN "
+                            + "-e TZ=Europe/Berlin "
+                            + "-v /etc/resolv.conf:/etc/resolv.conf "
+                            + "-v /var/run/docker.sock:/var/run/docker.sock "
+                            + "--network 172.17.0.0 "
+                            + "--restart unless-stopped "
+                            + "--platform=linux/amd64 "
+                            + "--cpu-quota 2000 "
+                            + "--cpu-period 2000 "
+                            + "--cpu-shares 1024 "
+                            + "--kernel-memory=6M "
+                            + "--cpuset-cpus=\"1\" "
+                            + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                            + "jgsoftwares/oraclelinux_openjdk_derbydb:latest "
+                            + "/bin/bash /root/startderbydb.sh");
+                    
+          
+                jTextArea1.setText("");
+                jTextArea1.append("start the docker container derbydb " + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append(stderbydb + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append("copy docker run command with" + "\n");
+                jTextArea1.append("Strg + c" + "\n");
+                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+
+                 // getRuntime start LanServer container
+                de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+                dockerclient.startderbydb();
+
+             
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

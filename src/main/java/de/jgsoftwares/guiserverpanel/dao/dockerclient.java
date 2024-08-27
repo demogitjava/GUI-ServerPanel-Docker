@@ -114,6 +114,20 @@ public class dockerclient
             System.out.print("Error " +e);
         }
     }
+
+
+    public void startderbydb()
+    {
+    
+           try {
+				process = Runtime.getRuntime().exec("xterm -hold ");
+				
+	
+        } catch(Exception e)
+        {
+            System.out.print("Error " +e);
+        }
+    }
     
     public void pullImage(String imageName)
     {
