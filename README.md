@@ -15,6 +15,11 @@ install xterm on a docker container with
 
 yum install xterm
 
+to paste the commands from the GUI Window
+
+gui window -> Strg + c
+xterm -> schift + insert
+
 
 to install docker on your maschine 
 dnf install -y dnf-utils zip unzip
