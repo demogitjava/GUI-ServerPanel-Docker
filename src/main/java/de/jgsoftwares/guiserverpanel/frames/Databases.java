@@ -209,6 +209,16 @@ public class Databases extends javax.swing.JPanel {
                 + "--restart unless-stopped "
                 + "--cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
 
+
+                jTextArea1.setText("");
+                jTextArea1.append("start the docker container oraclelinuxh2db " + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append(sth2db + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append("copy docker run command with" + "\n");
+                jTextArea1.append("Strg + c" + "\n");
+                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+
             // getRuntime start h2db  container xterm window
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
             dockerclient.starth2db();
@@ -222,19 +232,29 @@ public class Databases extends javax.swing.JPanel {
         
            // install mysql database
         try {
-            process = Runtime.getRuntime().exec("docker container run --name mysqlcontainer -p 0.0.0.0:3306:3306 jgsoftwares/demomysqlserver-ce:latest");
+          
+            String stmysql = new String("docker container run "
+                + "--runtime runc "
+                + "-e TZ=Europe/Berlin "
+                + "--name mysqlcontainer "
+                + "-p 0.0.0.0:3306:3306 jgsoftwares/demomysqlserver-ce:latest");
 
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            writer = new PrintWriter(new PrintWriter(process.getOutputStream()));
             
-            String line = "";
-            jTextArea1.setText("");
-            while ((line = reader.readLine()) != null) {
-                jTextArea1.append(line + "docker container is installed" + "\n");
-               // System.out.println(line);
-            }
-            
-        } catch (IOException e) {
+                jTextArea1.setText("");
+                jTextArea1.append("start the docker container mysqlcontainer " + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append(stmysql + "\n");
+                jTextArea1.append("#################################" + "\n");
+                jTextArea1.append("copy docker run command with" + "\n");
+                jTextArea1.append("Strg + c" + "\n");
+                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+
+
+            // getRuntime start mysql  container xterm window
+            de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+            dockerclient.startmysqldb();
+                 
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
