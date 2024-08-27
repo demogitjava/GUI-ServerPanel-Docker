@@ -115,7 +115,7 @@ public class dockerclient
         }
     }
 
-
+    // start xterm window for derby db command
     public void startderbydb()
     {
     
@@ -128,7 +128,23 @@ public class dockerclient
             System.out.print("Error " +e);
         }
     }
-    
+
+
+
+        // start xterm for h2 command 
+    public void starth2db()
+    {
+    try {
+                                  process = Runtime.getRuntime().exec("xterm -hold ");
+
+
+          } catch(Exception e)
+          {
+              System.out.print("Error " +e);
+          }
+
+    }
+
     public void pullImage(String imageName)
     {
 
