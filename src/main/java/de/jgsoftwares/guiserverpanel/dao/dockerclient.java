@@ -26,7 +26,7 @@ public class dockerclient
     public void listContainers()
     {
 
-
+  
     }
 
     public void startdockerclient()
@@ -159,6 +159,18 @@ public class dockerclient
 
 
     public void startlandingpage()
+    {
+          try {
+                                  process = Runtime.getRuntime().exec("xterm -hold ");
+
+          } catch(Exception e)
+          {
+              System.out.print("Error " +e);
+          }
+    }
+    
+    
+        public void startopenwrtcloudflaredmz()
     {
           try {
                                   process = Runtime.getRuntime().exec("xterm -hold ");
