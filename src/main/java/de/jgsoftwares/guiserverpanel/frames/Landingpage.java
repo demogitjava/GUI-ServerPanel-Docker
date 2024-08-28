@@ -5,7 +5,7 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-import static de.jgsoftwares.guiserverpanel.frames.OpenWrt.jPasswordField1;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
