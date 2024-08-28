@@ -4,15 +4,9 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
-import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTabbedPane;
 
 
 public class MainPanel extends javax.swing.JFrame {
