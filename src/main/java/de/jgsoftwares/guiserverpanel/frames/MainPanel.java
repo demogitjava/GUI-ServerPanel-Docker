@@ -80,7 +80,7 @@ public class MainPanel extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jScrollPane1);
 
-        de.jgsoftwares.guiserverpanel.frames.DNSPanel dnspanel = new de.jgsoftwares.guiserverpanel.frames.DNSPanel();
+        //de.jgsoftwares.guiserverpanel.frames.DNSPanel dnspanel = new de.jgsoftwares.guiserverpanel.frames.DNSPanel();
 
         de.jgsoftwares.guiserverpanel.frames.OpenWrt openwrt = new de.jgsoftwares.guiserverpanel.frames.OpenWrt();
         de.jgsoftwares.guiserverpanel.frames.Databases databases = new de.jgsoftwares.guiserverpanel.frames.Databases();
@@ -101,10 +101,10 @@ public class MainPanel extends javax.swing.JFrame {
         jTabbedPane1.add(databases, "Databases");
 
         // DNS Server Panel
-        jTabbedPane1.add(dnspanel, "DNS Panel");
+        //jTabbedPane1.add(dnspanel, "DNS Panel");
 
-        JRemoteDesktop jremotedesktop = new JRemoteDesktop();
-        jTabbedPane1.add(jremotedesktop, "JRemoteDesktop");
+        //JRemoteDesktop jremotedesktop = new JRemoteDesktop();
+        //jTabbedPane1.add(jremotedesktop, "JRemoteDesktop");
 
         Landingpage landingpage = new Landingpage();
         jTabbedPane1.add(landingpage, "Landingapge");
@@ -112,8 +112,8 @@ public class MainPanel extends javax.swing.JFrame {
         LanServerTCP lanservertcp = new LanServerTCP();
         jTabbedPane1.add(lanservertcp, "LanServerTCP");
 
-        Ebay ebaypanel = new Ebay();
-        jTabbedPane1.add(ebaypanel, "Ebay");
+        //Ebay ebaypanel = new Ebay();
+        //jTabbedPane1.add(ebaypanel, "Ebay");
 
         jSplitPane1.setRightComponent(jTabbedPane1);
 
