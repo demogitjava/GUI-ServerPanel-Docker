@@ -6,6 +6,7 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
 
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -104,7 +105,7 @@ public class Landingpage extends javax.swing.JPanel {
             String stlandingpage = new String("docker run -it "
                 + "-p 0.0.0.0:80:80 "
                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
-                + "--runtime runc "
+                + "--runtime " + stcomboruntime + " " 
                 + "--name oraclelinuxlandingpage "
                 + "-e TZ=Europe/Berlin "
                 + "--net=host "
