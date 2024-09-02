@@ -6,6 +6,7 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
 
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -104,8 +105,8 @@ public class LanServerTCP extends javax.swing.JPanel {
             
             // "/path-to/bash -c \"rm *.foo\""
             String struncontainer = "docker run -it -p 0.0.0.0:8443:8443 " +
-                    "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " +      
-                    "--runtime runc " +
+                    "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " "  +     
+                    "--runtime " + stcomboruntime + " " +
                     "--blkio-weight 100 " + 
                     "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
                     "--platform=linux/amd64 " +
