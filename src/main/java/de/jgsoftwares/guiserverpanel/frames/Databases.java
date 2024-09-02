@@ -5,6 +5,7 @@
  */
 package de.jgsoftwares.guiserverpanel.frames;
 
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -115,7 +116,7 @@ public class Databases extends javax.swing.JPanel {
                     "docker run -it -p 0.0.0.0:1527:1527 "
                             + "--ip 172.17.0.2 "
                             + "--name oraclederbydb "
-                            + "--runtime runc "
+                            + "--runtime " + stcomboruntime + " " 
                             + "--blkio-weight 100 "
                             + "--cap-add=NET_ADMIN "
                             + "-e TZ=Europe/Berlin "
