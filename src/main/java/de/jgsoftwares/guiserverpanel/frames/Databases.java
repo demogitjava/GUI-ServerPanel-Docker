@@ -6,12 +6,10 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Databases extends javax.swing.JPanel {
@@ -117,6 +115,7 @@ public class Databases extends javax.swing.JPanel {
                             + "--ip 172.17.0.2 "
                             + "--name oraclederbydb "
                             + "--runtime " + stcomboruntime + " " 
+                            + "-e NETWORK_IF=" + stinterfacename + " " 
                             + "--blkio-weight 100 "
                             + "--cap-add=NET_ADMIN "
                             + "-e TZ=Europe/Berlin "
