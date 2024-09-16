@@ -6,6 +6,7 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -179,7 +180,8 @@ public class OpenWrt extends javax.swing.JPanel {
                    + "-p 0.0.0.0:53:53 "
                    + "-p 0.0.0.0:22:22 "
                    + "--name openwrtbackfireopendns "
-                   + "--runtime " + stcomboruntime + " " 
+                   + "--runtime " + stcomboruntime + " "
+                   + "-e NETWORK_IF=" + stinterfacename + " " 
                    + "-v /etc/resolv.conf:/etc/resolv.conf "
                    + "-e TZ=Europe/Berlin "
                    + "--blkio-weight 100 "
