@@ -166,6 +166,7 @@ public class Databases extends javax.swing.JPanel {
                 + "-e TZ=Europe/Berlin "
                 + "--add-host=docker:217.160.255.254 " 
                 + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
                 + "--blkio-weight 100 --platform=linux/amd64 "
                 + "--cpu-quota 2000 "
                 + "--cpu-period 2000 "
