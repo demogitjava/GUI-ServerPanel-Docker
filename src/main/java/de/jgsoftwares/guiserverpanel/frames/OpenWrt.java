@@ -122,8 +122,8 @@ public class OpenWrt extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,14 +153,14 @@ public class OpenWrt extends javax.swing.JPanel {
            
            
            
-               jTextArea1.setText("");
-                jTextArea1.append("start the docker container openwrt cloud flare dmz " + "\n");
-                jTextArea1.append("#################################" + "\n");
-                jTextArea1.append(strunopenwrtdmz + "\n");
-                jTextArea1.append("#################################" + "\n");
-                jTextArea1.append("copy docker run command with" + "\n");
-                jTextArea1.append("Strg + c" + "\n");
-                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+                jTextArea2.setText("");
+                jTextArea2.append("start the docker container openwrt cloud flare dmz " + "\n");
+                jTextArea2.append("#################################" + "\n");
+                jTextArea2.append(strunopenwrtdmz + "\n");
+                jTextArea2.append("#################################" + "\n");
+                jTextArea2.append("copy docker run command with" + "\n");
+                jTextArea2.append("Strg + c" + "\n");
+                jTextArea2.append("insert string with schift + inster on the xterm window" + "\n");
 
                  // getRuntime start Landingpage container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
