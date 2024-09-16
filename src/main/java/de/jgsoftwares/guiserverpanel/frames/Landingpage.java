@@ -7,6 +7,7 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -106,6 +107,7 @@ public class Landingpage extends javax.swing.JPanel {
                 + "-p 0.0.0.0:80:80 "
                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
                 + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
                 + "--name oraclelinuxlandingpage "
                 + "-e TZ=Europe/Berlin "
                 + "--net=host "
