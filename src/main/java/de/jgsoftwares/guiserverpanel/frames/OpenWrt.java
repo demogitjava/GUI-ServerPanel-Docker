@@ -53,7 +53,7 @@ public class OpenWrt extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setText("openwrt dmz - cloudflare");
+        jButton1.setText("openwrt dmz - google");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -73,9 +73,9 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jLabel1.setText("acces to running container typ:");
 
-        jLabel2.setText("docker exec -it openwrtbackfire /bin/ash");
+        jLabel2.setText("docker exec -it openwrtbackfireopendns /bin/ash");
 
-        jLabel3.setText("docker exec -it openwrtbackfireopendns /bin/ash");
+        jLabel3.setText("docker exec -it openwrtbackfiregoogle /bin/ash");
 
         jLabel4.setText("edit password -   passwd");
 
@@ -135,8 +135,9 @@ public class OpenWrt extends javax.swing.JPanel {
            String strunopenwrtdmz = new String("docker run -it -p "
                    + "0.0.0.0:123:123 "
                    + "-p 0.0.0.0:53:53 "
-                   + "--name openwrtbackfire "
-                   + "--runtime " + stcomboruntime + " " 
+                   + "--name openwrtbackfiregoogle "
+                   + "--runtime " + stcomboruntime + " "
+                   + "-e NETWORK_IF=" + stinterfacename + " " 
                    + "-v /etc/resolv.conf:/etc/resolv.conf "
                    + "-e TZ=Europe/Berlin "
                    + "--blkio-weight 100 "
@@ -148,7 +149,7 @@ public class OpenWrt extends javax.swing.JPanel {
                    + "--platform=linux/amd64 "
                    + "--kernel-memory=6M "
                    + "--restart unless-stopped "
-                   + "--privileged jgsoftwares/openwrt-x86-backfire:dmz /bin/ash");
+                   + "--privileged jgsoftwares/openwrt-x86-backfire:google /bin/ash");
            
            
            

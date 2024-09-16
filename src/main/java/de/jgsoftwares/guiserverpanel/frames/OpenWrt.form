@@ -82,7 +82,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="openwrt dmz - cloudflare"/>
+        <Property name="text" type="java.lang.String" value="openwrt dmz - google"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -118,12 +118,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="docker exec -it openwrtbackfire /bin/ash"/>
+        <Property name="text" type="java.lang.String" value="docker exec -it openwrtbackfireopendns /bin/ash"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="docker exec -it openwrtbackfireopendns /bin/ash"/>
+        <Property name="text" type="java.lang.String" value="docker exec -it openwrtbackfiregoogle /bin/ash"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
