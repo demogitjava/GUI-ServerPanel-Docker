@@ -198,14 +198,14 @@ public class OpenWrt extends javax.swing.JPanel {
            
            
            
-               jTextArea1.setText("");
-                jTextArea1.append("start the docker container openwrt cloud flare dmz " + "\n");
-                jTextArea1.append("#################################" + "\n");
-                jTextArea1.append(strunopenwrtopendns + "\n");
-                jTextArea1.append("#################################" + "\n");
-                jTextArea1.append("copy docker run command with" + "\n");
-                jTextArea1.append("Strg + c" + "\n");
-                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+               jTextArea2.setText("");
+                jTextArea2.append("start the docker container openwrt cloud flare dmz " + "\n");
+                jTextArea2.append("#################################" + "\n");
+                jTextArea2.append(strunopenwrtopendns + "\n");
+                jTextArea2.append("#################################" + "\n");
+                jTextArea2.append("copy docker run command with" + "\n");
+                jTextArea2.append("Strg + c" + "\n");
+                jTextArea2.append("insert string with schift + inster on the xterm window" + "\n");
 
                  // getRuntime start Landingpage container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
