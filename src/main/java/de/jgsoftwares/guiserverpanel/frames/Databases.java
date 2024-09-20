@@ -128,6 +128,7 @@ public class Databases extends javax.swing.JPanel {
                             + "--cpu-period 2000 "
                             + "--cpu-shares 1024 "
                             + "--kernel-memory=6M "
+                            + "--device=/dev/kvm "    
                             + "--cpuset-cpus=\"1\" "
                             + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                             + "jgsoftwares/oraclelinux_openjdk_derbydb:latest "
