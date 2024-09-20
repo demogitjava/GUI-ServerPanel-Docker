@@ -179,6 +179,7 @@ public class Databases extends javax.swing.JPanel {
                 + "--network 172.17.0.0 "
                 + "--ip 172.17.0.101 "
                 + "--name oraclelinuxh2db "
+                + "--device=/dev/kvm "    
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                 + "-v /var/run/docker.sock:/var/run/docker.sock "
                 + "-v /etc/resolv.conf:/etc/resolv.conf "
