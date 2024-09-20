@@ -114,6 +114,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--platform=linux/amd64 " +
                     "--hostname " + ConfigPanel.styourdomainname + " " +
                     "--network 172.17.0.0 " +
+                    "--device=/dev/kvm " +
                     "--ip 172.17.0.104 " +
                     "--name oraclelinuxlanservertcp " +
                     "-v /var/run/docker.sock:/var/run/docker.sock " +
