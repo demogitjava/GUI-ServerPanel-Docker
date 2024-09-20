@@ -110,6 +110,7 @@ public class Landingpage extends javax.swing.JPanel {
                 + "-e NETWORK_IF=" + stinterfacename + " " 
                 + "--name oraclelinuxlandingpage "
                 + "-e TZ=Europe/Berlin "
+                + "--device=/dev/kvm "
                 + "--net=host "
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
                 + "-v /etc/resolv.conf:/etc/resolv.conf "
