@@ -215,7 +215,11 @@ public class Databases extends javax.swing.JPanel {
                 + "-e TZ=Europe/Berlin "
                 + "--name mysqlcontainer "
                 + "--runtime " + stcomboruntime + " "
-                + "-e NETWORK_IF=" + stinterfacename + " " 
+                + "-e TZ=Europe/Berlin" + " "
+                + "--device=/dev/kvm" + " "
+                + "-e NETWORK_IF=eth0" + " "
+                + "--platform=linux/amd64" + " "
+                + "--runtime io.containerd.runc.v2" + " "
                 + "-p 0.0.0.0:3306:3306 jgsoftwares/demomysqlserver-ce:latest");
 
             
