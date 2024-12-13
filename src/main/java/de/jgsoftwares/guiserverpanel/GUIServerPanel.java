@@ -8,6 +8,10 @@ import javax.swing.*;
 public class GUIServerPanel implements i_GuiServerPanel
 {
  
+  
+  public static de.jgsoftwares.guiserverpanel.frames.MainPanel mpanel;
+    
+  
    
   public static void main(String[] args)
     {
@@ -27,18 +31,16 @@ public class GUIServerPanel implements i_GuiServerPanel
             System.out.print("LookAndFeel Error Nimbus !");
         }
 
-        de.jgsoftwares.guiserverpanel.frames.MainPanel mpanel = new de.jgsoftwares.guiserverpanel.frames.MainPanel();
+        mpanel = new de.jgsoftwares.guiserverpanel.frames.MainPanel();
         mpanel.setVisible(true);
         mpanel.setSize(800,400);
-
-      
-
 
         de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         dockerclient.startdockerclient();
 
 
     }
-
+    
+   
 
 }

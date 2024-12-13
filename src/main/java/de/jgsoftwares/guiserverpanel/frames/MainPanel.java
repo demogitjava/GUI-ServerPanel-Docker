@@ -3,6 +3,7 @@ package de.jgsoftwares.guiserverpanel.frames;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.util.HashMap;
+import javax.swing.UIManager;
 
 
 public class MainPanel extends javax.swing.JFrame {
@@ -51,6 +52,8 @@ public class MainPanel extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree(rootNode);
@@ -70,6 +73,20 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton1);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nimbus", "Metal" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jComboBox1);
+
+        jButton2.setText("help");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton2);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
@@ -129,12 +146,32 @@ public class MainPanel extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+        String selectedLookAndFeel = (String) jComboBox1.getSelectedItem();
+        
+        de.jgsoftwares.guiserverpanel.config.LookAndFeel lookandfeel = new de.jgsoftwares.guiserverpanel.config.LookAndFeel();
+        
+        if(selectedLookAndFeel.equals("Nimbus"))
+        {
+            lookandfeel.setNimbusLookAndFeel();
+        }
+        else if(selectedLookAndFeel.equals("Metal"))
+        {
+            lookandfeel.setMetalLookAndFeel();
+        }
+       
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
    
   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
