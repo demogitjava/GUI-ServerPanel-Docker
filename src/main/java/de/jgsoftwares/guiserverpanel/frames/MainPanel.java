@@ -3,6 +3,8 @@ package de.jgsoftwares.guiserverpanel.frames;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.util.HashMap;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 
@@ -86,6 +88,11 @@ public class MainPanel extends javax.swing.JFrame {
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton2);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
@@ -163,6 +170,36 @@ public class MainPanel extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        JFrame helpframe = new JFrame("Help Docker ");
+        
+        JEditorPane htmlPane = new JEditorPane();
+        String description = ""
+                + "<html>"
+                + "<body>"
+                + "<tr>"
+                + "<p>Docker compose</p>" + "</br>"
+                + "<p>Docker compose files are available on </p>" + "</br>"
+                + "<p>http://demogitjava.ddns.net:8000/docker/compose-files/</p>" + "</br>"
+                + "<p>to run the composefile donwload the compose file to your device </p>" + "</br>"
+                + "<p>run command </p>" + "</br>"
+                + "<p>docker compose up -d --build</p>" + "</br>"
+                + "</br>"
+                + "<p>repository on </p>" + "</br>"
+                + "<p>https://hub.docker.com/search?q=jgsoftwares</p>" + "</br>"
+                + "</body></html>";
+                htmlPane.setContentType("text/html");
+                htmlPane.setText(description);
+                System.out.println(htmlPane.getText());
+               
+        helpframe.add(htmlPane);        
+        
+        helpframe.setSize(600,400);
+        helpframe.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
    
   
