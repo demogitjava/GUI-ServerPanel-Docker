@@ -4,9 +4,19 @@ Simple GUI Docker  Panel
 ![image](https://github.com/demogitjava/demodatabase/blob/master/screenshotguiserverpanel.jpg?raw=true)
 
 
-the used java jdk is - oracle open jdk 11
-http://demogitjava.ddns.net:8000/Java_JDK/openjdk-11.0.2_linux-x64_bin.tar.gz
+the used java jdk is - oracle open jdk 21
+http://demogitjava.ddns.net:8000/Java_JDK/openjdk-21.0.2_linux-x64_bin.tar.gz
 
+alternative start jar application with custome look and fell from commandline
+Files are available
+http://demogitjava.ddns.net:8000/java-ide/
+copy jar and theme files to root 
+
+for snow theme
+QT_QPA_PLATFORM=minimal -J-Dnimrodlf.themeFile=/root/Snow.theme --cp:p /root/nimrodlf-1.2d.jar Guiserverpanel-0.0.1-SNAPSHOT.jar
+
+for DarkTabaco
+QT_QPA_PLATFORM=minimal -J-Dnimrodlf.themeFile=/root/DarkTabaco.theme --cp:p /root/nimrodlf-1.2d.jar Guiserverpanel-0.0.1-SNAPSHOT.jar
 
 The xterm window is in the moment not available over process id
 it stated a xterm window and copy and paste the command over
