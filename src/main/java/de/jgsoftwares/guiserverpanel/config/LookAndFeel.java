@@ -47,4 +47,16 @@ public class LookAndFeel
     }
 
     
+    public void setNimRODLookAndFeel()
+    {
+         try
+        {
+            UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
+            SwingUtilities.updateComponentTreeUI(GUIServerPanel.mpanel);
+        } catch (Exception e)
+        {
+            System.out.print("LookAndFeel Error  NomRoD !");
+        }
+    }
+    
 }

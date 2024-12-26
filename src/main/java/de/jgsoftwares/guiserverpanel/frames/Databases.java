@@ -18,6 +18,7 @@ public class Databases extends javax.swing.JPanel {
     Process process;
     BufferedReader reader;
     PrintWriter writer;
+    
     /**
      * Creates new form Databases
      */

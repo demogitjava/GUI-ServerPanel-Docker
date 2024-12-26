@@ -37,7 +37,7 @@ public class MainPanel extends javax.swing.JFrame {
         
         
         
-        this.pack();
+        //this.pack();
         
         
     
@@ -76,7 +76,7 @@ public class MainPanel extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nimbus", "Metal" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NimROD", "Nimbus", "Metal" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -160,13 +160,18 @@ public class MainPanel extends javax.swing.JFrame {
         
         de.jgsoftwares.guiserverpanel.config.LookAndFeel lookandfeel = new de.jgsoftwares.guiserverpanel.config.LookAndFeel();
         
-        if(selectedLookAndFeel.equals("Nimbus"))
-        {
-            lookandfeel.setNimbusLookAndFeel();
-        }
-        else if(selectedLookAndFeel.equals("Metal"))
-        {
-            lookandfeel.setMetalLookAndFeel();
+        switch (selectedLookAndFeel) {
+            case "NimROD":
+                lookandfeel.setNimRODLookAndFeel();
+                break;
+            case "Nimbus":
+                lookandfeel.setNimbusLookAndFeel();
+                break;
+            case "Metal":
+                lookandfeel.setMetalLookAndFeel();
+                break;
+            default:
+                break;
         }
        
     }//GEN-LAST:event_jComboBox1ActionPerformed
