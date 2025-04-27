@@ -2,6 +2,13 @@ package de.jgsoftwares.guiserverpanel;
 
 
 
+
+
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.model.Image;
+import com.github.dockerjava.core.DockerClientBuilder;
+import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -20,7 +27,6 @@ public class GUIServerPanel implements i_GuiServerPanel
         try
         {
             UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
-            
         } catch (Exception e)
         {
             System.out.print("LookAndFeel Error  NomRoD !");
@@ -41,7 +47,12 @@ public class GUIServerPanel implements i_GuiServerPanel
         mpanel.pack();
         
         
-        
+        // Docker client
+        // default unix:///var/run/docker.sock 
+      	
+        DockerClient dockerClient = DockerClientBuilder.getInstance().build();    	
+        List<Image> images = dockerClient.listImagesCmd().exec();
+
         de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         dockerclient.startdockerclient();
 

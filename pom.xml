@@ -5,7 +5,7 @@
 
 	<groupId>de.jgsoftware.guiserverpanel</groupId>
 	<artifactId>Guiserverpanel</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version> 
 	<name>Guiserverpanel</name>
 	<description>GUI ServerPanel</description>
 	<packaging>jar</packaging>
@@ -18,9 +18,9 @@
 		<spring-boot.run.jvmArguments>-Duser.timezone=UTC</spring-boot.run.jvmArguments>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
-		<java.version>17</java.version>
-	 <maven.compiler.source>17</maven.compiler.source>
-	 <maven.compiler.target>17</maven.compiler.target>
+		<java.version>11</java.version>
+	 <maven.compiler.source>11</maven.compiler.source>
+	 <maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
 	
@@ -56,9 +56,22 @@
             </dependency>
 
 
+        <dependency>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-api</artifactId>
+            <version>2.2.0</version>
+        </dependency>
 
 
-	</dependencies>
+        <dependency>
+            <groupId>com.github.docker-java</groupId>
+            <artifactId>docker-java</artifactId>
+            <version>3.1.1</version>
+            <type>jar</type>
+        </dependency>
+
+
+</dependencies>
 
 	
 
