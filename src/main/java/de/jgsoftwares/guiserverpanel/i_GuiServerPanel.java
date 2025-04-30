@@ -1,9 +1,9 @@
 
 package de.jgsoftwares.guiserverpanel;
 
-import com.github.dockerjava.api.DockerClient;
+import de.jgsoftwares.guiserverpanel.NtpClient;
 
 public interface i_GuiServerPanel
 {
-  
+
 }
