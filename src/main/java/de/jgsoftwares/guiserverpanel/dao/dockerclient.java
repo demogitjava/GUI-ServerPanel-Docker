@@ -6,8 +6,6 @@ import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.core.DockerClientBuilder;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -23,7 +21,18 @@ public class dockerclient
     Process process;
     BufferedReader reader;
 
+    // model for dockerclient for images and containers
+    com.github.dockerjava.api.model.Image mdimage;
+    com.github.dockerjava.api.model.Container mdcontainer;
 
+   
+    DockerClient dockerClient;
+    
+    // List of dockerimages
+    // from /var/run/docker.sock
+    static List<Image> dockerimages;
+    static List<Container> dockercontainers;
+    
     public dockerclient()
     {
 
@@ -41,10 +50,10 @@ public class dockerclient
         
         // Docker client
         // default unix:///var/run/docker.sock
-        DockerClient dockerClient = DockerClientBuilder.getInstance().build();    	
-        List<Image> dockerimages = dockerClient.listImagesCmd().exec();
+        dockerClient = DockerClientBuilder.getInstance().build();    	
+        dockerimages = dockerClient.listImagesCmd().exec();
         
-        List<Container> dockercontainers = dockerClient.listContainersCmd().exec();
+        dockercontainers = dockerClient.listContainersCmd().exec();
         
         // get size of images
         int imagesize = dockerimages.size();
@@ -58,14 +67,10 @@ public class dockerclient
           
                 for(int i = 0; i < imagesize; i++)
                 {
-                    com.github.dockerjava.api.model.Container mdcontainer = new com.github.dockerjava.api.model.Container();
-                    
+                    mdcontainer = new com.github.dockerjava.api.model.Container();
                     mdcontainer = dockercontainers.get(i);
                     
                     String strcontainers = Arrays.toString(mdcontainer.getNames());
-                   
-                  
-                   
                     MainPanel.dockercontainers.add(new DefaultMutableTreeNode(strcontainers));
                 }
               
@@ -80,14 +85,9 @@ public class dockerclient
         try {
              for(int i = 0; i < containersize; i++)
                 {
-                    com.github.dockerjava.api.model.Image mdimage = new com.github.dockerjava.api.model.Image();
-                    
-                    mdimage = dockerimages.get(i);
-                    
+                    mdimage = new com.github.dockerjava.api.model.Image();
+                    mdimage = dockerimages.get(i);          
                     String strepotage = Arrays.toString(mdimage.getRepoTags());
-                   
-                  
-                   
                     MainPanel.dockerimages.add(new DefaultMutableTreeNode(strepotage));
                 }
                 
