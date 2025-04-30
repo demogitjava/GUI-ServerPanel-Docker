@@ -1,13 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.jgsoftwares.guiserverpanel.dao;
+
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.model.Container;
+import com.github.dockerjava.api.model.Image;
+import java.util.List;
 
 /**
  *
- * @author root
+ * @author hoscho
  */
 public interface Idockerclient {
     public void listContainers();
@@ -24,4 +24,9 @@ public interface Idockerclient {
     public void startopenwrtcloudflaredmz();
     public void startopenwrtopendns();
     public void pullImage(String imageName);
+    
+    public DockerClient getDockerClient();
+    public List<Image> getDockerimages();
+    public List<Container> getDockercontainers();
+    
 }

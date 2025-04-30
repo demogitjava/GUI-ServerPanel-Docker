@@ -35,6 +35,8 @@ public class GUIServerPanel implements i_GuiServerPanel
         
        // SpringApplication.run(GUIServerPanel.class, args);
     }
+  
+     
 
     public static void showFrame()
     {
@@ -52,7 +54,7 @@ public class GUIServerPanel implements i_GuiServerPanel
         try
         {
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-            
+            dockerclient.getDockerClient();
             dockerclient.startdockerclient();
 
         } catch(Exception e)

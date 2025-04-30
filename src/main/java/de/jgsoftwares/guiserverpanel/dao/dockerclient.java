@@ -14,7 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
+/**
+ *
+ * @author hoscho
+ */
 public class dockerclient implements Idockerclient
 {
 
@@ -26,18 +29,47 @@ public class dockerclient implements Idockerclient
     com.github.dockerjava.api.model.Container mdcontainer;
 
    
-    DockerClient dockerClient;
+    public DockerClient dockerClient;
     
     // List of dockerimages
     // from /var/run/docker.sock
-    static List<Image> dockerimages;
-    static List<Container> dockercontainers;
+    public List<Image> dockerimages;
+    public List<Container> dockercontainers;
     
     public dockerclient()
     {
-
+       
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public DockerClient getDockerClient() {
+        return dockerClient;
+    }
+
+     /**
+     *
+     * @return
+     */
+    @Override
+    public List<Image> getDockerimages() {
+        return dockerimages;
+    }
+
+     /**
+     *
+     * @return
+     */
+    @Override
+    public List<Container> getDockercontainers() {
+        return dockercontainers;
+    }
+
+    
+    
     
      /**
      *
@@ -279,6 +311,8 @@ public class dockerclient implements Idockerclient
 
 
     }
+
+  
     
     
     
