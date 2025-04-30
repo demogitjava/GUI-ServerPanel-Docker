@@ -47,11 +47,7 @@ public class GUIServerPanel implements i_GuiServerPanel
         mpanel.pack();
         
         
-        // Docker client
-        // default unix:///var/run/docker.sock 
-      	
-        DockerClient dockerClient = DockerClientBuilder.getInstance().build();    	
-        List<Image> images = dockerClient.listImagesCmd().exec();
+   
    
         de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         dockerclient.startdockerclient();

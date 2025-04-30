@@ -1,6 +1,10 @@
 package de.jgsoftwares.guiserverpanel.dao;
 
 
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.model.Image;
+import com.github.dockerjava.api.model.Container;
+import com.github.dockerjava.core.DockerClientBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,6 +12,8 @@ import java.io.InputStreamReader;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+import java.util.Arrays;
+import java.util.List;
 
 
 
@@ -32,32 +38,60 @@ public class dockerclient
     public void startdockerclient()
     {
 
-
-        // list images
-        try {
-            process = Runtime.getRuntime().exec("docker images");
-
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                MainPanel.dockerimages.add(new DefaultMutableTreeNode(line));
-               // System.out.println(line);
-            }
-        } catch (IOException e) {
-            System.out.print("Error " + e);
-        }
+        
+        // Docker client
+        // default unix:///var/run/docker.sock
+        DockerClient dockerClient = DockerClientBuilder.getInstance().build();    	
+        List<Image> dockerimages = dockerClient.listImagesCmd().exec();
+        
+        List<Container> dockercontainers = dockerClient.listContainersCmd().exec();
+        
+        // get size of images
+        int imagesize = dockerimages.size();
+        
+        // get size of containers
+        int containersize = dockercontainers.size();
 
         // list containers
         try {
-            process = Runtime.getRuntime().exec("docker container ls");
+           
+          
+                for(int i = 0; i < imagesize; i++)
+                {
+                    com.github.dockerjava.api.model.Container mdcontainer = new com.github.dockerjava.api.model.Container();
+                    
+                    mdcontainer = dockercontainers.get(i);
+                    
+                    String strcontainers = Arrays.toString(mdcontainer.getNames());
+                   
+                  
+                   
+                    MainPanel.dockercontainers.add(new DefaultMutableTreeNode(strcontainers));
+                }
+              
+                
+               // System.out.println(line);
+           
+        } catch (Exception e) {
+            System.out.print("Error " + e);
+        }
 
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                MainPanel.dockercontainers.add(new DefaultMutableTreeNode(line));
-                // System.out.println(line);
-            }
-        } catch (IOException e) {
+        // list images
+        try {
+             for(int i = 0; i < containersize; i++)
+                {
+                    com.github.dockerjava.api.model.Image mdimage = new com.github.dockerjava.api.model.Image();
+                    
+                    mdimage = dockerimages.get(i);
+                    
+                    String strepotage = Arrays.toString(mdimage.getRepoTags());
+                   
+                  
+                   
+                    MainPanel.dockercontainers.add(new DefaultMutableTreeNode(strepotage));
+                }
+                
+        } catch (Exception e) {
           System.out.print("Error " + e);
         }
 
