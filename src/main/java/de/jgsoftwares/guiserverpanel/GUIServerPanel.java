@@ -49,9 +49,16 @@ public class GUIServerPanel implements i_GuiServerPanel
         
    
    
-        de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-        dockerclient.startdockerclient();
+        try
+        {
+            de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+            
+            dockerclient.startdockerclient();
 
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
+        }
        
     }
     

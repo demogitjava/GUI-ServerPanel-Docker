@@ -15,7 +15,7 @@ import java.util.List;
 
 
 
-public class dockerclient
+public class dockerclient implements Idockerclient
 {
 
     Process process;
@@ -38,12 +38,22 @@ public class dockerclient
 
     }
 
+    
+     /**
+     *
+     */
+    @Override
     public void listContainers()
     {
 
   
     }
 
+    
+     /**
+     *
+     */
+    @Override
     public void startdockerclient()
     {
 
@@ -97,6 +107,11 @@ public class dockerclient
 
     }
     
+    
+     /**
+     *
+     */
+    @Override
     public void startlanservercontiner(String struncontainer)
     {
           // list start container 
@@ -117,6 +132,10 @@ public class dockerclient
     
     // lanserver tcp container 
     // function restart 
+     /**
+     *
+     */
+    @Override
     public void restartlanserver(String strestartcontainer)
     {
         
@@ -135,6 +154,10 @@ public class dockerclient
 
 
     // lanserver tcp set systemtime
+     /**
+     *
+     */
+    @Override
     public void setsystemtimetolanservertcp()
     {
         
@@ -150,6 +173,10 @@ public class dockerclient
     }
 
     // start xterm window for derby db command
+     /**
+     *
+     */
+    @Override
     public void startderbydb()
     {
     
@@ -166,6 +193,10 @@ public class dockerclient
 
 
         // start xterm for h2 command 
+     /**
+     *
+     */
+    @Override
     public void starth2db()
     {
     try {
@@ -179,6 +210,10 @@ public class dockerclient
 
     }
 
+    /**
+     *
+     */
+    @Override
     public void startmysqldb()
     {
   try {
@@ -191,7 +226,10 @@ public class dockerclient
           }
     }
 
-
+    /**
+     *
+     */
+    @Override
     public void startlandingpage()
     {
           try {
@@ -203,8 +241,11 @@ public class dockerclient
           }
     }
     
-    
-        public void startopenwrtcloudflaredmz()
+    /**
+     *
+     */
+    @Override
+    public void startopenwrtcloudflaredmz()
     {
           try {
                                   process = Runtime.getRuntime().exec("xterm -hold ");
@@ -216,7 +257,8 @@ public class dockerclient
     }
         
         
-              public void startopenwrtopendns()
+    @Override
+    public void startopenwrtopendns()
     {
           try {
                                   process = Runtime.getRuntime().exec("xterm -hold ");
@@ -227,7 +269,11 @@ public class dockerclient
           }
     }
 
-
+    /**
+     *
+     * @param imageName
+     */
+    @Override
     public void pullImage(String imageName)
     {
 
