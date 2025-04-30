@@ -21,6 +21,7 @@ public class GUIServerPanel implements i_GuiServerPanel
         try {
             ntpclient = new NtpClient();
             ntpclient.getSystemTime();
+            System.out.print(ntpclient.getSystemTime());
         } catch (Exception ex) {
             System.out.print("Error by method getSystemTime");
         }
