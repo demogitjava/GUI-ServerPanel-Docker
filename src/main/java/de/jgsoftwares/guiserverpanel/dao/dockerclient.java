@@ -88,7 +88,7 @@ public class dockerclient
                    
                   
                    
-                    MainPanel.dockercontainers.add(new DefaultMutableTreeNode(strepotage));
+                    MainPanel.dockerimages.add(new DefaultMutableTreeNode(strepotage));
                 }
                 
         } catch (Exception e) {
