@@ -106,8 +106,6 @@ public class dockerclient implements Idockerclient
 
         // list containers
         try {
-           
-          
                 for(int i = 0; i < imagesize; i++)
                 {
                     mdcontainer = new com.github.dockerjava.api.model.Container();
@@ -115,11 +113,7 @@ public class dockerclient implements Idockerclient
                     
                     String strcontainers = Arrays.toString(mdcontainer.getNames());
                     MainPanel.dockercontainers.add(new DefaultMutableTreeNode(strcontainers));
-                }
-              
-                
-             
-           
+                }  
         } catch (Exception e) {
             System.out.print("Error " + e);
         }
@@ -158,9 +152,6 @@ public class dockerclient implements Idockerclient
         {
             System.out.print("Error " +e);
         }
-        
-        
-       
     }
     
     
@@ -172,15 +163,12 @@ public class dockerclient implements Idockerclient
      */
     @Override
     public void restartlanserver(String strestartcontainer)
-    {
-        
-        
+    {    
         // restart docker contaienr 
         // lanserver tcp
             try {
 				process = Runtime.getRuntime().exec("xterm -hold ");
-				
-	
+
         } catch(IOException e)
         {
             System.out.print("Error " +e);
@@ -195,8 +183,6 @@ public class dockerclient implements Idockerclient
     @Override
     public void setsystemtimetolanservertcp()
     {
-        
-       
            try {
 				process = Runtime.getRuntime().exec("xterm -hold ");
 				
@@ -214,7 +200,6 @@ public class dockerclient implements Idockerclient
     @Override
     public void startderbydb()
     {
-    
            try {
 				process = Runtime.getRuntime().exec("xterm -hold ");
 				
@@ -251,10 +236,8 @@ public class dockerclient implements Idockerclient
     @Override
     public void startmysqldb()
     {
-  try {
+            try {
                                   process = Runtime.getRuntime().exec("xterm -hold ");
-
-
           } catch(IOException e)
           {
               System.out.print("Error " +e);
@@ -315,8 +298,4 @@ public class dockerclient implements Idockerclient
 
     }
 
-  
-    
-    
-    
 }
