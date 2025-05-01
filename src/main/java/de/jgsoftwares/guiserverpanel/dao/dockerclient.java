@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -117,7 +118,7 @@ public class dockerclient implements Idockerclient
                 }
               
                 
-               // System.out.println(line);
+             
            
         } catch (Exception e) {
             System.out.print("Error " + e);
@@ -142,6 +143,7 @@ public class dockerclient implements Idockerclient
     
      /**
      *
+     * @param struncontainer
      */
     @Override
     public void startlanservercontiner(String struncontainer)
@@ -152,7 +154,7 @@ public class dockerclient implements Idockerclient
 				process = Runtime.getRuntime().exec("xterm -hold ");
 				
 	
-        } catch(Exception e)
+        } catch(IOException e)
         {
             System.out.print("Error " +e);
         }
@@ -166,6 +168,7 @@ public class dockerclient implements Idockerclient
     // function restart 
      /**
      *
+     * @param strestartcontainer
      */
     @Override
     public void restartlanserver(String strestartcontainer)
@@ -178,7 +181,7 @@ public class dockerclient implements Idockerclient
 				process = Runtime.getRuntime().exec("xterm -hold ");
 				
 	
-        } catch(Exception e)
+        } catch(IOException e)
         {
             System.out.print("Error " +e);
         }
@@ -198,7 +201,7 @@ public class dockerclient implements Idockerclient
 				process = Runtime.getRuntime().exec("xterm -hold ");
 				
 	
-        } catch(Exception e)
+        } catch(IOException e)
         {
             System.out.print("Error " +e);
         }
@@ -216,7 +219,7 @@ public class dockerclient implements Idockerclient
 				process = Runtime.getRuntime().exec("xterm -hold ");
 				
 	
-        } catch(Exception e)
+        } catch(IOException e)
         {
             System.out.print("Error " +e);
         }
@@ -235,7 +238,7 @@ public class dockerclient implements Idockerclient
                                   process = Runtime.getRuntime().exec("xterm -hold ");
 
 
-          } catch(Exception e)
+          } catch(IOException e)
           {
               System.out.print("Error " +e);
           }
@@ -252,7 +255,7 @@ public class dockerclient implements Idockerclient
                                   process = Runtime.getRuntime().exec("xterm -hold ");
 
 
-          } catch(Exception e)
+          } catch(IOException e)
           {
               System.out.print("Error " +e);
           }
@@ -267,7 +270,7 @@ public class dockerclient implements Idockerclient
           try {
                                   process = Runtime.getRuntime().exec("xterm -hold ");
 
-          } catch(Exception e)
+          } catch(IOException e)
           {
               System.out.print("Error " +e);
           }
@@ -282,7 +285,7 @@ public class dockerclient implements Idockerclient
           try {
                                   process = Runtime.getRuntime().exec("xterm -hold ");
 
-          } catch(Exception e)
+          } catch(IOException e)
           {
               System.out.print("Error " +e);
           }
@@ -295,7 +298,7 @@ public class dockerclient implements Idockerclient
           try {
                                   process = Runtime.getRuntime().exec("xterm -hold ");
 
-          } catch(Exception e)
+          } catch(IOException e)
           {
               System.out.print("Error " +e);
           }

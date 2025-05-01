@@ -1,11 +1,21 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.util.HashMap;
+import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 
 public class MainPanel extends javax.swing.JFrame {
@@ -221,4 +231,3 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
-

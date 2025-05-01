@@ -4,8 +4,6 @@ package de.jgsoftwares.guiserverpanel;
 
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 public class GUIServerPanel implements i_GuiServerPanel
