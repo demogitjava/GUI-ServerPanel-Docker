@@ -13,6 +13,7 @@ import de.jgsoftwares.guiserverpanel.frames.MainPanel;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JTree;
 
 
 /**
@@ -50,7 +51,24 @@ public class dockerclient implements Idockerclient
     public DockerClient getDockerClient() {
         return dockerClient;
     }
-
+    
+    
+      /**
+     *
+     * @param stcontainername
+     * @param stcontainerid
+     * @return
+     */
+    @Override
+    public String getMenuItem(String stcontainername, String stcontainerid)
+    {
+        // get containername 
+        // get containerid
+        
+        // to restart the container
+        
+        return stcontainername + stcontainerid;
+    }
      /**
      *
      * @return
@@ -82,6 +100,12 @@ public class dockerclient implements Idockerclient
   
     }
 
+    
+    public void jtreemenu()
+    {
+        
+    }
+    
     
      /**
      *
@@ -131,7 +155,7 @@ public class dockerclient implements Idockerclient
         } catch (Exception e) {
           System.out.print("Error " + e);
         }
-
+     
     }
     
     

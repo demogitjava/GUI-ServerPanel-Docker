@@ -28,5 +28,7 @@ public interface Idockerclient {
     public DockerClient getDockerClient();
     public List<Image> getDockerimages();
     public List<Container> getDockercontainers();
+   
+    public String getMenuItem(String stcontainername, String stcontainerid);
     
 }

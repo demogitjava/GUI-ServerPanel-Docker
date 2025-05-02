@@ -7,12 +7,15 @@ import java.awt.event.MouseEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.util.HashMap;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTree;
+import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -21,11 +24,16 @@ import javax.swing.tree.TreePath;
 public class MainPanel extends javax.swing.JFrame {
 
     
+    //
+    // JTree jTree1
     public static DefaultMutableTreeNode rootNode;
 
     public static DefaultMutableTreeNode dockerimages;
     public static DefaultMutableTreeNode dockercontainers;
-
+ 
+    
+    public static MouseAdapter ma;
+    //
 
     Process process;
     BufferedReader reader;
@@ -75,7 +83,7 @@ public class MainPanel extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton1.setText("list running containers");
+        jButton1.setText("reload docker client");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -110,6 +118,18 @@ public class MainPanel extends javax.swing.JFrame {
         //jTree1 = new JTree(rootNode);
         rootNode.add(dockerimages);
         rootNode.add(dockercontainers);
+        jTree1.addTreeExpansionListener(new javax.swing.event.TreeExpansionListener() {
+            public void treeExpanded(javax.swing.event.TreeExpansionEvent evt) {
+                jTree1TreeExpanded(evt);
+            }
+            public void treeCollapsed(javax.swing.event.TreeExpansionEvent evt) {
+            }
+        });
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
@@ -156,6 +176,8 @@ public class MainPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+ 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
@@ -208,7 +230,7 @@ public class MainPanel extends javax.swing.JFrame {
                 + "</body></html>";
                 htmlPane.setContentType("text/html");
                 htmlPane.setText(description);
-                System.out.println(htmlPane.getText());
+                //System.out.println(htmlPane.getText());
                
         helpframe.add(htmlPane);        
         
@@ -216,7 +238,84 @@ public class MainPanel extends javax.swing.JFrame {
         helpframe.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-   
+    private void jTree1TreeExpanded(javax.swing.event.TreeExpansionEvent evt) {//GEN-FIRST:event_jTree1TreeExpanded
+            // TODO add your handling code here:
+             int j = jTree1.getRowCount();
+        int i = 0;
+        while(i < j) {
+            jTree1.expandRow(i);
+            i += 1;
+            j = jTree1.getRowCount();
+        }
+    }//GEN-LAST:event_jTree1TreeExpanded
+
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        // TODO add your handling code here:
+         if (SwingUtilities.isRightMouseButton(evt)) {
+
+        int row = jTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+        jTree1.setSelectionRow(row);
+       
+        rootNode = (DefaultMutableTreeNode)
+                       jTree1.getLastSelectedPathComponent();
+                if (rootNode == null) return;
+                Object nodeInfo = rootNode.getUserObject();
+              
+                
+                // init String 
+                // remove in try catch block the /[ and ] value
+                String stdockerclient = null;
+                try
+                {
+                      String stname = String.valueOf(nodeInfo);
+                // remove /[ ] over String anem
+                
+                   // String is now without the [
+                String stname0 = stname.toString();
+                String strrepeace1 = stname0.replace("[", "");
+                
+                // String is now without the ]
+                String stname1 = strrepeace1;
+                String strrepeace2 = stname1.replace("]", "");
+                
+                String stname2 = strrepeace2.toString();
+                String strrepeace3 = stname2.replace("/", "");
+                
+                
+                stdockerclient = strrepeace3.toString();
+                
+                
+                System.out.print("der name ist " + stdockerclient + "\n");
+                } catch(Exception e)
+                {
+                    System.out.print("Fehler " + e); 
+                }
+                
+                
+                
+                
+                
+                // load JFrame to display String
+                de.jgsoftwares.guiserverpanel.frames.dockerclient.DCPopUpMenu dcpopjframe = new de.jgsoftwares.guiserverpanel.frames.dockerclient.DCPopUpMenu();
+               
+                // add string form jTree to jLabel1
+                dcpopjframe.jLabel1.setText("Image - Container" + stdockerclient);
+                
+                dcpopjframe.setVisible(true);
+                dcpopjframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                dcpopjframe.pack();
+                
+                //popup.show();
+       
+       // System.out.print("row is " + row + "\n");
+        
+        //popupMenu.show(e.getComponent(), e.getX(), e.getY());
+    }
+    }//GEN-LAST:event_jTree1MouseClicked
+
+ 
+
+ 
   
 
 
@@ -228,6 +327,6 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTree jTree1;
+    public javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
