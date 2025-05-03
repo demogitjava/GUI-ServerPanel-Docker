@@ -67,6 +67,11 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         jButton4.setText("pull image");
 
         jButton5.setText("remove");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Container");
 
@@ -160,6 +165,16 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         daodockerclient.restartcontainerdockerlclient(stdockerclient);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        /*
+            remove Container 
+        */
+        String stdockerclient = jLabel1.getText();
+        de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        daodockerclient.removecontainerdockerclient(stdockerclient);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
