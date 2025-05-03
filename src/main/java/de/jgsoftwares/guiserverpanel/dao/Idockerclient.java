@@ -32,5 +32,6 @@ public interface Idockerclient {
     public String getMenuItem(String stcontainername, String stcontainerid);
     
     public void startcontainerdockerclient(String stdockerclient);
+    public void stopcontainerdockerclient(String stdockerclient);
     
 }

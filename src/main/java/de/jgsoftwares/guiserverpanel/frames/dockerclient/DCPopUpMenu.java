@@ -133,7 +133,15 @@ public class DCPopUpMenu extends javax.swing.JFrame {
 
     // stop container
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+        
+        /*
+            stop container over list
+            from JTree
+        */
+        
+        String stdockerclient = jLabel1.getText();
+        de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        daodockerclient.stopcontainerdockerclient(stdockerclient);
     }//GEN-LAST:event_jButton2ActionPerformed
 
    

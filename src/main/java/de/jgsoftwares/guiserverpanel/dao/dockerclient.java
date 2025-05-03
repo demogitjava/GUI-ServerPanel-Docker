@@ -69,9 +69,21 @@ public class dockerclient implements Idockerclient
     {
         InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stdockerclient.toString()).exec();
         dockerClient.restartContainerCmd(container.getId()).exec();
-        System.out.println("Container " + container.getName() + " restarted");
+        //System.out.println("Container " + container.getName() + " restarted");
        
         
+    }
+    
+    /**
+     *
+     * @param stdockerclient
+     */
+    @Override
+    public void stopcontainerdockerclient(String stdockerclient)
+    {
+        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stdockerclient.toString()).exec();
+        dockerClient.stopContainerCmd(container.getId()).exec();
+        System.out.println("Container " + container.getName() + " stoped");
     }
     
     /**
