@@ -1,24 +1,14 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import com.github.dockerjava.api.command.InspectContainerResponse;
+import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.util.HashMap;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JTree;
-import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 
 
 public class MainPanel extends javax.swing.JFrame {
@@ -299,7 +289,9 @@ public class MainPanel extends javax.swing.JFrame {
                 de.jgsoftwares.guiserverpanel.frames.dockerclient.DCPopUpMenu dcpopjframe = new de.jgsoftwares.guiserverpanel.frames.dockerclient.DCPopUpMenu();
                
                 // add string form jTree to jLabel1
-                dcpopjframe.jLabel1.setText("Image - Container" + stdockerclient);
+                dcpopjframe.jLabel1.setText("" + stdockerclient.toString());
+                
+              
                 
                 dcpopjframe.setVisible(true);
                 dcpopjframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

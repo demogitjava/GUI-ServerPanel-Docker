@@ -2,6 +2,7 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -13,7 +14,7 @@ import de.jgsoftwares.guiserverpanel.frames.MainPanel;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JTree;
+
 
 
 /**
@@ -31,7 +32,7 @@ public class dockerclient implements Idockerclient
     com.github.dockerjava.api.model.Container mdcontainer;
 
    
-    public DockerClient dockerClient;
+    public static DockerClient dockerClient;
     
     // List of dockerimages
     // from /var/run/docker.sock
@@ -40,7 +41,9 @@ public class dockerclient implements Idockerclient
     
     public dockerclient()
     {
-       
+       dockerClient = DockerClientBuilder.getInstance().build();    
+       dockerimages = dockerClient.listImagesCmd().exec();
+       dockercontainers = dockerClient.listContainersCmd().exec();
     }
 
     /**
@@ -53,12 +56,30 @@ public class dockerclient implements Idockerclient
     }
     
     
-      /**
+    /*
+       restart docker container over the 
+       jtree menu 
+    */
+    /**
      *
-     * @param stcontainername
-     * @param stcontainerid
-     * @return
+     * @param stdockerclient
      */
+    @Override
+    public void startcontainerdockerclient(String stdockerclient)
+    {
+        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stdockerclient.toString()).exec();
+        dockerClient.restartContainerCmd(container.getId()).exec();
+        System.out.println("Container " + container.getName() + " restarted");
+       
+        
+    }
+    
+    /**
+    *
+    * @param stcontainername
+    * @param stcontainerid
+    * @return
+    */
     @Override
     public String getMenuItem(String stcontainername, String stcontainerid)
     {
@@ -117,7 +138,8 @@ public class dockerclient implements Idockerclient
         
         // Docker client
         // default unix:///var/run/docker.sock
-        dockerClient = DockerClientBuilder.getInstance().build();    	
+        //dockerClient = DockerClientBuilder.getInstance().build();    	
+        
         dockerimages = dockerClient.listImagesCmd().exec();
         
         dockercontainers = dockerClient.listContainersCmd().exec();
