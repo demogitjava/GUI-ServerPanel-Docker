@@ -56,6 +56,11 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         });
 
         jButton3.setText("restart");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Image");
 
@@ -143,6 +148,18 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         daodockerclient.stopcontainerdockerclient(stdockerclient);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        /*
+            restart container
+        */
+        
+        String stdockerclient = jLabel1.getText();
+        de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        daodockerclient.restartcontainerdockerlclient(stdockerclient);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
