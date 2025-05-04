@@ -35,4 +35,5 @@ public interface Idockerclient {
     public void stopcontainerdockerclient(String stdockerclient);
     public void restartcontainerdockerlclient(String stdockerclient);
     public void removecontainerdockerclient(String stdockerclient);
+    
 }

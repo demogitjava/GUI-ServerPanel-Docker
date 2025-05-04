@@ -14,6 +14,7 @@ import de.jgsoftwares.guiserverpanel.frames.MainPanel;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.tree.MutableTreeNode;
 
 
 
@@ -162,7 +163,7 @@ public class dockerclient implements Idockerclient
         
     }
     
-    
+   
      /**
      *
      */
@@ -187,7 +188,7 @@ public class dockerclient implements Idockerclient
 
         // list containers
         try {
-                for(int i = 0; i < imagesize; i++)
+                for(int i = 0; i < containersize; i++)
                 {
                     mdcontainer = new com.github.dockerjava.api.model.Container();
                     mdcontainer = dockercontainers.get(i);
@@ -201,7 +202,7 @@ public class dockerclient implements Idockerclient
 
         // list images
         try {
-             for(int i = 0; i < containersize; i++)
+             for(int i = 0; i < imagesize; i++)
                 {
                     mdimage = new com.github.dockerjava.api.model.Image();
                     mdimage = dockerimages.get(i);          
