@@ -245,15 +245,9 @@ public class dockerclient implements Idockerclient
     @Override
     public void restartlanserver(String strestartcontainer)
     {    
-        // restart docker contaienr 
-        // lanserver tcp
-            try {
-				process = Runtime.getRuntime().exec("xterm -hold ");
-
-        } catch(IOException e)
-        {
-            System.out.print("Error " +e);
-        }
+        String stdockerclient = "oraclelinuxlanservertcp";
+        de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        daodockerclient.restartcontainerdockerlclient(stdockerclient);
     }
 
 
