@@ -48,9 +48,8 @@ public class LanServerTCP extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
-        jButton1.setText("install de - lanserver tcp");
+        jButton1.setText("install  - lanserver tcp");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -61,17 +60,10 @@ public class LanServerTCP extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setText("restart container - de - lanserver tcp");
+        jButton2.setText("restart container  - lanserver tcp");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("set Systemtime to lanserver tcp - de - Container");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -81,8 +73,7 @@ public class LanServerTCP extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,9 +82,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -109,13 +98,11 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " "  +     
                     "--runtime " + stcomboruntime + " " +
                     "-e NETWORK_IF=" + stinterfacename + " " +
-                    "--blkio-weight 100 " + 
                     "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
                     "--platform=linux/amd64 " +
                     "--hostname " + ConfigPanel.styourdomainname + " " +
-                    "--network 172.17.0.0 " +
+                    "--network host " +
                     "--device=/dev/kvm " +
-                    "--ip 172.17.0.104 " +
                     "--name oraclelinuxlanservertcp " +
                     "-v /var/run/docker.sock:/var/run/docker.sock " +
                     "-v /etc/resolv.conf:/etc/resolv.conf " +
@@ -128,12 +115,12 @@ public class LanServerTCP extends javax.swing.JPanel {
             System.out.println("docker string " + struncontainer + "\n" + "\n");
          
             
-            // getRuntime start LanServer container
+          
+          
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
             dockerclient.startlanservercontiner(struncontainer);
             
              
-           
 
          
             
@@ -178,39 +165,10 @@ public class LanServerTCP extends javax.swing.JPanel {
              
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
-        
-                // add systemtime
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMddyyHHmm"); 
-                //  DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-              
-                LocalDateTime now = LocalDateTime.now();  
-                System.out.println(dtf.format(now));  
-                
-                  jTextArea1.setText("");
-                  jTextArea1.setText(
-                          "set systemdate to docker lanserver tcp" + "\n" +
-                          "access to docker container " + "\n" +
-                           "################################" + "\n" + "\n" +
-                          "docker exec -it oraclelinuxlanservertcp /bin/bash" + "\n" + "\n" +
-                           "date " + dtf.format(now) + "\n" +
-                           "################################" + "\n" + "\n" +
-                           "\n");
-                         
-                           String stsystemtime = dtf.format(now);
-                  
-                          de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-                          dockerclient.setsystemtimetolanservertcp();
-       
-    }//GEN-LAST:event_jButton3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

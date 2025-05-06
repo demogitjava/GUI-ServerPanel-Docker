@@ -224,15 +224,14 @@ public class dockerclient implements Idockerclient
     @Override
     public void startlanservercontiner(String struncontainer)
     {
-          // list start container 
-          // lanserver tcp 
-        try {
-				process = Runtime.getRuntime().exec("xterm -hold ");
-				
-	
-        } catch(IOException e)
+          try
         {
-            System.out.print("Error " +e);
+             InspectContainerResponse startlanserver = (InspectContainerResponse) dockerClient.startContainerCmd(struncontainer);
+             startlanserver.getConfig();
+             
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
         }
     }
     
