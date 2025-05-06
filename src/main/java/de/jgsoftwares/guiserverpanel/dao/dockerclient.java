@@ -338,7 +338,8 @@ public class dockerclient implements Idockerclient
         try
         {
              InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
-     
+             startlandingpage.getConfig();
+             
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);

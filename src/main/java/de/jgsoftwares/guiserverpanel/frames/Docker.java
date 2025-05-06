@@ -6,6 +6,7 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
 
+import com.github.dockerjava.api.model.AuthConfig;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -114,35 +115,17 @@ public class Docker extends javax.swing.JPanel {
         String stpassword2 = null;
         
         
-        try
-        {
-          stlogin = jTextField1.getText();
-          stpassword2 = jPasswordField1.getText();
+      
+        stlogin = jTextField1.getText();
+        stpassword2 = jPasswordField1.getText();
           
-          
-          if(stlogin == stpassword2)
-          {
-             // password ist gleich
+        // login over dockerclient api
+        AuthConfig authConfig = new AuthConfig()
+                .withUsername(stlogin)
+                .withPassword(stpassword2);
+         
               
-               try {
-            process = Runtime.getRuntime().exec("docker container login");
-
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            jTextArea2.setText("");
-            while ((line = reader.readLine()) != null) {
-                jTextArea2.append(line + "container backfire is restarted" + "\n");
-               // System.out.println(line);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-              
-        }
-        } catch (Exception e)
-        {
-            System.out.print("Fehler " +e);
-        }
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
