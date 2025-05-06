@@ -328,17 +328,22 @@ public class dockerclient implements Idockerclient
 
     /**
      *
+     * @param stlandingpage
      */
     @Override
-    public void startlandingpage()
+    public void startlandingpage(String stlandingpage)
     {
-          try {
-                                  process = Runtime.getRuntime().exec("xterm -hold ");
-
-          } catch(IOException e)
-          {
-              System.out.print("Error " +e);
-          }
+        
+        
+        try
+        {
+             InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
+     
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
+        }
+        
     }
     
     /**

@@ -20,7 +20,7 @@ public interface Idockerclient {
     public void starth2db();
     public void startmysqldb();
     
-    public void startlandingpage();
+    public void startlandingpage(String stlandingpage);
     public void startopenwrtcloudflaredmz();
     public void startopenwrtopendns();
     public void pullImage(String imageName);
