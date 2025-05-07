@@ -11,9 +11,16 @@ import java.io.BufferedReader;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.tree.MutableTreeNode;
 
 
@@ -56,6 +63,25 @@ public class dockerclient implements Idockerclient
         return dockerClient;
     }
     
+    /**
+     *
+     * @param url
+     */
+    @Override
+    public void loadDockerimage(String url)
+    {
+        final String tarFilePath = "http://demogitjava.ddns.net:8000/openwrt/dockerimages/httpfileserver.tar";
+      
+        try (InputStream is = new FileInputStream(tarFilePath)) {
+            dockerClient.loadImageCmd(is).exec();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(dockerclient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(dockerclient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Loaded");
+        
+    }
     
     /*
        restart docker container over the 
@@ -271,18 +297,13 @@ public class dockerclient implements Idockerclient
     // start xterm window for derby db command
      /**
      *
+     * @param stderbydb
      */
     @Override
-    public void startderbydb()
+    public void startderbydb(String stderbydb)
     {
-           try {
-				process = Runtime.getRuntime().exec("xterm -hold ");
-				
-	
-        } catch(IOException e)
-        {
-            System.out.print("Error " +e);
-        }
+        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stderbydb).exec();
+        dockerClient.restartContainerCmd(container.getId()).exec();
     }
 
 

@@ -69,6 +69,7 @@ public class MainPanel extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Docker Panel - Host only");
 
         jToolBar1.setRollover(true);
 

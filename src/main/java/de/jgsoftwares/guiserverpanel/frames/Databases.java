@@ -45,6 +45,7 @@ public class Databases extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("install Databases Docker Container - Oracle Linux");
 
@@ -81,6 +82,8 @@ public class Databases extends javax.swing.JPanel {
 
         jLabel5.setText("docker compose up");
 
+        jLabel6.setText("the containers are standalone ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,14 +107,19 @@ public class Databases extends javax.swing.JPanel {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
@@ -125,7 +133,7 @@ public class Databases extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -144,23 +152,16 @@ public class Databases extends javax.swing.JPanel {
 
             String stderbydb = new String(
                     "docker run -it -p 0.0.0.0:1527:1527 "
-                            + "--ip 172.17.0.2 "
                             + "--name oraclederbydb "
                             + "--runtime " + stcomboruntime + " " 
-                            + "-e NETWORK_IF=" + stinterfacename + " " 
-                            + "--blkio-weight 100 "
+                            + "-e NETWORK_IF=" + stinterfacename + " "
                             + "--cap-add=NET_ADMIN "
                             + "-e TZ=Europe/Berlin "
                             + "-v /etc/resolv.conf:/etc/resolv.conf "
                             + "-v /var/run/docker.sock:/var/run/docker.sock "
-                            + "--network 172.17.0.0 "
                             + "--restart unless-stopped "
                             + "--platform=linux/amd64 "
-                            + "--cpu-quota 2000 "
-                            + "--cpu-period 2000 "
-                            + "--cpu-shares 1024 "
-                            + "--kernel-memory=6M "
-                            + "--device=/dev/kvm "    
+                            + "--kernel-memory=6M " 
                             + "--cpuset-cpus=\"1\" "
                             + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                             + "jgsoftwares/oraclelinux_openjdk_derbydb:latest "
@@ -178,7 +179,7 @@ public class Databases extends javax.swing.JPanel {
 
                  // getRuntime start LanServer container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-                dockerclient.startderbydb();
+                dockerclient.startderbydb(stderbydb);
 
              
         } catch (Exception e) {
@@ -284,6 +285,7 @@ public class Databases extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

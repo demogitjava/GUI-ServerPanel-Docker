@@ -16,7 +16,7 @@ public interface Idockerclient {
     public void restartlanserver(String strestartcontainer);
     public void setsystemtimetolanservertcp();
     
-    public void startderbydb();
+    public void startderbydb(String stderbydb);
     public void starth2db();
     public void startmysqldb();
     
@@ -35,5 +35,6 @@ public interface Idockerclient {
     public void stopcontainerdockerclient(String stdockerclient);
     public void restartcontainerdockerlclient(String stdockerclient);
     public void removecontainerdockerclient(String stdockerclient);
+    public void loadDockerimage(String url);
     
 }
