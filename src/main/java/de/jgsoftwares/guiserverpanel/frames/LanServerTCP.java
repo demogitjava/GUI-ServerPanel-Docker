@@ -116,9 +116,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--platform=linux/amd64 " +
                     "--hostname " + ConfigPanel.styourdomainname + " " +
                     "--network host " +
-                    "--device=/dev/kvm " +
                     "--name oraclelinuxlanservertcp " +
-                    "-v /var/run/docker.sock:/var/run/docker.sock " +
                     "-v /etc/resolv.conf:/etc/resolv.conf " +
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +

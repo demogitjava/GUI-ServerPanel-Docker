@@ -302,6 +302,11 @@ public class dockerclient implements Idockerclient
     @Override
     public void startderbydb(String stderbydb)
     {
+        
+        /*
+            start a derbydb 
+            as standalone docker container
+        */
         InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stderbydb).exec();
         dockerClient.restartContainerCmd(container.getId()).exec();
     }

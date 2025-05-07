@@ -49,7 +49,7 @@ public class Databases extends javax.swing.JPanel {
 
         jLabel1.setText("install Databases Docker Container - Oracle Linux");
 
-        jButton1.setText("install DerbyDB - for Web");
+        jButton1.setText("install DerbyDB - host");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -156,13 +156,12 @@ public class Databases extends javax.swing.JPanel {
                             + "--runtime " + stcomboruntime + " " 
                             + "-e NETWORK_IF=" + stinterfacename + " "
                             + "--cap-add=NET_ADMIN "
+                            + "--network host " 
                             + "-e TZ=Europe/Berlin "
                             + "-v /etc/resolv.conf:/etc/resolv.conf "
-                            + "-v /var/run/docker.sock:/var/run/docker.sock "
                             + "--restart unless-stopped "
                             + "--platform=linux/amd64 "
                             + "--kernel-memory=6M " 
-                            + "--cpuset-cpus=\"1\" "
                             + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                             + "jgsoftwares/oraclelinux_openjdk_derbydb:latest "
                             + "/bin/bash /root/startderbydb.sh");
