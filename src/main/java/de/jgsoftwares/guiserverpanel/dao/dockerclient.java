@@ -2,11 +2,23 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
+import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
+import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.HostConfig;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
 import com.github.dockerjava.core.DockerClientBuilder;
 import java.io.BufferedReader;
+import com.github.dockerjava.api.DockerClient;
+import static com.github.dockerjava.api.model.Capability.NET_ADMIN;
+import static com.github.dockerjava.api.model.Capability.SYS_ADMIN;
+import com.github.dockerjava.core.DefaultDockerClientConfig;
+import com.github.dockerjava.core.DockerClientBuilder;
+
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -252,9 +264,66 @@ public class dockerclient implements Idockerclient
     {
           try
         {
-             InspectContainerResponse startlanserver = (InspectContainerResponse) dockerClient.startContainerCmd(struncontainer);
-             startlanserver.getConfig();
-             
+         
+            // host image 
+            // jgsoftwares/oraclelinux_openjdk_lanservertcp:host  
+          
+            //ExposedPort tcp4444 = ExposedPort.tcp(8443);
+            //Ports portBindings = new Ports();
+            //portBindings.bind(tcp4444,Ports.Binding.bindPort(8443));
+
+            //String name = new String("oraclelinuxlanservertcp");
+            //HostConfig hc = new HostConfig();
+            //hc.withNetworkMode("host");
+            
+            // jgsoftwares/oraclelinux_openjdk_lanservertcp:host 
+            
+            //CreateContainerResponse response = dockerClient.
+              //      createContainerCmd("oraclelinuxlanservertcp")
+              //      .withHostConfig(hc)
+              //      .withPortSpecs("8443:8443")
+              //      .withName(name)
+              //      .withImage("jgsoftwares/oraclelinux_openjdk_lanservertcp:host")
+              //      .withExposedPorts(ExposedPort.tcp(8443))
+              //      //.withPortBindings(tcp4444)
+              //      .withAttachStderr(false)
+              //      .withAttachStdin(false)
+              //      .withAttachStdout(false)
+              //      .exec();
+
+                     // Actually run the container
+              //       dockerClient.startContainerCmd("oraclelinuxlanservertcp").exec();
+                     
+                     
+                ExposedPort tcp8443 = ExposedPort.tcp(8443);
+                Ports portBindings = new Ports();
+                portBindings.bind(tcp8443, Ports.Binding.bindPort(8443));
+
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("8443:8443"));
+                hostConfig.withNetworkMode("host");
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.withRuntime("io.containerd.runc.v2");
+               
+                
+                // create container from image
+                CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:host")            
+                        .withExposedPorts(tcp8443)
+                        .withHostConfig(hostConfig) //.withPortBindings(portBindings))
+                        .withName("oraclelinuxlanservertcp")
+                        .exec();
+    
+                //dockerclient.execCreateCmd("containerName").withCmd("sh", "-c", "cd /root/Downloads && ./myScript.sh").exec();
+
+                
+                // run shell script 
+                //dockerClient.execCreateCmd("oraclelinuxlanservertcp").withCmd("/bin/bash", "-c", "sh /root/LanServer.sh").exec();
+                
+                dockerClient.statsCmd("/root/LanServer.sh");
+                
+                // start the container
+                dockerClient.startContainerCmd(container.getId()).exec();  
+                
+                 
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
