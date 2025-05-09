@@ -306,7 +306,7 @@ public class dockerclient implements Idockerclient
                
                 
                 // create container from image
-                CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:host")            
+                CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:hostopenwrtext4")            
                         .withExposedPorts(tcp8443)
                         .withHostConfig(hostConfig) //.withPortBindings(portBindings))
                         .withName("oraclelinuxlanservertcp")
@@ -318,7 +318,7 @@ public class dockerclient implements Idockerclient
                 // run shell script 
                 //dockerClient.execCreateCmd("oraclelinuxlanservertcp").withCmd("/bin/bash", "-c", "sh /root/LanServer.sh").exec();
                 
-                dockerClient.statsCmd("/root/LanServer.sh");
+                dockerClient.statsCmd("java -jar /root/LanServer-0.0.1-SNAPSHOT.jar");
                 
                 // start the container
                 dockerClient.startContainerCmd(container.getId()).exec();  

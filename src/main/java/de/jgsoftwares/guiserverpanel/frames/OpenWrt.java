@@ -45,15 +45,12 @@ public class OpenWrt extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setText("openwrt dmz - google");
+        jButton1.setText("openwrt2305host");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -64,7 +61,7 @@ public class OpenWrt extends javax.swing.JPanel {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jButton5.setText("openwrt open dns");
+        jButton5.setText("openwrt2305none");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -73,15 +70,9 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jLabel1.setText("acces to running container typ:");
 
-        jLabel2.setText("docker exec -it openwrtbackfireopendns /bin/ash");
+        jLabel2.setText("docker exec -it opnewrt2305none /bin/ash");
 
-        jLabel3.setText("docker exec -it openwrtbackfiregoogle /bin/ash");
-
-        jLabel4.setText("edit password -   passwd");
-
-        jLabel5.setText("edit date  -  date -s hh:mm[:ss]");
-
-        jLabel6.setText("start the web interface with -  /etc/init.d/uhttpd restart");
+        jLabel3.setText("docker exec -it openwrt2305host /bin/ash");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,10 +86,7 @@ public class OpenWrt extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -116,13 +104,7 @@ public class OpenWrt extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -131,6 +113,7 @@ public class OpenWrt extends javax.swing.JPanel {
         // TODO add your handling code here:
      
         // install opoenwrt 
+        /*
         try {
            String strunopenwrtdmz = new String("docker run -it -p "
                    + "0.0.0.0:123:123 "
@@ -169,12 +152,14 @@ public class OpenWrt extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.print("Error " + e);
         }
-        
+        */
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        /*
+        
         try {
            String strunopenwrtopendns = new String("docker run -it "
                    + "-p 0.0.0.0:123:123 "
@@ -214,7 +199,8 @@ public class OpenWrt extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.print("Error " + e);
         }
-        
+        */     
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
@@ -224,9 +210,6 @@ public class OpenWrt extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
