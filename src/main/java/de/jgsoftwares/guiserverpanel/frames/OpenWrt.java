@@ -66,6 +66,11 @@ public class OpenWrt extends javax.swing.JPanel {
         jLabel1.setText("access to running container typ:");
 
         jButton1.setText("openwrt 2305 - host network");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("containers must forwarded with:");
 
@@ -115,7 +120,27 @@ public class OpenWrt extends javax.swing.JPanel {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
        
-         dockerclient.dockerClient.attachContainerCmd(stcomboruntime).getContainerId();
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        
+        
+        String stopenwrtnone = new String("docker run -it "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
+                + "--name openwrt2305none "
+                + "-v /var/run/docker.sock:/var/run/docker.sock "
+                + "-v /etc/docker/daemon.json:/etc/docker/daemon.json "
+                + "-v /etc/config/:/etc/config/ "
+                + "-e TZ=Europe/Berlin "
+                + "--net=none "
+                + "--restart unless-stopped "
+                + "--cap-add=NET_ADMIN "
+                + "--platform=linux/amd64 "   
+                + "--kernel-memory=6M "
+                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                + "jgsoftwares/openwrt23.05:dockerext4 /bin/ash");
+        
+        dclient.startopenwrt2305none(stopenwrtnone);
         /*
        
         try {
@@ -160,6 +185,32 @@ public class OpenWrt extends javax.swing.JPanel {
         */     
 
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+         de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        
+        
+        String stopenwrthost = new String("docker run -it "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
+                + "--name openwrt2305none "
+                + "-v /var/run/docker.sock:/var/run/docker.sock "
+                + "-v /etc/docker/daemon.json:/etc/docker/daemon.json "
+                + "-v /etc/config/:/etc/config/ "
+                + "-e TZ=Europe/Berlin "
+                + "--net=none "
+                + "--restart unless-stopped "
+                + "--cap-add=NET_ADMIN "
+                + "--platform=linux/amd64 "   
+                + "--kernel-memory=6M "
+                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                + "jgsoftwares/openwrt23.05:dockerext4 /bin/ash");
+        
+        dclient.startopenwrt2305host(stopenwrthost);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

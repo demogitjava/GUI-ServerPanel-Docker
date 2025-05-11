@@ -383,7 +383,7 @@ public class dockerclient implements Idockerclient
         
         /*
             start a derbydb 
-            as standalone docker container
+          
         */
         InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stderbydb).exec();
         dockerClient.restartContainerCmd(container.getId()).exec();
@@ -481,6 +481,53 @@ public class dockerclient implements Idockerclient
     {
 
 
+    }
+    
+    /**
+     *
+     * @param stopenwrtnone
+     * 
+     */
+    @Override
+    public void startopenwrt2305none(String stopenwrtnone)
+    {
+        /*
+            start openwrt container on network none
+        */
+        
+     
+        try
+        {
+             InspectContainerResponse startopenwrtnone = (InspectContainerResponse) dockerClient.startContainerCmd(stopenwrtnone);
+             startopenwrtnone.getConfig();
+             
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
+        }
+    }
+    
+    /**
+     *
+     * @param stopenwrthost
+     */
+    @Override
+    public void startopenwrt2305host(String stopenwrthost)
+    {
+          /*
+            start openwrt container on network host
+        */
+        
+     
+        try
+        {
+             InspectContainerResponse startopenwrthost = (InspectContainerResponse) dockerClient.startContainerCmd(stopenwrthost);
+             startopenwrthost.getConfig();
+             
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
+        }
     }
 
 }

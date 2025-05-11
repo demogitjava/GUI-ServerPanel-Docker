@@ -38,5 +38,7 @@ public interface Idockerclient {
     public void loadDockerimage(String url);
     
     public void attachContainer(String stdockerclient);
+    public void startopenwrt2305none(String stopenwrtnone);
+    public void startopenwrt2305host(String stopenwrthost);
     
 }
