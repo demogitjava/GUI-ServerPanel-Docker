@@ -1,40 +1,32 @@
 package de.jgsoftwares.guiserverpanel.dao;
 
 
-import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
-import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
-import com.github.dockerjava.core.DockerClientBuilder;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
-import static com.github.dockerjava.api.model.Capability.NET_ADMIN;
-import static com.github.dockerjava.api.model.Capability.SYS_ADMIN;
-import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.tree.MutableTreeNode;
-
 
 
 /**
@@ -51,6 +43,10 @@ public class dockerclient implements Idockerclient
     com.github.dockerjava.api.model.Image mdimage;
     com.github.dockerjava.api.model.Container mdcontainer;
 
+    
+    
+    PipedInputStream inputStream;
+    PipedOutputStream outputStream;
    
     public static DockerClient dockerClient;
     
@@ -111,6 +107,19 @@ public class dockerclient implements Idockerclient
         //System.out.println("Container " + container.getName() + " restarted");
        
         
+    }
+    
+    /**
+     *
+     * @param stdockerclient
+     */
+    @Override
+    public void attachContainer(String stdockerclient)
+    {
+           
+      
+         
+
     }
     
     /**
@@ -182,7 +191,7 @@ public class dockerclient implements Idockerclient
         return dockercontainers;
     }
 
-    
+   
     
     
      /**

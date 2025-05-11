@@ -37,4 +37,6 @@ public interface Idockerclient {
     public void removecontainerdockerclient(String stdockerclient);
     public void loadDockerimage(String url);
     
+    public void attachContainer(String stdockerclient);
+    
 }
