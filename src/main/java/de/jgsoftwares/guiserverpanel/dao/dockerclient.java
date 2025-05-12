@@ -17,6 +17,7 @@ import com.github.dockerjava.core.DockerClientBuilder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+import de.jgsoftwares.guiserverpanel.frames.xterm.JTerminal;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -116,10 +117,29 @@ public class dockerclient implements Idockerclient
     @Override
     public void attachContainer(String stdockerclient)
     {
-           
-      
-         
+     
+          // String stdockerclient is the container name 
+          
+          dockerClient.attachContainerCmd("" + stdockerclient.toString())
+            .withStdErr(true)
+            .withStdOut(true)
+            .withFollowStream(true);
+           //.exec(callback)
+            //.awaitCompletion(15, TimeUnit.SECONDS);
+ /*
+            com.github.dockerjava.api.model.Container container = new com.github.dockerjava.api.model.Container();
+            container.equals(stdockerclient);
+        
+            
+            JTerminal jterm = new JTerminal("" + stdockerclient.toString(),120,40);
+            jterm.setLocation(100,100);
+	    jterm.setVisible(true);
+		
+            jterm.add(jterm, container);
+            jterm.setSize(400, 600);
+            jterm.setVisible(true);
 
+          */   
     }
     
     /**

@@ -173,6 +173,15 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
+
+        
+        
+        // attach to container
+        String stdockerclient = jLabel1.getText();
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        dclient.attachContainer(stdockerclient);
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
    
