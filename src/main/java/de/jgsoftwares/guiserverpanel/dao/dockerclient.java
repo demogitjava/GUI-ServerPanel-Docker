@@ -17,7 +17,7 @@ import com.github.dockerjava.core.DockerClientBuilder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
-import de.jgsoftwares.guiserverpanel.frames.xterm.JTerminal;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
