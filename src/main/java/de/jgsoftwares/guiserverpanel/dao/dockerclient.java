@@ -12,7 +12,7 @@ import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.core.DockerClientBuilder;
-
+import com.github.dockerjava.api.model.Frame;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -117,13 +117,14 @@ public class dockerclient implements Idockerclient
     @Override
     public void attachContainer(String stdockerclient)
     {
-     
+
           // String stdockerclient is the container name 
           
           dockerClient.attachContainerCmd("" + stdockerclient.toString())
             .withStdErr(true)
             .withStdOut(true)
             .withFollowStream(true);
+            
            //.exec(callback)
             //.awaitCompletion(15, TimeUnit.SECONDS);
  /*
