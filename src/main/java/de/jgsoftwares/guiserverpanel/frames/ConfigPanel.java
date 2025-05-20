@@ -12,6 +12,8 @@ public class ConfigPanel extends javax.swing.JPanel {
     public static String styourdomainname;
     public static String stcomboruntime;
     public static String stinterfacename;
+    public static String stcontainersystem;
+    
     
     Process process;
     /**
@@ -177,6 +179,13 @@ public class ConfigPanel extends javax.swing.JPanel {
         styourdomainname = jTextField2.getText();
     
         stinterfacename = jTextField3.getText();
+        
+        
+        /*
+           get operating system from JCombobox3
+        */
+        stcontainersystem = String.valueOf(jComboBox3.getSelectedItem());
+        
         
         /*
             string from selected runtime
