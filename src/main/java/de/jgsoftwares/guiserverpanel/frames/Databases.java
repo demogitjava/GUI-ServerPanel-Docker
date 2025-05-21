@@ -150,11 +150,16 @@ public class Databases extends javax.swing.JPanel {
             
             //process = Runtime.getRuntime().exec("docker run -it -p 0.0.0.0:1527:1527 --ip 172.17.0.2 --name oraclederbydb --runtime runc --blkio-weight 100 --cap-add=NET_ADMIN -e TZ=Europe/Berlin -v /etc/resolv.conf:/etc/resolv.conf -v /var/run/docker.sock:/var/run/docker.sock --network 172.17.0.0 --restart unless-stopped --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -e NTP_SERVER=\"2.rhel.pool.ntp.org\" jgsoftwares/oraclelinux_openjdk_derbydb:latest /bin/bash /root/startderbydb.sh");
 
+            
+                  // "/path-to/bash -c \"rm *.foo\""
+      
             String stderbydb = new String(
                     "docker run -it -p 0.0.0.0:1527:1527 "
+                            + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " "     
                             + "--name oraclederbydb "
                             + "--runtime " + stcomboruntime + " " 
                             + "-e NETWORK_IF=" + stinterfacename + " "
+                            + "--hostname " + ConfigPanel.styourdomainname + " " 
                             + "--cap-add=NET_ADMIN "
                             + "--net=host --net=none " 
                             + "-e TZ=Europe/Berlin "
@@ -167,14 +172,12 @@ public class Databases extends javax.swing.JPanel {
                             + "/bin/bash /root/startderbydb.sh");
                     
           
-                jTextArea1.setText("");
-                jTextArea1.append("start the docker container derbydb " + "\n");
+                jTextArea1.setText("" + "\n");
+                jTextArea1.append("docker container is started with" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append(stderbydb + "\n");
                 jTextArea1.append("#################################" + "\n");
-                jTextArea1.append("copy docker run command with" + "\n");
-                jTextArea1.append("Strg + c" + "\n");
-                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+            
 
                  // getRuntime start LanServer container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
@@ -187,42 +190,31 @@ public class Databases extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        //process = Runtime.getRuntime().exec("docker run -it --runtime runc -e TZ=Europe/Berlin --add-host=docker:217.160.255.254 --runtime runc --blkio-weight 100 --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -p 0.0.0.0:8082:8082 -p 0.0.0.0:9092:9092 --network 172.17.0.0 --ip 172.17.0.101 --name oraclelinuxh2db -e NTP_SERVER=\"2.rhel.pool.ntp.org\" -v /var/run/docker.sock:/var/run/docker.sock -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
         
+        String sth2db = new String("docker run -it "
+                                + "-e TZ=Europe/Berlin "
+                                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " "  
+                                + "--runtime " + stcomboruntime + " "
+                                + "-e NETWORK_IF=" + stinterfacename + " "
+                                + "--hostname " + ConfigPanel.styourdomainname + " " 
+                                + "--kernel-memory=6M "
+                                + "--name oraclelinuxh2db "
+                                + "--net=host --net=none "
+                                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                                + "-v /var/run/docker.sock:/var/run/docker.sock "
+                                + "-v /etc/resolv.conf:/etc/resolv.conf "
+                                + "--restart unless-stopped "
+                                + "--cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
         
-        // install h2 docker container database
-        try {
-            process = Runtime.getRuntime().exec("docker run -it --runtime runc -e TZ=Europe/Berlin --add-host=docker:217.160.255.254 --runtime runc --blkio-weight 100 --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -p 0.0.0.0:8082:8082 -p 0.0.0.0:9092:9092 --network 172.17.0.0 --ip 172.17.0.101 --name oraclelinuxh2db -e NTP_SERVER=\"2.rhel.pool.ntp.org\" -v /var/run/docker.sock:/var/run/docker.sock -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
-
-            String sth2db = new String("docker run -it "
-                + "-e TZ=Europe/Berlin "
-                + "--runtime " + stcomboruntime + " " 
-                + "-e NETWORK_IF=" + stinterfacename + " " 
-                + "--kernel-memory=6M "
-                + "--name oraclelinuxh2db "
-                + "--net=host --net=none "    
-                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                + "-v /var/run/docker.sock:/var/run/docker.sock "
-                + "-v /etc/resolv.conf:/etc/resolv.conf "
-                + "--restart unless-stopped "
-                + "--cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
-
-
-                jTextArea1.setText("");
-                jTextArea1.append("start the docker container oraclelinuxh2db " + "\n");
-                jTextArea1.append("#################################" + "\n");
-                jTextArea1.append(sth2db + "\n");
-                jTextArea1.append("#################################" + "\n");
-                jTextArea1.append("copy docker run command with" + "\n");
-                jTextArea1.append("Strg + c" + "\n");
-                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
-
-            // getRuntime start h2db  container xterm window
-            de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-            dockerclient.starth2db();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        jTextArea1.setText("");
+        jTextArea1.append("docker container is started oraclelinuxh2db " + "\n");
+        jTextArea1.append("#################################" + "\n");
+        jTextArea1.append(sth2db + "\n");
+        jTextArea1.append("#################################" + "\n");
+        // getRuntime start h2db  container xterm window
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        dockerclient.starth2db();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -232,20 +224,20 @@ public class Databases extends javax.swing.JPanel {
         try {
           
             String stmysql = new String("docker container run "
-                + "--runtime runc "
+                + "--runtime " + stcomboruntime + " "
                 + "-e TZ=Europe/Berlin "
                 + "--name mysqlcontainer "
                 + "--runtime " + stcomboruntime + " "
                 + "-e TZ=Europe/Berlin" + " "
-                + "-e NETWORK_IF=eth0" + " "
+                + "-e NETWORK_IF=" + stinterfacename + " "
+                + "--hostname " + ConfigPanel.styourdomainname + " " 
                 + "--platform=linux/amd64" + " "
-                + "--net=host --net=none" + " "  
-                + "--runtime io.containerd.runc.v2" + " "
+                + "--net=host --net=none" + " "
                 + "jgsoftwares/demomysqlserver-ce:latest");
 
             
                 jTextArea1.setText("");
-                jTextArea1.append("start the docker container mysqlcontainer " + "\n");
+                jTextArea1.append("docker container is started -  mysqlcontainer " + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append(stmysql + "\n");
                 jTextArea1.append("#################################" + "\n");

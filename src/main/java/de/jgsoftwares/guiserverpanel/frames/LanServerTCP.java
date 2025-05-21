@@ -9,13 +9,7 @@ package de.jgsoftwares.guiserverpanel.frames;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
