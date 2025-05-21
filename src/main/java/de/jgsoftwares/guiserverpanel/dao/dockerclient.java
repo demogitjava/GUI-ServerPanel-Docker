@@ -545,6 +545,8 @@ public class dockerclient implements Idockerclient
              InspectContainerResponse startopenwrthost = (InspectContainerResponse) dockerClient.startContainerCmd(stopenwrthost);
              startopenwrthost.getConfig();
              
+             dockerClient.attachContainerCmd(stopenwrthost);
+             
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
