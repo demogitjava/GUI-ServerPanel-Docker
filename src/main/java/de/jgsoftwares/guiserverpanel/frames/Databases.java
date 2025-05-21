@@ -156,7 +156,7 @@ public class Databases extends javax.swing.JPanel {
                             + "--runtime " + stcomboruntime + " " 
                             + "-e NETWORK_IF=" + stinterfacename + " "
                             + "--cap-add=NET_ADMIN "
-                            + "--network host " 
+                            + "--net=host --net=none " 
                             + "-e TZ=Europe/Berlin "
                             + "-v /etc/resolv.conf:/etc/resolv.conf "
                             + "--restart unless-stopped "
@@ -195,23 +195,12 @@ public class Databases extends javax.swing.JPanel {
             process = Runtime.getRuntime().exec("docker run -it --runtime runc -e TZ=Europe/Berlin --add-host=docker:217.160.255.254 --runtime runc --blkio-weight 100 --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -p 0.0.0.0:8082:8082 -p 0.0.0.0:9092:9092 --network 172.17.0.0 --ip 172.17.0.101 --name oraclelinuxh2db -e NTP_SERVER=\"2.rhel.pool.ntp.org\" -v /var/run/docker.sock:/var/run/docker.sock -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
 
             String sth2db = new String("docker run -it "
-                + "--runtime runc "
                 + "-e TZ=Europe/Berlin "
-                + "--add-host=docker:217.160.255.254 " 
                 + "--runtime " + stcomboruntime + " " 
                 + "-e NETWORK_IF=" + stinterfacename + " " 
-                + "--blkio-weight 100 --platform=linux/amd64 "
-                + "--cpu-quota 2000 "
-                + "--cpu-period 2000 "
-                + "--cpu-shares 1024 "
                 + "--kernel-memory=6M "
-                + "--cpuset-cpus=\"1\" "
-                + "-p 0.0.0.0:8082:8082 "
-                + "-p 0.0.0.0:9092:9092 "
-                + "--network 172.17.0.0 "
-                + "--ip 172.17.0.101 "
                 + "--name oraclelinuxh2db "
-                + "--device=/dev/kvm "    
+                + "--net=host --net=none "    
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                 + "-v /var/run/docker.sock:/var/run/docker.sock "
                 + "-v /etc/resolv.conf:/etc/resolv.conf "
@@ -248,11 +237,11 @@ public class Databases extends javax.swing.JPanel {
                 + "--name mysqlcontainer "
                 + "--runtime " + stcomboruntime + " "
                 + "-e TZ=Europe/Berlin" + " "
-                + "--device=/dev/kvm" + " "
                 + "-e NETWORK_IF=eth0" + " "
                 + "--platform=linux/amd64" + " "
+                + "--net=host --net=none" + " "  
                 + "--runtime io.containerd.runc.v2" + " "
-                + "-p 0.0.0.0:3306:3306 jgsoftwares/demomysqlserver-ce:latest");
+                + "jgsoftwares/demomysqlserver-ce:latest");
 
             
                 jTextArea1.setText("");

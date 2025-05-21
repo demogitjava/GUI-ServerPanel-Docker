@@ -96,7 +96,7 @@ public class Landingpage extends javax.swing.JPanel {
                 + "--name oraclelinuxlandingpage "
                 + "-e TZ=Europe/Berlin "
                 + "--device=/dev/kvm "
-                + "--net=host --net=none"
+                + "--net=host --net=none "
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
                 + "-v /etc/resolv.conf:/etc/resolv.conf "
                 + "--restart unless-stopped "
