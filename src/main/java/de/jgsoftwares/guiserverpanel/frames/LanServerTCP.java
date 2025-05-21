@@ -115,7 +115,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
                     "--platform=linux/amd64 " +
                     "--hostname " + ConfigPanel.styourdomainname + " " +
-                    "--network host " +
+                    "--net=host --net=none" +
                     "--name oraclelinuxlanservertcp " +
                     "-v /etc/resolv.conf:/etc/resolv.conf " +
                     "--restart unless-stopped " +
