@@ -19,7 +19,7 @@ public class ConfigPanel extends javax.swing.JPanel {
     public static String stcontainersystem;
     
     public static String stcomborunorcompose;
-    
+    public static String stcombotimezone;
     Process process;
     /**
      * Creates new form ConfigPanel
@@ -54,6 +54,8 @@ public class ConfigPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
 
         setName(""); // NOI18N
 
@@ -101,6 +103,15 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Operation System");
 
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Europe/Berlin", "Europe/Rome", "Europe/Paris", "Europe/Madrid", "Europe/Istanbul", "Europe/London" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Time Zone");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,11 +138,15 @@ public class ConfigPanel extends javax.swing.JPanel {
                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,6 +178,10 @@ public class ConfigPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,7 +223,7 @@ public class ConfigPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(new JFrame(), "supported at the moment only oracle linux!");
         }
         
-         /*
+        /*
             edit default runtime 
         
             runc 
@@ -217,14 +236,37 @@ public class ConfigPanel extends javax.swing.JPanel {
             docker run 
             or use the 
             compose file
-        */
-       
+        */ 
         stcomborunorcompose = String.valueOf(jComboBox2.getSelectedItem());
         if(stcomborunorcompose.equals("docker_compose"))
         {
             JOptionPane.showMessageDialog(new JFrame(), "only docker run supported!");
         }
         
+        /*
+            timezone
+        
+        */
+        stcombotimezone = String.valueOf(jComboBox4.getSelectedItem());
+          switch (stcombotimezone) {
+          case "Europe/Rom":
+                 JOptionPane.showMessageDialog(new JFrame(), "at the moment only Europe/Berlin is supported !");
+             break;
+          case "Europe/Paris":
+                JOptionPane.showMessageDialog(new JFrame(), "at the moment only Europe/Berlin is supported !");
+             break;   
+          case "Europe/Madrid":
+                JOptionPane.showMessageDialog(new JFrame(), "at the moment only Europe/Berlin is supported !");
+             break;
+          case "Europe/Istanbul":
+                JOptionPane.showMessageDialog(new JFrame(), "at the moment only Europe/Berlin is supported !");
+             break;
+          case "Europe/London":
+                JOptionPane.showMessageDialog(new JFrame(), "at the moment only Europe/Berlin is supported !");
+             break;
+         default:
+             System.out.print("default time zone is set to Europe/Berlin");
+     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -243,6 +285,10 @@ public class ConfigPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -252,6 +298,7 @@ public class ConfigPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -259,6 +306,7 @@ public class ConfigPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
