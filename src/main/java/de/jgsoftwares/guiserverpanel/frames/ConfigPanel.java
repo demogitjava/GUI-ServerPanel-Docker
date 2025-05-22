@@ -1,6 +1,10 @@
 
 package de.jgsoftwares.guiserverpanel.frames;
 
+import java.awt.Frame;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hoscho
@@ -14,6 +18,7 @@ public class ConfigPanel extends javax.swing.JPanel {
     public static String stinterfacename;
     public static String stcontainersystem;
     
+    public static String stcomborunorcompose;
     
     Process process;
     /**
@@ -78,7 +83,8 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel5.setText("interface name:  - like eth0  ");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "docker compose", "docker run" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "docker_compose", "docker_run" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "docker_compose", "docker_run" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -154,7 +160,7 @@ public class ConfigPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -183,14 +189,41 @@ public class ConfigPanel extends javax.swing.JPanel {
         
         /*
            get operating system from JCombobox3
+            openwrt
+            oraclelinux
+            alpinelinux
+
         */
         stcontainersystem = String.valueOf(jComboBox3.getSelectedItem());
+        if(stcontainersystem.equals("openwrt"))
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "supported at the moment only oracle linux!");
+        }
+        else if (stcontainersystem.equals("alpinelinux"))
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "supported at the moment only oracle linux!");
+        }
         
+         /*
+            edit default runtime 
         
-        /*
-            string from selected runtime
+            runc 
+            io.containerd.runc.v2 
         */
         stcomboruntime = String.valueOf(jComboBox1.getSelectedItem());
+        
+        /*
+            run container as
+            docker run 
+            or use the 
+            compose file
+        */
+       
+        stcomborunorcompose = String.valueOf(jComboBox2.getSelectedItem());
+        if(stcomborunorcompose.equals("docker_compose"))
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "only docker run supported!");
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

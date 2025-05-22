@@ -129,7 +129,7 @@ public class MainPanel extends javax.swing.JFrame {
         jTabbedPane1.add(dockerpanel, "Docker Panel");
 
         // OpenWrt Panel
-        jTabbedPane1.add(openwrt, "OpenWrt -BackFire");
+        jTabbedPane1.add(openwrt, "OpenWrt2305");
 
         // Databases - DerbyDB - H2 - MYSql
         jTabbedPane1.add(databases, "Databases");
