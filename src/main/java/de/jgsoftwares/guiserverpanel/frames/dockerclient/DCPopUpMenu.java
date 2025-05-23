@@ -1,5 +1,15 @@
 package de.jgsoftwares.guiserverpanel.frames.dockerclient;
 
+import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+
 /**
  *
  * @author root
@@ -56,7 +66,7 @@ public class DCPopUpMenu extends javax.swing.JFrame {
 
         jLabel3.setText("Container");
 
-        jButton4.setText("attach container");
+        jButton4.setText("run container command");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -147,7 +157,29 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         dclient.attachContainer(stdockerclient);
         
+        JFrame frame = new JFrame();
         
+        frame.setLayout(new BorderLayout());
+        JLabel jlabel = new JLabel("Container" + jLabel1.getText());
+        frame.add(jlabel, "North");
+        JTextArea textarea = new JTextArea();
+        frame.add(textarea, "Center");
+        
+        JButton jbutton = new JButton("run command");
+        jbutton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                
+                //ExecCreateCmdResponse exec = dockerClient.execCreateCmd(container.getId()).withCmd("echo", "hello world").withAttachStdout(true).exec();
+                ExecCreateCmdResponse exec = dockerClient.execCreateCmd(jLabel1.getText()).withCmd("echo", textarea.getText()).withAttachStdout(true).exec();
+                frame.dispose();
+            }
+        });
+        
+        frame.add(jbutton, "South");
+        
+        frame.pack();
+        frame.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
    
