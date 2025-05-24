@@ -115,7 +115,7 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "-v /etc/docker/daemon.json:/etc/docker/daemon.json "
                 + "-v /etc/config/:/etc/config/ "
                 + "-e TZ=Europe/Berlin "
-                + "--net=none --net=host "
+                + "--net=host --net=none "
                 + "--restart unless-stopped "
                 + "--cap-add=NET_ADMIN "
                 + "--platform=linux/amd64 "   

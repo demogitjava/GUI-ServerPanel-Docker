@@ -172,10 +172,11 @@ public class DCPopUpMenu extends javax.swing.JFrame {
                 
                 //ExecCreateCmdResponse exec = dockerClient.execCreateCmd(container.getId()).withCmd("echo", "hello world").withAttachStdout(true).exec();
                 ExecCreateCmdResponse exec = dockerClient.execCreateCmd(jLabel1.getText()).withCmd("echo", textarea.getText()).withAttachStdout(true).exec();
-                frame.dispose();
+            
+                
             }
         });
-        
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(jbutton, "South");
         
         frame.pack();
