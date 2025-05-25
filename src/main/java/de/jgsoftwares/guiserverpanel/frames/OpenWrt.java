@@ -121,7 +121,7 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "--net=host --net=none "
                 + "--restart unless-stopped "
                 + "--cap-add=NET_ADMIN "
-                + "--cap-add SYS_ADMIN " 
+                + "--cap-add=SYS_ADMIN " 
                 + "--platform=linux/amd64 "   
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
