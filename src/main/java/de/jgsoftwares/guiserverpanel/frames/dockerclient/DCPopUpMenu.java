@@ -1,10 +1,19 @@
 package de.jgsoftwares.guiserverpanel.frames.dockerclient;
 
+import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import com.github.dockerjava.api.model.Frame;
+import com.github.dockerjava.core.command.ExecStartResultCallback;
 import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,6 +47,8 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,6 +84,11 @@ public class DCPopUpMenu extends javax.swing.JFrame {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("run command over the \ncontainer on opnewrt2305host\nsimple command run at the moment \nwith /bin/ash for openwrt linux\n\n");
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,8 +102,9 @@ public class DCPopUpMenu extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +121,9 @@ public class DCPopUpMenu extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -170,10 +189,27 @@ public class DCPopUpMenu extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 
-                //ExecCreateCmdResponse exec = dockerClient.execCreateCmd(container.getId()).withCmd("echo", "hello world").withAttachStdout(true).exec();
-                ExecCreateCmdResponse exec = dockerClient.execCreateCmd(jLabel1.getText()).withCmd("echo", textarea.getText()).withAttachStdout(true).exec();
-            
-                
+                try
+                {
+                    ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(jLabel1.getText())
+                    .withTty(false)
+                    .withAttachStdout(true)
+                    .withCmd("/bin/ash", "-c", textarea.getText())
+                    .exec();
+            dockerClient.execStartCmd(execCreateCmdResponse.getId())
+                    .withTty(false)
+                    .withDetach(false)
+                    .exec(new ExecStartResultCallback(getStringOutputStream(), System.err))
+                    .awaitCompletion();
+
+           
+
+                } catch (Exception ex)
+                {
+                    System.out.print("Fehler " + ex);
+                }
+       
+
             }
         });
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -183,7 +219,20 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-   
+     private OutputStream getStringOutputStream() {
+        return new OutputStream() {
+            private StringBuilder string = new StringBuilder();
+
+            @Override
+            public void write(int x) throws IOException {
+                this.string.append((char) x);
+            }
+
+            public String toString() {
+                return this.string.toString();
+            }
+        };
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -191,5 +240,7 @@ public class DCPopUpMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
