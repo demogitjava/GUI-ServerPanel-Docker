@@ -94,7 +94,6 @@ public class Landingpage extends javax.swing.JPanel {
                 + "--runtime " + stcomboruntime + " " 
                 + "-e NETWORK_IF=" + stinterfacename + " " 
                 + "--name oraclelinuxlandingpage "
-                + "-e TZ=Europe/Berlin "
                 + "--device=/dev/kvm "
                 + "--net=host --net=none "
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
