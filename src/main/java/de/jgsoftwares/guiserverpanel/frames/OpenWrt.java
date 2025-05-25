@@ -7,7 +7,9 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 import de.jgsoftwares.guiserverpanel.dao.dockerclient;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcombotimezone;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stlocales;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -114,10 +116,12 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "-v /var/run/docker.sock:/var/run/docker.sock "
                 + "-v /etc/docker/daemon.json:/etc/docker/daemon.json "
                 + "-v /etc/config/:/etc/config/ "
-                + "-e TZ=Europe/Berlin "
+                + "-e TZ=" + stcombotimezone + " "
+                + "-e " + stlocales + " "
                 + "--net=host --net=none "
                 + "--restart unless-stopped "
                 + "--cap-add=NET_ADMIN "
+                + "--cap-add SYS_ADMIN " 
                 + "--platform=linux/amd64 "   
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "

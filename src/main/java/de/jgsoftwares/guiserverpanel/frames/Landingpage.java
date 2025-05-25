@@ -88,13 +88,15 @@ public class Landingpage extends javax.swing.JPanel {
         try {
             
             
+            // optional for host network 
+            //    + "-p 0.0.0.0:80:80 "
+            
             String stlandingpage = new String("docker run -it "
                 + "-p 0.0.0.0:80:80 "
                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
                 + "--runtime " + stcomboruntime + " " 
                 + "-e NETWORK_IF=" + stinterfacename + " " 
                 + "--name oraclelinuxlandingpage "
-                + "--device=/dev/kvm "
                 + "--net=host --net=none "
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
                 + "-v /etc/resolv.conf:/etc/resolv.conf "

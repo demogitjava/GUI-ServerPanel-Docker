@@ -2,6 +2,7 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
 import java.awt.Frame;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -20,6 +21,8 @@ public class ConfigPanel extends javax.swing.JPanel {
     
     public static String stcomborunorcompose;
     public static String stcombotimezone;
+    
+    public static String stlocales;
     Process process;
     /**
      * Creates new form ConfigPanel
@@ -207,6 +210,8 @@ public class ConfigPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
+        
+        
         /*
                 save string 
                 wan ip 
@@ -279,16 +284,19 @@ public class ConfigPanel extends javax.swing.JPanel {
              break;
          default:
              System.out.print("default time zone is set to Europe/Berlin");
-     }
+        }
+          
+          
+          
+        stlocales = String.valueOf(jComboBox5.getSelectedItem()); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-         try {
+        try {
 		process = Runtime.getRuntime().exec("xterm -hold ");
-
-        } catch(Exception e)
+        } catch(IOException e)
         {
             System.out.print("Fehler " +e);
         }
