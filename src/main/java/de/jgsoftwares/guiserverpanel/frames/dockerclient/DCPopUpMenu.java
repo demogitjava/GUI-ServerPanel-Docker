@@ -176,6 +176,12 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         
 
         
+        /*
+        
+            command run with 
+            /bin/ash only for openwrt2305host
+            
+        */
         
         // attach to container
         String stdockerclient = jLabel1.getText();
@@ -192,6 +198,7 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         
         JButton jbutton = new JButton("run command");
         jbutton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 

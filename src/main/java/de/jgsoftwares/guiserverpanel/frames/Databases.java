@@ -6,7 +6,9 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcombotimezone;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stlocales;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -161,8 +163,10 @@ public class Databases extends javax.swing.JPanel {
                             + "-e NETWORK_IF=" + stinterfacename + " "
                             + "--hostname " + ConfigPanel.styourdomainname + " " 
                             + "--cap-add=NET_ADMIN "
+                            + "--cap-add SYS_ADMIN "
                             + "--net=host --net=none " 
-                            + "-e TZ=Europe/Berlin "
+                            + "-e LANG=" + stlocales + " "
+                            + "-e TZ=" + stcombotimezone + " " 
                             + "-v /etc/resolv.conf:/etc/resolv.conf "
                             + "--restart unless-stopped "
                             + "--platform=linux/amd64 "
@@ -193,7 +197,7 @@ public class Databases extends javax.swing.JPanel {
         //process = Runtime.getRuntime().exec("docker run -it --runtime runc -e TZ=Europe/Berlin --add-host=docker:217.160.255.254 --runtime runc --blkio-weight 100 --platform=linux/amd64 --cpu-quota 2000 --cpu-period 2000 --cpu-shares 1024 --kernel-memory=6M --cpuset-cpus=\"1\" -p 0.0.0.0:8082:8082 -p 0.0.0.0:9092:9092 --network 172.17.0.0 --ip 172.17.0.101 --name oraclelinuxh2db -e NTP_SERVER=\"2.rhel.pool.ntp.org\" -v /var/run/docker.sock:/var/run/docker.sock -v /etc/resolv.conf:/etc/resolv.conf --restart unless-stopped --cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
         
         String sth2db = new String("docker run -it "
-                                + "-e TZ=Europe/Berlin "
+                                + "-e TZ=" + stcombotimezone + " " 
                                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " "  
                                 + "--runtime " + stcomboruntime + " "
                                 + "-e NETWORK_IF=" + stinterfacename + " "
@@ -201,11 +205,12 @@ public class Databases extends javax.swing.JPanel {
                                 + "--kernel-memory=6M "
                                 + "--name oraclelinuxh2db "
                                 + "--net=host --net=none "
+                                + "-e LANG=" + stlocales + " " 
                                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                                 + "-v /var/run/docker.sock:/var/run/docker.sock "
                                 + "-v /etc/resolv.conf:/etc/resolv.conf "
                                 + "--restart unless-stopped "
-                                + "--cap-add=NET_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
+                                + "--cap-add=NET_ADMIN --cap-add SYS_ADMIN jgsoftwares/oraclelinux_openjdk_h2db:1.4.199 /bin/bash /root/landingpageh2db.sh");
         
         jTextArea1.setText("");
         jTextArea1.append("docker container is started oraclelinuxh2db " + "\n");
@@ -225,14 +230,16 @@ public class Databases extends javax.swing.JPanel {
           
             String stmysql = new String("docker container run "
                 + "--runtime " + stcomboruntime + " "
-                + "-e TZ=Europe/Berlin "
+                + "-e TZ=" + stcombotimezone + " "
                 + "--name mysqlcontainer "
                 + "--runtime " + stcomboruntime + " "
-                + "-e TZ=Europe/Berlin" + " "
+                + "-e LANG=" + stlocales + " " 
                 + "-e NETWORK_IF=" + stinterfacename + " "
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
                 + "--platform=linux/amd64" + " "
                 + "--net=host --net=none" + " "
+                + "--cap-add=NET_ADMIN " + " "
+                + "--cap-add SYS_ADMIN " + " "
                 + "jgsoftwares/demomysqlserver-ce:latest");
 
             

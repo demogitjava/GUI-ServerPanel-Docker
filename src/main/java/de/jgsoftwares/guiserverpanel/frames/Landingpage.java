@@ -7,7 +7,9 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcombotimezone;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stlocales;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -97,11 +99,14 @@ public class Landingpage extends javax.swing.JPanel {
                 + "--runtime " + stcomboruntime + " " 
                 + "-e NETWORK_IF=" + stinterfacename + " " 
                 + "--name oraclelinuxlandingpage "
+                + "-e TZ=" + stcombotimezone + " "
                 + "--net=host --net=none "
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
                 + "-v /etc/resolv.conf:/etc/resolv.conf "
                 + "--restart unless-stopped "
+                + "-e LANG=" + stlocales + " "
                 + "--cap-add=NET_ADMIN "
+                + "--cap-add=SYS_ADMIN "
                 + "--platform=linux/amd64 "
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "

@@ -7,7 +7,9 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcombotimezone;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stlocales;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
@@ -107,9 +109,11 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--runtime " + stcomboruntime + " " +
                     "-e NETWORK_IF=" + stinterfacename + " " +
                     "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
+                    "-e TZ=" + stcombotimezone + " " +
                     "--platform=linux/amd64 " +
                     "--hostname " + ConfigPanel.styourdomainname + " " +
                     "--net=host --net=none " +
+                    "-e LANG=" + stlocales + " " +
                     "--name oraclelinuxlanservertcp " +
                     "-v /etc/resolv.conf:/etc/resolv.conf " +
                     "--restart unless-stopped " +
