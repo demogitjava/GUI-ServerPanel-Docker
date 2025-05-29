@@ -1,8 +1,9 @@
 
 Simple GUI Docker  Panel
 ============================================================   
-![image](https://github.com/demogitjava/demodatabase/blob/master/screenshotguiserverpanel.jpg?raw=true)
 
+
+![enter image description here](https://github.com/demogitjava/demodatabase/blob/master/GUI-ServerPanel/ServerGUI-Panel.jpg?raw=true)
 
 
 alternative start jar application with custome look and fell from commandline
@@ -23,6 +24,9 @@ mvn package
 
 used java jdk is 
 open jdk 11
+
+
+
 
 
 

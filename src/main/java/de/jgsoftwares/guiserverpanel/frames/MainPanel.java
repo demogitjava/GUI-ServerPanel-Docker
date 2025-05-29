@@ -122,6 +122,8 @@ public class MainPanel extends javax.swing.JFrame {
 
         de.jgsoftwares.guiserverpanel.frames.ConfigPanel configpanel = new de.jgsoftwares.guiserverpanel.frames.ConfigPanel();
 
+        de.jgsoftwares.guiserverpanel.frames.JRemoteDesktop jremotepanel = new de.jgsoftwares.guiserverpanel.frames.JRemoteDesktop();
+
         // Config Panel
         jTabbedPane1.add(configpanel, "Config Panel");
 
@@ -138,7 +140,7 @@ public class MainPanel extends javax.swing.JFrame {
         //jTabbedPane1.add(dnspanel, "DNS Panel");
 
         //JRemoteDesktop jremotedesktop = new JRemoteDesktop();
-        //jTabbedPane1.add(jremotedesktop, "JRemoteDesktop");
+        jTabbedPane1.add(jremotepanel, "JRemoteDesktop");
 
         Landingpage landingpage = new Landingpage();
         jTabbedPane1.add(landingpage, "Landingapge");
