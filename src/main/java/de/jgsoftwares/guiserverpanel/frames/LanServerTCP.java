@@ -118,7 +118,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "-v /etc/resolv.conf:/etc/resolv.conf " +
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
-                    "--cap-add SYS_ADMIN " +
+                    "--cap-add=SYS_ADMIN " +
                     "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest bin/bash /root/LanServer.sh";
            
                      
