@@ -107,7 +107,7 @@ public class LanServerTCP extends javax.swing.JPanel {
             String struncontainer = "docker run -it -p 0.0.0.0:8443:8443 " +
                     "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " "  +     
                     "--runtime " + stcomboruntime + " " +
-                    "-e NETWORK_BRIDGE=" + stinterfacename + " " +
+                    "-e NETWORK_NONE=" + stinterfacename + " " +
                     "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" " +
                     "-e TZ=" + stcombotimezone + " " +
                     "--platform=linux/amd64 " +
