@@ -1,9 +1,5 @@
 package de.jgsoftwares.guiserverpanel;
 
-
-
-
-
 import javax.swing.*;
 
 public class GUIServerPanel implements i_GuiServerPanel
@@ -11,11 +7,12 @@ public class GUIServerPanel implements i_GuiServerPanel
  
   
   public static de.jgsoftwares.guiserverpanel.frames.MainPanel mpanel;
-    
+  
+
   
   public GUIServerPanel()
   {
-          NtpClient ntpclient;
+        NtpClient ntpclient;
         try {
             ntpclient = new NtpClient();
             ntpclient.getSystemTime();
@@ -24,26 +21,18 @@ public class GUIServerPanel implements i_GuiServerPanel
             System.out.print("Error by method getSystemTime");
         }
   }
+
   
    
   public static void main(String[] args)
-    {
-        
-        
-       
-        
+  {      
         try
         {
             UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
         } catch (Exception e)
         {
             System.out.print("LookAndFeel Error  NomRoD !");
-        }
-       
-       
-       
-        
-        
+        }     
         GUIServerPanel.showFrame();
         
        // SpringApplication.run(GUIServerPanel.class, args);
@@ -56,9 +45,7 @@ public class GUIServerPanel implements i_GuiServerPanel
 
     public static void showFrame()
     {
-   
-       
-       
+
         mpanel = new de.jgsoftwares.guiserverpanel.frames.MainPanel();
         mpanel.setVisible(true);
         //mpanel.setSize(800,400);
