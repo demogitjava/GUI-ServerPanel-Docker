@@ -115,9 +115,14 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel8.setText("Time Zone");
 
-        jLabel9.setText("Locale");
+        jLabel9.setText("Locale + TIME");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LANG=de_DE.ISO-8859-1", "LANG=de_DE.UTF-8", "LANG=uk_UK.UTF-8", "LANG=es_ES.UTF-8", "LANG=fr_FR.UTF-8", "LANG=tk_TK.UTF-8", " ", " " }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "de_DE.ISO-8859-1", "de_DE.UTF-8", "uk_UK.UTF-8", "es_ES.UTF-8", "fr_FR.UTF-8", "tk_TK.UTF-8", " ", " " }));
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -309,12 +314,16 @@ public class ConfigPanel extends javax.swing.JPanel {
         + "<p>Network_BRIDE = set to brigde network is set a bridge</p>" + "</br>"
         + "<p>Network_NONE = set to netnwork none as none </p>"
         + "</br>"
-        + "</p>eth0" + "</p>" );
+        + "</p>eth0 is loaded with NETwork_IF " + "</p>" );
         
         
         editorPane.setText(stoptionPane);
         JOptionPane.showMessageDialog(null, editorPane);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
