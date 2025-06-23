@@ -8,6 +8,7 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcombotimezone;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcontainersystem;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stlocales;
 import java.io.BufferedReader;
@@ -59,7 +60,12 @@ public class Landingpage extends javax.swing.JPanel {
 
         jLabel1.setText("start the container with a second interface lo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "no second interface", "NETWORK_IF=lo", "NETWORK_BRIDGE=lo", "NETWORK_NONE=lo" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,13 +82,13 @@ public class Landingpage extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -94,27 +100,126 @@ public class Landingpage extends javax.swing.JPanel {
         try {
             
             
+            String stloopback = (String) jComboBox1.getSelectedItem();
+            String stlandingpage = null;
+            /*
+                    openwrt
+                    oraclelinux
+                    alpinelinux
+
+            */
+            String stoperatingsystem = stcontainersystem.toString();
+            String dockerimagename = null;
+            
+            if(stoperatingsystem.equals("openwrt")) {
+               dockerimagename = "jgsoftwares/openwrt2305landingpage:java11 /bin/ash /root/runlandingpage.sh";
+            } else if (stoperatingsystem.equals("oraclelinux")) {
+               dockerimagename = "jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh";
+            } else if ( stoperatingsystem.equals(" alpinelinux")) {
+               dockerimagename = "jgsoftwares/alpinelinux_landingpage:edge";
+            }
+            
+            
+            switch(stloopback)
+            {
+                case "no second interface" :
+                       stlandingpage = new String("docker run -it "
+                        + "-p 0.0.0.0:80:80 "
+                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                        + "--runtime " + stcomboruntime + " " 
+                        + "-e NETWORK_IF=" + stinterfacename + " " 
+                        + "--name oraclelinuxlandingpage "
+                        + "-e TZ=" + stcombotimezone + " "
+                        + "--net=host --net=none "
+                        + "--hostname " + ConfigPanel.styourdomainname + " " 
+                        + "-v /etc/resolv.conf:/etc/resolv.conf "
+                        + "--restart unless-stopped "
+                        + "-e LANG=" + stlocales + " "
+                        + "--cap-add=NET_ADMIN "
+                        + "--cap-add=SYS_ADMIN "
+                        + "--platform=linux/amd64 "
+                        + "--kernel-memory=6M "
+                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                        + dockerimagename);
+                        //"jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+                    break;
+                case "NETWORK_IF=lo" :
+                     
+                       String lonetworkif = jComboBox1.getSelectedItem().toString();
+                       stlandingpage = new String("docker run -it "
+                        + "-p 0.0.0.0:80:80 "
+                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                        + "--runtime " + stcomboruntime + " " 
+                        + "-e NETWORK_IF=" + stinterfacename + " " + lonetworkif + " " 
+                        + "--name oraclelinuxlandingpage "
+                        + "-e TZ=" + stcombotimezone + " "
+                        + "--net=host --net=none "
+                        + "--hostname " + ConfigPanel.styourdomainname + " " 
+                        + "-v /etc/resolv.conf:/etc/resolv.conf "
+                        + "--restart unless-stopped "
+                        + "-e LANG=" + stlocales + " "
+                        + "--cap-add=NET_ADMIN "
+                        + "--cap-add=SYS_ADMIN "
+                        + "--platform=linux/amd64 "
+                        + "--kernel-memory=6M "
+                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                        //+ "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+                        + dockerimagename);
+                    break;
+                case "NETWORK_BRIDGE=lo" :
+                       String lonetworkbridge = jComboBox1.getSelectedItem().toString();
+                       stlandingpage = new String("docker run -it "
+                        + "-p 0.0.0.0:80:80 "
+                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                        + "--runtime " + stcomboruntime + " " 
+                        + "-e NETWORK_IF=" + stinterfacename + " " + lonetworkbridge + " " 
+                        + "--name oraclelinuxlandingpage "
+                        + "-e TZ=" + stcombotimezone + " "
+                        + "--net=host --net=none "
+                        + "--hostname " + ConfigPanel.styourdomainname + " " 
+                        + "-v /etc/resolv.conf:/etc/resolv.conf "
+                        + "--restart unless-stopped "
+                        + "-e LANG=" + stlocales + " "
+                        + "--cap-add=NET_ADMIN "
+                        + "--cap-add=SYS_ADMIN "
+                        + "--platform=linux/amd64 "
+                        + "--kernel-memory=6M "
+                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                        // + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+                        + dockerimagename);
+                    break;
+                case "NETWORK_NONE=lo" :
+                       String lonetworknone = jComboBox1.getSelectedItem().toString();
+                       stlandingpage = new String("docker run -it "
+                        + "-p 0.0.0.0:80:80 "
+                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                        + "--runtime " + stcomboruntime + " " 
+                        + "-e NETWORK_IF=" + stinterfacename + " " + lonetworknone + " " 
+                        + "--name oraclelinuxlandingpage "
+                        + "-e TZ=" + stcombotimezone + " "
+                        + "--net=host --net=none "
+                        + "--hostname " + ConfigPanel.styourdomainname + " " 
+                        + "-v /etc/resolv.conf:/etc/resolv.conf "
+                        + "--restart unless-stopped "
+                        + "-e LANG=" + stlocales + " "
+                        + "--cap-add=NET_ADMIN "
+                        + "--cap-add=SYS_ADMIN "
+                        + "--platform=linux/amd64 "
+                        + "--kernel-memory=6M "
+                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                       // + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+                        + dockerimagename);
+                    break;
+                
+                default:
+                    System.out.print("no optin default ");
+            }
+            
+            
             // optional for host network 
             //    + "-p 0.0.0.0:80:80 "
             
-            String stlandingpage = new String("docker run -it "
-                + "-p 0.0.0.0:80:80 "
-                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
-                + "--runtime " + stcomboruntime + " " 
-                + "-e NETWORK_IF=" + stinterfacename + " " 
-                + "--name oraclelinuxlandingpage "
-                + "-e TZ=" + stcombotimezone + " "
-                + "--net=host --net=none "
-                + "--hostname " + ConfigPanel.styourdomainname + " " 
-                + "-v /etc/resolv.conf:/etc/resolv.conf "
-                + "--restart unless-stopped "
-                + "-e LANG=" + stlocales + " "
-                + "--cap-add=NET_ADMIN "
-                + "--cap-add=SYS_ADMIN "
-                + "--platform=linux/amd64 "
-                + "--kernel-memory=6M "
-                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+          
 
                 
                 jTextArea1.setText("");
@@ -134,6 +239,10 @@ public class Landingpage extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

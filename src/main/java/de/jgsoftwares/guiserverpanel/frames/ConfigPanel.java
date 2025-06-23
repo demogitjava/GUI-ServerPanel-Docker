@@ -103,6 +103,11 @@ public class ConfigPanel extends javax.swing.JPanel {
         jButton4.setText("?");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "openwrt", "oraclelinux", "alpinelinux", " " }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Operation System");
 
@@ -324,6 +329,10 @@ public class ConfigPanel extends javax.swing.JPanel {
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
