@@ -239,14 +239,14 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         */
         stcontainersystem = String.valueOf(jComboBox3.getSelectedItem());
-        if(stcontainersystem.equals("openwrt"))
-        {
-            JOptionPane.showMessageDialog(new JFrame(), "supported at the moment only oracle linux!");
-        }
-        else if (stcontainersystem.equals("alpinelinux"))
-        {
-            JOptionPane.showMessageDialog(new JFrame(), "supported at the moment only oracle linux!");
-        }
+        //if(stcontainersystem.equals("openwrt"))
+        //{
+        //    JOptionPane.showMessageDialog(new JFrame(), "supported at the moment only oracle linux!");
+        //}
+        //else if (stcontainersystem.equals("alpinelinux"))
+        //{
+        //   JOptionPane.showMessageDialog(new JFrame(), "supported at the moment only oracle linux!");
+        //}
         
         /*
             edit default runtime 
