@@ -7,7 +7,7 @@ public class GUIServerPanel implements i_GuiServerPanel
  
   
   public static de.jgsoftwares.guiserverpanel.frames.MainPanel mpanel;
-  
+   
 
   
   public GUIServerPanel()

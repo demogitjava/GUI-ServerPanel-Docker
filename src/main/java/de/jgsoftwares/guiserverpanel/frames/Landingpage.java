@@ -100,127 +100,32 @@ public class Landingpage extends javax.swing.JPanel {
         try {
             
             
-            String stloopback = (String) jComboBox1.getSelectedItem();
-            String stlandingpage = null;
-            /*
-                    openwrt
-                    oraclelinux
-                    alpinelinux
-
-            */
-            String stoperatingsystem = stcontainersystem.toString();
-            String dockerimagename = null;
-            
-            if(stoperatingsystem.equals("openwrt")) {
-               dockerimagename = "jgsoftwares/openwrt2305landingpage:java11 /bin/ash /root/runlandingpage.sh";
-            } else if (stoperatingsystem.equals("oraclelinux")) {
-               dockerimagename = "jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh";
-            } else if ( stoperatingsystem.equals(" alpinelinux")) {
-               dockerimagename = "jgsoftwares/alpinelinux_landingpage:edge";
-            }
-            
-            
-            switch(stloopback)
-            {
-                case "no second interface" :
-                       stlandingpage = new String("docker run -it "
-                        + "-p 0.0.0.0:80:80 "
-                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
-                        + "--runtime " + stcomboruntime + " " 
-                        + "-e NETWORK_IF=" + stinterfacename + " " 
-                        + "--name oraclelinuxlandingpage "
-                        + "-e TZ=" + stcombotimezone + " "
-                        + "--net=host --net=none "
-                        + "--hostname " + ConfigPanel.styourdomainname + " " 
-                        + "-v /etc/resolv.conf:/etc/resolv.conf "
-                        + "--restart unless-stopped "
-                        + "-e LANG=" + stlocales + " "
-                        + "--cap-add=NET_ADMIN "
-                        + "--cap-add=SYS_ADMIN "
-                        + "--platform=linux/amd64 "
-                        + "--kernel-memory=6M "
-                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                        + dockerimagename);
-                        //"jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
-                    break;
-                case "NETWORK_IF=lo" :
-                     
-                       String lonetworkif = jComboBox1.getSelectedItem().toString();
-                       stlandingpage = new String("docker run -it "
-                        + "-p 0.0.0.0:80:80 "
-                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
-                        + "--runtime " + stcomboruntime + " " 
-                        + "-e NETWORK_IF=" + stinterfacename + " " + lonetworkif + " " 
-                        + "--name oraclelinuxlandingpage "
-                        + "-e TZ=" + stcombotimezone + " "
-                        + "--net=host --net=none "
-                        + "--hostname " + ConfigPanel.styourdomainname + " " 
-                        + "-v /etc/resolv.conf:/etc/resolv.conf "
-                        + "--restart unless-stopped "
-                        + "-e LANG=" + stlocales + " "
-                        + "--cap-add=NET_ADMIN "
-                        + "--cap-add=SYS_ADMIN "
-                        + "--platform=linux/amd64 "
-                        + "--kernel-memory=6M "
-                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                        //+ "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
-                        + dockerimagename);
-                    break;
-                case "NETWORK_BRIDGE=lo" :
-                       String lonetworkbridge = jComboBox1.getSelectedItem().toString();
-                       stlandingpage = new String("docker run -it "
-                        + "-p 0.0.0.0:80:80 "
-                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
-                        + "--runtime " + stcomboruntime + " " 
-                        + "-e NETWORK_IF=" + stinterfacename + " " + lonetworkbridge + " " 
-                        + "--name oraclelinuxlandingpage "
-                        + "-e TZ=" + stcombotimezone + " "
-                        + "--net=host --net=none "
-                        + "--hostname " + ConfigPanel.styourdomainname + " " 
-                        + "-v /etc/resolv.conf:/etc/resolv.conf "
-                        + "--restart unless-stopped "
-                        + "-e LANG=" + stlocales + " "
-                        + "--cap-add=NET_ADMIN "
-                        + "--cap-add=SYS_ADMIN "
-                        + "--platform=linux/amd64 "
-                        + "--kernel-memory=6M "
-                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                        // + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
-                        + dockerimagename);
-                    break;
-                case "NETWORK_NONE=lo" :
-                       String lonetworknone = jComboBox1.getSelectedItem().toString();
-                       stlandingpage = new String("docker run -it "
-                        + "-p 0.0.0.0:80:80 "
-                        + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
-                        + "--runtime " + stcomboruntime + " " 
-                        + "-e NETWORK_IF=" + stinterfacename + " " + lonetworknone + " " 
-                        + "--name oraclelinuxlandingpage "
-                        + "-e TZ=" + stcombotimezone + " "
-                        + "--net=host --net=none "
-                        + "--hostname " + ConfigPanel.styourdomainname + " " 
-                        + "-v /etc/resolv.conf:/etc/resolv.conf "
-                        + "--restart unless-stopped "
-                        + "-e LANG=" + stlocales + " "
-                        + "--cap-add=NET_ADMIN "
-                        + "--cap-add=SYS_ADMIN "
-                        + "--platform=linux/amd64 "
-                        + "--kernel-memory=6M "
-                        + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                       // + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
-                        + dockerimagename);
-                    break;
-                
-                default:
-                    System.out.print("no optin default ");
-            }
-            
-            
             // optional for host network 
             //    + "-p 0.0.0.0:80:80 "
             
-          
-
+            String stlandingpage = new String("docker run -it --net=host --name oraclelinuxlandingpagedebug --restart unless-stopped jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4");
+            
+            /*
+            String stlandingpage = new String("docker run -it "
+                + "-p 0.0.0.0:80:80 "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
+                + "--name oraclelinuxlandingpage "
+               // + "-e TZ=" + stcombotimezone + " "
+                + "--net=host "
+                + "--hostname " + ConfigPanel.styourdomainname + " " 
+                //+ "-v /etc/resolv.conf:/etc/resolv.conf "
+                + "--restart unless-stopped "
+                + "-e LANG=" + stlocales + " "
+                + "--cap-add=NET_ADMIN "
+                + "--cap-add=SYS_ADMIN "
+                + "--platform=linux/amd64 "
+                + "--kernel-memory=6M "
+                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+*/
+                
                 
                 jTextArea1.setText("");
                 jTextArea1.append("start the docker container landingpage " + "\n");
@@ -234,9 +139,9 @@ public class Landingpage extends javax.swing.JPanel {
                  // getRuntime start Landingpage container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
                 dockerclient.startlandingpage(stlandingpage);
-            
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (Exception e)
+        {
+            System.out.print("Error + e");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

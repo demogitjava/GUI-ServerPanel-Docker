@@ -455,9 +455,41 @@ public class dockerclient implements Idockerclient
         
         try
         {
-             InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
-             startlandingpage.getConfig();
-             
+            //InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
+           // InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
+           //  jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh
+                ExposedPort tcp80 = ExposedPort.tcp(80);
+                ExposedPort tcp1527 = ExposedPort.tcp(1527);
+                Ports portBindings = new Ports();
+                portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                portBindings.bind(tcp80, Ports.Binding.bindPort(80));
+
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
+                hostConfig.withNetworkMode("host");
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getIsolation();
+                hostConfig.withRuntime("io.containerd.runc.v2");
+               
+            
+            
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05landingpage:java11")
+                 .withCmd("/bin/ash", "/root/runlandingpage.sh")
+                 .withName("openwrtlandingpage")
+                 .withUser("root")
+                 .withExposedPorts(tcp80)
+                 .withExposedPorts(tcp1527)
+                 .withHostConfig(hostConfig)
+                 .withWorkingDir("/root")
+                 .exec();
+         
+             // create container from image
+              //  CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:hostopenwrtext4")            
+                //        .withExposedPorts(tcp8443)
+                 //       .withHostConfig(hostConfig) //.withPortBindings(portBindings))
+                 //       .withName("oraclelinuxlanservertcp")
+                 //       .exec();
+         dockerClient.startContainerCmd(container.getId()).exec();
+
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
