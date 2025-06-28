@@ -6,11 +6,14 @@ import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.Network;
+
 import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
+
 import com.github.dockerjava.core.DockerClientBuilder;
 
 
@@ -44,6 +47,7 @@ public class dockerclient implements Idockerclient
     com.github.dockerjava.api.model.Image mdimage;
     com.github.dockerjava.api.model.Container mdcontainer;
 
+    
     
     
     PipedInputStream inputStream;
@@ -466,21 +470,36 @@ public class dockerclient implements Idockerclient
 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 hostConfig.withNetworkMode("host");
+              
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime("io.containerd.runc.v2");
+                
+                
                
             
-            
+               
+            dockerClient = DockerClientBuilder.getInstance().build();    
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05landingpage:java11")
                  .withCmd("/bin/ash", "/root/runlandingpage.sh")
                  .withName("openwrtlandingpage")
-                 .withUser("root")
+                 .withUser("root") 
+                 .withHostConfig(hostConfig)
                  .withExposedPorts(tcp80)
                  .withExposedPorts(tcp1527)
-                 .withHostConfig(hostConfig)
+                 .withDomainName("demogitjava.ddns.net")
+                 .withStdinOpen(Boolean.TRUE)
                  .withWorkingDir("/root")
                  .exec();
+            
+            // Network network = dockerClient.inspectNetworkCmd().withNetworkId("none").exec();
+            // dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();
+
+            
+            //DefaultDockerClientConfig build = DefaultDockerClientConfig.createDefaultConfigBuilder().withDockerHost("tcp://docker:2375").build();
+            //DockerClient docker = DockerClientBuilder.getInstance(build).build();
+            //docker.execCreateCmd("containerName").withCmd("sh", "-c", "cd /root/Downloads && ./myScript.sh").exec();
+    
          
              // create container from image
               //  CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:hostopenwrtext4")            

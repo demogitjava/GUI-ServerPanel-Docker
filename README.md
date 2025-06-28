@@ -10,6 +10,8 @@ the docker socket file has to on path
     /var/run/docker.sock
 
 
+used jdk is openjdk11
+
 alternative start jar application with custome look and fell from commandline
 Files are available
 http://demogitjava.ddns.net:8000/java-ide/

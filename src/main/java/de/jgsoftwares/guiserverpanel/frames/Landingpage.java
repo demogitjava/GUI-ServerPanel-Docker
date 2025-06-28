@@ -128,7 +128,7 @@ public class Landingpage extends javax.swing.JPanel {
                 
                 
                 jTextArea1.setText("");
-                jTextArea1.append("start the docker container landingpage " + "\n");
+                jTextArea1.append("start the docker container landingpage manually with command" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append(stlandingpage + "\n");
                 jTextArea1.append("#################################" + "\n");
