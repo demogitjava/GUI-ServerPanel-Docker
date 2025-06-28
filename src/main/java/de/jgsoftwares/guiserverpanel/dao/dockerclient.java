@@ -410,8 +410,44 @@ public class dockerclient implements Idockerclient
             start a derbydb 
           
         */
-        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stderbydb).exec();
-        dockerClient.restartContainerCmd(container.getId()).exec();
+        try
+        {
+          
+              
+                ExposedPort tcp1527 = ExposedPort.tcp(1527);
+                Ports portBindings = new Ports();
+                portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+              
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("1527:1527"));
+                hostConfig.withNetworkMode("host");
+              
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getIsolation();
+                hostConfig.withRuntime("io.containerd.runc.v2");
+                
+                
+               
+            
+               // jgsoftwares/openwrt23.05derbydb:10-14-02 /bin/ash /root/startderbydb.sh
+            dockerClient = DockerClientBuilder.getInstance().build();    
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
+                 .withCmd("/bin/ash", "/root/startderbydb.sh")
+                 .withName("openwrtderbydb")
+                 .withUser("root") 
+                 .withHostConfig(hostConfig)
+                 
+                 .withExposedPorts(tcp1527)
+                // .withDomainName("demogitjava.ddns.net")
+                 .withStdinOpen(Boolean.TRUE)
+                 .withWorkingDir("/root")
+                 .exec();
+          
+         dockerClient.startContainerCmd(container.getId()).exec();
+
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
+        }
     }
 
 
@@ -487,7 +523,7 @@ public class dockerclient implements Idockerclient
                  .withHostConfig(hostConfig)
                  .withExposedPorts(tcp80)
                  .withExposedPorts(tcp1527)
-                 .withDomainName("demogitjava.ddns.net")
+                 //.withDomainName("demogitjava.ddns.net")
                  .withStdinOpen(Boolean.TRUE)
                  .withWorkingDir("/root")
                  .exec();
