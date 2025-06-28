@@ -437,7 +437,7 @@ public class dockerclient implements Idockerclient
                  .withHostConfig(hostConfig)
                  
                  .withExposedPorts(tcp1527)
-                // .withDomainName("demogitjava.ddns.net")
+                 .withDomainName("demogitjava.ddns.net")
                  .withStdinOpen(Boolean.TRUE)
                  .withWorkingDir("/root")
                  .exec();
@@ -501,7 +501,7 @@ public class dockerclient implements Idockerclient
                 ExposedPort tcp80 = ExposedPort.tcp(80);
                 ExposedPort tcp1527 = ExposedPort.tcp(1527);
                 Ports portBindings = new Ports();
-                portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp80, Ports.Binding.bindPort(80));
 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
@@ -522,8 +522,8 @@ public class dockerclient implements Idockerclient
                  .withUser("root") 
                  .withHostConfig(hostConfig)
                  .withExposedPorts(tcp80)
-                 .withExposedPorts(tcp1527)
-                 //.withDomainName("demogitjava.ddns.net")
+                // .withExposedPorts(tcp1527)
+                 .withDomainName("demogitjava.ddns.net")
                  .withStdinOpen(Boolean.TRUE)
                  .withWorkingDir("/root")
                  .exec();
