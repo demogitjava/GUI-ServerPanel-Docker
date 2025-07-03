@@ -15,6 +15,10 @@ import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
 
 import com.github.dockerjava.core.DockerClientBuilder;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stwanip;
+import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
 
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -430,7 +434,7 @@ public class dockerclient implements Idockerclient
             
                // jgsoftwares/openwrt23.05derbydb:10-14-02 /bin/ash /root/startderbydb.sh
             dockerClient = DockerClientBuilder.getInstance().build();    
-            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
+            CreateContainerResponse containerderbydb = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
                  .withCmd("/bin/ash", "/root/startderbydb.sh")
                  .withName("openwrtderbydb")
                  .withUser("root") 
@@ -442,7 +446,7 @@ public class dockerclient implements Idockerclient
                  .withWorkingDir("/root")
                  .exec();
           
-         dockerClient.startContainerCmd(container.getId()).exec();
+         dockerClient.startContainerCmd(containerderbydb.getId()).exec();
 
         } catch(Exception e)
         {
@@ -504,29 +508,39 @@ public class dockerclient implements Idockerclient
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp80, Ports.Binding.bindPort(80));
 
+                
+                // connect to network like eth0 or eth0.10
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
-                hostConfig.withNetworkMode("host");
-              
+                
+                // add container to host network
+                hostConfig.withNetworkMode("host").getKernelMemory();
+                hostConfig.isUserDefinedNetwork();
+               
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
-                hostConfig.withRuntime("io.containerd.runc.v2");
+                hostConfig.withRuntime(stcomboruntime);
+              
+           
                 
-                
-               
-            
-               
             dockerClient = DockerClientBuilder.getInstance().build();    
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05landingpage:java11")
                  .withCmd("/bin/ash", "/root/runlandingpage.sh")
                  .withName("openwrtlandingpage")
                  .withUser("root") 
                  .withHostConfig(hostConfig)
+                 
                  .withExposedPorts(tcp80)
                 // .withExposedPorts(tcp1527)
-                 .withDomainName("demogitjava.ddns.net")
+                 .withDomainName(styourdomainname)
+                 //.withIpv4Address(stwanip)
                  .withStdinOpen(Boolean.TRUE)
+                 
                  .withWorkingDir("/root")
                  .exec();
+            
+             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
             
             // Network network = dockerClient.inspectNetworkCmd().withNetworkId("none").exec();
             // dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();
