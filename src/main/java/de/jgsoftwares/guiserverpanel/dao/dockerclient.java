@@ -417,36 +417,46 @@ public class dockerclient implements Idockerclient
         try
         {
           
-              
+          
                 ExposedPort tcp1527 = ExposedPort.tcp(1527);
                 Ports portBindings = new Ports();
                 portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                
               
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("1527:1527"));
-                hostConfig.withNetworkMode("host");
-              
+                
+                // add container to host network
+                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.isUserDefinedNetwork();
+               
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
-                hostConfig.withRuntime("io.containerd.runc.v2");
+                hostConfig.withRuntime(stcomboruntime);
+              
+           
                 
-                
-               
-            
-               // jgsoftwares/openwrt23.05derbydb:10-14-02 /bin/ash /root/startderbydb.sh
+                // jgsoftwares/openwrt23.05derbydb                10-14-02 
             dockerClient = DockerClientBuilder.getInstance().build();    
-            CreateContainerResponse containerderbydb = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
                  .withCmd("/bin/ash", "/root/startderbydb.sh")
                  .withName("openwrtderbydb")
-                 .withUser("root") 
+                
                  .withHostConfig(hostConfig)
-                 
-                 .withExposedPorts(tcp1527)
-                 .withDomainName("demogitjava.ddns.net")
-                 .withStdinOpen(Boolean.TRUE)
-                 .withWorkingDir("/root")
+                // .withExposedPorts(tcp1527)
+                // .withExposedPorts(tcp1527)
+                 .withDomainName(styourdomainname)
+                    
+                 //.withIpv4Address(stwanip)
+                 //.withStdinOpen(Boolean.TRUE)
+                 //.withWorkingDir("/root")
                  .exec();
-          
-         dockerClient.startContainerCmd(containerderbydb.getId()).exec();
+            
+             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            
+         
+         dockerClient.startContainerCmd(container.getId()).exec();
 
         } catch(Exception e)
         {
@@ -515,7 +525,7 @@ public class dockerclient implements Idockerclient
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 
                 // add container to host network
-                hostConfig.withNetworkMode("host").getKernelMemory();
+                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 hostConfig.isUserDefinedNetwork();
                
                 hostConfig.withPrivileged(Boolean.TRUE);

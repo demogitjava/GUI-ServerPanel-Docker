@@ -164,9 +164,7 @@ public class Databases extends javax.swing.JPanel {
                             + "--hostname " + ConfigPanel.styourdomainname + " " 
                             + "--cap-add=NET_ADMIN "
                             + "--cap-add SYS_ADMIN "
-                            + "--net=host --net=none " 
-                            + "-e LANG=" + stlocales + " "
-                            + "-e TZ=" + stcombotimezone + " " 
+                            + "--net=host --net=none "
                             + "-v /etc/resolv.conf:/etc/resolv.conf "
                             + "--restart unless-stopped "
                             + "--platform=linux/amd64 "
@@ -177,7 +175,7 @@ public class Databases extends javax.swing.JPanel {
                     
           
                 jTextArea1.setText("" + "\n");
-                jTextArea1.append("docker container is started with" + "\n");
+                jTextArea1.append("alternative start the container manually" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append(stderbydb + "\n");
                 jTextArea1.append("#################################" + "\n");
