@@ -117,7 +117,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
                     "--cap-add=SYS_ADMIN " +
-                    "jgsoftwares/oraclelinux_openjdk_lanservertcp:latest bin/bash /root/LanServer.sh";
+                    "jgsoftwares/openwrt23.05lanserver:11 bin/ash /root/LanServer.sh";
            
                      
             System.out.println("docker string " + struncontainer + "\n" + "\n");
@@ -142,14 +142,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "################################" + "\n" + "\n" +
                       struncontainer + "\n" + "\n" +
                     "################################" + "\n" + "\n");
-            
-             jTextArea1.append("xterm window is started - start docker container with copy paste" + "\n");
-             jTextArea1.append("run command with Shift + Insert" + "\n");
-             jTextArea1.append("close window " + "\n");
-             jTextArea1.append("ps -a " + "\n");
-             jTextArea1.append("kill -9 psid" + "\n");
-          
-           
+
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
