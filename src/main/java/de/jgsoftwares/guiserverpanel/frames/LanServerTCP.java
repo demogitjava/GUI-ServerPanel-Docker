@@ -113,9 +113,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--platform=linux/amd64 " +
                     "--hostname " + ConfigPanel.styourdomainname + " " +
                     "--net=host --net=none " +
-                    "-e LANG=" + stlocales + " " +
-                    "--name oraclelinuxlanservertcp " +
-                    "-v /etc/resolv.conf:/etc/resolv.conf " +
+                    "--name openwrtlanservertcp " +
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
                     "--cap-add=SYS_ADMIN " +

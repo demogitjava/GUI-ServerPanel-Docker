@@ -300,68 +300,52 @@ public class dockerclient implements Idockerclient
     @Override
     public void startlanservercontiner(String struncontainer)
     {
-          try
+           try
         {
          
-            // host image 
-            // jgsoftwares/oraclelinux_openjdk_lanservertcp:host  
-          
-            //ExposedPort tcp4444 = ExposedPort.tcp(8443);
-            //Ports portBindings = new Ports();
-            //portBindings.bind(tcp4444,Ports.Binding.bindPort(8443));
-
-            //String name = new String("oraclelinuxlanservertcp");
-            //HostConfig hc = new HostConfig();
-            //hc.withNetworkMode("host");
-            
-            // jgsoftwares/oraclelinux_openjdk_lanservertcp:host 
-            
-            //CreateContainerResponse response = dockerClient.
-              //      createContainerCmd("oraclelinuxlanservertcp")
-              //      .withHostConfig(hc)
-              //      .withPortSpecs("8443:8443")
-              //      .withName(name)
-              //      .withImage("jgsoftwares/oraclelinux_openjdk_lanservertcp:host")
-              //      .withExposedPorts(ExposedPort.tcp(8443))
-              //      //.withPortBindings(tcp4444)
-              //      .withAttachStderr(false)
-              //      .withAttachStdin(false)
-              //      .withAttachStdout(false)
-              //      .exec();
-
-                     // Actually run the container
-              //       dockerClient.startContainerCmd("oraclelinuxlanservertcp").exec();
-                     
-                     
                 ExposedPort tcp8443 = ExposedPort.tcp(8443);
+               
                 Ports portBindings = new Ports();
+             
                 portBindings.bind(tcp8443, Ports.Binding.bindPort(8443));
 
-                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("8443:8443"));
-                hostConfig.withNetworkMode("host");
-                hostConfig.withPrivileged(Boolean.TRUE);
-                hostConfig.withRuntime("io.containerd.runc.v2");
-               
                 
-                // create container from image
-                CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:hostopenwrtext4")            
-                        .withExposedPorts(tcp8443)
-                        .withHostConfig(hostConfig) //.withPortBindings(portBindings))
-                        .withName("oraclelinuxlanservertcp")
-                        .exec();
-    
-                //dockerclient.execCreateCmd("containerName").withCmd("sh", "-c", "cd /root/Downloads && ./myScript.sh").exec();
+                // connect to network like eth0 or eth0.10
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("8443:8443"));
                 
-                // run shell script 
-                //dockerClient.execCreateCmd("oraclelinuxlanservertcp").withCmd("/bin/bash", "-c", "sh /root/LanServer.sh").exec();
+                // add container to host network
+                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.isUserDefinedNetwork();
+               
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getIsolation();
+                hostConfig.withRuntime(stcomboruntime);
+              
+           
                 
-                dockerClient.statsCmd("java -jar /root/LanServer-0.0.1-SNAPSHOT.jar");
-                
-                // start the container
-                dockerClient.startContainerCmd(container.getId()).exec();  
-                
+            dockerClient = DockerClientBuilder.getInstance().build();    
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05lanserver:11")
+                 .withCmd("/bin/ash", "/root/LanServer.sh")
+                 .withName("openwrtlanserver")
+                 .withUser("root") 
+                 .withHostConfig(hostConfig)
                  
+                 .withExposedPorts(tcp8443)
+                // .withExposedPorts(tcp1527)
+                 .withDomainName(styourdomainname)
+                 //.withIpv4Address(stwanip)
+                 .withStdinOpen(Boolean.TRUE)
+                 
+                 .withWorkingDir("/root")
+                 .exec();
+            
+             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            
+         
+         dockerClient.startContainerCmd(container.getId()).exec();
+
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);

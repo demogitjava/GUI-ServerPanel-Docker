@@ -189,7 +189,7 @@ public class ConfigPanel extends javax.swing.JPanel {
         
         
         /*
-           get operating system from JCombobox3
+            get operating system from JCombobox3
             openwrt
             oraclelinux
             alpinelinux
