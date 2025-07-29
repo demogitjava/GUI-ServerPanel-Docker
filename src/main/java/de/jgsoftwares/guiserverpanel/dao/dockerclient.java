@@ -516,6 +516,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
               
+            
            
                 
             dockerClient = DockerClientBuilder.getInstance().build();    

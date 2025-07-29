@@ -41,7 +41,7 @@ public class httpfileserver extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("httpfileserver is only on debain available.");
+        jLabel2.setText("httpfileserver - openwrt");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8000", "80", "443", "8443", " " }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +85,7 @@ public class httpfileserver extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(97, 97, 97))
         );

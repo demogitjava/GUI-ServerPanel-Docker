@@ -158,19 +158,19 @@ public class Databases extends javax.swing.JPanel {
             String stderbydb = new String(
                     "docker run -it -p 0.0.0.0:1527:1527 "
                             + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " "     
-                            + "--name oraclederbydb "
+                            + "--name openwrtderbydb "
                             + "--runtime " + stcomboruntime + " " 
                             + "-e NETWORK_NONE=" + stinterfacename + " "
                             + "--hostname " + ConfigPanel.styourdomainname + " " 
                             + "--cap-add=NET_ADMIN "
                             + "--cap-add SYS_ADMIN "
                             + "--net=host --net=none "
-                            + "-v /etc/resolv.conf:/etc/resolv.conf "
+                         //   + "-v /etc/resolv.conf:/etc/resolv.conf "
                             + "--restart unless-stopped "
                             + "--platform=linux/amd64 "
                             + "--kernel-memory=6M " 
-                            + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                            + "jgsoftwares/oraclelinux_openjdk_derbydb:latest "
+                          //  + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                            + "jgsoftwares/openwrt2305derbydb:10-14-02 "
                             + "/bin/bash /root/startderbydb.sh");
                     
           

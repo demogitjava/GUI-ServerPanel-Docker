@@ -98,9 +98,9 @@ public class Landingpage extends javax.swing.JPanel {
             // optional for host network 
             //    + "-p 0.0.0.0:80:80 "
             
-            String stlandingpage = new String("docker run -it --net=host --name oraclelinuxlandingpagedebug --restart unless-stopped jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4");
+            //String stlandingpage = new String("docker run -it --net=host --name oraclelinuxlandingpagedebug --restart unless-stopped jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4");
             
-            /*
+            
             String stlandingpage = new String("docker run -it "
                 + "-p 0.0.0.0:80:80 "
                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
@@ -108,18 +108,17 @@ public class Landingpage extends javax.swing.JPanel {
                 + "-e NETWORK_IF=" + stinterfacename + " " 
                 + "--name oraclelinuxlandingpage "
                // + "-e TZ=" + stcombotimezone + " "
-                + "--net=host "
+                + "--net=host net=none"
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
                 //+ "-v /etc/resolv.conf:/etc/resolv.conf "
                 + "--restart unless-stopped "
-                + "-e LANG=" + stlocales + " "
+               // + "-e LANG=" + stlocales + " "
                 + "--cap-add=NET_ADMIN "
                 + "--cap-add=SYS_ADMIN "
                 + "--platform=linux/amd64 "
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                 + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
-*/
                 
                 
                 jTextArea1.setText("");
@@ -127,9 +126,7 @@ public class Landingpage extends javax.swing.JPanel {
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append(stlandingpage + "\n");
                 jTextArea1.append("#################################" + "\n");
-                jTextArea1.append("copy docker run command with" + "\n");
-                jTextArea1.append("Strg + c" + "\n");
-                jTextArea1.append("insert string with schift + inster on the xterm window" + "\n");
+           
 
                  // getRuntime start Landingpage container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
