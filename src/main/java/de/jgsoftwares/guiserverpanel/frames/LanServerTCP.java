@@ -123,8 +123,12 @@ public class LanServerTCP extends javax.swing.JPanel {
             System.out.println("docker string " + struncontainer + "\n" + "\n");
          
             
-          
-          
+            jTextArea1.setText("");
+            jTextArea1.append("started container " + "/n");
+            jTextArea1.append(struncontainer + "/n");
+            jTextArea1.append("access to container with " + "/n");
+            jTextArea1.append("docker exec -it openwrtlanservertcp /bin/ash " + "/n");
+            
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
             dockerclient.startlanservercontiner(struncontainer);
             

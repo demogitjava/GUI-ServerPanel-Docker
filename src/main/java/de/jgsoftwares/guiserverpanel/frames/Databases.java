@@ -178,6 +178,8 @@ public class Databases extends javax.swing.JPanel {
                 jTextArea1.append("alternative start the container manually" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append(stderbydb + "\n");
+                jTextArea1.append("access to container with " + "/n");
+                jTextArea1.append("docker exec -it openwrtderbydb /bin/ash ");
                 jTextArea1.append("#################################" + "\n");
             
 
