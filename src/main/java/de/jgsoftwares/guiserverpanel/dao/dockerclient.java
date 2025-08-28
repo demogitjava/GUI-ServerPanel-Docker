@@ -13,6 +13,9 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.CreateVolumeResponse;
+import com.github.dockerjava.api.model.Bind;
+import com.github.dockerjava.api.model.Volume;
 
 import com.github.dockerjava.core.DockerClientBuilder;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
@@ -418,30 +421,29 @@ public class dockerclient implements Idockerclient
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
-              
-           
                 
-                // jgsoftwares/openwrt23.05derbydb                10-14-02 
+                
+          // opkg install zoneinfo-all              
             dockerClient = DockerClientBuilder.getInstance().build();    
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
                  .withCmd("/bin/ash", "/root/startderbydb.sh")
                  .withName("openwrtderbydb")
-                
                  .withHostConfig(hostConfig)
+                  
                 // .withExposedPorts(tcp1527)
                 // .withExposedPorts(tcp1527)
                  .withDomainName(styourdomainname)
-                    
+                 
                  //.withIpv4Address(stwanip)
                  //.withStdinOpen(Boolean.TRUE)
                  //.withWorkingDir("/root")
                  .exec();
             
-             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
-            
-         
-         dockerClient.startContainerCmd(container.getId()).exec();
+            dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
+            dockerClient.startContainerCmd(container.getId()).exec();
 
+            
+            
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
