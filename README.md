@@ -25,6 +25,17 @@ opkg update && opkg install zoneinfo-all
 /etc/TZ
 CET-1CEST,M3.5.0,M10.5.0/3
 
+
+for http file server setup date
+jgsoftwares/openwrthttpfileserver:latest         "/bin/ash"               2 hours ago    Up 48 minutes             openwrthttpfileserver  
+
+setup timeserver
+opkg install alpine-repositories
+apk add --allow-untrusted tzdata
+ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
+
+
 restart containers
 
 check time with command 
