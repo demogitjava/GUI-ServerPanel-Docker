@@ -13,7 +13,8 @@ public class GUIServerPanel implements i_GuiServerPanel
   public GUIServerPanel()
   {
         NtpClient ntpclient;
-        try {
+        try 
+        {
             ntpclient = new NtpClient();
             ntpclient.getSystemTime();
             System.out.print(ntpclient.getSystemTime());

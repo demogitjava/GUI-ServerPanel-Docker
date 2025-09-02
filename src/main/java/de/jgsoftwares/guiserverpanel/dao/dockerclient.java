@@ -18,6 +18,7 @@ import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Volume;
 
 import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stwanip;
@@ -36,6 +37,7 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -519,6 +521,10 @@ public class dockerclient implements Idockerclient
                 hostConfig.withRuntime(stcomboruntime);
               
             
+                dockerClient.pullImageCmd("jgsoftwares/openwrt23.05landingpage")
+                .withTag("java11")
+                .exec(new PullImageResultCallback())
+                .awaitCompletion(30, TimeUnit.SECONDS);
            
                 
             dockerClient = DockerClientBuilder.getInstance().build();    

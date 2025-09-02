@@ -7,6 +7,8 @@ package de.jgsoftwares.guiserverpanel.frames;
 
 
 import com.github.dockerjava.api.model.AuthConfig;
+import com.github.dockerjava.core.DefaultDockerClientConfig;
+import com.github.dockerjava.core.DockerClientBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +23,7 @@ public class Docker extends javax.swing.JPanel {
     Process process;
     BufferedReader reader;
     PrintWriter writer;
+    DefaultDockerClientConfig clientConfig;
     
     /**
      * Creates new form Docker
@@ -113,18 +116,29 @@ public class Docker extends javax.swing.JPanel {
         
         String stlogin = null;
         String stpassword2 = null;
+        String serverurl = null;
+        String stemail = null;
         
         
-      
         stlogin = jTextField1.getText();
         stpassword2 = jPasswordField1.getText();
-          
-        // login over dockerclient api
-        AuthConfig authConfig = new AuthConfig()
-                .withUsername(stlogin)
-                .withPassword(stpassword2);
-        
          
+        serverurl = "https://index.docker.io/v1";
+        // login over dockerclient api
+        //AuthConfig authConfig = new AuthConfig()
+        //      .withUsername(stlogin)
+        //     .withPassword(stpassword2);
+        
+        
+        clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
+        .withRegistryUrl(serverurl)
+        .withRegistryUsername(stlogin)
+        .withRegistryPassword(stpassword2)
+        .withRegistryEmail(stemail)
+        .build();
+        
+        //return DockerClientBuilder.getInstance(clientConfig).build();
+        clientConfig.getDockerConfig();
               
          
     }//GEN-LAST:event_jButton1ActionPerformed
