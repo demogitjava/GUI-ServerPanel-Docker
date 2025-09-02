@@ -328,6 +328,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
               
+                
+            dockerClient.pullImageCmd("jgsoftwares/openwrt23.05lanserver")
+                .withTag("11")
+                .exec(new PullImageResultCallback())
+                .awaitCompletion(30, TimeUnit.SECONDS);
            
                 
             dockerClient = DockerClientBuilder.getInstance().build();    
