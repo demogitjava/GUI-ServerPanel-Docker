@@ -425,6 +425,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.withRuntime(stcomboruntime);
                 
                 
+            dockerClient.pullImageCmd("jgsoftwares/openwrt23.05derbydb")
+                .withTag("10-14-02")
+                .exec(new PullImageResultCallback())
+                .awaitCompletion(30, TimeUnit.SECONDS);     
+                
           // opkg install zoneinfo-all              
             dockerClient = DockerClientBuilder.getInstance().build();    
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
