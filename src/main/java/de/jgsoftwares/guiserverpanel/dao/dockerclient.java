@@ -667,4 +667,65 @@ public class dockerclient implements Idockerclient
         }
     }
 
+     /*
+        start ipfire in host mode
+    */
+     public void startipfire(String stipfire)
+    {
+          try
+          {
+            //InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
+           // InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
+           //  jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh
+                ExposedPort tcp444 = ExposedPort.tcp(444);
+              
+                Ports portBindings = new Ports();
+                //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                portBindings.bind(tcp444, Ports.Binding.bindPort(444));
+
+                
+                // connect to network like eth0 or eth0.10
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("444:444"));
+                
+                // add container to host network
+                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.isUserDefinedNetwork();
+               
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getIsolation();
+                hostConfig.withRuntime(stcomboruntime);
+              
+            
+                dockerClient.pullImageCmd("jgsoftwares/ipfire")
+                .withTag("greenred")
+                .exec(new PullImageResultCallback())
+                .awaitCompletion(30, TimeUnit.SECONDS);
+           
+                
+            dockerClient = DockerClientBuilder.getInstance().build();    
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/ipfire:greenred")
+                 .withName("ipfire")
+                 //.withUser("root") 
+                 //.withHostConfig(hostConfig)
+                 //.withExposedPorts(tcp444)
+                // .withExposedPorts(tcp1527)
+                 //.withDomainName(styourdomainname)
+                 //.withIpv4Address(stwanip)
+                 //.withStdinOpen(Boolean.TRUE)
+                 
+                 //.withWorkingDir("/root")
+                 .exec();
+            
+             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            
+      
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
+        }
+      }
+                
+     
 }

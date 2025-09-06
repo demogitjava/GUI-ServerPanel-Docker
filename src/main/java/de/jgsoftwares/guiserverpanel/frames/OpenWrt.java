@@ -46,6 +46,7 @@ public class OpenWrt extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -64,6 +65,13 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jLabel1.setText("container for access as console for Netbeans");
 
+        jButton2.setText("IpFire Firewall - default - green - red");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,7 +84,8 @@ public class OpenWrt extends javax.swing.JPanel {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -85,10 +94,12 @@ public class OpenWrt extends javax.swing.JPanel {
                 .addGap(59, 59, 59)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -125,9 +136,40 @@ public class OpenWrt extends javax.swing.JPanel {
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        
+        
+        String startipfire = new String("docker run -it "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_NONE=" + stinterfacename + " " 
+                + "--name ipfire "
+                + "--net=host --net=none "
+                + "--restart unless-stopped "
+                + "--cap-add=NET_ADMIN "
+                + "--cap-add=SYS_ADMIN " 
+                + "--platform=linux/amd64 "   
+                + "--kernel-memory=6M "
+                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                + "jgsoftwares/ipfire:greenred /bin/bash");
+        
+        //dclient.startopenwrt2305host(stopenwrthost);
+        dclient.startipfire(startipfire);
+        jTextArea2.setText("run docker cotainer with command" + "\n" + "\n" + startipfire + "\n" + "\n");
+        jTextArea2.append("container run manually " + "\n");
+        // vi /var/ipfire/ethernet/settings 
+        jTextArea2.append("settings for network config  " + " vi /var/ipfire/ethernet/settings " + "\n");
+        jTextArea2.append("access to container with   " + "docker exec -it ipfire /bin/bash " + "\n");
+        jTextArea2.append("setup firewall config in contianer type " + " setup " + "\n");
+        jTextArea2.append(startipfire + "\n");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
