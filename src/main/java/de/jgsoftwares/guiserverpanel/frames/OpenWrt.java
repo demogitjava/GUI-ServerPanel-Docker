@@ -65,7 +65,7 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jLabel1.setText("container for access as console for Netbeans");
 
-        jButton2.setText("IpFire Firewall - default - green - red");
+        jButton2.setText("IpFire Firewall - default - green - red - orange");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -118,7 +118,6 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "-v /var/run/docker.sock:/var/run/docker.sock "
                 + "-v /etc/docker/daemon.json:/etc/docker/daemon.json "
                 + "-v /etc/config/:/etc/config/ "
-            
                 + "--net=host --net=none "
                 + "--restart unless-stopped "
                 + "--cap-add=NET_ADMIN "
@@ -137,8 +136,10 @@ public class OpenWrt extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-          de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+       
+        //
+        // start ipfire container 
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         
         
         String startipfire = new String("docker run -it "
@@ -153,7 +154,7 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "--platform=linux/amd64 "   
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                + "jgsoftwares/ipfire:greenred /bin/bash");
+                + "jgsoftwares/ipfire:greenredorange /bin/bash");
         
         //dclient.startopenwrt2305host(stopenwrthost);
         dclient.startipfire(startipfire);

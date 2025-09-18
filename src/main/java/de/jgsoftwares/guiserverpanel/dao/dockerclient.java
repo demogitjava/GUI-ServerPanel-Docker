@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateVolumeResponse;
 import com.github.dockerjava.api.model.Bind;
+import com.github.dockerjava.api.model.Capability;
 import com.github.dockerjava.api.model.Volume;
 
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -524,6 +525,9 @@ public class dockerclient implements Idockerclient
                 
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
+                hostConfig.withCapAdd(Capability.NET_ADMIN);
+                hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.isUserDefinedNetwork();
                
                 hostConfig.withPrivileged(Boolean.TRUE);
@@ -535,23 +539,23 @@ public class dockerclient implements Idockerclient
                 .withTag("java11")
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
-           
+               
                 
-            dockerClient = DockerClientBuilder.getInstance().build();    
-            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05landingpage:java11")
-                 .withCmd("/bin/ash", "/root/runlandingpage.sh")
-                 .withName("openwrtlandingpage")
-                 .withUser("root") 
-                 .withHostConfig(hostConfig)
-                 
-                 .withExposedPorts(tcp80)
-                // .withExposedPorts(tcp1527)
-                 .withDomainName(styourdomainname)
-                 //.withIpv4Address(stwanip)
-                 .withStdinOpen(Boolean.TRUE)
-                 
-                 .withWorkingDir("/root")
-                 .exec();
+            dockerClient = DockerClientBuilder.getInstance().build();  
+            
+            CreateContainerResponse container;
+            container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05landingpage:java11")
+                    .withCmd("/bin/ash", "/root/runlandingpage.sh")
+                    .withName("openwrtlandingpagedebug")
+                    .withUser("root")
+                    .withHostConfig(hostConfig)
+                    .withExposedPorts(tcp80)
+                    // .withExposedPorts(tcp1527)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE)
+                    .withWorkingDir("/root")
+                    .exec();
             
              dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
             

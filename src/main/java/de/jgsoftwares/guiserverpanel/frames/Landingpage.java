@@ -106,7 +106,7 @@ public class Landingpage extends javax.swing.JPanel {
                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
                 + "--runtime " + stcomboruntime + " " 
                 + "-e NETWORK_IF=" + stinterfacename + " " 
-                + "--name oraclelinuxlandingpage "
+                + "--name openwrtlandingpagedebug "
                // + "-e TZ=" + stcombotimezone + " "
                 + "--net=host net=none"
                 + "--hostname " + ConfigPanel.styourdomainname + " " 
@@ -115,10 +115,11 @@ public class Landingpage extends javax.swing.JPanel {
                // + "-e LANG=" + stlocales + " "
                 + "--cap-add=NET_ADMIN "
                 + "--cap-add=SYS_ADMIN "
+                + "--cap-add=NET_RAW "        
                 + "--platform=linux/amd64 "
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                + "jgsoftwares/oraclelinux_openjdk_landingpage:latest /bin/bash /root/runlandingpage.sh");
+                + "jgsoftwares/openwrt23.05landingpage:java11 /bin/bash /root/runlandingpage.sh");
                 
                 
                 jTextArea1.setText("");
