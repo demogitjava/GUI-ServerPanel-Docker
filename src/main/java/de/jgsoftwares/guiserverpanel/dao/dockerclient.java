@@ -13,16 +13,12 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.CreateVolumeResponse;
-import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Capability;
-import com.github.dockerjava.api.model.Volume;
 
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
-import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stwanip;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
 
 
@@ -529,7 +525,6 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.isUserDefinedNetwork();
-               
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
@@ -653,22 +648,67 @@ public class dockerclient implements Idockerclient
     @Override
     public void startopenwrt2305host(String stopenwrthost)
     {
-          /*
-            start openwrt container on network host
+        /*
+            start openwrt 2305 docker container on host network
         */
-        
-     
+       
         try
         {
-             InspectContainerResponse startopenwrthost = (InspectContainerResponse) dockerClient.startContainerCmd(stopenwrthost);
-             startopenwrthost.getConfig();
-             
-             dockerClient.attachContainerCmd(stopenwrthost);
-             
+         
+                
+                // connect to network like eth0 or eth0.10
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+
+                HostConfig hostConfig = HostConfig.newHostConfig();
+                        //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
+                
+                // add container to host network
+                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
+                hostConfig.withCapAdd(Capability.NET_ADMIN);
+                hostConfig.withCapAdd(Capability.NET_RAW);
+                hostConfig.isUserDefinedNetwork();
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getIsolation();
+                hostConfig.withRuntime(stcomboruntime);
+              
+                // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
+                dockerClient.pullImageCmd("jgsoftwares/openwrt23.05")
+                .withTag("nftbridgelayer2ext4")
+                .exec(new PullImageResultCallback())
+                .awaitCompletion(30, TimeUnit.SECONDS);
+               
+                
+            dockerClient = DockerClientBuilder.getInstance().build();  
+            
+            CreateContainerResponse container;
+            container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:nftbridgelayer2ext4")
+                    //.withCmd("/bin/ash", "/root/runlandingpage.sh")
+                    .withName("openwrt2305host")
+                    .withUser("root")
+                    .withHostConfig(hostConfig)
+                    //.withExposedPorts(tcp80)
+                    // .withExposedPorts(tcp1527)
+                    .withAttachStderr(false)
+                    .withAttachStdin(false)
+                    .withAttachStdout(false)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE)
+                    .withWorkingDir("/root")
+                    .exec();
+            
+             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            
+        
+             dockerClient.startContainerCmd(container.getId()).exec();
+
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
         }
+        
+      
     }
 
      /*

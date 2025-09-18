@@ -121,7 +121,8 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "--net=host --net=none "
                 + "--restart unless-stopped "
                 + "--cap-add=NET_ADMIN "
-                + "--cap-add=SYS_ADMIN " 
+                + "--cap-add=SYS_ADMIN "
+                + "--cap-add=NET_RAW "      
                 + "--platform=linux/amd64 "   
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
@@ -130,9 +131,9 @@ public class OpenWrt extends javax.swing.JPanel {
         dclient.startopenwrt2305host(stopenwrthost);
         
         jTextArea2.setText("run docker cotainer with command" + "\n" + "\n" + stopenwrthost + "\n" + "\n");
-        jTextArea2.append("container run manually " + "¿n");
+        jTextArea2.append("container run manually " + "/n");
         jTextArea2.append(stopenwrthost + "/n");
-       
+        jTextArea2.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
