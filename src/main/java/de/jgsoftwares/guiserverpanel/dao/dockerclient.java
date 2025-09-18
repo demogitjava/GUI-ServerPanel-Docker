@@ -13,8 +13,10 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Capability;
-
+import com.github.dockerjava.api.model.Volume;
+import com.github.dockerjava.api.model.Binds;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
@@ -442,7 +444,9 @@ public class dockerclient implements Idockerclient
                 // .withExposedPorts(tcp1527)
                 // .withExposedPorts(tcp1527)
                  .withDomainName(styourdomainname)
-                 
+                 .withAttachStderr(false)
+                 .withAttachStdin(false)
+                 .withAttachStdout(false)
                  //.withIpv4Address(stwanip)
                  //.withStdinOpen(Boolean.TRUE)
                  //.withWorkingDir("/root")
@@ -549,6 +553,9 @@ public class dockerclient implements Idockerclient
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE)
+                    .withAttachStderr(false)
+                    .withAttachStdin(false)
+                    .withAttachStdout(false)
                     .withWorkingDir("/root")
                     .exec();
             
@@ -680,10 +687,11 @@ public class dockerclient implements Idockerclient
                
                 
             dockerClient = DockerClientBuilder.getInstance().build();  
-            
+           // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
+           
             CreateContainerResponse container;
             container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:nftbridgelayer2ext4")
-                    //.withCmd("/bin/ash", "/root/runlandingpage.sh")
+                   
                     .withName("openwrt2305host")
                     .withUser("root")
                     .withHostConfig(hostConfig)
@@ -694,7 +702,7 @@ public class dockerclient implements Idockerclient
                     .withAttachStdout(false)
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
-                    .withStdinOpen(Boolean.TRUE)
+                    .withStdinOpen(Boolean.TRUE) 
                     .withWorkingDir("/root")
                     .exec();
             
