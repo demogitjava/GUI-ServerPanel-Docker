@@ -93,15 +93,91 @@ public class Landingpage extends javax.swing.JPanel {
         
           // install landingpage
         try {
+            String contsystem = de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcontainersystem;
             
+            String stlandingpage = null;
+            // openwrt
+            // oraclelinux
+            // alpinelinux
+            switch(contsystem) {
+            case "openwrt":
+                stlandingpage = new String("docker run -it "
+                + "-p 0.0.0.0:80:80 "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
+                + "--name openwrtlandingpagedebug "
+               // + "-e TZ=" + stcombotimezone + " "
+                + "--net=host net=none "
+                + "--hostname " + ConfigPanel.styourdomainname + " " 
+                //+ "-v /etc/resolv.conf:/etc/resolv.conf "
+                + "--restart unless-stopped "
+               // + "-e LANG=" + stlocales + " "
+                + "--cap-add=NET_ADMIN "
+                + "--cap-add=SYS_ADMIN "
+                + "--cap-add=NET_RAW "        
+                + "--platform=linux/amd64 "
+                + "--kernel-memory=6M "
+                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                + "jgsoftwares/openwrt23.05landingpage:java11 /bin/bash /root/runlandingpage.sh");             
+              break;
+            case "oraclelinux":
+                stlandingpage = new String("docker run -it "
+                + "-p 0.0.0.0:80:80 "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
+                + "--name openwrtlandingpagedebug "
+               // + "-e TZ=" + stcombotimezone + " "
+                + "--net=host net=none "
+                + "--hostname " + ConfigPanel.styourdomainname + " " 
+                //+ "-v /etc/resolv.conf:/etc/resolv.conf "
+                + "--restart unless-stopped "
+               // + "-e LANG=" + stlocales + " "
+                + "--cap-add=NET_ADMIN "
+                + "--cap-add=SYS_ADMIN "
+                + "--cap-add=NET_RAW "        
+                + "--platform=linux/amd64 "
+                + "--kernel-memory=6M "
+                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                + "jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh");   
+              break;
+            case "alpinelinux":
+              // jgsoftwares/alpinelinux_landingpage:edge
+                 stlandingpage = new String("docker run -it "
+                + "-p 0.0.0.0:80:80 "
+                + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
+                + "--runtime " + stcomboruntime + " " 
+                + "-e NETWORK_IF=" + stinterfacename + " " 
+                + "--name openwrtlandingpagedebug "
+               // + "-e TZ=" + stcombotimezone + " "
+                + "--net=host net=none "
+                + "--hostname " + ConfigPanel.styourdomainname + " " 
+                //+ "-v /etc/resolv.conf:/etc/resolv.conf "
+                + "--restart unless-stopped "
+               // + "-e LANG=" + stlocales + " "
+                + "--cap-add=NET_ADMIN "
+                + "--cap-add=SYS_ADMIN "
+                + "--cap-add=NET_RAW "        
+                + "--platform=linux/amd64 "
+                + "--kernel-memory=6M "
+                + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
+                + "jgsoftwares/alpinelinux_landingpage:edge /bin/bash /root/runlandingpage.sh");  
+              break;  
+            default:
+                System.out.print("no system set "+ "\n");
+                break;
+            }
+
             
             // optional for host network 
             //    + "-p 0.0.0.0:80:80 "
             
             //String stlandingpage = new String("docker run -it --net=host --name oraclelinuxlandingpagedebug --restart unless-stopped jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4");
+            // String stcontainersystem
             
-            
-            String stlandingpage = new String("docker run -it "
+            /*
+            stlandingpage = new String("docker run -it "
                 + "-p 0.0.0.0:80:80 "
                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
                 + "--runtime " + stcomboruntime + " " 
@@ -120,19 +196,39 @@ public class Landingpage extends javax.swing.JPanel {
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
                 + "jgsoftwares/openwrt23.05landingpage:java11 /bin/bash /root/runlandingpage.sh");
-                
+                */
+            
                 
                 jTextArea1.setText("");
                 jTextArea1.append("start the docker container landingpage manually with command" + "\n");
                 jTextArea1.append("#################################" + "\n");
+                jTextArea1.append("system - " + contsystem + "\n");
+                jTextArea1.append("The image is downloaded for docker hub  - over pull request" + "\n");
                 jTextArea1.append(stlandingpage + "\n");
                 jTextArea1.append("#################################" + "\n");
-                jTextArea1.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
-                jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata ");
-
+                jTextArea1.append("Timezone set for germany by default" + "\n");
+                jTextArea1.append("access to container with" + "\n");
+                jTextArea1.append("openwrt -> docker exec -it openwrtlandingapgedebug /bin/ash"  + "\n");
+                jTextArea1.append("oraclelinux  -> docker exec -it oraclelandingapgedebug /bin/bash"  + "\n");
+                jTextArea1.append("alpine linux  -> docker exec -it alpineandingapgedebug /bin/ash"  + "\n");
+                jTextArea1.append("openwrt" + "\n");
+                jTextArea1.append("-----------" + "\n");
+                jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata" + "\n");
+                jTextArea1.append("add CET-1CEST,M3.5.0,M10.5.0/3 to  /etc/TZ - for germany" + "/n");
+                jTextArea1.append("-----------" + "\n");
+                jTextArea1.append("alpine linux " + "\n");
+                jTextArea1.append("-----------" + "\n");
+                jTextArea1.append("apk add tzdata");
+                jTextArea1.append("ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime" + "/n");
+                jTextArea1.append("-----------" + "\n");
+                jTextArea1.append("oracle linux " + "\n");
+                jTextArea1.append("-----------" + "\n");
+                jTextArea1.append("timedatectl set-timezone Europe/Berlin" + "\n");
+               
                  // getRuntime start Landingpage container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-                dockerclient.startlandingpage(stlandingpage);
+                dockerclient.startlandingpage(stlandingpage, contsystem);
+               
         } catch (Exception e)
         {
             System.out.print("Error + e");

@@ -165,6 +165,8 @@ public class OpenWrt extends javax.swing.JPanel {
         jTextArea2.append("settings for network config  " + " vi /var/ipfire/ethernet/settings " + "\n");
         jTextArea2.append("access to container with   " + "docker exec -it ipfire /bin/bash " + "\n");
         jTextArea2.append("setup firewall config in contianer type " + " setup " + "\n");
+        jTextArea2.append("vi /var/ipfire/ethernet/settings" + "config network interfaces manually"+ "\n");
+        // vi /var/ipfire/ethernet/settings
         jTextArea2.append(startipfire + "\n");
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -13,10 +13,7 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Capability;
-import com.github.dockerjava.api.model.Volume;
-import com.github.dockerjava.api.model.Binds;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
@@ -500,11 +497,44 @@ public class dockerclient implements Idockerclient
     /**
      *
      * @param stlandingpage
+     * @param contsystem
      */
-    @Override
-    public void startlandingpage(String stlandingpage)
+    public void startlandingpage(String stlandingpage, String contsystem)
     {
-        
+       
+        String stinstall = null;
+        String sttime = null;
+        String stimage = null;
+        String stimagetag = null;
+        String struncmdst = null;
+        String stcontainername = null;
+        String stshell = null;
+        // simle container config 
+        if (contsystem.equals("openwrt")) 
+        {
+	   stinstall = "apk add --allow-untrusted tzdata";
+                // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+           sttime = "echo \"CET-1CEST,M3.5.0,M10.5.0/3\" > /etc/TZ";
+           stimage = "jgsoftwares/openwrt23.05landingpage";
+           stimagetag = "java11";
+           stshell = "/bin/ash";
+           struncmdst = "/root/runlandingpage.sh";
+           stcontainername = "openwrtlandingpagedebug";
+        } else if(contsystem.equals("oraclelinux")) {
+                stinstall = "";
+                // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+                sttime = "timedatectl set-timezone Europe/Berlin";
+                stimage = "";
+                stimagetag = "";
+        }   
+        else if(contsystem.equals("alpinelinux")) {
+                //do this code
+                stinstall = "apk add tzdata";
+                // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+                sttime = "echo \"ln -s /usr/share/zoneinfo/Europe/Berlin\" > /etc/localtime";
+                stimagetag = "";
+        }
+       
         
         try
         {
@@ -532,10 +562,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
-              
-            
-                dockerClient.pullImageCmd("jgsoftwares/openwrt23.05landingpage")
-                .withTag("java11")
+               
+                dockerClient.pullImageCmd(stimage)
+                .withTag(stimagetag)
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
                
@@ -543,9 +572,9 @@ public class dockerclient implements Idockerclient
             dockerClient = DockerClientBuilder.getInstance().build();  
             
             CreateContainerResponse container;
-            container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05landingpage:java11")
-                    .withCmd("/bin/ash", "/root/runlandingpage.sh")
-                    .withName("openwrtlandingpagedebug")
+            container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
+                    .withCmd(stshell, struncmdst)
+                    .withName(stcontainername)
                     .withUser("root")
                     .withHostConfig(hostConfig)
                     .withExposedPorts(tcp80)
@@ -556,6 +585,9 @@ public class dockerclient implements Idockerclient
                     .withAttachStderr(false)
                     .withAttachStdin(false)
                     .withAttachStdout(false)
+                    // timesettings
+                    //.withCmd(stinstall)
+                    //.withCmd(sttime)
                     .withWorkingDir("/root")
                     .exec();
             
@@ -748,30 +780,51 @@ public class dockerclient implements Idockerclient
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
-              
-            
+                      
                 dockerClient.pullImageCmd("jgsoftwares/ipfire")
-                .withTag("greenred")
+                .withTag("greenredorange")
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
            
                 
+                /*
+                      .withCmd("/bin/ash", "/root/runlandingpage.sh")
+                    .withName("openwrtlandingpagedebug")
+                    .withUser("root")
+                    .withHostConfig(hostConfig)
+                    .withExposedPorts(tcp80)
+                    // .withExposedPorts(tcp1527)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE)
+                    .withAttachStderr(false)
+                    .withAttachStdin(false)
+                    .withAttachStdout(false)
+                    .withWorkingDir("/root")
+                    .exec();
+                */
             dockerClient = DockerClientBuilder.getInstance().build();    
-            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/ipfire:greenred")
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/ipfire:greenredorange")
                  .withName("ipfire")
-                 //.withUser("root") 
-                 //.withHostConfig(hostConfig)
-                 //.withExposedPorts(tcp444)
+                 // forward container  
+                 .withCmd("/bin/bash", "sysctl -w net.ipv4.ip_forward=1")
+                 .withCmd("/bin/bash", "sysctl -w net.ipv6.conf.all.disable_ipv6=0")
+                 .withCmd("/bin/bash", "sysctl -w net.ipv4.conf.all.src_valid_mark=1")  
+                 .withUser("root") 
+                 .withHostConfig(hostConfig)
+                 .withExposedPorts(tcp444)
                 // .withExposedPorts(tcp1527)
-                 //.withDomainName(styourdomainname)
+                 .withDomainName(styourdomainname)
                  //.withIpv4Address(stwanip)
                  //.withStdinOpen(Boolean.TRUE)
-                 
-                 //.withWorkingDir("/root")
+                 .withAttachStderr(false)
+                 .withAttachStdin(false)
+                 .withAttachStdout(false)
+                 .withWorkingDir("/root")
                  .exec();
             
              dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
-            
+             dockerClient.startContainerCmd(container.getId()).exec();
       
         } catch(Exception e)
         {
