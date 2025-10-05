@@ -514,7 +514,11 @@ public class dockerclient implements Idockerclient
         {
 	   stinstall = "apk add --allow-untrusted tzdata";
                 // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
-           sttime = "echo \"CET-1CEST,M3.5.0,M10.5.0/3\" > /etc/TZ";
+           sttime = "echo 'CET-1CEST,M3.5.0,M10.5.0/3' > /etc/TZ";
+           // "sh", "-c", "echo 'test:111' | chpasswd")
+           // .withCmd("sh", "-c", "echo 'test:111' | chpasswd")
+
+         
            stimage = "jgsoftwares/openwrt23.05landingpage";
            stimagetag = "java11";
            stshell = "/bin/ash";
@@ -524,15 +528,24 @@ public class dockerclient implements Idockerclient
                 stinstall = "";
                 // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
                 sttime = "timedatectl set-timezone Europe/Berlin";
-                stimage = "";
-                stimagetag = "";
+                // jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh
+                stimage = "jgsoftwares/oraclelinux_openjdk_landingpage";
+                stimagetag = "hostopenwrtext4";
+                stshell = "/bin/bash";
+                struncmdst = "/root/runlandingpage.sh";
+                stcontainername = "oraclelinuxlandingpagedebug";
         }   
         else if(contsystem.equals("alpinelinux")) {
                 //do this code
                 stinstall = "apk add tzdata";
                 // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
-                sttime = "echo \"ln -s /usr/share/zoneinfo/Europe/Berlin\" > /etc/localtime";
-                stimagetag = "";
+                sttime = "echo ln -s /usr/share/zoneinfo/Europe/Berlin > /etc/localtime";
+                //docker pull jgsoftwares/alpinelinux_landingpage:edgehost
+                stimage = "jgsoftwares/alpinelinux_landingpage";
+                stimagetag = "edgehost";
+                stshell = "/bin/sh";
+                struncmdst = "/root/runlandingpage.sh";
+                stcontainername = "alpinelinuxlandingpagedebugedge";
         }
        
         
@@ -571,11 +584,17 @@ public class dockerclient implements Idockerclient
                 
             dockerClient = DockerClientBuilder.getInstance().build();  
             
-            CreateContainerResponse container;
-            container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
+            CreateContainerResponse container = null;
+            
+                switch(contsystem)
+                {
+                case "openwrt":
+                    System.out.println("start openwrt container " + "\n");
+                    container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
                     .withCmd(stshell, struncmdst)
                     .withName(stcontainername)
                     .withUser("root")
+                    //.withCmd(cmd)
                     .withHostConfig(hostConfig)
                     .withExposedPorts(tcp80)
                     // .withExposedPorts(tcp1527)
@@ -589,7 +608,86 @@ public class dockerclient implements Idockerclient
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
                     .withWorkingDir("/root")
+                    //.withCmd(stshell, stinstall)
+                    //.withCmd(stshell, sttime)     
                     .exec();
+                    break;
+                case "oraclelinux":
+                   System.out.println("start oracle container " + "\n");
+                    container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
+                    //.withCmd(stshell, struncmdst)
+                    .withName(stcontainername)
+                    .withUser("root")
+                    //.withCmd(cmd)
+                    .withHostConfig(hostConfig)
+                    .withExposedPorts(tcp80)
+                    // .withExposedPorts(tcp1527)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE)
+                    .withAttachStderr(false)
+                    .withAttachStdin(false)
+                    .withAttachStdout(false)
+                    // timesettings
+                    //.withCmd(stshell + " " + struncmdst)
+                    //.withCmd(sttime)
+                    .withWorkingDir("/root")
+                    //.withCmd(stshell, "-c", stinstall)
+                    //.withCmd(sttime)     
+                    .exec();
+                    break;
+                case "alpinelinux":
+                   System.out.println("start alpine linux container " + "\n");
+                    container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
+                    //.withCmd(stshell, struncmdst)
+                    .withName(stcontainername)
+                    .withUser("root")
+                    //.withCmd(cmd)
+                    .withHostConfig(hostConfig)
+                    .withExposedPorts(tcp80)
+                    // .withExposedPorts(tcp1527)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE)
+                    .withAttachStderr(false)
+                    .withAttachStdin(false)
+                    .withAttachStdout(false)
+                    // timesettings
+                    //.withCmd(stinstall)
+                    //.withCmd(sttime)
+                    .withWorkingDir("/root")
+                    //.withCmd(stshell, "-c", stinstall)
+                    //.withCmd(stshell, "-c", sttime)     
+                    .exec();
+                    break;
+               
+                default:
+                    System.out.println("Error no system selected " + "\n");
+                    break;
+                } 
+
+            
+            /*container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
+                    .withCmd(stshell, struncmdst)
+                    .withName(stcontainername)
+                    .withUser("root")
+                    //.withCmd(cmd)
+                    .withHostConfig(hostConfig)
+                    .withExposedPorts(tcp80)
+                    // .withExposedPorts(tcp1527)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE)
+                    .withAttachStderr(false)
+                    .withAttachStdin(false)
+                    .withAttachStdout(false)
+                    // timesettings
+                    //.withCmd(stinstall)
+                    //.withCmd(sttime)
+                    .withWorkingDir("/root")
+                    //.withCmd("sh", "-c", "echo 'test:111' | chpasswd")
+                    .exec();
+                */
             
              dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
             
