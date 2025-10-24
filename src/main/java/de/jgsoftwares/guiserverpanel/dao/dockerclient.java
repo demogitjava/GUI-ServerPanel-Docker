@@ -880,7 +880,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.withRuntime(stcomboruntime);
                       
                 dockerClient.pullImageCmd("jgsoftwares/ipfire")
-                .withTag("greenredorange")
+                .withTag("cloud")
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
            
