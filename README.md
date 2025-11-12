@@ -10,6 +10,23 @@ the docker socket file has to on path
     /var/run/docker.sock
 
 
+used jdk is openjdk1.8
+
+
+
+---------------------
+
+login over the host platform required 
+on the hostplatform - openwrt the /etc/resolv.conf add nameservers
+
+/etc/resolv.conf
+
+nameserver 95.85.95.85
+nameserver 2.56.220.2
+
+---------------------
+
+
 
 edit Timezones on openwrt 
 
@@ -42,7 +59,6 @@ check time with command
 date
 
 
-used jdk is openjdk11
 
 alternative start jar application with custome look and fell from commandline
 Files are available
@@ -64,6 +80,3 @@ for DarkTabaco
 compile project with
 
 > mvn package
-
-used java jdk is 
-open jdk 11
