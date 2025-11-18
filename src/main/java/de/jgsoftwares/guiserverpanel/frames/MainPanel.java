@@ -1,7 +1,5 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
-import com.github.dockerjava.api.command.InspectContainerResponse;
-import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
 import java.awt.event.MouseAdapter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
@@ -42,12 +40,12 @@ public class MainPanel extends javax.swing.JFrame {
         dockerimages = new DefaultMutableTreeNode("Images");
         dockercontainers = new DefaultMutableTreeNode("Containers");
         initComponents();  
-        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         
         //this.pack();
         
-        
+       
     
     }
 
@@ -60,6 +58,7 @@ public class MainPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton3 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
@@ -67,6 +66,9 @@ public class MainPanel extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree(rootNode);
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jButton1 = new javax.swing.JButton();
+
+        jButton3.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Docker Panel - Host only");
@@ -154,6 +156,14 @@ public class MainPanel extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(jTabbedPane1);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
+
+        jButton1.setText("Close Window");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -290,6 +300,11 @@ public class MainPanel extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jTree1MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
  
 
  
@@ -297,7 +312,9 @@ public class MainPanel extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;

@@ -3,13 +3,10 @@ package de.jgsoftwares.guiserverpanel;
 import javax.swing.*;
 
 public class GUIServerPanel implements i_GuiServerPanel
-{
- 
-  
+{ 
   public static de.jgsoftwares.guiserverpanel.frames.MainPanel mpanel;
-   
 
-  
+
   public GUIServerPanel()
   {
         NtpClient ntpclient;
@@ -32,7 +29,7 @@ public class GUIServerPanel implements i_GuiServerPanel
             UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
         } catch (Exception e)
         {
-            System.out.print("LookAndFeel Error  NomRoD !");
+            System.out.print("LookAndFeel Error NomRoD !");
         }     
         GUIServerPanel.showFrame();
         
@@ -52,8 +49,7 @@ public class GUIServerPanel implements i_GuiServerPanel
         //mpanel.setSize(800,400);
         mpanel.pack();
         
-        
-   
+    
    
         try
         {

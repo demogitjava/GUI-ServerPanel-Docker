@@ -301,6 +301,56 @@ public class dockerclient implements Idockerclient
     @Override
     public void startlanservercontiner(String struncontainer)
     {
+        
+        String contsystem = de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcontainersystem;
+        String stinstall = null;
+        String sttime = null;
+        String stimage = null;
+        String stimagetag = null;
+        String struncmdst = null;
+        String stcontainername = null;
+        String stshell = null;
+        // simle container config 
+        if (contsystem.equals("openwrt")) 
+        {
+	   stinstall = "apk add --allow-untrusted tzdata";
+                // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+           sttime = "echo 'CET-1CEST,M3.5.0,M10.5.0/3' > /etc/TZ";
+           // "sh", "-c", "echo 'test:111' | chpasswd")
+           // .withCmd("sh", "-c", "echo 'test:111' | chpasswd")
+
+         
+           stimage = "jgsoftwares/openwrt23.05lanserver";
+           stimagetag = "11";
+           stshell = "/bin/ash";
+           struncmdst = "/root/LanServer.sh";
+           stcontainername = "openwrtlanservertcp";
+        } else if(contsystem.equals("oraclelinux")) {
+                stinstall = "";
+                // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+                sttime = "timedatectl set-timezone Europe/Berlin";
+                // jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh
+                stimage = "jgsoftwares/oraclelinux_openjdk_lanservertcp";
+                stimagetag = "hostopenwrtext4";
+                stshell = "/bin/bash";
+                struncmdst = "/root/LanServer.sh";
+                stcontainername = "oraclelinuxlanserver";
+        }   
+        else if(contsystem.equals("alpinelinux")) {
+                //do this code
+                stinstall = "apk add tzdata";
+                // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+                sttime = "echo ln -s /usr/share/zoneinfo/Europe/Berlin > /etc/localtime";
+                //docker pull jgsoftwares/alpinelinux_landingpage:edgehost
+                stimage = "jgsoftwares/alpinelinux_lanserver_tcp";
+                stimagetag = "11";
+                stshell = "/bin/ash";
+                struncmdst = "";
+                stcontainername = "h2lanservertcp";
+        }
+        
+        
+        
            try
         {
          
@@ -308,9 +358,7 @@ public class dockerclient implements Idockerclient
                
                 Ports portBindings = new Ports();
              
-                portBindings.bind(tcp8443, Ports.Binding.bindPort(8443));
-
-                
+                portBindings.bind(tcp8443, Ports.Binding.bindPort(8443));     
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
@@ -325,12 +373,91 @@ public class dockerclient implements Idockerclient
                 hostConfig.withRuntime(stcomboruntime);
               
                 
-            dockerClient.pullImageCmd("jgsoftwares/openwrt23.05lanserver")
-                .withTag("11")
+            dockerClient.pullImageCmd(stimage)
+                .withTag(stimagetag)
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
-           
+            
+            
+            switch(contsystem)
+            {
+                case "openwrt":
+                {
+                  dockerClient = DockerClientBuilder.getInstance().build();    
+                  CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
+                 .withCmd("/bin/ash", "/root/LanServer.sh")
+                 .withName("openwrtlanserver")
+                 .withUser("root") 
+                 .withHostConfig(hostConfig)
+                 
+                 .withExposedPorts(tcp8443)
+                // .withExposedPorts(tcp1527)
+                 .withDomainName(styourdomainname)
+                 //.withIpv4Address(stwanip)
+                 .withStdinOpen(Boolean.TRUE)
+                 
+                 .withWorkingDir("/root")
+                 .exec();
+                   dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+         dockerClient.startContainerCmd(container.getId()).exec();
+                  break;
+                }
                 
+                case "oraclelinux":
+                {
+                     dockerClient = DockerClientBuilder.getInstance().build();    
+                  CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
+                 .withCmd("/bin/bash", "/root/LanServer.sh")
+                 .withName("oraclelinuxlanserver")
+                 .withUser("root") 
+                 .withHostConfig(hostConfig)
+                 
+                 .withExposedPorts(tcp8443)
+                // .withExposedPorts(tcp1527)
+                 .withDomainName(styourdomainname)
+                 //.withIpv4Address(stwanip)
+                 .withStdinOpen(Boolean.TRUE)
+                 
+                 .withWorkingDir("/root")
+                 .exec();
+                  
+                   dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+         dockerClient.startContainerCmd(container.getId()).exec();
+                  break;
+                   
+                }
+                
+                case "alpinelinux":
+                {
+                     dockerClient = DockerClientBuilder.getInstance().build();    
+                  CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
+                 //.withCmd("/bin/bash", "/root/LanServer.sh")
+                 .withName("h2lanservertcp")
+                 .withUser("root") 
+                 .withHostConfig(hostConfig)
+                 
+                 .withExposedPorts(tcp8443)
+                // .withExposedPorts(tcp1527)
+                 .withDomainName(styourdomainname)
+                 //.withIpv4Address(stwanip)
+                 .withStdinOpen(Boolean.TRUE)
+                 
+                 .withWorkingDir("/root")
+                 .exec();
+                   dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+         dockerClient.startContainerCmd(container.getId()).exec();
+                  break;
+                   
+                }
+                
+                
+                
+                default:
+                    System.out.print("no system seletec" + "\n");
+                    break;
+            }
+           
+            /*
             dockerClient = DockerClientBuilder.getInstance().build();    
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05lanserver:11")
                  .withCmd("/bin/ash", "/root/LanServer.sh")
@@ -347,11 +474,9 @@ public class dockerclient implements Idockerclient
                  .withWorkingDir("/root")
                  .exec();
             
-             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
-            
-         
+         dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
          dockerClient.startContainerCmd(container.getId()).exec();
-
+*/
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
@@ -499,6 +624,7 @@ public class dockerclient implements Idockerclient
      * @param stlandingpage
      * @param contsystem
      */
+    @Override
     public void startlandingpage(String stlandingpage, String contsystem)
     {
        
