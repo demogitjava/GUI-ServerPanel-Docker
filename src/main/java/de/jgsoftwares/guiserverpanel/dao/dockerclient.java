@@ -559,13 +559,14 @@ public class dockerclient implements Idockerclient
                 if (imageexist.equals("openwrt")) 
                 {
                     imageexist = "jgsoftwares/openwrt23.05derbydb:10-14-0";
-                    InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
-                    if(response.equals(imageexist))
-                    {
-                        System.out.print("Image openwrt - derbydb exist");
-                    }
-                    else
-                    {
+                    //InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
+                    //if(response.equals("jgsoftwares/openwrt23.05derbydb:10-14-0"))
+                    //{
+                     //   System.out.print("Image openwrt - derbydb exist");
+                    //}
+                
+                    //else
+                    //{
                         System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/openwrt23.05derbydb")
                                 .withTag("10-14-02")
@@ -595,18 +596,18 @@ public class dockerclient implements Idockerclient
                          dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
             dockerClient.startContainerCmd(container.getId()).exec();
                          
-                    }
+                    //}
                 }
                 else if (imageexist.equals("oraclelinux")) 
                 {
                     imageexist = "jgsoftwares/oraclelinux_openjdk_derbydb:openwrtext4";
-                    InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
-                    if(response.equals(imageexist))
-                    {
-                        System.out.print("Image oracle - derbydb image exist");
-                    }
-                    else
-                    {
+                    //InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
+                   // if(response.equals(imageexist))
+                   // {
+                     //   System.out.print("Image oracle - derbydb image exist");
+                  //  }
+                   // else
+                   // {
                         System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/oraclelinux_openjdk_derbydb")
                                 .withTag("openwrtext4")
@@ -634,21 +635,21 @@ public class dockerclient implements Idockerclient
                              //.withWorkingDir("/root")
                              .exec();
                          dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
-            dockerClient.startContainerCmd(container.getId()).exec();
+                         dockerClient.startContainerCmd(container.getId()).exec();
                          
                          
-                    }
+                    //}
                 }
                 else if (imageexist.equals("alpinelinux")) 
                 {
                     imageexist = "jgsoftwares/alpinelinux_derbydb:openwrtedgehost";
-                    InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
-                    if(response.equals(imageexist))
-                    {
-                        System.out.print("Image alpine - derbydb image exist");
-                    }
-                    else
-                    {
+                    ///InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
+                    //if(response.equals(imageexist))
+                    //{
+                       // System.out.print("Image alpine - derbydb image exist");
+                    //}
+                   // else
+                    //{
                         System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/alpinelinux_derbydb")
                                 .withTag("openwrtedgehost")
@@ -678,7 +679,7 @@ public class dockerclient implements Idockerclient
                              .exec();
                          dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
             dockerClient.startContainerCmd(container.getId()).exec();
-                    }
+                    //}
                 }
             
             // dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     

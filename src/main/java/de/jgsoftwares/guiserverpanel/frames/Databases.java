@@ -50,7 +50,7 @@ public class Databases extends javax.swing.JPanel {
 
         jLabel1.setText("install Databases Docker Container - Oracle Linux");
 
-        jButton1.setText("install DerbyDB - host - openwrt");
+        jButton1.setText("install DerbyDB - host ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
