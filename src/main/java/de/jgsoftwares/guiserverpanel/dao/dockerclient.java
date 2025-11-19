@@ -13,6 +13,7 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.model.Capability;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.PullImageResultCallback;
@@ -550,32 +551,138 @@ public class dockerclient implements Idockerclient
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
                 
+               
                 
-            dockerClient.pullImageCmd("jgsoftwares/openwrt23.05derbydb")
-                .withTag("10-14-02")
-                .exec(new PullImageResultCallback())
-                .awaitCompletion(30, TimeUnit.SECONDS);     
-                
-          // opkg install zoneinfo-all              
-            dockerClient = DockerClientBuilder.getInstance().build();    
-            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
-                 .withCmd("/bin/ash", "/root/startderbydb.sh")
-                 .withName("openwrtderbydb")
-                 .withHostConfig(hostConfig)
-                  
-                // .withExposedPorts(tcp1527)
-                // .withExposedPorts(tcp1527)
-                 .withDomainName(styourdomainname)
-                 .withAttachStderr(false)
-                 .withAttachStdin(false)
-                 .withAttachStdout(false)
-                 //.withIpv4Address(stwanip)
-                 //.withStdinOpen(Boolean.TRUE)
-                 //.withWorkingDir("/root")
-                 .exec();
-            
-            dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
+                String imageexist = null;
+                // image exist
+                imageexist = de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcontainersystem;
+                if (imageexist.equals("openwrt")) 
+                {
+                    imageexist = "jgsoftwares/openwrt23.05derbydb:10-14-0";
+                    InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
+                    if(response.equals(imageexist))
+                    {
+                        System.out.print("Image openwrt - derbydb exist");
+                    }
+                    else
+                    {
+                        System.out.print("pull image " + "\n");
+                        dockerClient.pullImageCmd("jgsoftwares/openwrt23.05derbydb")
+                                .withTag("10-14-02")
+                                .exec(new PullImageResultCallback())
+                                .awaitCompletion(30, TimeUnit.SECONDS);
+                        
+                        
+                        //  start container openwrt             
+                        dockerClient = DockerClientBuilder.getInstance().build();
+                        System.out.print("start container " + "\n");
+
+                        CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
+                             .withCmd("/bin/ash", "/root/startderbydb.sh")
+                             .withName("openwrtderbydb")
+                             .withHostConfig(hostConfig)
+
+                            // .withExposedPorts(tcp1527)
+                            // .withExposedPorts(tcp1527)
+                             .withDomainName(styourdomainname)
+                             .withAttachStderr(false)
+                             .withAttachStdin(false)
+                             .withAttachStdout(false)
+                             //.withIpv4Address(stwanip)
+                             //.withStdinOpen(Boolean.TRUE)
+                             //.withWorkingDir("/root")
+                             .exec();
+                         dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
             dockerClient.startContainerCmd(container.getId()).exec();
+                         
+                    }
+                }
+                else if (imageexist.equals("oraclelinux")) 
+                {
+                    imageexist = "jgsoftwares/oraclelinux_openjdk_derbydb:openwrtext4";
+                    InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
+                    if(response.equals(imageexist))
+                    {
+                        System.out.print("Image oracle - derbydb image exist");
+                    }
+                    else
+                    {
+                        System.out.print("pull image " + "\n");
+                        dockerClient.pullImageCmd("jgsoftwares/oraclelinux_openjdk_derbydb")
+                                .withTag("openwrtext4")
+                                .exec(new PullImageResultCallback())
+                                .awaitCompletion(30, TimeUnit.SECONDS);  
+                        
+                         //  start container openwrt             
+                        dockerClient = DockerClientBuilder.getInstance().build();
+                        System.out.print("start container " + "\n");
+
+                        // openwrtext4
+                        CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_derbydb:openwrtext4")
+                             .withCmd("/bin/bash", "/root/startderbydb.sh")
+                             .withName("oraclelinuxderbydb")
+                             .withHostConfig(hostConfig)
+
+                            // .withExposedPorts(tcp1527)
+                            // .withExposedPorts(tcp1527)
+                             .withDomainName(styourdomainname)
+                             .withAttachStderr(false)
+                             .withAttachStdin(false)
+                             .withAttachStdout(false)
+                             //.withIpv4Address(stwanip)
+                             //.withStdinOpen(Boolean.TRUE)
+                             //.withWorkingDir("/root")
+                             .exec();
+                         dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
+            dockerClient.startContainerCmd(container.getId()).exec();
+                         
+                         
+                    }
+                }
+                else if (imageexist.equals("alpinelinux")) 
+                {
+                    imageexist = "jgsoftwares/alpinelinux_derbydb:openwrtedgehost";
+                    InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
+                    if(response.equals(imageexist))
+                    {
+                        System.out.print("Image alpine - derbydb image exist");
+                    }
+                    else
+                    {
+                        System.out.print("pull image " + "\n");
+                        dockerClient.pullImageCmd("jgsoftwares/alpinelinux_derbydb")
+                                .withTag("openwrtedgehost")
+                                .exec(new PullImageResultCallback())
+                                .awaitCompletion(30, TimeUnit.SECONDS); 
+                        
+                        
+                          //  start container openwrt             
+                        dockerClient = DockerClientBuilder.getInstance().build();
+                        System.out.print("start container " + "\n");
+
+                        // openwrtext4
+                        CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/alpinelinux_derbydb:openwrtedgehost")
+                             //.withCmd("/bin/bash", "/root/startderbydb.sh")
+                             .withName("alpinelinuxderbydb")
+                             .withHostConfig(hostConfig)
+
+                            // .withExposedPorts(tcp1527)
+                            // .withExposedPorts(tcp1527)
+                             .withDomainName(styourdomainname)
+                             .withAttachStderr(false)
+                             .withAttachStdin(false)
+                             .withAttachStdout(false)
+                             //.withIpv4Address(stwanip)
+                             //.withStdinOpen(Boolean.TRUE)
+                             //.withWorkingDir("/root")
+                             .exec();
+                         dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
+            dockerClient.startContainerCmd(container.getId()).exec();
+                    }
+                }
+            
+            // dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
+            //dockerClient.startContainerCmd(container.getId()).exec();
 
             
             
@@ -583,8 +690,7 @@ public class dockerclient implements Idockerclient
         {
             System.out.print("Fehler " + e);
         }
-    }
-
+    }   
 
 
         // start xterm for h2 command 
