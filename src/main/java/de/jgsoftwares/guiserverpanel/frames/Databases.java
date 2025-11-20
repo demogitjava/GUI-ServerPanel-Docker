@@ -57,7 +57,7 @@ public class Databases extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("install H2 Database - for Lanserver TCP");
+        jButton2.setText("install H2 Database - for Lanserver TCP  - standalone ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

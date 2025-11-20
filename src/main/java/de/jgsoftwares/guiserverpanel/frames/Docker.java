@@ -130,6 +130,8 @@ public class Docker extends javax.swing.JPanel {
         //     .withPassword(stpassword2);
         
         
+      
+        
         clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
         .withRegistryUrl(serverurl)
         .withRegistryUsername(stlogin)

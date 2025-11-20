@@ -13,6 +13,7 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.InspectImageCmd;
 import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.model.Capability;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -350,11 +351,19 @@ public class dockerclient implements Idockerclient
                 stcontainername = "h2lanservertcp";
         }
         
+         
+       
+        
+        
+            
         
         
            try
         {
-         
+              
+            
+            
+               
                 ExposedPort tcp8443 = ExposedPort.tcp(8443);
                
                 Ports portBindings = new Ports();
@@ -718,12 +727,59 @@ public class dockerclient implements Idockerclient
     @Override
     public void startmysqldb()
     {
-            try {
-                                  process = Runtime.getRuntime().exec("xterm -hold ");
-          } catch(IOException e)
-          {
-              System.out.print("Error " +e);
-          }
+        
+        try
+        {
+              ExposedPort tcp3306 = ExposedPort.tcp(3306);
+                Ports portBindings = new Ports();
+                portBindings.bind(tcp3306, Ports.Binding.bindPort(3306));
+                
+              
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("3306:3306"));
+                
+                // add container to host network
+                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.isUserDefinedNetwork();
+               
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getIsolation();
+                hostConfig.withRuntime(stcomboruntime);
+                
+                  System.out.print("pull image " + "\n");
+                        dockerClient.pullImageCmd("jgsoftwares/demomysqlserver-ce")
+                                .withTag("latest")
+                                .exec(new PullImageResultCallback())
+                                .awaitCompletion(30, TimeUnit.SECONDS);  
+                
+                
+                  dockerClient = DockerClientBuilder.getInstance().build();    
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/demomysqlserver-ce:latest")
+                 //.withCmd("/bin/ash", "/root/LanServer.sh")
+                 .withName("mysqlserver")
+                 .withUser("root") 
+                
+                 .withHostConfig(hostConfig)
+                 
+                 .withExposedPorts(tcp3306)
+                // .withExposedPorts(tcp1527)
+                 //.withDomainName(styourdomainname)
+                 //.withIpv4Address(stwanip)
+                 .withStdinOpen(Boolean.TRUE)
+                 
+                 //.withWorkingDir("/root")
+                 .exec();
+            
+         dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+         dockerClient.startContainerCmd(container.getId()).exec();
+        } catch(Exception e)
+        {
+           System.out.print("Error " +e);
+        }
+        
+        
+        
     }
 
     /**
