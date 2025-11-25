@@ -174,7 +174,7 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "-e NETWORK_NONE=" + stinterfacename + " " 
                 + "--name openwrt2305host "
                 + "-v /var/run/docker.sock:/var/run/docker.sock "
-                + "-v /etc/docker/daemon.json:/etc/docker/daemon.json "
+                //+ "-v /etc/docker/daemon.json:/etc/docker/daemon.json "
                 + "-v /etc/config/:/etc/config/ "
                 + "--net=host --net=none "
                 + "--restart unless-stopped "
@@ -213,9 +213,9 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "--platform=linux/amd64 "   
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                + "jgsoftwares/ipfire:greenredorange /bin/bash");
+                + "jgsoftwares/ipfire:cloud /bin/bash");
         
-        //dclient.startopenwrt2305host(stopenwrthost);
+        
         dclient.startipfire(startipfire);
         jTextArea2.setText("run docker cotainer with command" + "\n" + "\n" + startipfire + "\n" + "\n");
         jTextArea2.append("container run manually " + "\n");

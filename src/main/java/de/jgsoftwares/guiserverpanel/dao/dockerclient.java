@@ -1153,66 +1153,57 @@ public class dockerclient implements Idockerclient
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp444, Ports.Binding.bindPort(444));
-
+   
                 
+             
+             
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
-                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("444:444"));
+                HostConfig hostConfig = HostConfig.newHostConfig();
+                        //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
+                hostConfig.withCapAdd(Capability.NET_ADMIN);
+                hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.isUserDefinedNetwork();
-               
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
-                      
+              
+                // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 dockerClient.pullImageCmd("jgsoftwares/ipfire")
-                .withTag("cloud")
+                .withTag("dmz")
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
-           
+               
                 
-                /*
-                      .withCmd("/bin/ash", "/root/runlandingpage.sh")
-                    .withName("openwrtlandingpagedebug")
+            dockerClient = DockerClientBuilder.getInstance().build();  
+           // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
+           
+            CreateContainerResponse container;
+            container = dockerClient.createContainerCmd("jgsoftwares/ipfire:dmz")
+                   
+                    .withName("ipfiredmz")
                     .withUser("root")
                     .withHostConfig(hostConfig)
-                    .withExposedPorts(tcp80)
+                    //.withExposedPorts(tcp80)
                     // .withExposedPorts(tcp1527)
-                    .withDomainName(styourdomainname)
-                    //.withIpv4Address(stwanip)
-                    .withStdinOpen(Boolean.TRUE)
                     .withAttachStderr(false)
                     .withAttachStdin(false)
                     .withAttachStdout(false)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE) 
                     .withWorkingDir("/root")
                     .exec();
-                */
-            dockerClient = DockerClientBuilder.getInstance().build();    
-            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/ipfire:greenredorange")
-                 .withName("ipfire")
-                 // forward container  
-                 .withCmd("/bin/bash", "sysctl -w net.ipv4.ip_forward=1")
-                 .withCmd("/bin/bash", "sysctl -w net.ipv6.conf.all.disable_ipv6=0")
-                 .withCmd("/bin/bash", "sysctl -w net.ipv4.conf.all.src_valid_mark=1")  
-                 .withUser("root") 
-                 .withHostConfig(hostConfig)
-                 .withExposedPorts(tcp444)
-                // .withExposedPorts(tcp1527)
-                 .withDomainName(styourdomainname)
-                 //.withIpv4Address(stwanip)
-                 //.withStdinOpen(Boolean.TRUE)
-                 .withAttachStderr(false)
-                 .withAttachStdin(false)
-                 .withAttachStdout(false)
-                 .withWorkingDir("/root")
-                 .exec();
             
              dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            
+        
              dockerClient.startContainerCmd(container.getId()).exec();
-      
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
