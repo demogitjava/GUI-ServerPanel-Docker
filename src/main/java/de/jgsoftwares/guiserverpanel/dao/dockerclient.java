@@ -8,14 +8,20 @@ import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Network;
 
+
 import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.async.ResultCallback;
+import com.github.dockerjava.api.command.ExecCreateCmd;
+import com.github.dockerjava.api.command.ExecStartCmd;
 import com.github.dockerjava.api.command.InspectImageCmd;
 import com.github.dockerjava.api.command.InspectImageResponse;
+import com.github.dockerjava.api.command.StartContainerCmd;
 import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
@@ -26,9 +32,11 @@ import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
@@ -83,6 +91,7 @@ public class dockerclient implements Idockerclient
         return dockerClient;
     }
     
+ 
     /**
      *
      * @param url
@@ -317,7 +326,7 @@ public class dockerclient implements Idockerclient
         {
 	   stinstall = "apk add --allow-untrusted tzdata";
                 // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
-           sttime = "echo 'CET-1CEST,M3.5.0,M10.5.0/3' > /etc/TZ";
+           sttime = "echo CET-1CEST,M3.5.0,M10.5.0/3 > /etc/TZ";
            // "sh", "-c", "echo 'test:111' | chpasswd")
            // .withCmd("sh", "-c", "echo 'test:111' | chpasswd")
 
@@ -388,18 +397,19 @@ public class dockerclient implements Idockerclient
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
             
-            
+        
             switch(contsystem)
             {
                 case "openwrt":
                 {
+                    
+                    
                   dockerClient = DockerClientBuilder.getInstance().build();    
                   CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
                  .withCmd("/bin/ash", "/root/LanServer.sh")
                  .withName("openwrtlanserver")
                  .withUser("root") 
                  .withHostConfig(hostConfig)
-                 
                  .withExposedPorts(tcp8443)
                 // .withExposedPorts(tcp1527)
                  .withDomainName(styourdomainname)
@@ -408,8 +418,14 @@ public class dockerclient implements Idockerclient
                  
                  .withWorkingDir("/root")
                  .exec();
-                   dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
-         dockerClient.startContainerCmd(container.getId()).exec();
+                  
+            
+                 dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+                 dockerClient.startContainerCmd(container.getId()).exec();
+         
+                
+                 System.out.print(dockerClient.startContainerCmd(container.getId()));
+               
                   break;
                 }
                 
@@ -817,6 +833,7 @@ public class dockerclient implements Idockerclient
                 stinstall = "";
                 // ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
                 sttime = "timedatectl set-timezone Europe/Berlin";
+                
                 // jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh
                 stimage = "jgsoftwares/oraclelinux_openjdk_landingpage";
                 stimagetag = "hostopenwrtext4";
@@ -875,8 +892,11 @@ public class dockerclient implements Idockerclient
             
             CreateContainerResponse container = null;
             
+              
+            
                 switch(contsystem)
                 {
+                  
                 case "openwrt":
                     System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
@@ -897,6 +917,11 @@ public class dockerclient implements Idockerclient
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
                     .withWorkingDir("/root")
+                            // 
+                            //   jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata" + "\n");
+                            // jTextArea1.append("add CET-1CEST,M3.5.0,M10.5.0/3 to  /etc/TZ - for germany" + "/n");
+                    // install alpine repositorys
+                    
                     //.withCmd(stshell, stinstall)
                     //.withCmd(stshell, sttime)     
                     .exec();
@@ -1209,6 +1234,10 @@ public class dockerclient implements Idockerclient
             System.out.print("Fehler " + e);
         }
       }
+
+    private String fwriter(String ceT1CESTM350M10503__etcTZ) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
                 
      
 }

@@ -73,7 +73,7 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jLabel1.setText("container for access as console for Netbeans");
 
-        jButton2.setText("IpFire Firewall - cloud ");
+        jButton2.setText("IpFire Firewall - dmz");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

@@ -117,7 +117,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
                     "--cap-add=SYS_ADMIN " +
-                    "jgsoftwares/openwrt23.05lanserver:11 bin/ash /root/LanServer.sh";
+                    "jgsoftwares/openwrt23.05lanserver:11 /bin/ash /root/LanServer.sh";
            
                      
             System.out.println("docker string " + struncontainer + "\n" + "\n");
@@ -128,6 +128,9 @@ public class LanServerTCP extends javax.swing.JPanel {
             jTextArea1.append(struncontainer + "/n");
             jTextArea1.append("access to container with " + "/n");
             jTextArea1.append("docker exec -it openwrtlanservertcp /bin/ash " + "/n");
+            jTextArea1.append("opkg update" + "/n");
+            jTextArea1.append("opkg install alpine-repositories" + "/n");
+            jTextArea1.append("opkg install zoneinfo-all" + "/n");
             jTextArea1.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
             dockerclient.startlanservercontiner(struncontainer);

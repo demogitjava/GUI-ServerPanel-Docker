@@ -6,7 +6,9 @@ public class GUIServerPanel implements i_GuiServerPanel
 { 
   public static de.jgsoftwares.guiserverpanel.frames.MainPanel mpanel;
 
-
+    /**
+     *
+     */
   public GUIServerPanel()
   {
         NtpClient ntpclient;
@@ -18,8 +20,11 @@ public class GUIServerPanel implements i_GuiServerPanel
         } catch (Exception ex) {
             System.out.print("Error by method getSystemTime");
         }
+        
+     
   }
-
+    
+ 
   
    
   public static void main(String[] args)
@@ -34,7 +39,7 @@ public class GUIServerPanel implements i_GuiServerPanel
         GUIServerPanel.showFrame();
         
        // SpringApplication.run(GUIServerPanel.class, args);
-    }
+   }
   
   
   
