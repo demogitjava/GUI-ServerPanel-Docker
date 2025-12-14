@@ -29,6 +29,10 @@ nameserver 2.56.220.2
 
 
 edit Timezones on openwrt 
+jgsoftwares/ipfire:cloud                          "/bin/bash"              3 days ago     Up 47 seconds            ipfiredmz                         
+
+-> as compose 
+jgsoftwares/ipfire:cloud                          "/bin/bash"              3 days ago     Up 38 seconds            ipfire     
 
 jgsoftwares/openwrt23.05landingpage:java11       "/bin/ash /root/runl?"   20 hours ago   Up 20 hours               openwrtlandingpage                                           
 jgsoftwares/openwrt23.05derbydb:10-14-02         "/bin/ash /root/star?"   20 hours ago   Up 20 hours               openwrtderbydb                                               
