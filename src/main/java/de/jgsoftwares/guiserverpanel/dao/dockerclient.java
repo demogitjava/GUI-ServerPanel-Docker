@@ -420,13 +420,32 @@ public class dockerclient implements Idockerclient
                  .exec();
                   
             
-                 dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+                 dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec(); 
+
+                 // start container openwrtlanserver
                  dockerClient.startContainerCmd(container.getId()).exec();
-         
-                
-                 System.out.print(dockerClient.startContainerCmd(container.getId()));
                
-                  break;
+                 
+                  
+               
+                 // install time zones
+                 //dockerClient.execCreateCmd(container.getId()).withCmd("/bin/ash", "-c", "opkg install zoneinfo-all").exec();
+
+                 // set time zone
+                 //dockerClient.execCreateCmd(container.getId()).withCmd("/bin/ash", "-c", "echo 'CET-1CEST,M3.5.0,M10.5.0/3' > /etc/TZ").exec();
+                
+                 //System.out.print(dockerClient.startContainerCmd(container.getId()) +  "/n");
+               
+                 // get access to running container 
+                 /*
+                    jTextArea1.append("opkg install alpine-repositories" + "/n");
+            jTextArea1.append("opkg install zoneinfo-all" + "/n");
+            jTextArea1.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
+                 */
+                
+                 
+               
+                 break;
                 }
                 
                 case "oraclelinux":

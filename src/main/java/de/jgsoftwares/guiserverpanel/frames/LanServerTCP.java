@@ -136,20 +136,6 @@ public class LanServerTCP extends javax.swing.JPanel {
             dockerclient.startlanservercontiner(struncontainer);
             
              
-
-         
-            
-            
-            String line = "";
-            jTextArea1.setText("");
-            jTextArea1.setText("DemolanServer" + "\n" + 
-                    "if container is not running paste the string to shell and restart the GUI Server Panel " + "\n" +
-                    "the started container is then visible on the Panel" + "\n" +
-                    "the ntp server is set by default  \"-e NTP_SERVER=\\\"2.rhel.pool.ntp.org\\\" \" " + "\n" +
-                    "################################" + "\n" + "\n" +
-                      struncontainer + "\n" + "\n" +
-                    "################################" + "\n" + "\n");
-
        
     }//GEN-LAST:event_jButton1ActionPerformed
 

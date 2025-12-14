@@ -53,6 +53,30 @@ ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 
 
+run sandboxes in a docker container if openwrt2305host running
+simple example to run a nsjail sandbox on an openwrt container 
+-> from openwrt2305host
+docker exec -it openwrtlandingpage /bin/ash
+opkg install alpine-repositories
+apk add --allow-untrusted nsjail
+nsjail join=java
+
+
+alternatives you can install nsjail over the alpine packages to start a sandbox in a container
+apk add --allow-untrusted nsjail
+
+show process with 
+ps -a 
+or 
+ps -w
+
+run process in a sandbox 
+nsjail join=yourpid
+or
+nsjail join=java
+
+ 
+
 restart containers
 
 check time with command 
