@@ -844,7 +844,7 @@ public class dockerclient implements Idockerclient
 
          
            stimage = "jgsoftwares/openwrt23.05landingpage";
-           stimagetag = "java11";
+           stimagetag = "java11firejailde";
            stshell = "/bin/ash";
            struncmdst = "/root/runlandingpage.sh";
            stcontainername = "openwrtlandingpagedebug";
