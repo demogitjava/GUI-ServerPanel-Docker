@@ -163,12 +163,15 @@ public class Databases extends javax.swing.JPanel {
                             + "--platform=linux/amd64 "
                             + "--kernel-memory=6M " 
                           //  + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                            + "jgsoftwares/openwrt2305derbydb:10-14-02 "
+                            + "jgsoftwares/openwrt2305derbydb:10-14-02firejail "
                             + "/bin/ash /root/startderbydb.sh");
                     
           
                 jTextArea1.setText("" + "\n");
                 jTextArea1.append("alternative start the container manually" + "\n");
+                jTextArea1.append("the container run with firejail and alpine network ist started too" + "\n");
+                jTextArea1.append("the alpine network config /etc/network/interfaces" + "\n");
+                jTextArea1.append("run commands in /root/startderbydb.sh" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append(stderbydb + "\n");
                 jTextArea1.append("access to container with " + "/n");

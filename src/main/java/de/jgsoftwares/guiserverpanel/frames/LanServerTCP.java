@@ -117,7 +117,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
                     "--cap-add=SYS_ADMIN " +
-                    "jgsoftwares/openwrt23.05lanserver:11 /bin/ash /root/LanServer.sh";
+                    "jgsoftwares/openwrt23.05lanserver:11firejail /bin/ash /root/LanServer.sh";
            
                      
             System.out.println("docker string " + struncontainer + "\n" + "\n");
@@ -126,6 +126,8 @@ public class LanServerTCP extends javax.swing.JPanel {
             jTextArea1.setText("");
             jTextArea1.append("started container " + "/n");
             jTextArea1.append(struncontainer + "/n");
+            jTextArea1.append("the alpine network config /etc/network/interfaces" + "\n");
+            jTextArea1.append("run commands in /root/LanServer.sh" + "\n");
             jTextArea1.append("access to container with " + "/n");
             jTextArea1.append("docker exec -it openwrtlanservertcp /bin/ash " + "/n");
             jTextArea1.append("opkg update" + "/n");

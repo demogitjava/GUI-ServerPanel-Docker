@@ -119,7 +119,7 @@ public class Landingpage extends javax.swing.JPanel {
                 + "--platform=linux/amd64 "
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                + "jgsoftwares/openwrt23.05landingpage:java11 /bin/bash /root/runlandingpage.sh");             
+                + "jgsoftwares/openwrt23.05landingpage:java11firejail /bin/bash /root/runlandingpage.sh");             
               break;
             case "oraclelinux":
                 stlandingpage = new String("docker run -it "
