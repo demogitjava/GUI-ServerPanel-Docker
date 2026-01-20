@@ -179,7 +179,7 @@ public class Databases extends javax.swing.JPanel {
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
                 jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata ");
-                 // getRuntime start LanServer container
+                // getRuntime start LanServer container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
                 dockerclient.startderbydb(stderbydb);
 
