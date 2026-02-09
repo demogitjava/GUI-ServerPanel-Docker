@@ -129,11 +129,12 @@ public class LanServerTCP extends javax.swing.JPanel {
             jTextArea1.append("the alpine network config /etc/network/interfaces" + "\n");
             jTextArea1.append("run commands in /root/LanServer.sh" + "\n");
             jTextArea1.append("access to container with " + "/n");
+            jTextArea1.append("openwrt" + "/n");
             jTextArea1.append("docker exec -it openwrtlanservertcp /bin/ash " + "/n");
             jTextArea1.append("opkg update" + "/n");
-            jTextArea1.append("opkg install alpine-repositories" + "/n");
-            jTextArea1.append("opkg install zoneinfo-all" + "/n");
-            jTextArea1.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
+            jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata" + "\n");
+            jTextArea1.append("add CET-1CEST,M3.5.0,M10.5.0/3 to  /etc/TZ - for germany" + "/n");
+            jTextArea1.append("if openwrt as host platform is running restart service /system/startup/initscripts/fixtime " + "/n");
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
             dockerclient.startlanservercontiner(struncontainer);
             

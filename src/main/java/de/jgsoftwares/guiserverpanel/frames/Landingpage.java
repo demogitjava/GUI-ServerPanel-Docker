@@ -215,6 +215,7 @@ public class Landingpage extends javax.swing.JPanel {
                 jTextArea1.append("-----------" + "\n");
                 jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata" + "\n");
                 jTextArea1.append("add CET-1CEST,M3.5.0,M10.5.0/3 to  /etc/TZ - for germany" + "/n");
+                jTextArea1.append("if openwrt as host platform is running restart service /system/startup/initscripts/fixtime " + "/n");
                 jTextArea1.append("-----------" + "\n");
                 jTextArea1.append("alpine linux " + "\n");
                 jTextArea1.append("-----------" + "\n");

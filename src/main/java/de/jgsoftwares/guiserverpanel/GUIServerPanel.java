@@ -9,6 +9,7 @@ public class GUIServerPanel implements i_GuiServerPanel
     /**
      *
      */
+
   public GUIServerPanel()
   {
         NtpClient ntpclient;
@@ -53,9 +54,6 @@ public class GUIServerPanel implements i_GuiServerPanel
         mpanel.setVisible(true);
         //mpanel.setSize(800,400);
         mpanel.pack();
-        
-    
-   
         try
         {
             de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();  
