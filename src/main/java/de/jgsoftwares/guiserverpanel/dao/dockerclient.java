@@ -1,6 +1,7 @@
 package de.jgsoftwares.guiserverpanel.dao;
 
 
+import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
@@ -13,7 +14,8 @@ import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
-import com.github.dockerjava.api.DockerClient;
+
+        
 import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.ExecCreateCmd;
 import com.github.dockerjava.api.command.ExecStartCmd;
@@ -77,7 +79,10 @@ public class dockerclient implements Idockerclient
     
     public dockerclient()
     {
-       dockerClient = DockerClientBuilder.getInstance().build();    
+       // over docker.sock
+       //dockerClient = DockerClientBuilder.getInstance().build();  
+       
+       dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
        dockerimages = dockerClient.listImagesCmd().exec();
        dockercontainers = dockerClient.listContainersCmd().exec();
     }
