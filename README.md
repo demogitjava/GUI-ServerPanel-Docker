@@ -5,23 +5,20 @@ Simple GUI Docker  Panel
 
 ![enter image description here](https://github.com/demogitjava/demodatabase/blob/master/GUI-ServerPanel/ServerGUI-Panel.jpg?raw=true)
 
+
 the docker socket file has to on path
 
-    the url is changed to tcp for wireguard vpn
+the url is changed to tcp for wireguard vpn
 
-    ----------------
+ 
     on java class dockerclient line 83
     dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
-    
-    --------------
    
-    openwrt as hostplastform install with gparted 
+openwrt as hostplastform install with gparted 
     http://demogitjava.ddns.net:8000/openwrt/openwrt_installwithgparted
 
 
-
-    for hostplatform is used openwrt 23.05 
-    backup
+for hostplatform is used openwrt 23.05  backup
     http://demogitjava.ddns.net:8000/backup-demogitjava.ddns.net-2025-11-06.tar.gz
     username root jj78mvpr52k1
 
