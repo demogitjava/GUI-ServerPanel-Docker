@@ -101,10 +101,10 @@ public class MainPanel extends javax.swing.JFrame {
         rootNode.add(dockercontainers);
         rootNode.add(dockerimages);
         jTree1.addTreeExpansionListener(new javax.swing.event.TreeExpansionListener() {
+            public void treeCollapsed(javax.swing.event.TreeExpansionEvent evt) {
+            }
             public void treeExpanded(javax.swing.event.TreeExpansionEvent evt) {
                 jTree1TreeExpanded(evt);
-            }
-            public void treeCollapsed(javax.swing.event.TreeExpansionEvent evt) {
             }
         });
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,6 +153,10 @@ public class MainPanel extends javax.swing.JFrame {
 
         LanServerTCP lanservertcp = new LanServerTCP();
         jTabbedPane1.add(lanservertcp, "LanServerTCP");
+
+        de.jgsoftwares.guiserverpanel.frames.httpfileserver httpfileserver = new de.jgsoftwares.guiserverpanel.frames.httpfileserver();
+        // add httpfileserver
+        jTabbedPane1.add(httpfileserver, "simple http fileserver");
 
         //Ebay ebaypanel = new Ebay();
         //jTabbedPane1.add(ebaypanel, "Ebay");

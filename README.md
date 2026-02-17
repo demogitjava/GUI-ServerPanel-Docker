@@ -7,10 +7,39 @@ Simple GUI Docker  Panel
 
 the docker socket file has to on path
 
+    the url is changed to tcp for wireguard vpn
+
+    ----------------
+    on java class dockerclient line 83
+    dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+    
+    --------------
+   
+    openwrt as hostplastform install with gparted 
+    http://demogitjava.ddns.net:8000/openwrt/openwrt_installwithgparted
+
+
+
+    for hostplatform is used openwrt 23.05 
+    backup
+    http://demogitjava.ddns.net:8000/backup-demogitjava.ddns.net-2025-11-06.tar.gz
+    username root jj78mvpr52k1
+
+   
+    
+ 
+    runs over wireguard with localhost on remote maschine with
+    127.0.0.1/24 dev lo
+   
+    starting and stopping the container works
+    
+
+
     /var/run/docker.sock
+    
 
-
-used jdk is openjdk1.8
+used jdk is openjdk11
+http://demogitjava.ddns.net:8000/javajdk/openjdk-11.0.2_linux-x64_bin.tar.gz
 
 
 
