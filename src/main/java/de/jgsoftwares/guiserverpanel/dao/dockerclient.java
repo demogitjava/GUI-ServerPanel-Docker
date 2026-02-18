@@ -16,14 +16,7 @@ import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 
         
-import com.github.dockerjava.api.async.ResultCallback;
-import com.github.dockerjava.api.command.ExecCreateCmd;
-import com.github.dockerjava.api.command.ExecStartCmd;
-import com.github.dockerjava.api.command.InspectImageCmd;
-import com.github.dockerjava.api.command.InspectImageResponse;
-import com.github.dockerjava.api.command.StartContainerCmd;
 import com.github.dockerjava.api.model.Capability;
-import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
@@ -34,11 +27,9 @@ import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
-import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
@@ -71,6 +62,9 @@ public class dockerclient implements Idockerclient
     PipedOutputStream outputStream;
    
     public static DockerClient dockerClient;
+    //DockerClient dockerClient;
+
+   
     
     // List of dockerimages
     // from /var/run/docker.sock
@@ -82,10 +76,28 @@ public class dockerclient implements Idockerclient
        // over docker.sock
        //dockerClient = DockerClientBuilder.getInstance().build();  
        
-       dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+       //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+       setDockerClient(dockerClient);
+       
        dockerimages = dockerClient.listImagesCmd().exec();
        dockercontainers = dockerClient.listContainersCmd().exec();
     }
+    
+    
+    // set Instance to 
+    //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+    public void setDockerClient(DockerClient dockerClient) {
+        this.dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+    }
+    
+     
+    // return Instance  
+    //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+    public void getDockerClient(DockerClient dockerClient) {
+        this.dockerClient = dockerClient;
+    }
+    
+     
 
     /**
      *
@@ -409,7 +421,9 @@ public class dockerclient implements Idockerclient
                 {
                     
                     
-                  dockerClient = DockerClientBuilder.getInstance().build();    
+                  //dockerClient = DockerClientBuilder.getInstance().build();    
+                  getDockerClient(dockerClient);
+                  
                   CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
                  .withCmd("/bin/ash", "/root/LanServer.sh")
                  .withName("openwrtlanserver")
@@ -455,7 +469,8 @@ public class dockerclient implements Idockerclient
                 
                 case "oraclelinux":
                 {
-                     dockerClient = DockerClientBuilder.getInstance().build();    
+                     //dockerClient = DockerClientBuilder.getInstance().build(); 
+                     getDockerClient(dockerClient);
                   CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
                  .withCmd("/bin/bash", "/root/LanServer.sh")
                  .withName("oraclelinuxlanserver")
@@ -479,7 +494,8 @@ public class dockerclient implements Idockerclient
                 
                 case "alpinelinux":
                 {
-                     dockerClient = DockerClientBuilder.getInstance().build();    
+                    // dockerClient = DockerClientBuilder.getInstance().build(); 
+                     getDockerClient(dockerClient);
                   CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
                  //.withCmd("/bin/bash", "/root/LanServer.sh")
                  .withName("h2lanservertcp")
@@ -624,7 +640,8 @@ public class dockerclient implements Idockerclient
                         
                         
                         //  start container openwrt             
-                        dockerClient = DockerClientBuilder.getInstance().build();
+                        //dockerClient = DockerClientBuilder.getInstance().build();
+                         getDockerClient(dockerClient);
                         System.out.print("start container " + "\n");
 
                         CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02firejail")
@@ -664,7 +681,8 @@ public class dockerclient implements Idockerclient
                                 .awaitCompletion(30, TimeUnit.SECONDS);  
                         
                          //  start container openwrt             
-                        dockerClient = DockerClientBuilder.getInstance().build();
+                        //dockerClient = DockerClientBuilder.getInstance().build();
+                         getDockerClient(dockerClient);
                         System.out.print("start container " + "\n");
 
                         // openwrtext4
@@ -707,7 +725,8 @@ public class dockerclient implements Idockerclient
                         
                         
                           //  start container openwrt             
-                        dockerClient = DockerClientBuilder.getInstance().build();
+                        //dockerClient = DockerClientBuilder.getInstance().build();
+                         getDockerClient(dockerClient);
                         System.out.print("start container " + "\n");
 
                         // openwrtext4
@@ -794,7 +813,8 @@ public class dockerclient implements Idockerclient
                                 .awaitCompletion(30, TimeUnit.SECONDS);  
                 
                 
-                  dockerClient = DockerClientBuilder.getInstance().build();    
+                  //dockerClient = DockerClientBuilder.getInstance().build();  
+                   getDockerClient(dockerClient);
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/demomysqlserver-ce:latest")
                  //.withCmd("/bin/ash", "/root/LanServer.sh")
                  .withName("mysqlserver")
@@ -912,8 +932,9 @@ public class dockerclient implements Idockerclient
                 .awaitCompletion(30, TimeUnit.SECONDS);
                
                 
-            dockerClient = DockerClientBuilder.getInstance().build();  
-            
+            //dockerClient = DockerClientBuilder.getInstance().build();  
+             getDockerClient(dockerClient);
+             
             CreateContainerResponse container = null;
             
               
@@ -1154,7 +1175,8 @@ public class dockerclient implements Idockerclient
                 .awaitCompletion(30, TimeUnit.SECONDS);
                
                 
-            dockerClient = DockerClientBuilder.getInstance().build();  
+            //dockerClient = DockerClientBuilder.getInstance().build();  
+             getDockerClient(dockerClient);
            // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
            
             CreateContainerResponse container;
@@ -1229,7 +1251,8 @@ public class dockerclient implements Idockerclient
                 .awaitCompletion(30, TimeUnit.SECONDS);
                
                 
-            dockerClient = DockerClientBuilder.getInstance().build();  
+           // dockerClient = DockerClientBuilder.getInstance().build();  
+            getDockerClient(dockerClient);
            // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
            
             CreateContainerResponse container;
