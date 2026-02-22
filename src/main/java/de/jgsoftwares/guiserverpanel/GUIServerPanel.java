@@ -33,6 +33,7 @@ public class GUIServerPanel implements i_GuiServerPanel
         try
         {
             UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
+          
         } catch (Exception e)
         {
             System.out.print("LookAndFeel Error NomRoD !");

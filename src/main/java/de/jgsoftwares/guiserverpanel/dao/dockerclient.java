@@ -17,7 +17,10 @@ import java.io.BufferedReader;
 
         
 import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.DockerClientConfig;
+import com.github.dockerjava.core.DockerClientImpl;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
@@ -76,8 +79,15 @@ public class dockerclient implements Idockerclient
        // over docker.sock
        //dockerClient = DockerClientBuilder.getInstance().build();  
        
+        DockerClientConfig dockerClientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
+        .withDockerHost("tcp://192.168.10.56:2375")
+        .withDockerTlsVerify(false)
+        .build(); 
+       // DockerClient dockerClient = DockerClientImpl.getInstance(dockerClientConfig);
        //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
-       setDockerClient(dockerClient);
+       setDockerClient(dockerClient, dockerClientConfig);
+       
+      
        
        dockerimages = dockerClient.listImagesCmd().exec();
        dockercontainers = dockerClient.listContainersCmd().exec();
@@ -86,8 +96,10 @@ public class dockerclient implements Idockerclient
     
     // set Instance to 
     //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
-    public void setDockerClient(DockerClient dockerClient) {
-        this.dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+    public void setDockerClient(DockerClient dockerClient, DockerClientConfig dockerClientConfig) {
+        
+       // this.dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+       this.dockerClient = DockerClientBuilder.getInstance(dockerClientConfig).build();
     }
     
      
