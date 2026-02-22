@@ -1,6 +1,8 @@
 package de.jgsoftwares.guiserverpanel;
 
 import javax.swing.*;
+import net.sf.nimrod.NimRODLookAndFeel;
+import static net.sf.nimrod.NimRODMain.nt;
 
 public class GUIServerPanel implements i_GuiServerPanel
 { 
@@ -25,19 +27,25 @@ public class GUIServerPanel implements i_GuiServerPanel
      
   }
     
- 
   
    
   public static void main(String[] args)
   {      
+       
+            //com.nilo.plaf.nimrod.NimRODLF
+          
+      
         try
         {
             UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
-          
         } catch (Exception e)
         {
             System.out.print("LookAndFeel Error NomRoD !");
         }     
+       
+            
+            
+                  
         GUIServerPanel.showFrame();
         
        // SpringApplication.run(GUIServerPanel.class, args);

@@ -7,6 +7,11 @@ import java.util.HashMap;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import net.sf.nimrod.NimRODLookAndFeel;
+import static net.sf.nimrod.NimRODMain.nt;
+//import static net.sf.nimrod.NimRODMain.nt;
 
 
 public class MainPanel extends javax.swing.JFrame {
@@ -195,12 +200,14 @@ public class MainPanel extends javax.swing.JFrame {
             case "Metal":
                 lookandfeel.setMetalLookAndFeel();
                 break;
+            
             default:
                 break;
         }
        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
