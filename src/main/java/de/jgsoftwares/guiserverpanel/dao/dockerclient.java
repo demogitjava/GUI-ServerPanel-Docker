@@ -2,6 +2,7 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
@@ -10,6 +11,10 @@ import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Network;
 
 
+import com.github.dockerjava.core.async.ResultCallbackTemplate;
+import com.github.dockerjava.api.async.ResultCallback;
+import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
@@ -17,10 +22,12 @@ import java.io.BufferedReader;
 
         
 import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DockerClientImpl;
+import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
@@ -30,6 +37,7 @@ import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -881,7 +889,7 @@ public class dockerclient implements Idockerclient
 
          
            stimage = "jgsoftwares/openwrt23.05landingpage";
-           stimagetag = "java11firejailde";
+           stimagetag = "java11";
            stshell = "/bin/ash";
            struncmdst = "/root/runlandingpage.sh";
            stcontainername = "openwrtlandingpagedebug";
@@ -933,16 +941,18 @@ public class dockerclient implements Idockerclient
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
+                hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
-               
+               // hostConfig.withSysctls(sysctls)
+                /*
                 dockerClient.pullImageCmd(stimage)
                 .withTag(stimagetag)
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
-               
+                */
                 
             //dockerClient = DockerClientBuilder.getInstance().build();  
              getDockerClient(dockerClient);
@@ -1079,6 +1089,11 @@ public class dockerclient implements Idockerclient
                  //       .exec();
          dockerClient.startContainerCmd(container.getId()).exec();
 
+         String noforward = "net.ipv4.ip_forward=0";
+         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+         
+         
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
@@ -1175,11 +1190,12 @@ public class dockerclient implements Idockerclient
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
+                hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
-              
+               
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 dockerClient.pullImageCmd("jgsoftwares/openwrt23.05")
                 .withTag("nftbridgelayer2ext4")
@@ -1189,19 +1205,23 @@ public class dockerclient implements Idockerclient
                 
             //dockerClient = DockerClientBuilder.getInstance().build();  
              getDockerClient(dockerClient);
-           // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
            
+            // add volume     
+            Volume vmdockersoc = new Volume("/var/run/docker.sock");
+           
+           
+            
             CreateContainerResponse container;
             container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:nftbridgelayer2ext4")
-                   
                     .withName("openwrt2305host")
                     .withUser("root")
+                    .withVolumes(vmdockersoc)
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
-                    // .withExposedPorts(tcp1527)
-                    .withAttachStderr(false)
-                    .withAttachStdin(false)
-                    .withAttachStdout(false)
+                    //.withExposedPorts(tcp1527)
+                    .withAttachStderr(true)
+                    .withAttachStdin(true)
+                    .withAttachStdout(true)
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE) 
@@ -1210,8 +1230,12 @@ public class dockerclient implements Idockerclient
             
              dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
             
-        
+             // start container
              dockerClient.startContainerCmd(container.getId()).exec();
+             
+             
+
+          
 
         } catch(Exception e)
         {

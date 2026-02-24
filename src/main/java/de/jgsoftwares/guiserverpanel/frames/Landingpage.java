@@ -119,7 +119,7 @@ public class Landingpage extends javax.swing.JPanel {
                 + "--platform=linux/amd64 "
                 + "--kernel-memory=6M "
                 + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                + "jgsoftwares/openwrt23.05landingpage:java11firejail /bin/bash /root/runlandingpage.sh");             
+                + "jgsoftwares/openwrt23.05landingpage:java11 /bin/bash /root/runlandingpage.sh");             
               break;
             case "oraclelinux":
                 stlandingpage = new String("docker run -it "
@@ -203,7 +203,9 @@ public class Landingpage extends javax.swing.JPanel {
                 jTextArea1.append("start the docker container landingpage manually with command" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append("system - " + contsystem + "\n");
-                jTextArea1.append("The image is downloaded for docker hub  - over pull request" + "\n");
+                //net.ipv4.ip_forward=0
+                jTextArea1.append("container config is net.ipv4.ip_forward=0  /etc/sysctl.conf" + "\n");
+               
                 jTextArea1.append(stlandingpage + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append("Timezone set for germany by default" + "\n");
