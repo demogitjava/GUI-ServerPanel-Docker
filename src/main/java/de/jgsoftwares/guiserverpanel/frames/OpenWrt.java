@@ -187,8 +187,8 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "jgsoftwares/openwrt23.05:dockerext4 /bin/ash");
         
         dclient.startopenwrt2305host(stopenwrthost);
-        
-        jTextArea2.setText("run docker cotainer with command" + "\n" + "\n" + stopenwrthost + "\n" + "\n");
+        jTextArea2.setText("");
+        jTextArea2.append("run docker cotainer with command" + "\n" + "\n" + stopenwrthost + "\n" + "\n");
         jTextArea2.append("container run manually " + "/n");
         jTextArea2.append(stopenwrthost + "/n");
         jTextArea2.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");

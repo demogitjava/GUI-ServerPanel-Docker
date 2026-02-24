@@ -28,6 +28,7 @@ import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DockerClientImpl;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
+import de.jgsoftwares.guiserverpanel.frames.ConfigPanel;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
@@ -1256,12 +1257,68 @@ public class dockerclient implements Idockerclient
              // start container
              dockerClient.startContainerCmd(container.getId()).exec();
              
-             String noforward = "net.ipv4.ip_forward=0";
-             ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             
+             /*
+                
+                clear files in the docker container 
+                openwrt2305host
+             */
+             // cat /dev/null > /etc/hosts
+             String clearhostsfile = "/etc/hosts";
+             ExecCreateCmdResponse execlearhost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearhostsfile).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execlearhost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+           
+             // cat /dev/null > /etc/sysctl.conf
+             String clearsysctl = "/etc/sysctl.conf";
+             ExecCreateCmdResponse execlearsysctl = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearsysctl).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execlearsysctl.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 
+             // resolv.conf
+             // cat /dev/null > /etc/resolv.conf
+             String clearresolvconf = "/etc/resolv.conf";
+             ExecCreateCmdResponse execlearresolvconf = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearresolvconf).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execlearresolvconf.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 
+              // TZ
+             // cat /dev/null > /etc/TZ
+             String cleartimezone = "/etc/TZ";
+             ExecCreateCmdResponse execleartimezone = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + cleartimezone).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execleartimezone.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+               
+             
+             
+             /*
+             
+                write config to docker container 
+                openwrt2305host
+             
+             */
+             
+             // add string with wanip and hostname
+             String sthost = (String) ConfigPanel.stwanip + "  " + ConfigPanel.styourdomainname;
+             ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + sthost + " >> /etc/hosts").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
          
+             
+             // add string to /etc/sysctl.conf
+             String noforward = "net.ipv4.ip_forward=0";
+             ExecCreateCmdResponse execaddstringtosyscontl = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringtosyscontl.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+         
 
+             // get Timezone String 
+             String sttimezonecountry = ConfigPanel.stcombotimezone.toString();
+             
+             //load timezoneconfig
+             // write timezone string to /etc/TZ
+             de.jgsoftwares.guiserverpanel.config.Timezoneconfig tmconfig = new de.jgsoftwares.guiserverpanel.config.Timezoneconfig();     
+             String stgettimezone = tmconfig.timezoneopenwrt(sttimezonecountry, cleartimezone);
+             ExecCreateCmdResponse execaddstringtotimezone = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + stgettimezone + " >> /etc/TZ").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringtotimezone.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
+             
+             
+             // resolv.conf
 
         } catch(Exception e)
         {
