@@ -192,6 +192,8 @@ public class OpenWrt extends javax.swing.JPanel {
         jTextArea2.append("container run manually " + "/n");
         jTextArea2.append(stopenwrthost + "/n");
         jTextArea2.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
+        jTextArea2.append("container is started with net.ipv4.ip_forward=0");
+        jTextArea2.append("mount - docker socket /var/run/docker.sock");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

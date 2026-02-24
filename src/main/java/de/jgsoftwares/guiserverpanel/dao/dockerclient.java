@@ -9,8 +9,7 @@ import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Network;
-
-
+import com.github.dockerjava.api.model.Binds;
 import com.github.dockerjava.core.async.ResultCallbackTemplate;
 import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
@@ -1203,7 +1202,8 @@ public class dockerclient implements Idockerclient
        
         try
         {
-         
+                // add volume - dockersocket 
+                Volume dockersocket = new Volume("/var/run/docker.sock");
                 
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
@@ -1221,6 +1221,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
+                hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
                
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 dockerClient.pullImageCmd("jgsoftwares/openwrt23.05")
@@ -1232,16 +1233,12 @@ public class dockerclient implements Idockerclient
             //dockerClient = DockerClientBuilder.getInstance().build();  
              getDockerClient(dockerClient);
            
-            // add volume     
-            Volume vmdockersoc = new Volume("/var/run/docker.sock");
-           
-           
             
-            CreateContainerResponse container;
-            container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:nftbridgelayer2ext4")
+            //CreateContainerResponse container;
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:nftbridgelayer2ext4")
                     .withName("openwrt2305host")
                     .withUser("root")
-                    .withVolumes(vmdockersoc)
+                    .withVolumes(dockersocket)
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
                     //.withExposedPorts(tcp1527)
@@ -1259,7 +1256,10 @@ public class dockerclient implements Idockerclient
              // start container
              dockerClient.startContainerCmd(container.getId()).exec();
              
-             
+             String noforward = "net.ipv4.ip_forward=0";
+             ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+         
 
           
 
