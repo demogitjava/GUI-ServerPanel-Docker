@@ -156,14 +156,14 @@ public class Databases extends javax.swing.JPanel {
                             + "-e NETWORK_NONE=" + stinterfacename + " "
                             + "--hostname " + ConfigPanel.styourdomainname + " " 
                             + "--cap-add=NET_ADMIN "
-                            + "--cap-add SYS_ADMIN "
-                            + "--net=host --net=none "
+                            + "--cap-add=SYS_ADMIN "
+                            + "--net=host "
                          //   + "-v /etc/resolv.conf:/etc/resolv.conf "
                             + "--restart unless-stopped "
                             + "--platform=linux/amd64 "
                             + "--kernel-memory=6M " 
                           //  + "-e NTP_SERVER=\"2.rhel.pool.ntp.org\" "
-                            + "jgsoftwares/openwrt2305derbydb:10-14-02firejail "
+                            + "jgsoftwares/openwrt2305derbydb:10-14-02 "
                             + "/bin/ash /root/startderbydb.sh");
                     
           

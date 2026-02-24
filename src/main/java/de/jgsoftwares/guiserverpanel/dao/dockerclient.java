@@ -654,7 +654,7 @@ public class dockerclient implements Idockerclient
                     //{
                         System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/openwrt23.05derbydb")
-                                .withTag("10-14-02firejail")
+                                .withTag("10-14-02")
                                 .exec(new PullImageResultCallback())
                                 .awaitCompletion(30, TimeUnit.SECONDS);
                         
@@ -664,7 +664,7 @@ public class dockerclient implements Idockerclient
                          getDockerClient(dockerClient);
                         System.out.print("start container " + "\n");
 
-                        CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02firejail")
+                        CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
                              .withCmd("/bin/ash", "/root/startderbydb.sh")
                              .withName("openwrtderbydb")
                              .withHostConfig(hostConfig)
@@ -680,7 +680,12 @@ public class dockerclient implements Idockerclient
                              //.withWorkingDir("/root")
                              .exec();
                          dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
-            dockerClient.startContainerCmd(container.getId()).exec();
+                         dockerClient.startContainerCmd(container.getId()).exec();
+            
+                         String noforward = "net.ipv4.ip_forward=0";
+                         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+
                          
                     //}
                 }
@@ -724,6 +729,10 @@ public class dockerclient implements Idockerclient
                          dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
                          dockerClient.startContainerCmd(container.getId()).exec();
                          
+                         String noforward = "net.ipv4.ip_forward=0";
+                         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+
                          
                     //}
                 }
@@ -766,7 +775,12 @@ public class dockerclient implements Idockerclient
                              //.withWorkingDir("/root")
                              .exec();
                          dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
-            dockerClient.startContainerCmd(container.getId()).exec();
+                         dockerClient.startContainerCmd(container.getId()).exec();
+                         
+                         String noforward = "net.ipv4.ip_forward=0";
+                         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+
                     //}
                 }
             
