@@ -369,7 +369,7 @@ public class dockerclient implements Idockerclient
 
          
            stimage = "jgsoftwares/openwrt23.05lanserver";
-           stimagetag = "11firejail";
+           stimagetag = "11";
            stshell = "/bin/ash";
            struncmdst = "/root/LanServer.sh";
            stcontainername = "openwrtlanservertcp";
@@ -464,7 +464,10 @@ public class dockerclient implements Idockerclient
                  // start container openwrtlanserver
                  dockerClient.startContainerCmd(container.getId()).exec();
                
-                 
+                   String noforward = "net.ipv4.ip_forward=0";
+         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+        
                   
                
                  // install time zones
@@ -508,6 +511,10 @@ public class dockerclient implements Idockerclient
                   
                    dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
          dockerClient.startContainerCmd(container.getId()).exec();
+           String noforward = "net.ipv4.ip_forward=0";
+         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+        
                   break;
                    
                 }
@@ -530,8 +537,13 @@ public class dockerclient implements Idockerclient
                  
                  .withWorkingDir("/root")
                  .exec();
+                  
                    dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
          dockerClient.startContainerCmd(container.getId()).exec();
+           String noforward = "net.ipv4.ip_forward=0";
+         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+        
                   break;
                    
                 }

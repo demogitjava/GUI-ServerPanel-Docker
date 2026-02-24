@@ -117,7 +117,7 @@ public class LanServerTCP extends javax.swing.JPanel {
                     "--restart unless-stopped " +
                     "--cap-add=NET_ADMIN " +
                     "--cap-add=SYS_ADMIN " +
-                    "jgsoftwares/openwrt23.05lanserver:11firejail /bin/ash /root/LanServer.sh";
+                    "jgsoftwares/openwrt23.05lanserver:11 /bin/ash /root/LanServer.sh";
            
                      
             System.out.println("docker string " + struncontainer + "\n" + "\n");
