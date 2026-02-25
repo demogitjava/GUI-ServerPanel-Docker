@@ -1340,22 +1340,28 @@ public class dockerclient implements Idockerclient
           
 
             // resolv.conf
-            
+             //String stdns1 = null;
+             //String stdns2 = null;
+             
              de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
              String stdnsserver = ConfigPanel.stpubdnsserver;
-             String stdns1 = null;
-             String stdns2 = null;
-             
-             
              // returns string dnspulicserver ipdns1 ipdns2
-             publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
              
+            //String stdns1 = publicdnsserverconfig.getStdns1();
+             //String stdns2 = publicdnsserverconfig.getStdns2();
+             //publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
+            
+             
+             
+             
+             
+         
              // nameserver dnsip1
-             ExecCreateCmdResponse execaddstringpublicdnsip1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns1 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execaddstringpublicdnsip1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             //ExecCreateCmdResponse execaddstringpublicdnsip1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns1 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             //dockerClient.execStartCmd(execaddstringpublicdnsip1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              //nameserver dnsip2
-             ExecCreateCmdResponse execaddstringpublicdnsip2 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns2 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execaddstringpublicdnsip2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             //ExecCreateCmdResponse execaddstringpublicdnsip2 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns2 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             //dockerClient.execStartCmd(execaddstringpublicdnsip2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              // add search with domainname
              ExecCreateCmdResponse execaddstringsearchdomain = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "search " + ConfigPanel.styourdomainname + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringsearchdomain.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
