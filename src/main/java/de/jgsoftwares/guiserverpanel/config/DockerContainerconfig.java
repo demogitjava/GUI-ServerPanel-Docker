@@ -68,10 +68,22 @@ public class DockerContainerconfig
              dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
          
              
+            // /etc/sysctl.conf
              // add string to /etc/sysctl.conf
+             // net.ipv6.conf.all.disable_ipv6=0
+             // net.ipv4.conf.all.src_valid_mark=0
+             // net.ipv4.ip_forward=0   
              String noforward = "net.ipv4.ip_forward=0";
              ExecCreateCmdResponse execaddstringtosyscontl = dockerClient.execCreateCmd(containerid).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringtosyscontl.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+         
+             String nosrcvalid = "net.ipv4.conf.all.src_valid_mark=0";
+             ExecCreateCmdResponse execaddstringnosourcevalid = dockerClient.execCreateCmd(containerid).withCmd("sh", "-c", "echo " + nosrcvalid + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringnosourcevalid.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+         
+             String noipv6forward = "net.ipv6.conf.all.disable_ipv6=0";
+             ExecCreateCmdResponse execaddstringnoipv6forward = dockerClient.execCreateCmd(containerid).withCmd("sh", "-c", "echo " + noipv6forward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringnoipv6forward.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
          
 
              // get Timezone String 
