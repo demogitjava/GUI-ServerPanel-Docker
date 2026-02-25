@@ -20,11 +20,11 @@ public class ConfigPanel extends javax.swing.JPanel {
     public static String stinterfacename;
     public static String stcontainersystem;
     public static String stcomborunorcompose;
-    public static String stcombotimezone;
+    
     public static String stlocales; 
     public static String stcomboboxtimezone;
     public static String stpubdnsserver;
-    
+    public static String stcombotimezone;
     Process process;
     /**
      * Creates new form ConfigPanel
