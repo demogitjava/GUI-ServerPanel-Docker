@@ -14,8 +14,9 @@ public class Timezoneconfig
     // return german timezone
     public String timezoneopenwrt(String sttimezonecountry, String openwrttimezone)
     {
-        /*
         
+        // set default timezones for container config
+        /*  
         Europe/Berlin
         Europe/Paris
         Europe/London
@@ -23,7 +24,7 @@ public class Timezoneconfig
         Europe/Rom
         Europe/Istanbul
         */
-        
+        // 
        switch (sttimezonecountry)
        {
             case "Europe/Berlin":
