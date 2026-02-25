@@ -23,6 +23,7 @@ public class ConfigPanel extends javax.swing.JPanel {
     public static String stcombotimezone;
     public static String stlocales; 
     public static String stcomboboxtimezone;
+    public static String stpubdnsserver;
     
     Process process;
     /**
@@ -304,7 +305,10 @@ public class ConfigPanel extends javax.swing.JPanel {
        
       
           
-          
+        /*
+            getpublic dns
+        */ 
+        stpubdnsserver = String.valueOf(jComboBox5.getSelectedItem());
      
     }//GEN-LAST:event_jButton1ActionPerformed
 

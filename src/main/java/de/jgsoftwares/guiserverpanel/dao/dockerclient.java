@@ -1114,10 +1114,14 @@ public class dockerclient implements Idockerclient
                  //       .withName("oraclelinuxlanservertcp")
                  //       .exec();
          dockerClient.startContainerCmd(container.getId()).exec();
-
-         String noforward = "net.ipv4.ip_forward=0";
-         ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
-         dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+    
+         
+         // docker container config
+         de.jgsoftwares.guiserverpanel.config.DockerContainerconfig dockercontainerconfig = new de.jgsoftwares.guiserverpanel.config.DockerContainerconfig();
+         
+         String containerid = container.getId();
+         dockercontainerconfig.openwrtlandingpage(containerid);
+         
          
          
         } catch(Exception e)
