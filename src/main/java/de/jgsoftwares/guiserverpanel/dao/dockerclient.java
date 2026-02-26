@@ -1344,15 +1344,17 @@ public class dockerclient implements Idockerclient
              //String stdns2 = null;
              
              de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
+           
              String stdnsserver = ConfigPanel.stpubdnsserver;
              // returns string dnspulicserver ipdns1 ipdns2
              
-            //String stdns1 = publicdnsserverconfig.getStdns1();
-             //String stdns2 = publicdnsserverconfig.getStdns2();
-             //publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
+             String stdns1 = null;
+             String stdns2 = null;
+             
+             publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
             
-             
-             
+             stdns1 = publicdnsserverconfig.getStdns1();
+             stdns2 = publicdnsserverconfig.getStdns2();
              
              
          
