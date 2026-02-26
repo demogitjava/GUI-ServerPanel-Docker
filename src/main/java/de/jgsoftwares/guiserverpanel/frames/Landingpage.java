@@ -222,12 +222,12 @@ public class Landingpage extends javax.swing.JPanel {
                 jTextArea1.append("alpine linux " + "\n");
                 jTextArea1.append("-----------" + "\n");
                 jTextArea1.append("apk add tzdata");
-                jTextArea1.append("ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime" + "/n");
+                jTextArea1.append("ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime" + "/n");
                 jTextArea1.append("-----------" + "\n");
                 jTextArea1.append("oracle linux " + "\n");
                 jTextArea1.append("-----------" + "\n");
                 jTextArea1.append("timedatectl set-timezone Europe/Berlin" + "\n");
-               
+                jTextArea1.append("command -> date" + "\n");
                  // getRuntime start Landingpage container
                 de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
                 dockerclient.startlandingpage(stlandingpage, contsystem);

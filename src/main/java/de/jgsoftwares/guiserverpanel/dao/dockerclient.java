@@ -2258,6 +2258,16 @@ public class dockerclient implements Idockerclient
     private String fwriter(String ceT1CESTM350M10503__etcTZ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-                
+        
+    
+    public void starthttpfileserver(String stport)
+    {
+        
+    }
+    
+    public void startreverseproxy(String port, List portlist)
+    {
+        
+    }
      
 }
