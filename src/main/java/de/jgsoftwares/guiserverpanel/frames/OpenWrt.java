@@ -202,7 +202,7 @@ public class OpenWrt extends javax.swing.JPanel {
                 + "--runtime " + stcomboruntime + " " 
                 + "-e NETWORK_NONE=" + stinterfacename + " " 
                 + "--name ipfire "
-                + "--net=host --net=none "
+                + "--net=host"
                 + "--restart unless-stopped "
                 + "--cap-add=NET_ADMIN "
                 + "--cap-add=SYS_ADMIN " 
@@ -220,8 +220,7 @@ public class OpenWrt extends javax.swing.JPanel {
         jTextArea2.append("settings for network config  " + " vi /var/ipfire/ethernet/settings " + "\n");
         jTextArea2.append("access to container with   " + "docker exec -it ipfire /bin/bash " + "\n");
         jTextArea2.append("setup firewall config in contianer type " + " setup " + "\n");
-        jTextArea2.append("vi /var/ipfire/ethernet/settings" + "config network interfaces manually"+ "\n");
-        jTextArea2.append("with api the container started with volume /var/run/docker.sock");
+     
         // vi /var/ipfire/ethernet/settings
         jTextArea2.append(startipfire + "\n");
     }//GEN-LAST:event_jButton2ActionPerformed

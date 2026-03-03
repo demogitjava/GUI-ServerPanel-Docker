@@ -2189,21 +2189,24 @@ public class dockerclient implements Idockerclient
     {
           try
           {
-            //InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
-           // InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
-           //  jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh
+        
+                // ipfire http port 
+                // access to ipfire container over vpn
+                // https://192.168.10.56:444
                 ExposedPort tcp444 = ExposedPort.tcp(444);
-              
+                // port 53 for dhcp
+                //ExposedPort tcp53 = ExposedPort.tcp(53);
+                
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp444, Ports.Binding.bindPort(444));
-   
+                //portBindings.bind(tcp53, Ports.Binding.bindPort(53));
                 
              
              
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
-
+                
                 HostConfig hostConfig = HostConfig.newHostConfig();
                         //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 
@@ -2212,6 +2215,7 @@ public class dockerclient implements Idockerclient
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
+                hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
@@ -2219,7 +2223,7 @@ public class dockerclient implements Idockerclient
               
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 dockerClient.pullImageCmd("jgsoftwares/ipfire")
-                .withTag("dmz")
+                .withTag("cloud")
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
                
@@ -2229,20 +2233,20 @@ public class dockerclient implements Idockerclient
            // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
            
             CreateContainerResponse container;
-            container = dockerClient.createContainerCmd("jgsoftwares/ipfire:dmz")
+            container = dockerClient.createContainerCmd("jgsoftwares/ipfire:cloud")
                    
-                    .withName("ipfiredmz")
+                    .withName("ipfire")
                     .withUser("root")
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
                     // .withExposedPorts(tcp1527)
-                    .withAttachStderr(false)
-                    .withAttachStdin(false)
-                    .withAttachStdout(false)
+                    .withAttachStderr(true)
+                    .withAttachStdin(true)
+                    .withAttachStdout(true)
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE) 
-                    .withWorkingDir("/root")
+                    //.withWorkingDir("/root")
                     .exec();
             
              dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
