@@ -32,15 +32,18 @@ import de.jgsoftwares.guiserverpanel.frames.ConfigPanel;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
+import de.jgsoftwares.guiserverpanel.frames.Landingpage;
 
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+import java.io.File;
 
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
@@ -50,6 +53,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
+import org.apache.commons.compress.utils.IOUtils;
+import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
 
 /**
@@ -66,7 +73,8 @@ public class dockerclient implements Idockerclient
     com.github.dockerjava.api.model.Image mdimage;
     com.github.dockerjava.api.model.Container mdcontainer;
 
-    
+    // copy jar to landingpage
+    java.io.FileInputStream tarStream;
     
     
     PipedInputStream inputStream;
@@ -1653,9 +1661,9 @@ public class dockerclient implements Idockerclient
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE)
-                    .withAttachStderr(false)
-                    .withAttachStdin(false)
-                    .withAttachStdout(false)
+                    .withAttachStderr(true)
+                    .withAttachStdin(true)
+                    .withAttachStdout(true)
                     // timesettings
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
@@ -2273,5 +2281,39 @@ public class dockerclient implements Idockerclient
     {
         
     }
+    
+    // copy jar from local to docker container landingpage
+    public void copyjartolandingpage(File landingpagefile)
+    {
+        try {
+            String containerid = new String("openwrtlandingpagedebug");
+            
+            // dockerClient = DockerClientBuilder.getInstance().build();
+            getDockerClient(dockerClient);
+            
+            String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
+            
+            String resource = landingpagefile.toString();
+            
+            
+           
+           
+            // dockerClient.copyArchiveToContainerCmd("openwrtlandingpagedebug")
+            //        .withRemotePath("/root/")
+            //        .withTarInputStream(tarArchiveInputStream)
+            //        .exec();
+            dockerClient.copyArchiveToContainerCmd(containerID)
+                    .withHostResource(resource)
+                    .withRemotePath("/root").exec();
+            Landingpage.jLabel1chooser.setText("file upload to landingpagecontainer " + resource + "\n");
+            System.out.print("file " + landingpagefile + "\n");
+            
+            
+        } catch (Exception ex) {
+            System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
+
      
 }

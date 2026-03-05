@@ -12,9 +12,12 @@ import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcontainersystem
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stlocales;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  *
@@ -46,6 +49,8 @@ public class Landingpage extends javax.swing.JPanel {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel1chooser = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jButton1.setText("start container - landingpage ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +72,8 @@ public class Landingpage extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("upload for landingpage.jar > 5 min");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,15 +84,25 @@ public class Landingpage extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1chooser, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1chooser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,12 +262,35 @@ public class Landingpage extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // copy the local landingpage.jar to landingpage container
         
+        JFrame filechooserframe = new JFrame("copy jar to landingapge container");
+        JFileChooser jfilechooser = new JFileChooser();
+        File landingpagefile = new File(System.getProperty("user.dir"));
+        jfilechooser.setCurrentDirectory(landingpagefile);
+        
+        filechooserframe.add(jfilechooser);
+        filechooserframe.setVisible(true);
+        filechooserframe.pack();
+        filechooserframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        int returnVal = jfilechooser.showOpenDialog(filechooserframe);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                landingpagefile = jfilechooser.getSelectedFile();
+                //This is where a real application would open the file.
+                System.out.println("selected File: " + landingpagefile.getName() + ".");    
+            } else {
+                System.out.println("command exit");
+            }
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        dockerclient.copyjartolandingpage(landingpagefile);
+        
+        filechooserframe.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    public static javax.swing.JLabel jLabel1chooser;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
