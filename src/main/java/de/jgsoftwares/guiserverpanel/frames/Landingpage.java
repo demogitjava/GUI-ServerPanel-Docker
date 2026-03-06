@@ -63,7 +63,7 @@ public class Landingpage extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel3.setText("update your container jar");
+        jLabel3.setText("update your container jar - landingpage-0.0.1-SNAPSHOT.jar");
 
         jButton2.setText("copy jar to landingpage container");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -80,15 +80,13 @@ public class Landingpage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1chooser, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -221,7 +219,7 @@ public class Landingpage extends javax.swing.JPanel {
             
                 
                 jTextArea1.setText("");
-                jTextArea1.append("start the docker container landingpage manually with command" + "\n");
+                jTextArea1.append("alternative start the docker container landingpage manually over the cli shell" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append("system - " + contsystem + "\n");
                 //net.ipv4.ip_forward=0
@@ -259,6 +257,7 @@ public class Landingpage extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    // upload jar to landingpage container
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // copy the local landingpage.jar to landingpage container
         

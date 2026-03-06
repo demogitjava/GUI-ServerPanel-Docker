@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 
         
 import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.api.model.Isolation;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -1628,7 +1629,14 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
-                hostConfig.getIsolation();
+                Isolation.PROCESS.getValue();
+                //Isolation.HYPERV.getValue();
+                hostConfig.getMemory();
+                hostConfig.getCgroup();
+                hostConfig.getBinds();
+                hostConfig.getDevices();
+                hostConfig.getDns();
+                hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
                // hostConfig.withSysctls(sysctls)
                 /*
@@ -2286,7 +2294,7 @@ public class dockerclient implements Idockerclient
     public void copyjartolandingpage(File landingpagefile)
     {
         try {
-            String containerid = new String("openwrtlandingpagedebug");
+            String containerid = "openwrtlandingpagedebug";
             
             // dockerClient = DockerClientBuilder.getInstance().build();
             getDockerClient(dockerClient);
@@ -2303,6 +2311,7 @@ public class dockerclient implements Idockerclient
             //        .withTarInputStream(tarArchiveInputStream)
             //        .exec();
             dockerClient.copyArchiveToContainerCmd(containerID)
+                    
                     .withHostResource(resource)
                     .withRemotePath("/root").exec();
             Landingpage.jLabel1chooser.setText("file upload to landingpagecontainer " + resource + "\n");

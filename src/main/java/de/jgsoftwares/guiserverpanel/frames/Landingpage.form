@@ -18,16 +18,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
           <Component id="jScrollPane1" alignment="0" pref="417" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
-              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
           <Component id="jButton2" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1chooser" alignment="0" min="-2" pref="382" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -78,7 +75,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="update your container jar"/>
+        <Property name="text" type="java.lang.String" value="update your container jar - landingpage-0.0.1-SNAPSHOT.jar"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
