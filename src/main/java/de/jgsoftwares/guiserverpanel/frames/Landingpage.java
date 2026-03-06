@@ -220,6 +220,7 @@ public class Landingpage extends javax.swing.JPanel {
                 
                 jTextArea1.setText("");
                 jTextArea1.append("alternative start the docker container landingpage manually over the cli shell" + "\n");
+                jTextArea1.append("a simple config" + "\n");
                 jTextArea1.append("#################################" + "\n");
                 jTextArea1.append("system - " + contsystem + "\n");
                 //net.ipv4.ip_forward=0

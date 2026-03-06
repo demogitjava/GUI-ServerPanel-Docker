@@ -13,6 +13,9 @@ import com.github.dockerjava.api.model.Binds;
 import com.github.dockerjava.core.async.ResultCallbackTemplate;
 import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import com.github.dockerjava.api.command.InspectImageCmd;
+import com.github.dockerjava.api.command.InspectImageResponse;
+import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
@@ -22,6 +25,7 @@ import java.io.BufferedReader;
         
 import com.github.dockerjava.api.model.Capability;
 import com.github.dockerjava.api.model.Isolation;
+import com.github.dockerjava.api.model.PullResponseItem;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -54,6 +58,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JList;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.utils.IOUtils;
@@ -1647,8 +1652,30 @@ public class dockerclient implements Idockerclient
                 */
                 
             //dockerClient = DockerClientBuilder.getInstance().build();  
-             getDockerClient(dockerClient);
+            getDockerClient(dockerClient);
              
+           
+           
+            boolean imagenotexist = false;
+            try
+            {
+                dockerClient.inspectContainerCmd(stcontainername).exec();
+            } catch(NotFoundException e)
+            {
+                System.out.print("error search image " + e);
+            }
+            if(imagenotexist == true)
+            {
+                System.out.print("landingpage image exist" + "\n");
+            }
+            else
+            {
+               
+                 String stlandingpageexist = "jgsoftwares/openwrt23.05landingpage:java11";
+                dockerClient.pullImageCmd(stlandingpageexist).exec(new PullImageResultCallback()).awaitSuccess();
+            }
+          
+            
             CreateContainerResponse container = null;
             
               
@@ -1762,7 +1789,7 @@ public class dockerclient implements Idockerclient
                     .exec();
                 */
             
-             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
             
             // Network network = dockerClient.inspectNetworkCmd().withNetworkId("none").exec();
             // dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();
@@ -1918,6 +1945,9 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(execrunzoneinfo.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
          
+             // jgsoftwares/openwrt23.05landingpage   java11
+             dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java11").exec();
+             System.out.print("local image commit jgsoftwares/openwrt23.05landingpage:java11");
          
         } catch(Exception e)
         {
