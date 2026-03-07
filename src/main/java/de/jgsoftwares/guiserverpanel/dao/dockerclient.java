@@ -1579,7 +1579,7 @@ public class dockerclient implements Idockerclient
 
          
            stimage = "jgsoftwares/openwrt23.05landingpage";
-           stimagetag = "java11";
+           stimagetag = "java" + ConfigPanel.stjavaversion;
            stshell = "/bin/ash";
            struncmdst = "/root/runlandingpage.sh";
            stcontainername = "openwrtlandingpagedebug";
@@ -1655,7 +1655,7 @@ public class dockerclient implements Idockerclient
             getDockerClient(dockerClient);
              
            
-           
+            // check image exist
             boolean imagenotexist = false;
             try
             {
@@ -1671,7 +1671,8 @@ public class dockerclient implements Idockerclient
             else
             {
                
-                 String stlandingpageexist = "jgsoftwares/openwrt23.05landingpage:java11";
+                String stjavaversion = ConfigPanel.stjavaversion.toString();
+                String stlandingpageexist = "jgsoftwares/openwrt23.05landingpage:java" + stjavaversion;
                 dockerClient.pullImageCmd(stlandingpageexist).exec(new PullImageResultCallback()).awaitSuccess();
             }
           
