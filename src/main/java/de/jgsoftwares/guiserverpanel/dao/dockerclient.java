@@ -384,10 +384,10 @@ public class dockerclient implements Idockerclient
 
          
            stimage = "jgsoftwares/openwrt23.05lanserver";
-           stimagetag = "11";
+           stimagetag = ConfigPanel.stjavaversion;
            stshell = "/bin/ash";
            struncmdst = "/root/LanServer.sh";
-       
+    
            stcontainername = "openwrtlanservertcp";
         } else if(contsystem.equals("oraclelinux")) {
                 stinstall = "";
