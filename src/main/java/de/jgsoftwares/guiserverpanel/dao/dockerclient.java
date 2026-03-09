@@ -37,6 +37,7 @@ import de.jgsoftwares.guiserverpanel.frames.ConfigPanel;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
+import de.jgsoftwares.guiserverpanel.frames.LanServerTCP;
 import de.jgsoftwares.guiserverpanel.frames.Landingpage;
 
 
@@ -490,7 +491,9 @@ public class dockerclient implements Idockerclient
                  .withDomainName(styourdomainname)
                  //.withIpv4Address(stwanip)
                  .withStdinOpen(Boolean.TRUE)
-                 
+                 .withAttachStderr(true)
+                 .withAttachStdin(true)
+                 .withAttachStdout(true)
                  .withWorkingDir("/root")
                  .exec();
                   
@@ -2511,6 +2514,39 @@ public class dockerclient implements Idockerclient
             System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
+    
+    // copy jar from local to docker container lanserver
+    public void copyjartolanserver(File lanserverfile)
+    {
+        try {
+            String containerid = "openwrtlanservertcp";
+            
+            // dockerClient = DockerClientBuilder.getInstance().build();
+            getDockerClient(dockerClient);
+            
+            String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
+            
+            String resource = lanserverfile.toString();
+            
+            
+           
+           
+            // dockerClient.copyArchiveToContainerCmd("openwrtlandingpagedebug")
+            //        .withRemotePath("/root/")
+            //        .withTarInputStream(tarArchiveInputStream)
+            //        .exec();
+            dockerClient.copyArchiveToContainerCmd(containerID)
+                    .withHostResource(resource)
+                    .withRemotePath("/root").exec();
+            LanServerTCP.jLabel3.setText("file upload to openwrtlanservertcp  " + resource + "\n");
+            System.out.print("file " + lanserverfile + "\n");
+            
+            
+        } catch (NotFoundException ex) {
+            System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
     
 
      
