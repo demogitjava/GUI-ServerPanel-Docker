@@ -93,7 +93,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="upload for landingpage.jar &gt; 5 min"/>
+        <Property name="text" type="java.lang.String" value="upload for landingpage.jar &gt; 10 min"/>
       </Properties>
     </Component>
   </SubComponents>

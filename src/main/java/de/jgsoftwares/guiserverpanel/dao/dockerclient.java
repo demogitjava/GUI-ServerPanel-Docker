@@ -780,39 +780,110 @@ public class dockerclient implements Idockerclient
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("1527:1527"));
                 
                 // add container to host network
+                // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
+                hostConfig.withCapAdd(Capability.NET_ADMIN);
+                hostConfig.withCapAdd(Capability.NET_RAW);
+                hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
-               
                 hostConfig.withPrivileged(Boolean.TRUE);
-                hostConfig.getIsolation();
+                Isolation.PROCESS.getValue();
+                //Isolation.HYPERV.getValue();
+                hostConfig.getMemory();
+                hostConfig.getCgroup();
+                hostConfig.getBinds();
+                hostConfig.getDevices();
+                hostConfig.getDns();
+                hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-                
+               
                
                 
                 String imageexist = null;
+                String sttag = null;
+                String stforcommit = null;
                 // image exist
                 imageexist = de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcontainersystem;
                 if (imageexist.equals("openwrt")) 
                 {
-                    imageexist = "jgsoftwares/openwrt23.05derbydb:10-14-02firejail";
-                    //InspectImageResponse response = dockerClient.inspectImageCmd(stderbydb).exec();
-                    //if(response.equals("jgsoftwares/openwrt23.05derbydb:10-14-0"))
-                    //{
-                     //   System.out.print("Image openwrt - derbydb exist");
-                    //}
-                
-                    //else
-                    //{
+                    String stjavaversion = new String(ConfigPanel.stjavaversion.toString());
+                   
+                    switch(stjavaversion)
+                    {
+                        case "11":
+                        {
+                            System.out.print("Java version 11" + "\n");
+                            imageexist = "jgsoftwares/openwrt23.05derbydb:10-14-02";
+                            stforcommit = "jgsoftwares/openwrt23.05derbydb";
+                            sttag = "10-14-02";
+                            break;
+                        }
+                        case "17":
+                        {
+                            System.out.print("Java version is 17" + "\n");
+                            imageexist = "jgsoftwares/openwrt23.05derbydb:10.16.1.1";
+                            stforcommit = "jgsoftwares/openwrt23.05derbydb";
+                            sttag = "10.16.1.1";
+                            break;
+                        }
+                        case "21":
+                        {
+                            System.out.print("Java version is 21" + "\n");
+                            imageexist = "jgsoftwares/openwrt23.05derbydb:10.16.1.1";
+                            stforcommit = "jgsoftwares/openwrt23.05derbydb";
+                            sttag = "10.16.1.1";
+                        }
+                        case "25":
+                        {
+                            System.out.print("Java version is 21" + "\n");
+                            imageexist = "jgsoftwares/openwrt23.05derbydb:10.16.1.1";
+                            stforcommit = "jgsoftwares/openwrt23.05derbydb";
+                            sttag = "10.16.1.1";
+                        }
+                        case "27":
+                        {
+                            System.out.print("Java version is 21" + "\n");
+                            imageexist = "jgsoftwares/openwrt23.05derbydb:10.16.1.1";
+                            stforcommit = "jgsoftwares/openwrt23.05derbydb";
+                            sttag = "10.16.1.1";
+                        }
+                        default:
+                            break;
+                    }
+                    
+                     // check image exist
+                    boolean imagenotexist = false;
+                    try
+                    {
+                        dockerClient.inspectImageCmd(imageexist).exec();
+                    } catch(NotFoundException e)
+                    {
+                        System.out.print("error search image " + e);
+                    }
+                    if(imagenotexist == true)
+                    {
+                        System.out.print("landingpage image exist" + "\n");
+                    }
+                    else
+                    {
+
+                        
+                        String stderbydbversion = imageexist;
+                        dockerClient.pullImageCmd(stderbydbversion).exec(new PullImageResultCallback()).awaitSuccess();
+                        System.out.print("image not exist local pull image " + "\n");
+                    }
                         System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/openwrt23.05derbydb")
-                                .withTag("10-14-02")
+                                //.withTag("10-14-02")
+                                .withTag(sttag)
                                 .exec(new PullImageResultCallback())
                                 .awaitCompletion(30, TimeUnit.SECONDS);
                         
                         
                         //  start container openwrt             
                         //dockerClient = DockerClientBuilder.getInstance().build();
-                         getDockerClient(dockerClient);
+                        getDockerClient(dockerClient);
                         System.out.print("start container " + "\n");
 
                         CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:10-14-02")
@@ -970,6 +1041,14 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse execrunzoneinfo = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && opkg install zoneinfo-all").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execrunzoneinfo.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
+             
+             // name for running container 
+             // commit container local with setting in /etc
+             // restart container settings
+             String stcontainername = "openwrtderbydb";
+             dockerClient.commitCmd(stcontainername).withRepository(stforcommit).withTag(sttag).exec();
+             System.out.print("local image commit" + stforcommit + " " + sttag + "\n");
+             
                 }
                 else if (imageexist.equals("oraclelinux")) 
                 {
@@ -2050,16 +2129,51 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
-                hostConfig.getIsolation();
+                Isolation.PROCESS.getValue();
+                //Isolation.HYPERV.getValue();
+                hostConfig.getMemory();
+                hostConfig.getCgroup();
+                hostConfig.getBinds();
+                hostConfig.getDevices();
+                hostConfig.getDns();
+                hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
                
+                
+                /*
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 dockerClient.pullImageCmd("jgsoftwares/openwrt23.05")
                 .withTag("nftbridgelayer2ext4")
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
+                */
+                
+                
+            String stcontainername = "openwrt2305host";
+            // check image exist
+            boolean imagenotexist = false;
+            try
+            {
+                dockerClient.inspectContainerCmd(stcontainername).exec();
+            } catch(NotFoundException e)
+            {
+                System.out.print("error search image " + e);
+            }
+            if(imagenotexist == true)
+            {
+                System.out.print("openwrthost image exist" + "\n");
+            }
+            else
+            {
                
+                // jgsoftwares/openwrt23.05:nftbridgelayer2ext4 
+               
+                
+                String stimagetag = "nftbridgelayer2ext4";
+                String stopenwrt2305host = "jgsoftwares/openwrt23.05:" + stimagetag;
+                dockerClient.pullImageCmd("jgsoftwares/openwrt23.05:" + stimagetag).exec(new PullImageResultCallback()).awaitSuccess();
+            }
                 
             //dockerClient = DockerClientBuilder.getInstance().build();  
              getDockerClient(dockerClient);
@@ -2265,15 +2379,44 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
-                hostConfig.getIsolation();
+                Isolation.PROCESS.getValue();
+                //Isolation.HYPERV.getValue();
+                hostConfig.getMemory();
+                hostConfig.getCgroup();
+                hostConfig.getBinds();
+                hostConfig.getDevices();
+                hostConfig.getDns();
+                hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
               
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
-                dockerClient.pullImageCmd("jgsoftwares/ipfire")
-                .withTag("cloud")
-                .exec(new PullImageResultCallback())
-                .awaitCompletion(30, TimeUnit.SECONDS);
+                //dockerClient.pullImageCmd("jgsoftwares/ipfire")
+                //.withTag("cloud")
+                //.exec(new PullImageResultCallback())
+                //.awaitCompletion(30, TimeUnit.SECONDS);
                
+            String stcontainername = "ipfire";
+            // check image exist
+            boolean imagenotexist = false;
+            try
+            {
+                dockerClient.inspectContainerCmd(stcontainername).exec();
+            } catch(NotFoundException e)
+            {
+                System.out.print("error search image " + e);
+            }
+            if(imagenotexist == true)
+            {
+                System.out.print("ipfire image exist" + "\n");
+            }
+            else
+            {         
+                // jgsoftwares/openwrt23.05:nftbridgelayer2ext4 
+               
+                String stimagetag = "cloud";
+                String stopenwrt2305host = "jgsoftwares/ipfire:" + stimagetag;
+                dockerClient.pullImageCmd("jgsoftwares/ipfire:" + stimagetag).exec(new PullImageResultCallback()).awaitSuccess();
+            }
                 
            // dockerClient = DockerClientBuilder.getInstance().build();  
             getDockerClient(dockerClient);
@@ -2300,6 +2443,12 @@ public class dockerclient implements Idockerclient
             
         
              dockerClient.startContainerCmd(container.getId()).exec();
+             
+             
+             
+              // jgsoftwares/ipfire:cloud 
+             dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag("cloud").exec();
+             System.out.print("local image commit jgsoftwares/ipfire:cloud");
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);

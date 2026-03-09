@@ -72,7 +72,7 @@ public class Landingpage extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("upload for landingpage.jar > 5 min");
+        jLabel1.setText("upload for landingpage.jar > 10 min");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
