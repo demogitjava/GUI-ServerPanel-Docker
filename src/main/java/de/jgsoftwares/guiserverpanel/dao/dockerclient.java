@@ -386,6 +386,7 @@ public class dockerclient implements Idockerclient
            stimagetag = "11";
            stshell = "/bin/ash";
            struncmdst = "/root/LanServer.sh";
+       
            stcontainername = "openwrtlanservertcp";
         } else if(contsystem.equals("oraclelinux")) {
                 stinstall = "";
@@ -409,45 +410,66 @@ public class dockerclient implements Idockerclient
                 stshell = "/bin/ash";
                 struncmdst = "";
                 stcontainername = "h2lanservertcp";
-        }
-        
-         
-       
-        
-        
-            
-        
+        }      
         
            try
         {
-              
-            
-            
-               
-                ExposedPort tcp8443 = ExposedPort.tcp(8443);
-               
+       
+                ExposedPort tcp8443 = ExposedPort.tcp(8443);    
                 Ports portBindings = new Ports();
-             
                 portBindings.bind(tcp8443, Ports.Binding.bindPort(8443));     
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
-
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("8443:8443"));
-                
-                // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
+                hostConfig.withCapAdd(Capability.NET_ADMIN);
+                hostConfig.withCapAdd(Capability.NET_RAW);
+                hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
-               
                 hostConfig.withPrivileged(Boolean.TRUE);
-                hostConfig.getIsolation();
+                Isolation.PROCESS.getValue();
+                //Isolation.HYPERV.getValue();
+                hostConfig.getMemory();
+                hostConfig.getCgroup();
+                hostConfig.getBinds();
+                hostConfig.getDevices();
+                hostConfig.getDns();
+                hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
+                
+                
               
                 
-            dockerClient.pullImageCmd(stimage)
-                .withTag(stimagetag)
-                .exec(new PullImageResultCallback())
-                .awaitCompletion(30, TimeUnit.SECONDS);
+           // dockerClient.pullImageCmd(stimage)
+            //    .withTag(stimagetag)
+             //   .exec(new PullImageResultCallback())
+             //   .awaitCompletion(30, TimeUnit.SECONDS);
             
+            // check image exist
+              
+            boolean imagenotexist = false;
+            try
+            {
+                dockerClient.inspectContainerCmd(stcontainername).exec();
+            } catch(NotFoundException e)
+            {
+                System.out.print("error search image " + e);
+            }
+            if(imagenotexist == true)
+            {
+                System.out.print("lanserver image exist" + "\n");
+            }
+            else
+            {
+                
+                String stjavaversion = ConfigPanel.stjavaversion.toString();
+                String stlanserverexist = "jgsoftwares/openwrt23.05lanserver:" + stjavaversion;
+                dockerClient.pullImageCmd(stlanserverexist).exec(new PullImageResultCallback()).awaitSuccess();
+            }
+             
+             
+             
         
             switch(contsystem)
             {
@@ -460,7 +482,7 @@ public class dockerclient implements Idockerclient
                   
                   CreateContainerResponse container = dockerClient.createContainerCmd(stimage + ":" + stimagetag)
                  .withCmd("/bin/ash", "/root/LanServer.sh")
-                 .withName("openwrtlanserver")
+                 .withName("openwrtlanservertcp")
                  .withUser("root") 
                  .withHostConfig(hostConfig)
                  .withExposedPorts(tcp8443)
@@ -607,25 +629,12 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse execrunzoneinfo = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && opkg install zoneinfo-all").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execrunzoneinfo.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
-         
-               
-                 // install time zones
-                 //dockerClient.execCreateCmd(container.getId()).withCmd("/bin/ash", "-c", "opkg install zoneinfo-all").exec();
-
-                 // set time zone
-                 //dockerClient.execCreateCmd(container.getId()).withCmd("/bin/ash", "-c", "echo 'CET-1CEST,M3.5.0,M10.5.0/3' > /etc/TZ").exec();
-                
-                 //System.out.print(dockerClient.startContainerCmd(container.getId()) +  "/n");
-               
-                 // get access to running container 
-                 /*
-                    jTextArea1.append("opkg install alpine-repositories" + "/n");
-            jTextArea1.append("opkg install zoneinfo-all" + "/n");
-            jTextArea1.append("check time settings /etc/TZ - for germany CET-1CEST,M3.5.0,M10.5.0/3" + "/n");
-                 */
-                
-                 
-               
+            
+             String stjavaversion = ConfigPanel.stjavaversion.toString();
+             // jgsoftwares/openwrt23.05lanserver     11 
+             dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05lanserver").withTag(stjavaversion).exec();
+             System.out.print("local image commit" + "jgsoftwares/openwrt23.05lanserver:" + stjavaversion + "\n");
+     
                  break;
                 }
                 
