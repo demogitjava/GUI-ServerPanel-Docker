@@ -2036,11 +2036,24 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse execrunzoneinfo = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && opkg install zoneinfo-all").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execrunzoneinfo.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
-         
+                   
+             // install iptables firewall package
+             // create dir
+             // /var/run -- for lock file for iptables
+             // opkg install iptables-legacy
+             ExecCreateCmdResponse execreatedir = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "mkdir /var/run/").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execreatedir.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+          
+             ExecCreateCmdResponse execinstalliptables = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install iptables-legacy").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstalliptables.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+          
+             
+             // commit
              // jgsoftwares/openwrt23.05landingpage   java11
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java11").exec();
              System.out.print("local image commit jgsoftwares/openwrt23.05landingpage:java11");
          
+       
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
