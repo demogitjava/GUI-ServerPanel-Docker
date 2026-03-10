@@ -845,6 +845,7 @@ public class dockerclient implements Idockerclient
                             imageexist = "jgsoftwares/openwrt23.05derbydb:10-17-01-21";
                             stforcommit = "jgsoftwares/openwrt23.05derbydb";
                             sttag = "10-17-01-21";
+                            break;
                         }
                         case "25":
                         {
@@ -852,6 +853,7 @@ public class dockerclient implements Idockerclient
                             imageexist = "jgsoftwares/openwrt23.05derbydb:10-17-01-25";
                             stforcommit = "jgsoftwares/openwrt23.05derbydb";
                             sttag = "10-17-01-25";
+                            break;
                         }
                         case "27":
                         {
@@ -859,6 +861,7 @@ public class dockerclient implements Idockerclient
                             imageexist = "jgsoftwares/openwrt23.05derbydb:10-17-01-27";
                             stforcommit = "jgsoftwares/openwrt23.05derbydb";
                             sttag = "10-17-01-27";
+                            break;
                         }
                         default:
                             break;
