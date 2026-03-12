@@ -1,8 +1,6 @@
 package de.jgsoftwares.guiserverpanel;
 
 import javax.swing.*;
-import net.sf.nimrod.NimRODLookAndFeel;
-import static net.sf.nimrod.NimRODMain.nt;
 
 public class GUIServerPanel implements i_GuiServerPanel
 { 
@@ -38,7 +36,7 @@ public class GUIServerPanel implements i_GuiServerPanel
         try
         {
             UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
-        } catch (Exception e)
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e)
         {
             System.out.print("LookAndFeel Error NomRoD !");
         }     
