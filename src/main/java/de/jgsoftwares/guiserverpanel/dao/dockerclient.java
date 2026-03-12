@@ -2401,6 +2401,25 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse execaddstringhostname = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "openwrt2305host" + " >> /etc/hostname").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringhostname.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
+             // install iptables firewall package
+             // create dir
+             // /var/run -- for lock file for iptables
+             // opkg install iptables-legacy
+             ExecCreateCmdResponse execreatedir = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "mkdir /var/run/").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execreatedir.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+          
+             ExecCreateCmdResponse execinstalliptables = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install iptables-legacy").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstalliptables.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+          
+             // iptables save
+             ExecCreateCmdResponse execiptablessave = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "iptables-legacy-save").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execiptablessave.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             
+             // commit
+             // jgsoftwares/openwrt23.05
+             dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05").withTag("nftbridgelayer2ext4").exec();
+             System.out.print("local image commit jgsoftwares/openwrt23.05:nftbridgelayer2ext4");
+             
 
         } catch(Exception e)
         {
