@@ -2805,7 +2805,7 @@ public class dockerclient implements Idockerclient
         
     }
     
-    public void copyjartohttpfileserver(File httpfileserverpagefile)
+    public void copyjartohttpfileserver(File httpfileserverpagefile, String stresource)
     {
           try {
             String containerid = "openwrthttpfileserver";
@@ -2815,10 +2815,7 @@ public class dockerclient implements Idockerclient
             
             String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
             
-            String resource = httpfileserverpagefile.toString();
-            
-            
-           
+            stresource = httpfileserverpagefile.toString();
            
             // dockerClient.copyArchiveToContainerCmd("openwrtlandingpagedebug")
             //        .withRemotePath("/root/")
@@ -2826,9 +2823,9 @@ public class dockerclient implements Idockerclient
             //        .exec();
             dockerClient.copyArchiveToContainerCmd(containerID)
                     
-                    .withHostResource(resource)
+                    .withHostResource(stresource)
                     .withRemotePath("/root").exec();
-            Landingpage.jLabel1chooser.setText("file upload to httpfileserver " + resource + "\n");
+            Landingpage.jLabel1chooser.setText("file upload to httpfileserver " + stresource + "\n");
             System.out.print("file " + httpfileserverpagefile + "\n");
             
             
