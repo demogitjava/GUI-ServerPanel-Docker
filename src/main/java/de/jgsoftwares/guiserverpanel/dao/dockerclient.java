@@ -9,6 +9,7 @@ import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Network;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import com.github.dockerjava.api.command.ListContainersCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.HostConfig;
@@ -2804,6 +2805,38 @@ public class dockerclient implements Idockerclient
         
     }
     
+    public void copyjartohttpfileserver(File httpfileserverpagefile)
+    {
+          try {
+            String containerid = "openwrthttpfileserver";
+            
+            // dockerClient = DockerClientBuilder.getInstance().build();
+            getDockerClient(dockerClient);
+            
+            String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
+            
+            String resource = httpfileserverpagefile.toString();
+            
+            
+           
+           
+            // dockerClient.copyArchiveToContainerCmd("openwrtlandingpagedebug")
+            //        .withRemotePath("/root/")
+            //        .withTarInputStream(tarArchiveInputStream)
+            //        .exec();
+            dockerClient.copyArchiveToContainerCmd(containerID)
+                    
+                    .withHostResource(resource)
+                    .withRemotePath("/root").exec();
+            Landingpage.jLabel1chooser.setText("file upload to httpfileserver " + resource + "\n");
+            System.out.print("file " + httpfileserverpagefile + "\n");
+            
+            
+        } catch (Exception ex) {
+            System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
     // copy jar from local to docker container landingpage
     public void copyjartolandingpage(File landingpagefile)
     {
@@ -2876,5 +2909,12 @@ public class dockerclient implements Idockerclient
         
     }
 
-     
+    
+    // delete file form dockercontainer httpfileserver
+    @Override
+    public void deletefilehttpfileserver(String fileresourcepath)
+    {
+       
+       
+    }
 }

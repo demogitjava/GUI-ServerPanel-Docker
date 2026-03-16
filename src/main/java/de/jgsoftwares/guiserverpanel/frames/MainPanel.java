@@ -7,10 +7,6 @@ import java.util.HashMap;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import net.sf.nimrod.NimRODLookAndFeel;
-import static net.sf.nimrod.NimRODMain.nt;
 //import static net.sf.nimrod.NimRODMain.nt;
 
 
@@ -39,6 +35,7 @@ public class MainPanel extends javax.swing.JFrame {
     public MainPanel() {
     
               
+       
         dockercontainerhashmap = new HashMap();
         
         rootNode = new DefaultMutableTreeNode("Docker Client");
@@ -76,7 +73,7 @@ public class MainPanel extends javax.swing.JFrame {
         jButton3.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Docker Panel - Host only");
+        setTitle("Docker Panel - Host only -");
 
         jToolBar1.setRollover(true);
 

@@ -40,5 +40,5 @@ public interface Idockerclient {
     public void attachContainer(String stdockerclient);
     public void startopenwrt2305none(String stopenwrtnone);
     public void startopenwrt2305host(String stopenwrthost);
-    
+    public void deletefilehttpfileserver(String fileresourcepath);
 }
