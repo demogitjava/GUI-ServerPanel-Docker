@@ -37,6 +37,7 @@ import de.jgsoftwares.guiserverpanel.frames.Landingpage;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
+import de.jgsoftwares.guiserverpanel.frames.httpfileserver;
 import java.io.File;
 
 
@@ -2805,17 +2806,21 @@ public class dockerclient implements Idockerclient
         
     }
     
-    public void copyjartohttpfileserver(File httpfileserverpagefile, String stresource)
+    @Override
+    public void copyjartohttpfileserver(File httpfile)
     {
-          try {
+       try {
             String containerid = "openwrthttpfileserver";
             
             // dockerClient = DockerClientBuilder.getInstance().build();
             getDockerClient(dockerClient);
             
             String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
-             
-            stresource = httpfileserverpagefile.toString();
+            
+            String resource = httpfile.toString();
+            
+            
+           
            
             // dockerClient.copyArchiveToContainerCmd("openwrtlandingpagedebug")
             //        .withRemotePath("/root/")
@@ -2823,10 +2828,11 @@ public class dockerclient implements Idockerclient
             //        .exec();
             dockerClient.copyArchiveToContainerCmd(containerID)
                     
-                    .withHostResource(stresource)
+                    .withHostResource(resource)
                     .withRemotePath("/usr/share/apache2/htdocs/").exec();
-            Landingpage.jLabel1chooser.setText("file upload to httpfileserver " + stresource + "\n");
-            System.out.print("file " + httpfileserverpagefile + "\n");
+            //Landingpage.jLabel1chooser.setText("file upload to landingpagecontainer " + resource + "\n");
+            httpfileserver.jLabel7.setText("upload file to " + resource + "\n");
+            System.out.print("file " + httpfile + "\n");
             
             
         } catch (Exception ex) {

@@ -3,6 +3,7 @@ package de.jgsoftwares.guiserverpanel.dao;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -41,4 +42,6 @@ public interface Idockerclient {
     public void startopenwrt2305none(String stopenwrtnone);
     public void startopenwrt2305host(String stopenwrthost);
     public void deletefilehttpfileserver(String fileresourcepath);
+    
+    public void copyjartohttpfileserver(File httpfile);
 }
