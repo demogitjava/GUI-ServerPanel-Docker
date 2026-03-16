@@ -2824,7 +2824,7 @@ public class dockerclient implements Idockerclient
             dockerClient.copyArchiveToContainerCmd(containerID)
                     
                     .withHostResource(stresource)
-                    .withRemotePath("/root").exec();
+                    .withRemotePath("/usr/share/apache2/htdocs/").exec();
             Landingpage.jLabel1chooser.setText("file upload to httpfileserver " + stresource + "\n");
             System.out.print("file " + httpfileserverpagefile + "\n");
             
