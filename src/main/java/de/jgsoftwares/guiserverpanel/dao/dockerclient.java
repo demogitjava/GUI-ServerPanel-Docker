@@ -1,6 +1,6 @@
 package de.jgsoftwares.guiserverpanel.dao;
 
-
+import com.github.dockerjava.api.model.Swarm;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
@@ -8,6 +8,7 @@ import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Network;
+
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.command.ListContainersCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
@@ -19,7 +20,10 @@ import java.io.BufferedReader;
 
         
 import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.api.model.ContainerSpec;
 import com.github.dockerjava.api.model.Isolation;
+import com.github.dockerjava.api.model.ServiceSpec;
+import com.github.dockerjava.api.model.TaskSpec;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -1793,7 +1797,7 @@ public class dockerclient implements Idockerclient
                 dockerClient.pullImageCmd(stlandingpageexist).exec(new PullImageResultCallback()).awaitSuccess();
             }
           
-            
+          
             CreateContainerResponse container = null;
             
               
@@ -2082,8 +2086,7 @@ public class dockerclient implements Idockerclient
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java" +ConfigPanel.stjavaversion).exec();
              System.out.print("local image commit jgsoftwares/openwrt23.05landingpage:java11");
          
-            
-       
+             
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
@@ -2833,6 +2836,7 @@ public class dockerclient implements Idockerclient
             //Landingpage.jLabel1chooser.setText("file upload to landingpagecontainer " + resource + "\n");
             httpfileserver.jLabel7.setText("upload file to " + resource + "\n");
             System.out.print("file " + httpfile + "\n");
+            
             
             
         } catch (Exception ex) {

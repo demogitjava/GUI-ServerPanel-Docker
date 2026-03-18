@@ -1,8 +1,10 @@
 
 package de.jgsoftwares.guiserverpanel.frames;
 
+import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
 import java.awt.Frame;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -332,6 +334,7 @@ public class ConfigPanel extends javax.swing.JPanel {
         */
         stjavaversion = String.valueOf(jComboBox6.getSelectedItem());
         
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
