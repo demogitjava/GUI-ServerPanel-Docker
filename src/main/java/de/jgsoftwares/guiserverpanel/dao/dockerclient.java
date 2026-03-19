@@ -2,13 +2,14 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 import com.github.dockerjava.api.model.Swarm;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Network;
-
+import com.github.dockerjava.api.command.AttachContainerCmd;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.command.ListContainersCmd;
 import com.github.dockerjava.api.exception.NotFoundException;
@@ -21,8 +22,10 @@ import java.io.BufferedReader;
         
 import com.github.dockerjava.api.model.Capability;
 import com.github.dockerjava.api.model.ContainerSpec;
+import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.Isolation;
 import com.github.dockerjava.api.model.ServiceSpec;
+import com.github.dockerjava.api.model.StreamType;
 import com.github.dockerjava.api.model.TaskSpec;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
@@ -76,8 +79,8 @@ public class dockerclient implements Idockerclient
     java.io.FileInputStream tarStream;
     
     
-    PipedInputStream inputStream;
-    PipedOutputStream outputStream;
+    PipedInputStream inputStream = null;
+    PipedOutputStream outputStream = null;
    
     public static DockerClient dockerClient;
     //DockerClient dockerClient;
@@ -2190,6 +2193,7 @@ public class dockerclient implements Idockerclient
                 Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();
+               
                 hostConfig.getCgroup();
                 hostConfig.getBinds();
                 hostConfig.getDevices();
@@ -2248,6 +2252,7 @@ public class dockerclient implements Idockerclient
                     .withAttachStderr(true)
                     .withAttachStdin(true)
                     .withAttachStdout(true)
+                    .withTty(false)
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE) 
@@ -2916,6 +2921,17 @@ public class dockerclient implements Idockerclient
         
     }
 
+    
+    @Override
+    public void attachopenwrt2305hostcontainer()
+    {
+         
+    
+       
+       
+
+
+    }
     
     // delete file form dockercontainer httpfileserver
     @Override
