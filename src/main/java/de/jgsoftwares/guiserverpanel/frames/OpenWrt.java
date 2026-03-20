@@ -23,6 +23,10 @@ import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.StreamType;
+import java.awt.Container;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 public class OpenWrt extends javax.swing.JPanel {
 
@@ -67,6 +71,7 @@ public class OpenWrt extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -121,6 +126,8 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jLabel15.setText("with ipfire a simple firewall is running over docker");
 
+        jLabel16.setText("default login: admin jj78mvpr52k1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,7 +180,8 @@ public class OpenWrt extends javax.swing.JPanel {
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -215,8 +223,10 @@ public class OpenWrt extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -225,7 +235,7 @@ public class OpenWrt extends javax.swing.JPanel {
         
          de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
         
-        
+       
         String stopenwrthost = new String("docker run -it "
                 + "--add-host=" + ConfigPanel.styourdomainname + ":"  + ConfigPanel.stwanip + " " 
                 + "--runtime " + stcomboruntime + " " 
@@ -293,6 +303,199 @@ public class OpenWrt extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
+        JFrame jframeconfigipfire = new JFrame("ipfire config");
+        
+        Container containerPane = jframeconfigipfire.getContentPane();
+        
+        JEditorPane jeditorPane = new JEditorPane();
+        JScrollPane jscrollpane3 = new JScrollPane(jeditorPane);
+        
+        jeditorPane.setEditable(false); // Als Viewer, nicht Editor
+
+         // " + ConfigPanel.stwanip + " " + "
+        // 2. HTML Inhalt setzen
+        jeditorPane.setContentType("text/html");
+        jeditorPane.setText("<html><body>" +
+                           "<h1>Ipfire simple manuel config</h1>" +
+                           "<p></p>" +
+                           "<br> " +
+                           "<h1>add ipfirehub </h1>" +
+                           "<p>brctl addbr ipfirehub</p>" +
+                           "<p>ifconfig ipfirehub up</p>" +
+                           "<br> " +
+                           "<h1>vi /var/ipfire/firewall/config</h1>" + 
+                           "<p>5,REJECT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,RED,ON,UDP,,9092,ON,,,TGT_PORT,9092,dropbittorent,,,,,,,,,,00:00,00:00,,AUTO,,dnat,,,,,second</p>" +
+                           "<p>6,ACCEPT,FORWARDFW,ON,src_addr," + ConfigPanel.stwanip + "/32,std_net_tgt,RED,,TCP,,80,ON,,,cust_srv,HTTP,HTTP,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second </p>" +
+                           "<p>1,ACCEPT,FORWARDFW,ON,src_addr," + ConfigPanel.stwanip + "/32,std_net_tgt,RED,ON,TCP,,1527,ON,,,TGT_PORT,1527,DerbyDB,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second</p>" +
+                           "<p>4,ACCEPT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,ORANGE,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second</p>" +
+                           "<p>3,ACCEPT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,ORANGE,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second</p>" +
+                           "<p>2,ACCEPT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,ORANGE,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second</p>" +
+                           "<br> " +
+                           "<h1>vi /var/ipfire/firewall/input</h1>" + 
+                           "<p>8,ACCEPT,INPUTFW,ON,std_net_src,ALL,ipfire,ORANGE,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second,</p>" +
+                           "<p>4,ACCEPT,INPUTFW,ON,src_addr," + ConfigPanel.stwanip + "/32,ipfire,RED1,ON,TCP,,1527,ON,,,TGT_PORT,1527,DerbyDB,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second</p>" +
+                           "<p>5,ACCEPT,INPUTFW,ON,src_addr," + ConfigPanel.stwanip + "/32,ipfire,RED1,ON,TCP,,8443,ON,,,TGT_PORT,8443,Lanserver,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second</p>" +
+                           "<p>6,ACCEPT,INPUTFW,ON,src_addr," + ConfigPanel.stwanip + "/32,ipfire,RED1,ON,TCP,,8000,ON,,,TGT_PORT,8000,HttpFileserver,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second</p>" +
+                           "<p>3,ACCEPT,INPUTFW,ON,src_addr," + ConfigPanel.stwanip + "/32,ipfire,RED1,,TCP,,80,ON,,,cust_srv,HTTP,HTTP,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second</p>" +
+                           "<p>7,ACCEPT,INPUTFW,ON,src_addr," + ConfigPanel.stwanip + "/32,ipfire,GREEN,ON,UDP,,51820,ON,,,TGT_PORT,51820,Wireguard,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second</p>" +
+                           "<p>1,ACCEPT,INPUTFW,ON,src_addr,192.168.10.56/32,ipfire,ORANGE,ON,TCP,,22,ON,,,TGT_PORT,22,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second</p>" +
+                           "<p>2,ACCEPT,INPUTFW,ON,src_addr," + ConfigPanel.stwanip + "/32,ipfire,RED1,,TCP,,80,ON,,,cust_srv,HTTP,HTTP,,,,,,,,,,00:00,00:00,ON,Default IP,80,dnat,,,,,second</p>" +
+                           "<br> " +
+                           "<h1>vi /var/ipfire/firewall/outgoing</h1>" +            
+                           "<p>1,REJECT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,RED,ON,UDP,,9092,ON,,,TGT_PORT,9092,dropbittorent,,,,,,,,,,00:00,00:00,,AUTO,,dnat,,,,,second </p>" +
+                           "<p>4,ACCEPT,FORWARDFW,ON,src_addr," + ConfigPanel.stwanip + "/32,std_net_tgt,RED,ON,TCP,,8443,ON,,,TGT_PORT,8443,Lanserver,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second      </p>" +
+                           "<p>2,ACCEPT,FORWARDFW,ON,src_addr," + ConfigPanel.stwanip + "/32,std_net_tgt,RED,,TCP,,80,ON,,,cust_srv,HTTP,HTTP,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second </p>" +
+                           "<p>3,ACCEPT,FORWARDFW,ON,src_addr," + ConfigPanel.stwanip + "/32,std_net_tgt,RED,ON,TCP,,1527,ON,,,TGT_PORT,1527,DerbyDB,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second  </p>" +
+                           "<p>7,ACCEPT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,OpenVPN-Dyn,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second    </p>" +
+                           "<p>5,ACCEPT,FORWARDFW,ON,src_addr," + ConfigPanel.stwanip + "/32,std_net_tgt,RED,ON,TCP,,8000,ON,,,TGT_PORT,8000,HttpFileserver,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second    </p>" +
+                           "<p>6,ACCEPT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,OpenVPN-Dyn,ON,UDP,,51820,ON,,,TGT_PORT,51820,Wireguard,,,,,,,,,,00:00,00:00,,AUTO,,dnat,,,,,second,ON </p>" +
+                           "<br> " +
+                           "<h1>vi /etc/unbound/local.d/insecure.conf</h1>" +         
+                           "<p>server:\n" +
+                           "               domain-insecure: yourdomain</p>" +
+                           "<br> " +
+                           "<h1>vi /var/ipfire/ethernet/vlans</h1>" +        
+                           "<p>GREEN_PARENT_DEV=vxlanwireguard</p>" +
+                           "<p>GREEN_VLAN_ID=10   </p>" + 
+                           "<p>GREEN_MAC_ADDRESS=e2:3e:c8:2d:3e:1c   </p>" +
+                           "<p>RED_PARENT_DEV=eth0   </p>" +
+                           "<p>RED_VLAN_ID=0  </p>" +
+                           "<p>RED_MAC_ADDRESS=02:01:18:4f:53:80   </p>" +
+                           "<p>ORANGE_PARENT_DEV=vxlanwireguard    </p>" +
+                           "<p>ORANGE_VLAN_ID=20    </p>" +
+                           "<p>ORANGE_MAC_ADDRESS=e2:3e:c8:2d:3e:1c    </p>" +
+                           "<br> " +
+                           "<h1>vi /etc/ntp/ntpInclude.conf</h1>" +
+                           "<p>server 2.rhel.pool.ntp.org prefer</p>" +
+                           "<p>restart ntp with</p>" +
+                           "<p>/etc/init.d/ntp start </p>" +
+                           "<br> " +
+                           "<h1>vi /var/ipfire/ethernet/settings</h1>" +
+                           "<p>CONFIG_TYPE=2</p>" +
+                           "<p>GREEN_DEV=green0</p>" +
+                           "<p>GREEN_MACADDR=e2:3e:c8:2d:3e:1c</p>" +
+                           "<p>GREEN_DESCRIPTION='\"tap: device on green0\"'</p>" +
+                           "<p>GREEN_MODE=NATIVE</p>" +
+                           "<p>GREEN_ADDRESS=192.168.10.56</p>" +
+                           "<p>GREEN_NETMASK=255.255.255.0</p>" +
+                           "<p>GREEN_NETADDRESS=192.168.10.0</p>" +
+                           "<p>GREEN_DRIVER=tap</p>" +
+                           "<p>RED_DEV=red0</p>" +
+                           "<p>RED_MACADDR=02:01:18:4f:53:80</p>" +
+                           "<p>RED_DESCRIPTION='\"tap: device on red0\"'</p>" +
+                           "<p>RED_DRIVER=tap</p>" +
+                           "<p>RED_MODE=NATIVE</p>" +
+                           "<p>RED_DHCP_HOSTNAME=demogitjava.ddns.net</p>" +
+                           "<p>RED_DHCP_FORCE_MTU=1500</p>" +
+                           "<p>RED_DHCP_RAPID_COMMIT=off</p>" +
+                           "<p>RED_ADDRESS=" + ConfigPanel.stwanip + "</p>" +
+                           "<p>RED_NETMASK=255.255.255.255</p>" +
+                           "<p>DEFAULT_GATEWAY=10.255.255.1</p>" +
+                           "<p>RED_NETADDRESS=" + ConfigPanel.stwanip + "</p>" + 
+                           "<p>ORANGE_DEV=orange0</p>" +
+                           "<p>ORANGE_MACADDR=0e:98:7f:b7:2d:ec</p>" +
+                           "<p>ORANGE_DESCRIPTION='\"???: Unknown Network Interface (vxlanwan)\"'</p>" +
+                           "<p>ORANGE_MODE=bridge</p>" +
+                           "<p>ORANGE_DESCRIPTION='\"tap: device on orange0\"'</p>" +
+                           "<p>ORANGE_DRIVER=tap</p>" +
+                           "<p>ORANGE_ADDRESS=10.255.255.1</p>" +
+                           "<p>ORANGE_NETMASK=0.0.0.0</p>" +
+                           "<p>ORANGE_NETADDRESS=0.0.0.0</p>" +
+                           "<p>RED_TYPE=STATIC</p>" +
+                           "<p>BLUE_DRIVER=</p>" +
+                           "<p>BLUE_DEV=</p>" +
+                           "<p>BLUE_MACADDR=</p>" +
+                           "<p>BLUE_DESCRIPTION=</p>" +
+                            "<br> " +
+                           "<h1>run commands in ipfire container</h1>" +
+                           "<p>reboot</p>" +
+                           "<p>iptables -F</p>" +
+                           "<p>iptables -N raw</p>" +
+                           "<p>/etc/rc.d/init.d/networking/red start</p>" +
+                           "<p>ip route del 10.255.255.1/32 </p>" +
+                           "<p>/etc/init.d/localnet start</p>" +
+                           "<p>/etc/init.d/dhcrelay start</p>" +
+                           "<p>/etc/init.d/leds start</p>" +
+                           "<p>/etc/init.d/sysctl start</p>" +
+                           "<p>/etc/init.d/wlanclient stop</p>" +
+                           "<p>iptables -t nat -I PREROUTING -p tcp -i orange0 --dport 22 -j DNAT --to 192.168.10.56:22</p>" +
+                           "<p>iptables -A FORWARD -i orange0 -o green0 -p tcp --dport 22 -j ACCEPT</p>" +
+                           "<p>iptables -t nat -I PREROUTING -p tcp -i orange0 --dport 6010 -j DNAT --to 127.0.0.1:6010</p>" +
+                           "<p>iptables -A FORWARD -i orange0 -o green0 -p tcp --dport 6010 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --dport 80 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A OUTPUT -p tcp --dport 80 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --dport 8000 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A OUTPUT -p tcp --dport 8000 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --dport 1527 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A OUTPUT -p tcp --dport 1527 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --dport 8443 -s 192.168.10.56 -j ACCEPT</p>" +
+                           "<p>iptables -A OUTPUT -p tcp --dport 8443 -s 192.168.10.56 -j ACCEPT</p>" +
+                           "<p>iptables -A FORWARD -i orange0 -o green0 -p tcp --dport 8443 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --dport 51820 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A OUTPUT -p tcp --dport 51820 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
+                           "<p>iptables -A FORWARD -i orange0 -o green0 -p tcp --dport 51820 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p udp --dport 53 -d 95.85.95.85,2.56.220.2 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p udp --sport 53 -s 95.85.95.85,2.56.220.2 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p udp --dport 53 -d 8.8.8.8,8.8.4.4 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p udp --sport 53 -s 8.8.8.8,8.8.4.4 -j ACCEPT</p>" +
+                           "<p>ip6tables -P INPUT DROP</p>" +
+                           "<p>ip6tables -P FORWARD DROP</p>" +
+                           "<p>iptables -D FORWARD 1 # docker-user</p>" +
+                           "<p>iptables -D FORWARD 1 # DOCKER-ISOLATION-STAGE-1</p>" +
+                           "<p>iptables -D DOCKER-ISOLATION-STAGE-1 1 # DOCKER-ISOLATION-STAGE-1</p>" +
+                           "<p>iptables -D DOCKER-ISOLATION-STAGE-1 1 # return </p>" +
+                           "<p>iptables -D DOCKER-ISOLATION-STAGE-2 1 # DOCKER-ISOLATION-STAGE-1</p>" +
+                           "<p>iptables -D DOCKER-ISOLATION-STAGE-2 1 # return</p>" +
+                           "<p>iptables -D DOCKER-USER 1 # return</p>" +
+                           "<p>iptables -t nat -A POSTROUTING -j MASQUERADE</p>" +
+                           "<p>iptables -vt nat -A CUSTOMPREROUTING ! -o orange0 -p udp --destination-port 53 -j REDIRECT --to-ports 53</p>" +
+                           "<p>iptables -vt nat -A CUSTOMPREROUTING ! -o orange0 -p tcp --destination-port 53 -j REDIRECT --to-ports 53</p>" +
+                           "<p>/etc/sysconfig/firewall.local start</p>" +
+                           "<p>/etc/init.d/wlanclient stop</p>" +
+                           "<p>/etc/init.d/cloud-init start</p>" +
+                           "<p>/etc/rc.d/init.d/static-routes reload</p>" +
+                           "<p>ip addr del 127.0.0.1/8 dev lo</p>" +
+                           "<p>ip addr del ::1/128 dev lo</p>" +
+                           "<p>sysctl net.ipv4.ip_forward=1</p>" +
+                           "<p>sysctl net.ipv4.conf.all.src_valid_mark=1</p>" +
+                           "<p>sysctl net.ipv6.conf.all.disable_ipv6=1</p>" +
+                           "<p>sysctl net.ipv6.conf.default.disable_ipv6 = 1</p>" +
+                           "<p>sysctl net.ipv6.conf.lo.disable_ipv6 = 1</p>" +
+                           "<p>ip link set red0 up</p>" +
+                           "<p>ip link set green0 up</p>" +
+                           "<p>ip link set orange0 up</p>" +
+                           "<p>ip route del 10.255.255.1/32 </p>" +
+                           "<p>route del -net 192.168.10.0 gw 0.0.0.0 netmask 255.255.255.0 dev wireguard</p>" +
+                           "<p>route add -net 192.168.10.0 gw 192.168.10.56 netmask 255.255.255.0 dev wireguard</p>" +
+                           "<p>ip link add link red0 name redvlan type vlan id 0</p>" +
+                           "<p>ifconfig redvlan up</p>" +
+                           "<p>ip link add link green0 name greenvlan type vlan id 10</p>" +
+                           "<p>ifconfig greenvlan up</p>" +
+                           "<p>ip link add link orange0 name orangevlan type vlan id 20</p>" +
+                           "<p>ifconfig orangevlan up</p>" +
+                           "<p>brctl addif ipfirehub redvlan</p>" +
+                           "<p>ip route add " + ConfigPanel.stwanip + " via 10.255.255.1 dev orange0</p>" +
+                           "<br> " +
+                           "<h1>delete red0.info file</h1>" +
+                           "<p>rm -rf /var/ipfire/dhcpc/red0.lease</p>" +
+                           "<br> " +
+                           "<h1>edit dns server ip in dhcpcd-red0.info file</h1>" +
+                           "<p>domain_name_servers='95.85.95.85 2.56.220.2'    <----- to public dns like gcore    </p>" +
+                           "<p></p>" +
+                           "<p></p>" +
+                           "<p></p>" +
+                           "<p></p>" +
+                           "<p></p>" +
+                           "<p></p>" +
+                           "<br> " +
+                           "</body></html>");
+        
+        
+        
+        containerPane.add(jscrollpane3, "Center");
+        
+        jframeconfigipfire.setVisible(true);
+        jframeconfigipfire.pack();
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
@@ -307,6 +510,7 @@ public class OpenWrt extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

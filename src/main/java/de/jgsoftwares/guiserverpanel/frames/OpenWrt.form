@@ -98,6 +98,7 @@
                       <Component id="jLabel13" min="-2" pref="259" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -143,8 +144,10 @@
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="178" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="150" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -253,6 +256,11 @@
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
         <Property name="text" type="java.lang.String" value="with ipfire a simple firewall is running over docker"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel16">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="default login: admin jj78mvpr52k1"/>
       </Properties>
     </Component>
   </SubComponents>
