@@ -2826,10 +2826,7 @@ public class dockerclient implements Idockerclient
             String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
             
             String resource = httpfile.toString();
-            
-            
-           
-           
+      
             // dockerClient.copyArchiveToContainerCmd("openwrtlandingpagedebug")
             //        .withRemotePath("/root/")
             //        .withTarInputStream(tarArchiveInputStream)
