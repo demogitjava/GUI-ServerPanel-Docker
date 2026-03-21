@@ -2815,7 +2815,7 @@ public class dockerclient implements Idockerclient
     }
     
     @Override
-    public void copyjartohttpfileserver(File httpfile)
+    public void copyjartohttpfileserver(File httpfile, String stpath)
     {
        try {
             String containerid = "openwrthttpfileserver";
@@ -2837,7 +2837,7 @@ public class dockerclient implements Idockerclient
             dockerClient.copyArchiveToContainerCmd(containerID)
                     
                     .withHostResource(resource)
-                    .withRemotePath("/usr/share/apache2/htdocs/").exec();
+                    .withRemotePath("/usr/share/apache2/htdocs/" + stpath).exec();
             //Landingpage.jLabel1chooser.setText("file upload to landingpagecontainer " + resource + "\n");
             httpfileserver.jLabel7.setText("upload file to " + resource + "\n");
             System.out.print("file " + httpfile + "\n");

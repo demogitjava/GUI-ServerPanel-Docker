@@ -43,7 +43,7 @@ public interface Idockerclient {
     public void startopenwrt2305host(String stopenwrthost);
     public void deletefilehttpfileserver(String fileresourcepath);
     
-    public void copyjartohttpfileserver(File httpfile);
+    public void copyjartohttpfileserver(File httpfile, String stpath);
     
     public void attachopenwrt2305hostcontainer();
 }

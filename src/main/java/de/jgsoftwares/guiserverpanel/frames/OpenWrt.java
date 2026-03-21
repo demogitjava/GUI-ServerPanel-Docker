@@ -316,6 +316,10 @@ public class OpenWrt extends javax.swing.JPanel {
         // 2. HTML Inhalt setzen
         jeditorPane.setContentType("text/html");
         jeditorPane.setText("<html><body>" +
+                           "<h1>Ipfire dns config </h1>" +
+                           "<p>for</p>" +
+                           "<p></p>" +
+                           "<br> " +
                            "<h1>Ipfire simple manuel config</h1>" +
                            "<p></p>" +
                            "<br> " +
@@ -452,8 +456,8 @@ public class OpenWrt extends javax.swing.JPanel {
                            "<p>iptables -D DOCKER-ISOLATION-STAGE-2 1 # return</p>" +
                            "<p>iptables -D DOCKER-USER 1 # return</p>" +
                            "<p>iptables -t nat -A POSTROUTING -j MASQUERADE</p>" +
-                           "<p>iptables -vt nat -A CUSTOMPREROUTING ! -o orange0 -p udp --destination-port 53 -j REDIRECT --to-ports 53</p>" +
-                           "<p>iptables -vt nat -A CUSTOMPREROUTING ! -o orange0 -p tcp --destination-port 53 -j REDIRECT --to-ports 53</p>" +
+                           "<p>iptables -vt nat -A CUSTOMPREROUTING ! -o orange0 -p udp --destination-port 853 -j REDIRECT --to-ports 853</p>" +
+                           "<p>iptables -vt nat -A CUSTOMPREROUTING ! -o orange0 -p tcp --destination-port 853 -j REDIRECT --to-ports 853</p>" +
                            "<p>/etc/sysconfig/firewall.local start</p>" +
                            "<p>/etc/init.d/wlanclient stop</p>" +
                            "<p>/etc/init.d/cloud-init start</p>" +
