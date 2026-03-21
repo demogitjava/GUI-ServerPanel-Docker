@@ -319,6 +319,10 @@ public class OpenWrt extends javax.swing.JPanel {
                            "<h1>Ipfire simple manuel config</h1>" +
                            "<p></p>" +
                            "<br> " +
+                           "<h1>config network for ipfire</h1>" +
+                           "<h1>run command</h1>" +
+                           "<p>setup</p>" +
+                           "<br> " +
                            "<h1>add ipfirehub </h1>" +
                            "<p>brctl addbr ipfirehub</p>" +
                            "<p>ifconfig ipfirehub up</p>" +
@@ -434,10 +438,10 @@ public class OpenWrt extends javax.swing.JPanel {
                            "<p>iptables -A INPUT -p tcp --dport 51820 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
                            "<p>iptables -A OUTPUT -p tcp --dport 51820 -s " + ConfigPanel.stwanip + " -j ACCEPT</p>" +
                            "<p>iptables -A FORWARD -i orange0 -o green0 -p tcp --dport 51820 -j ACCEPT</p>" +
-                           "<p>iptables -A INPUT -p udp --dport 53 -d 95.85.95.85,2.56.220.2 -j ACCEPT</p>" +
-                           "<p>iptables -A INPUT -p udp --sport 53 -s 95.85.95.85,2.56.220.2 -j ACCEPT</p>" +
-                           "<p>iptables -A INPUT -p udp --dport 53 -d 8.8.8.8,8.8.4.4 -j ACCEPT</p>" +
-                           "<p>iptables -A INPUT -p udp --sport 53 -s 8.8.8.8,8.8.4.4 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --dport 853 -d 95.85.95.85,2.56.220.2 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --sport 853 -s 95.85.95.85,2.56.220.2 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --dport 853 -d 8.8.8.8,8.8.4.4 -j ACCEPT</p>" +
+                           "<p>iptables -A INPUT -p tcp --sport 853 -s 8.8.8.8,8.8.4.4 -j ACCEPT</p>" +
                            "<p>ip6tables -P INPUT DROP</p>" +
                            "<p>ip6tables -P FORWARD DROP</p>" +
                            "<p>iptables -D FORWARD 1 # docker-user</p>" +
