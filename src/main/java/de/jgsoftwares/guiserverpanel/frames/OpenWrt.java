@@ -72,7 +72,6 @@ public class OpenWrt extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -129,13 +128,6 @@ public class OpenWrt extends javax.swing.JPanel {
 
         jLabel16.setText("default login: admin jj78mvpr52k1");
 
-        jButton3.setText("attach docker container");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +139,6 @@ public class OpenWrt extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -197,9 +188,7 @@ public class OpenWrt extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
@@ -330,12 +319,30 @@ public class OpenWrt extends javax.swing.JPanel {
                            "<p>http://demogitjava.ddns.net:8000/ipfire/ipfire_dnsovertlswithoutisp.jpg </p>" +
                            "<p>ipfire after reboot use gcore and google</p>" +
                            "<br> " +
-                           "<h1>Ipfire simple manuel config</h1>" +
+                           "<h1>Ipfire simple manually config</h1>" +
                            "<p></p>" +
                            "<br> " +
+                         
                            "<h1>config network for ipfire</h1>" +
                            "<h1>run command</h1>" +
                            "<p>setup</p>" +
+                           "<h1>routing table config</h1>" +
+                           "<p>Kernel IP routing table</p>" +  
+                           "<p>Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</p>" +   
+                           "<p>0.0.0.0         10.255.255.1    0.0.0.0         UG    0      0        0 red0</p>" +   
+                           "<p>10.255.255.1    0.0.0.0         255.255.255.255 UH    0      0        0 red0</p>" +   
+                           "<p>192.168.10.0    192.168.10.56   255.255.255.255 UGH   0      0        0 green0</p>" +   
+                           "<p>192.168.10.0    192.168.10.56   255.255.255.0   UG    0      0        0 wireguard</p>" +   
+                           "<p>" + ConfigPanel.stwanip + " 10.255.255.1    255.255.255.255 UGH   0      0        0 orange0</p>" +   
+                           "<p></p>" +   
+                           "<p>routing table</p>" +   
+                           "<p>ip route flush table main</p>" +   
+                           "<p>ip route add 0.0.0.0/0 via 10.255.255.1 dev red0</p>" +   
+                           "<p>ip route add 10.255.255.1/32 via 0.0.0.0 dev red0</p>" +   
+                           "<p>ip route add 192.168.10.0/32 via 192.168.10.56 dev green0</p>" +   
+                           "<p>ip route add 192.168.10.0/24 via 192.168.10.56 dev wireguard</p>" +   
+                           "<p>ip route add 217.160.255.254/24 via 10.255.255.1 dev orange0</p>" +  
+                            "<p></p>" +  
                            "<br> " +
                            "<h1>add ipfirehub </h1>" +
                            "<p>brctl addbr ipfirehub</p>" +
@@ -516,16 +523,10 @@ public class OpenWrt extends javax.swing.JPanel {
         jframeconfigipfire.pack();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

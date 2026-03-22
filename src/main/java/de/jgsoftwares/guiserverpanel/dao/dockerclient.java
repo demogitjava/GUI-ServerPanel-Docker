@@ -18,8 +18,6 @@ import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
-
-        
 import com.github.dockerjava.api.model.Capability;
 import com.github.dockerjava.api.model.ContainerSpec;
 import com.github.dockerjava.api.model.Frame;
@@ -31,6 +29,7 @@ import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
+import com.github.dockerjava.core.command.AttachContainerResultCallback;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import de.jgsoftwares.guiserverpanel.frames.ConfigPanel;
@@ -40,11 +39,14 @@ import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.styourdomainname;
 import de.jgsoftwares.guiserverpanel.frames.LanServerTCP;
 import de.jgsoftwares.guiserverpanel.frames.Landingpage;
 
-
+import com.github.dockerjava.api.async.ResultCallback;
+import com.github.dockerjava.api.async.ResultCallbackTemplate;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
 import de.jgsoftwares.guiserverpanel.frames.httpfileserver;
+import java.io.BufferedWriter;
+import java.io.Closeable;
 import java.io.File;
 
 
@@ -52,10 +54,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1767,6 +1772,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
+             
                // hostConfig.withSysctls(sysctls)
                 /*
                 dockerClient.pullImageCmd(stimage)
@@ -1824,6 +1830,7 @@ public class dockerclient implements Idockerclient
                     .withAttachStderr(true)
                     .withAttachStdin(true)
                     .withAttachStdout(true)
+                    
                     // timesettings
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
@@ -2249,10 +2256,11 @@ public class dockerclient implements Idockerclient
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
                     //.withExposedPorts(tcp1527)
+                    
                     .withAttachStderr(true)
                     .withAttachStdin(true)
                     .withAttachStdout(true)
-                    .withTty(false)
+                    .withTty(true)
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE) 
@@ -2922,10 +2930,31 @@ public class dockerclient implements Idockerclient
     @Override
     public void attachopenwrt2305hostcontainer()
     {
-         
-    
-       
-       
+        
+        String stcontainer = "openwrt2305host";
+        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stcontainer).exec();
+        //Container container = new Container();
+       try (PipedOutputStream out = new PipedOutputStream();
+                PipedInputStream in = new PipedInputStream(out);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            AttachContainerCmd attachContainerCmd = dockerClient.attachContainerCmd(container.getId()).withStdIn(in)
+                    .withStdOut(true).withStdErr(true).withFollowStream(true);
+            attachContainerCmd.exec(new AttachContainerResultCallback());
+
+            String line = "ls";
+            while (!"q".equals(line)) {
+                writer.write(line + "\n");
+
+                writer.flush();
+
+                line = reader.readLine();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+                
 
 
     }
