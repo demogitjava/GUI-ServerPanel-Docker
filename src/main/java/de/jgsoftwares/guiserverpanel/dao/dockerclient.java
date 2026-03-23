@@ -2208,7 +2208,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
-               
+                hostConfig.getTmpFs();
                 
                 /*
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
@@ -2239,7 +2239,7 @@ public class dockerclient implements Idockerclient
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4 
                
                 
-                String stimagetag = "nftbridgelayer2ext4";
+                String stimagetag = "iptablesext4";
                 String stopenwrt2305host = "jgsoftwares/openwrt23.05:" + stimagetag;
                 dockerClient.pullImageCmd("jgsoftwares/openwrt23.05:" + stimagetag).exec(new PullImageResultCallback()).awaitSuccess();
             }
@@ -2249,7 +2249,7 @@ public class dockerclient implements Idockerclient
            
             
             //CreateContainerResponse container;
-            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:nftbridgelayer2ext4")
+            CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:iptablesext4")
                     .withName("openwrt2305host")
                     .withUser("root")
                     .withVolumes(dockersocket)
@@ -2412,8 +2412,8 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse execreatedir = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "mkdir /var/run/").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execreatedir.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
-             ExecCreateCmdResponse execinstalliptables = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install iptables-legacy").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execinstalliptables.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             //ExecCreateCmdResponse execinstalliptables = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install iptables-legacy").withAttachStdout(true).withAttachStderr(true).exec();
+             //dockerClient.execStartCmd(execinstalliptables.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
              // iptables save
              ExecCreateCmdResponse execiptablessave = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "iptables-legacy-save").withAttachStdout(true).withAttachStderr(true).exec();
@@ -2421,8 +2421,8 @@ public class dockerclient implements Idockerclient
              
              // commit
              // jgsoftwares/openwrt23.05
-             dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05").withTag("nftbridgelayer2ext4").exec();
-             System.out.print("local image commit jgsoftwares/openwrt23.05:nftbridgelayer2ext4");
+             dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05").withTag("iptablesext4").exec();
+             System.out.print("local image commit jgsoftwares/openwrt23.05:iptablesext4");
              
 
         } catch(Exception e)
