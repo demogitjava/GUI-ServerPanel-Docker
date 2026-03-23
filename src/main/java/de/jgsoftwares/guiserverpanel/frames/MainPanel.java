@@ -73,7 +73,7 @@ public class MainPanel extends javax.swing.JFrame {
         jButton3.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Docker Panel - Host only -");
+        setTitle("Docker Panel - Host only - Openwrt23.05");
 
         jToolBar1.setRollover(true);
 

@@ -2931,28 +2931,7 @@ public class dockerclient implements Idockerclient
     public void attachopenwrt2305hostcontainer()
     {
         
-        String stcontainer = "openwrt2305host";
-        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stcontainer).exec();
-        //Container container = new Container();
-       try (PipedOutputStream out = new PipedOutputStream();
-                PipedInputStream in = new PipedInputStream(out);
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            AttachContainerCmd attachContainerCmd = dockerClient.attachContainerCmd(container.getId()).withStdIn(in)
-                    .withStdOut(true).withStdErr(true).withFollowStream(true);
-            attachContainerCmd.exec(new AttachContainerResultCallback());
-
-            String line = "ls";
-            while (!"q".equals(line)) {
-                writer.write(line + "\n");
-
-                writer.flush();
-
-                line = reader.readLine();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+       
 
                 
 
@@ -2965,5 +2944,29 @@ public class dockerclient implements Idockerclient
     {
        
        
+    }
+    
+    
+    @Override
+    public void openwrt2305hostsaveiptables()
+    {
+          try
+          {
+            String containerid = "openwrt2305host";
+            
+            // dockerClient = DockerClientBuilder.getInstance().build();
+            getDockerClient(dockerClient);
+            
+            //String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
+            InspectContainerResponse container = dockerClient.inspectContainerCmd("" + containerid.toString()).exec();
+            // iptables save
+             ExecCreateCmdResponse execiptablessave = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "iptables-legacy-save").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execiptablessave.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("openwrt2305host container command iptables-legacy-save" + "\n");
+          } catch(Exception e)
+          {
+              
+          }
+          
     }
 }

@@ -316,7 +316,16 @@ public class OpenWrt extends javax.swing.JPanel {
         jeditorPane.setContentType("text/html");
         jeditorPane.setText("<html><body>" +
                            "<h1>Ipfire dns config </h1>" +
-                           "<p>http://demogitjava.ddns.net:8000/ipfire/ipfire_dnsovertlswithoutisp.jpg </p>" +
+                           "<p>http://demogitjava.ddns.net:8000/ipfire/dnsgoogletls.jpg </p>" +
+                           "<p>gcore</p>" +
+                           "<p>95.85.95.85</p>" +
+                           "<p>2.56.220.2</p>" +
+                           "<p>google</p>" +
+                           "<p>8.8.8.8</p>" +
+                           "<p>dns.google</p>" +
+                           "<p>8.8.4.4</p>" +
+                           "<p>dns.google</p>" +
+                           "<p></p>" +
                            "<p>ipfire after reboot use gcore and google</p>" +
                            "<br> " +
                            "<h1>Ipfire simple manually config</h1>" +

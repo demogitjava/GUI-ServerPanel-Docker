@@ -157,8 +157,22 @@ public class DCPopUpMenu extends javax.swing.JFrame {
         */
         
         String stdockerclient = jLabel1.getText();
-        de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
-        daodockerclient.restartcontainerdockerlclient(stdockerclient);
+        if(jLabel1.getText().equals("openwrt2305host"))
+        {
+            System.out.print("restart openwrt2305host container with save ip tables command");
+            de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+            daodockerclient.restartcontainerdockerlclient(stdockerclient); 
+            
+            daodockerclient.openwrt2305hostsaveiptables();
+          
+            //openwrt2305hostsaveiptables()
+        }
+        else
+        {
+            de.jgsoftwares.guiserverpanel.dao.dockerclient daodockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+            daodockerclient.restartcontainerdockerlclient(stdockerclient); 
+        }
+   
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
