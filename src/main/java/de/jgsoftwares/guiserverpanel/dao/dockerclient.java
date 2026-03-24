@@ -19,6 +19,7 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.api.model.Links;
 import com.github.dockerjava.api.model.ContainerSpec;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.Isolation;
@@ -438,7 +439,8 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-                
+                hostConfig.getIsolation();
+                hostConfig.getIpcMode();
                 
               
                 
@@ -829,8 +831,8 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-               
-               
+                hostConfig.getIpcMode();
+                hostConfig.getIsolation();
                 
                 String imageexist = null;
                 String sttag = null;
@@ -1500,14 +1502,16 @@ public class dockerclient implements Idockerclient
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("3306:3306"));
-                
+                Isolation.PROCESS.getValue();
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 hostConfig.isUserDefinedNetwork();
-               
+                hostConfig.getIpcMode();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getIsolation();
                 hostConfig.withRuntime(stcomboruntime);
+                hostConfig.getIpcMode();
+                hostConfig.getIsolation();
                 
                   System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/demomysqlserver-ce")
@@ -1766,13 +1770,15 @@ public class dockerclient implements Idockerclient
                 Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();
-                hostConfig.getCgroup();
-                hostConfig.getBinds();
+                hostConfig.getCgroup(); 
+                hostConfig.getBinds();           
+                hostConfig.getIsolation();
+                hostConfig.getIpcMode();
                 hostConfig.getDevices();
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-             
+               
                // hostConfig.withSysctls(sysctls)
                 /*
                 dockerClient.pullImageCmd(stimage)
@@ -2183,6 +2189,8 @@ public class dockerclient implements Idockerclient
                 // add volume - dockersocket 
                 Volume dockersocket = new Volume("/var/run/docker.sock");
                 
+                
+                // network none
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
@@ -2200,7 +2208,8 @@ public class dockerclient implements Idockerclient
                 Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();
-               
+                hostConfig.getIsolation();
+                hostConfig.getIpcMode();
                 hostConfig.getCgroup();
                 hostConfig.getBinds();
                 hostConfig.getDevices();
@@ -2209,7 +2218,8 @@ public class dockerclient implements Idockerclient
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
                 hostConfig.getTmpFs();
-                
+                //hostConfig.setLinks("orange0");
+                //Isolation.PROCESS.getValue();
                 /*
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 dockerClient.pullImageCmd("jgsoftwares/openwrt23.05")
@@ -2256,7 +2266,6 @@ public class dockerclient implements Idockerclient
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
                     //.withExposedPorts(tcp1527)
-                    
                     .withAttachStderr(true)
                     .withAttachStdin(true)
                     .withAttachStdout(true)
@@ -2584,7 +2593,8 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-             
+                hostConfig.getIpcMode();
+                hostConfig.getIsolation();
             //dockerClient = DockerClientBuilder.getInstance().build();  
             getDockerClient(dockerClient);
             
