@@ -433,17 +433,26 @@ public class dockerclient implements Idockerclient
                 Isolation.PROCESS.getValue();
                 //String ipcmode = "private";
                
+                 // isolation process
+                hostConfig.withIsolation(Isolation.DEFAULT);
+                hostConfig.getIsolation();
+                // ipc mode
+                hostConfig.withIpcMode("private");
+                hostConfig.getIpcMode();
+                
+                // cgroup host
+                hostConfig.withCgroup("private");
+                hostConfig.getCgroup();
                 
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();
-                hostConfig.getCgroup();
+             
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-                hostConfig.getIsolation();
-                hostConfig.getIpcMode();
+              
                 
               
                 
@@ -827,15 +836,21 @@ public class dockerclient implements Idockerclient
                 hostConfig.withPrivileged(Boolean.TRUE);
                 Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
-                hostConfig.getMemory();
-                hostConfig.getCgroup();
+                hostConfig.getMemory();     
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-                hostConfig.getIpcMode();
+                 // isolation process
+                hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                // ipc mode
+                hostConfig.withIpcMode("private");
+                hostConfig.getIpcMode();           
+                // cgroup host
+                hostConfig.withCgroup("private");
+                hostConfig.getCgroup();
                 
                 String imageexist = null;
                 String sttag = null;
@@ -1511,10 +1526,20 @@ public class dockerclient implements Idockerclient
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.getIpcMode();
                 hostConfig.withPrivileged(Boolean.TRUE);
-                hostConfig.getIsolation();
+              
                 hostConfig.withRuntime(stcomboruntime);
-                hostConfig.getIpcMode();
+               
+                 // isolation process
+                hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                // ipc mode
+                hostConfig.withIpcMode("private");
+                hostConfig.getIpcMode();
+                
+                // cgroup host
+                hostConfig.withCgroup("private");
+                hostConfig.getCgroup();
+                
                 
                   System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/demomysqlserver-ce")
@@ -1771,12 +1796,22 @@ public class dockerclient implements Idockerclient
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 Isolation.PROCESS.getValue();
-                //Isolation.HYPERV.getValue();
-                hostConfig.getMemory();
-                hostConfig.getCgroup(); 
-                hostConfig.getBinds();           
+                
+                
+                // isolation process
+                hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                // ipc mode
+                hostConfig.withIpcMode("private");
                 hostConfig.getIpcMode();
+                
+                // cgroup host
+                hostConfig.withCgroup("private");
+                hostConfig.getCgroup();
+                
+                //Isolation.HYPERV.getValue();
+                hostConfig.getMemory(); 
+                hostConfig.getBinds();           
                 hostConfig.getDevices();
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
@@ -2197,9 +2232,11 @@ public class dockerclient implements Idockerclient
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
+                
                 HostConfig hostConfig = HostConfig.newHostConfig();
                         //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                
+                
                         
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
@@ -2210,12 +2247,23 @@ public class dockerclient implements Idockerclient
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 Isolation.PROCESS.getValue();
-              
+                
+                
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();
+                
+                // isolation process
+                hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                // ipc mode
+                hostConfig.withIpcMode("private");
                 hostConfig.getIpcMode();
+                
+                // cgroup host
+                hostConfig.withCgroup("private");
                 hostConfig.getCgroup();
+                
+                
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 hostConfig.getDns();
@@ -2483,17 +2531,25 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
-                Isolation.PROCESS.getValue();
-                //Isolation.HYPERV.getValue();
-                hostConfig.getIsolation();
+                Isolation.PROCESS.getValue();             
+                //Isolation.HYPERV.getValue();     
                 hostConfig.getMemory();
-                hostConfig.getCgroup();
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
               
+                 // isolation process
+                hostConfig.withIsolation(Isolation.DEFAULT);
+                hostConfig.getIsolation();
+                // ipc mode
+                hostConfig.withIpcMode("private");
+                hostConfig.getIpcMode();
+                
+                // cgroup host
+                hostConfig.withCgroup("private");
+                hostConfig.getCgroup();
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 //dockerClient.pullImageCmd("jgsoftwares/ipfire")
                 //.withTag("cloud")
@@ -2593,14 +2649,21 @@ public class dockerclient implements Idockerclient
                 //Isolation.HYPERV.getValue();
                 hostConfig.withBinds(new Bind("/srv/www/htdocs/", dockersocket));
                 hostConfig.getMemory();
-                hostConfig.getCgroup();
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
-                hostConfig.getIpcMode();
+                
+                 // isolation process
+                hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                // ipc mode
+                hostConfig.withIpcMode("private");
+                hostConfig.getIpcMode();
+                // cgroup host
+                hostConfig.withCgroup("private");
+                hostConfig.getCgroup();
             //dockerClient = DockerClientBuilder.getInstance().build();  
             getDockerClient(dockerClient);
             
