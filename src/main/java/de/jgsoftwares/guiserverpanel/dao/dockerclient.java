@@ -431,6 +431,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 Isolation.PROCESS.getValue();
+                //String ipcmode = "private";
+               
+                
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();
                 hostConfig.getCgroup();
@@ -2196,7 +2199,8 @@ public class dockerclient implements Idockerclient
 
                 HostConfig hostConfig = HostConfig.newHostConfig();
                         //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
-                
+               
+                        
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
@@ -2206,6 +2210,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.isUserDefinedNetwork();
                 hostConfig.withPrivileged(Boolean.TRUE);
                 Isolation.PROCESS.getValue();
+              
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();
                 hostConfig.getIsolation();
@@ -2480,6 +2485,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.withPrivileged(Boolean.TRUE);
                 Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
+                hostConfig.getIsolation();
                 hostConfig.getMemory();
                 hostConfig.getCgroup();
                 hostConfig.getBinds();
