@@ -2269,15 +2269,19 @@ public class dockerclient implements Idockerclient
                 
                 hostConfig.getBinds();
                 hostConfig.getDevices();
+                
+               
+                
                 hostConfig.getDns();
+                
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
                 //Collections.singletonMap("/tmp", "rw,noexec,nosuid,size=50m")
                 
                 // run in memory with tmpfs
-                hostConfig.withTmpFs(Collections.singletonMap("/opt/docker", "rw,noexec,nosuid,size=100m"));
-                hostConfig.getTmpFs().get("/opt/docker");
+                hostConfig.withTmpFs(Collections.singletonMap("/opt/docker", "rw,noexec,nosuid,size=50m"));
+                hostConfig.getTmpFs(); //.get("/opt/docker");
                 //hostConfig.setLinks("orange0");
                 //Isolation.PROCESS.getValue();
                 /*
