@@ -42,6 +42,7 @@ import de.jgsoftwares.guiserverpanel.frames.Landingpage;
 
 import com.github.dockerjava.api.async.ResultCallback;
 import com.github.dockerjava.api.async.ResultCallbackTemplate;
+import static com.google.common.base.Predicates.equalTo;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import de.jgsoftwares.guiserverpanel.frames.MainPanel;
@@ -60,6 +61,7 @@ import java.io.OutputStreamWriter;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -2245,8 +2247,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.isUserDefinedNetwork();
+                        
                 hostConfig.withPrivileged(Boolean.TRUE);
-                Isolation.PROCESS.getValue();
+                //Isolation.PROCESS.getValue();
                 
                 
                 //Isolation.HYPERV.getValue();
@@ -2270,7 +2273,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
-                hostConfig.getTmpFs();
+                //Collections.singletonMap("/tmp", "rw,noexec,nosuid,size=50m")
+                
+                // run in memory with tmpfs
+                hostConfig.withTmpFs(Collections.singletonMap("/opt/docker", "rw,noexec,nosuid,size=100m"));
+                hostConfig.getTmpFs().get("/opt/docker");
                 //hostConfig.setLinks("orange0");
                 //Isolation.PROCESS.getValue();
                 /*
