@@ -2404,31 +2404,36 @@ public class dockerclient implements Idockerclient
              String clearhostsfile = "/etc/hosts";
              ExecCreateCmdResponse execlearhost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearhostsfile).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execlearhost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-           
+             System.out.print("flush file - /etc/hosts" + "\n");
+             
              // cat /dev/null > /etc/sysctl.conf
              String clearsysctl = "/etc/sysctl.conf";
              ExecCreateCmdResponse execlearsysctl = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearsysctl).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execlearsysctl.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-                 
+             System.out.print("flush file - /etc/sysctl.conf" + "\n"); 
+             
              // resolv.conf
              // cat /dev/null > /etc/resolv.conf
              String clearresolvconf = "/etc/resolv.conf";
              ExecCreateCmdResponse execlearresolvconf = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearresolvconf).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execlearresolvconf.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-                 
+             System.out.print("flush file - /etc/resolv.conf" + "\n");   
+             
               // TZ
              // cat /dev/null > /etc/TZ
              String cleartimezone = "/etc/TZ";
              ExecCreateCmdResponse execleartimezone = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + cleartimezone).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execleartimezone.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-              
+             System.out.print("flush file - /etc/TZ" + "\n");   
              
              // clear /etc/hostname
              // cat /dev/null > /etc/hostname
              String clearhostname = "/etc/hostname";
              ExecCreateCmdResponse execlearhostname = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearhostname).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execlearhostname.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-              
+             System.out.print("flush file - /etc/hostname" + "\n");   
+             
+             
              /*
              
                 write config to docker container 
@@ -2440,7 +2445,7 @@ public class dockerclient implements Idockerclient
              String sthost = (String) ConfigPanel.stwanip + "  " + ConfigPanel.styourdomainname;
              ExecCreateCmdResponse execaddstringtohost = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + sthost + " >> /etc/hosts").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringtohost.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-         
+             System.out.print("write string " + sthost + "to etc/host");
              
             // /etc/sysctl.conf
              // add string to /etc/sysctl.conf
@@ -2450,19 +2455,26 @@ public class dockerclient implements Idockerclient
              String noforward = "net.ipv4.ip_forward=0";
              ExecCreateCmdResponse execaddstringtosyscontl = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noforward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringtosyscontl.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-         
+             System.out.print("write string " + noforward + "to /etc/sysctl.conf");
+             
+             
              String nosrcvalid = "net.ipv4.conf.all.src_valid_mark=0";
              ExecCreateCmdResponse execaddstringnosourcevalid = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + nosrcvalid + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringnosourcevalid.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-         
+             System.out.print("write string " + nosrcvalid + "to /etc/sysctl.conf");
+             
+             
              String noipv6forward = "net.ipv6.conf.all.disable_ipv6=0";
              ExecCreateCmdResponse execaddstringnoipv6forward = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + noipv6forward + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringnoipv6forward.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-         
+             System.out.print("write string " + noipv6forward + "to /etc/sysctl.conf");
+             
+             
              String nodynamicaddr = "net.ipv4.ip_dynaddr=0";
              ExecCreateCmdResponse execaddstringnodynamicaddr = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + nodynamicaddr + " >> /etc/sysctl.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringnodynamicaddr.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-         
+             System.out.print("write string " + nodynamicaddr + "to /etc/sysctl.conf");
+             
              // get Timezone String 
              String sttimezonecountry = ConfigPanel.stcomboboxtimezone;
              
@@ -2473,7 +2485,7 @@ public class dockerclient implements Idockerclient
              String stgettimezone = tmconfig.timezoneopenwrt(sttimezonecountry, cleartimezone);
              ExecCreateCmdResponse execaddstringtotimezone = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + stgettimezone + " >> /etc/TZ").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringtotimezone.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-          
+             System.out.print("write string to timezone /etc/TZ" + stgettimezone);
 
             // resolv.conf
              //String stdns1 = null;
@@ -2492,35 +2504,41 @@ public class dockerclient implements Idockerclient
              // add search with domainname
              //ExecCreateCmdResponse execaddstringsearchdomain = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "search " + ConfigPanel.styourdomainname + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              //dockerClient.execStartCmd(execaddstringsearchdomain.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+            
              // interface name
              ExecCreateCmdResponse execaddstringinterface = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "interface orange0 " + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringinterface.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("write String interface orange0 /etc/resolv.conf" + "\n");
+             
              // dnsec
              ExecCreateCmdResponse execaddstringdnssearch = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "DNSSEC=yes" + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringdnssearch.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("write String" + "DNSSEC=yes" + " >> /etc/resolv.conf" + "\n");
+             
              // dnsovertls
              ExecCreateCmdResponse execaddstringdnsovertls = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "DNSOverTLS=yes" + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringdnsovertls.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-          
+             System.out.print("write String DNSOverTLS=yes" + " >> /etc/resolv.conf" + "\n");
              // /etc/hostname
              // add hostname for openwrt2305
              ExecCreateCmdResponse execaddstringhostname = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "openwrt2305host" + " >> /etc/hostname").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execaddstringhostname.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-          
+             System.out.print("write String + openwrt2305host" + " >> /etc/hostname" + "\n");
              // install iptables firewall package
              // create dir
              // /var/run -- for lock file for iptables
              // opkg install iptables-legacy
              ExecCreateCmdResponse execreatedir = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "mkdir /var/run/").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execreatedir.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-          
+             System.out.print("create direcotory /var/run" + "\n");
+             
              //ExecCreateCmdResponse execinstalliptables = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install iptables-legacy").withAttachStdout(true).withAttachStderr(true).exec();
              //dockerClient.execStartCmd(execinstalliptables.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
           
              // iptables save
              ExecCreateCmdResponse execiptablessave = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "iptables-legacy-save").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execiptablessave.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             
+             System.out.print("run command iptables-legacy-save on container openwrt2305host" + "\n" + "output iptables " + "\n");
              // commit
              // jgsoftwares/openwrt23.05
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05").withTag("iptablesext4").exec();
@@ -2901,19 +2919,7 @@ public class dockerclient implements Idockerclient
              //String stdns1 = null;
              //String stdns2 = null;
              
-             de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
-           
-             String stdnsserver = ConfigPanel.stpubdnsserver;
-             // returns string dnspulicserver ipdns1 ipdns2
-             
-             String stdns1 = null;
-             String stdns2 = null;
-             
-             publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
-            
-             stdns1 = publicdnsserverconfig.getStdns1();
-             stdns2 = publicdnsserverconfig.getStdns2();
-             
+          
              
          
              //nameserver dnsip1
