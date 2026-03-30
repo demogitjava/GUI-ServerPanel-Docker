@@ -2693,9 +2693,12 @@ public class dockerclient implements Idockerclient
              
              
              
+             
               // jgsoftwares/ipfire:cloud 
              dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag("cloud").exec();
              System.out.print("local image commit jgsoftwares/ipfire:cloud");
+             System.out.print("restart container openwrt2305host to run iptables in memory of this container" + "\n");
+             
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
