@@ -121,36 +121,10 @@
                         
                 
                         
-                       <!-- disable tom ee  
-                           <plugin>
-                        <groupId>org.apache.openejb.maven</groupId>
-                        <artifactId>tomee-maven-plugin</artifactId>
-                        <version>1.7.1</version>
-                        <configuration>
-                          <tomeeVersion>1.7.1</tomeeVersion>
-                          <tomeeClassifier>plus</tomeeClassifier>
-                        </configuration>
-                    </plugin>--> 
+             
                     
-                    
-                     <!-- disable native plugin
-                    <plugin>
-                        <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>native-maven-plugin</artifactId>
-                        <version>0.9.24</version>
-                    </plugin>--> 
-            
-            
-            <!-- disable maven compile plugin
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <showDeprecation>false</showDeprecation>
-                    <debug>false</debug>
-                </configuration>
-            </plugin>--> 
+                
+         
             
     </plugins>
 
