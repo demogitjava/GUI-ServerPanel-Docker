@@ -427,8 +427,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCgroup("private");
                 hostConfig.getCgroup();
                 
-                //Isolation.HYPERV.getValue();
-                hostConfig.getMemory();
+              
              
                 hostConfig.getBinds();
                 hostConfig.getDevices();
@@ -436,6 +435,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
               
+                  // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
                 
               
                 
@@ -874,6 +876,10 @@ public class dockerclient implements Idockerclient
                 hostConfig.getRuntime();
                 
                 
+                // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
+                
                 
                  // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
@@ -884,6 +890,10 @@ public class dockerclient implements Idockerclient
                 // cgroup host
                 hostConfig.withCgroup("private");
                 hostConfig.getCgroup();
+                
+                  // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
                 
                 String imageexist = null;
                 String sttag = null;
@@ -1554,7 +1564,7 @@ public class dockerclient implements Idockerclient
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 hostConfig.isUserDefinedNetwork();
-                hostConfig.getIpcMode();
+                //hostConfig.getIpcMode();
                 hostConfig.withPrivileged(Boolean.TRUE);
               
                 hostConfig.withRuntime(stcomboruntime);
@@ -1570,6 +1580,10 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCgroup("private");
                 hostConfig.getCgroup();
                 
+                
+                  // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
                 
                   System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/demomysqlserver-ce")
@@ -1876,6 +1890,10 @@ public class dockerclient implements Idockerclient
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
                 */
+                
+                // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
                 
             //dockerClient = DockerClientBuilder.getInstance().build();  
             getDockerClient(dockerClient);
@@ -2375,6 +2393,10 @@ public class dockerclient implements Idockerclient
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.getRuntime();
                 
+                     // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
+                
                 // mount docker socket
                 hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
                 //Collections.singletonMap("/tmp", "rw,noexec,nosuid,size=50m")
@@ -2700,6 +2722,10 @@ public class dockerclient implements Idockerclient
                 // cgroup host
                 hostConfig.withCgroup("private");
                 hostConfig.getCgroup();
+                
+                     // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 //dockerClient.pullImageCmd("jgsoftwares/ipfire")
                 //.withTag("cloud")
@@ -2838,6 +2864,10 @@ public class dockerclient implements Idockerclient
                 // cgroup host
                 hostConfig.withCgroup("private");
                 hostConfig.getCgroup();
+                
+                  // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
             //dockerClient = DockerClientBuilder.getInstance().build();  
             getDockerClient(dockerClient);
             
