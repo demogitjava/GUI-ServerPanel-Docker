@@ -432,7 +432,28 @@ public class dockerclient implements Idockerclient
              
                 hostConfig.getBinds();
                 hostConfig.getDevices();
+                
+                
+                 // dns server config
+                de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
+           
+                String stdnsserver = ConfigPanel.stpubdnsserver;
+                // returns string dnspulicserver ipdns1 ipdns2
+
+                String stdns1 = null;
+                String stdns2 = null;
+
+                publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
+
+                stdns1 = publicdnsserverconfig.getStdns1();
+                stdns2 = publicdnsserverconfig.getStdns2();
+                
+                
+                // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
                 hostConfig.getDns();
+                
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
               
@@ -597,19 +618,7 @@ public class dockerclient implements Idockerclient
              //String stdns1 = null;
              //String stdns2 = null;
              
-             de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
            
-             String stdnsserver = ConfigPanel.stpubdnsserver;
-             // returns string dnspulicserver ipdns1 ipdns2
-             
-             String stdns1 = null;
-             String stdns2 = null;
-             
-             publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
-            
-             stdns1 = publicdnsserverconfig.getStdns1();
-             stdns2 = publicdnsserverconfig.getStdns2();
-             
              
          
              //nameserver dnsip1
@@ -868,7 +877,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 
-                hostConfig.withDns(stdns1 + stdns2);
+                     // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
                 //hostConfig.withDns(stdns2);
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
@@ -1561,7 +1572,7 @@ public class dockerclient implements Idockerclient
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("3306:3306"));
-                Isolation.PROCESS.getValue();
+                //Isolation.PROCESS.getValue();
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 hostConfig.isUserDefinedNetwork();
@@ -1581,6 +1592,25 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCgroup("private");
                 hostConfig.getCgroup();
                 
+              
+                  // dns server config
+                de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
+           
+                String stdnsserver = ConfigPanel.stpubdnsserver;
+                // returns string dnspulicserver ipdns1 ipdns2
+
+                String stdns1 = null;
+                String stdns2 = null;
+
+                publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
+
+                stdns1 = publicdnsserverconfig.getStdns1();
+                stdns2 = publicdnsserverconfig.getStdns2();
+                
+                     // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
+                hostConfig.getDns();
                 
                   // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
@@ -1707,19 +1737,7 @@ public class dockerclient implements Idockerclient
              //String stdns1 = null;
              //String stdns2 = null;
              
-             de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
-           
-             String stdnsserver = ConfigPanel.stpubdnsserver;
-             // returns string dnspulicserver ipdns1 ipdns2
-             
-             String stdns1 = null;
-             String stdns2 = null;
-             
-             publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
-            
-             stdns1 = publicdnsserverconfig.getStdns1();
-             stdns2 = publicdnsserverconfig.getStdns2();
-             
+         
              
          
              //nameserver dnsip1
@@ -2372,8 +2390,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.withDnsSearch(ConfigPanel.styourdomainname);
                 //hostConfig.getDnsSearch();
                 //hostConfig.withDns(stdns1 + stdns2);
-                hostConfig.withDns(stdns1);
-                hostConfig.withDns(stdns2);
+                     // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 
@@ -2705,8 +2724,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDevices();
                 
                 // set container with dns over config panel
-                hostConfig.withDns(stdns1);
-                hostConfig.withDns(stdns2);
+                     // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
                 hostConfig.getDns();
                 
                 // add dns search from config panel
@@ -2854,8 +2874,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 
-                hostConfig.withDns(stdns1);
-                hostConfig.withDns(stdns2);
+                 // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
                 hostConfig.getDns();
                 
                 hostConfig.withRuntime(stcomboruntime);
