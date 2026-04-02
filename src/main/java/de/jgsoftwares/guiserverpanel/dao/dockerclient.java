@@ -15,6 +15,7 @@ import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.model.Capability;
+
 import com.github.dockerjava.api.model.Isolation;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
@@ -867,8 +868,8 @@ public class dockerclient implements Idockerclient
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 
-                hostConfig.withDns(stdns1);
-                hostConfig.withDns(stdns2);
+                hostConfig.withDns(stdns1 + stdns2);
+                //hostConfig.withDns(stdns2);
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 
@@ -1873,9 +1874,13 @@ public class dockerclient implements Idockerclient
                 hostConfig.getMemory(); 
                 hostConfig.getBinds();           
                 hostConfig.getDevices();
+            
+                //hostConfig.withDns(stdns1.toString() + stdns2.toString());
                 
-                hostConfig.withDns(stdns1);
-                hostConfig.withDns(stdns2);
+                
+                // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
                 hostConfig.getDns();
                 
                 hostConfig.withDnsSearch(ConfigPanel.styourdomainname);
