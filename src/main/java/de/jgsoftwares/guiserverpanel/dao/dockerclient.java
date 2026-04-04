@@ -91,12 +91,12 @@ public class dockerclient implements Idockerclient
         .withDockerHost("tcp://192.168.10.56:2375")
         .withDockerTlsVerify(false)
         .build(); 
+        
+        
        // DockerClient dockerClient = DockerClientImpl.getInstance(dockerClientConfig);
        //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
        setDockerClient(dockerClient, dockerClientConfig);
-       
-      
-       
+
        dockerimages = dockerClient.listImagesCmd().exec();
        dockercontainers = dockerClient.listContainersCmd().exec();
     }
@@ -406,14 +406,22 @@ public class dockerclient implements Idockerclient
                 portBindings.bind(tcp8443, Ports.Binding.bindPort(8443));     
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+                
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("8443:8443"));
+                
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.getNetworkMode();
+                
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
+                hostConfig.getCapAdd();
+                
                 hostConfig.isUserDefinedNetwork();
+                
                 hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getPrivileged();
                 //Isolation.PROCESS.getValue();
                 //String ipcmode = "private";
                
@@ -865,12 +873,18 @@ public class dockerclient implements Idockerclient
                 // add container to host network
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.getNetworkMode();
+                
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
+                hostConfig.getCapAdd();
+                
                 hostConfig.isUserDefinedNetwork();
+                
                 hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getPrivileged();
                 //Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
                 hostConfig.getMemory();     
@@ -1575,12 +1589,16 @@ public class dockerclient implements Idockerclient
                 //Isolation.PROCESS.getValue();
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.getNetworkMode();
+                
                 hostConfig.isUserDefinedNetwork();
                 //hostConfig.getIpcMode();
                 hostConfig.withPrivileged(Boolean.TRUE);
-              
+                hostConfig.getPrivileged();
+                
                 hostConfig.withRuntime(stcomboruntime);
-               
+                hostConfig.getRuntime();
+                
                  // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
@@ -1867,15 +1885,20 @@ public class dockerclient implements Idockerclient
                 
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.getNetworkMode();
+                
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
+                hostConfig.getCapAdd();
+                
                 hostConfig.isUserDefinedNetwork();
+                
                 hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getPrivileged();
                 //Isolation.PROCESS.getValue();
-                
-                
+               
                 
                 // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
@@ -1917,6 +1940,8 @@ public class dockerclient implements Idockerclient
                 // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
+                
+                
                 
             //dockerClient = DockerClientBuilder.getInstance().build();  
             getDockerClient(dockerClient);
@@ -2377,13 +2402,20 @@ public class dockerclient implements Idockerclient
                         
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.getNetworkMode();
+                
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
+                hostConfig.getCapAdd();
+                
+                
                 hostConfig.isUserDefinedNetwork();
                         
                 hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getPrivileged();
+                
                 //Isolation.PROCESS.getValue();
                 
                 // domain name from config panel
@@ -2699,24 +2731,31 @@ public class dockerclient implements Idockerclient
                 stdns2 = publicdnsserverconfig.getStdns2();
                 
                 
-             
+               
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
                 
                 HostConfig hostConfig = HostConfig.newHostConfig();
                         //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
+                        
+               
                 
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.getNetworkMode();
+                
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
-                hostConfig.withCapAdd(Capability.NET_ADMIN);
+                hostConfig.withCapAdd(Capability.NET_ADMIN);  
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
+                hostConfig.getCapAdd();
+                
                 hostConfig.isUserDefinedNetwork();
+                
                 hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getPrivileged();
                 //Isolation.PROCESS.getValue();     
-                
-                
+
                 
                 //Isolation.HYPERV.getValue();     
                 hostConfig.getMemory();
@@ -2856,15 +2895,23 @@ public class dockerclient implements Idockerclient
         
         
         Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+        
         HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse(inthttpport + ":" + inthttpport));
                 
-         hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+        hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+        hostConfig.getNetworkMode();
+        
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
+                hostConfig.getCapAdd();
+                
                 hostConfig.isUserDefinedNetwork();
+                
                 hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getPrivileged();
+                
                 //Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
                 hostConfig.withBinds(new Bind("/srv/www/htdocs/", dockersocket));
