@@ -1861,7 +1861,7 @@ public class dockerclient implements Idockerclient
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp80, Ports.Binding.bindPort(80));
-
+                portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 
                  // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
@@ -1968,10 +1968,10 @@ public class dockerclient implements Idockerclient
                 dockerClient.pullImageCmd(stlandingpageexist).exec(new PullImageResultCallback()).awaitSuccess();
             }
           
-          
+            
+            
             CreateContainerResponse container = null;
             
-              
             
                 switch(contsystem)
                 {
@@ -1979,31 +1979,33 @@ public class dockerclient implements Idockerclient
                 case "openwrt":
                     System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
-                    .withCmd(stshell, struncmdst)
+                    .withCmd(stshell, struncmdst)   
                     .withName(stcontainername)
                     .withUser("root")
                     //.withCmd(cmd)
                     .withHostConfig(hostConfig)
-                    .withExposedPorts(tcp80)
+                    .withExposedPorts(tcp80, tcp1527)
+                    //.getExposedPorts(stgetexposedport)
                     // .withExposedPorts(tcp1527)
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE)
                     .withAttachStderr(true)
                     .withAttachStdin(true)
-                    .withAttachStdout(true)
-                    
+                    .withAttachStdout(true)   
                     // timesettings
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
                     .withWorkingDir("/root")
+                   
                             // 
                             //   jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata" + "\n");
                             // jTextArea1.append("add CET-1CEST,M3.5.0,M10.5.0/3 to  /etc/TZ - for germany" + "/n");
                     // install alpine repositorys
                     
                     //.withCmd(stshell, stinstall)
-                    //.withCmd(stshell, sttime)     
+                    //.withCmd(stshell, sttime)   
+                     
                     .exec();
                     break;
                 case "oraclelinux":
@@ -2969,7 +2971,7 @@ public class dockerclient implements Idockerclient
             
             
             // start container 
-             CreateContainerResponse container = null;
+            CreateContainerResponse container = null;
             System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd("jgsoftwares/openwrthttpfileserver:shell")
                     //.withCmd("apachectl restart")
@@ -2989,6 +2991,7 @@ public class dockerclient implements Idockerclient
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
                     .withWorkingDir("/root")
+                    
                             // 
                             //   jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata" + "\n");
                             // jTextArea1.append("add CET-1CEST,M3.5.0,M10.5.0/3 to  /etc/TZ - for germany" + "/n");
@@ -2997,6 +3000,7 @@ public class dockerclient implements Idockerclient
                     //.withCmd(stshell, stinstall)
                     //.withCmd(stshell, sttime)     
                     .exec();
+                    
                   
                     dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
                     dockerClient.startContainerCmd(container.getId()).exec();
