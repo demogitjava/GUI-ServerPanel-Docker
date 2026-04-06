@@ -1856,12 +1856,36 @@ public class dockerclient implements Idockerclient
             //InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
            // InspectContainerResponse startlandingpage = (InspectContainerResponse) dockerClient.startContainerCmd(stlandingpage);
            //  jgsoftwares/oraclelinux_openjdk_landingpage:hostopenwrtext4 /bin/bash /root/runlandingpage.sh
-                ExposedPort tcp80 = ExposedPort.tcp(80);
+                //ExposedPort tcp80 = ExposedPort.tcp(80);
+                
+                
+                // show java version
+                // > 26 java version http3 with upd 
+                String showjavaversion = ConfigPanel.stjavaversion;
+                Integer intjavaversion = Integer.parseInt(showjavaversion);
+                ExposedPort tcp80 = null;
+                if(intjavaversion > 24)
+                {
+                    tcp80 = ExposedPort.tcp(80);
+                    System.out.print("landingpage is started with Java JDK" + showjavaversion + "\n");
+                    System.out.print("to java > 25 tcp is required for http2" + "\n");
+                    System.out.print("container is started with tcp config on port 80");
+                }
+                else
+                {
+                    tcp80 = ExposedPort.udp(80);
+                    System.out.print("landingpage is started with Java > 25" + showjavaversion + "\n");
+                    System.out.print("the landingpage with java version > 25 ist started with port udp over http on port 80 " + "\n");
+                }
+                
+                
+                
                 ExposedPort tcp1527 = ExposedPort.tcp(1527);
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp80, Ports.Binding.bindPort(80));
                 portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                
                 
                  // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
@@ -1971,9 +1995,8 @@ public class dockerclient implements Idockerclient
             
             
             CreateContainerResponse container = null;
-            
-            
-                switch(contsystem)
+
+               switch(contsystem)
                 {
                   
                 case "openwrt":
@@ -1990,9 +2013,12 @@ public class dockerclient implements Idockerclient
                     .withDomainName(styourdomainname)
                     //.withIpv4Address(stwanip)
                     .withStdinOpen(Boolean.TRUE)
+                    //.getExposedPorts(extcp80 + extcp1527)
+                    //.getExposedPorts(extcp1527.getProtocol())
                     .withAttachStderr(true)
                     .withAttachStdin(true)
                     .withAttachStdout(true)   
+                   
                     // timesettings
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
