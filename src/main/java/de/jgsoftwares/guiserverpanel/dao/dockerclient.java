@@ -401,7 +401,28 @@ public class dockerclient implements Idockerclient
            try
         {
        
-                ExposedPort tcp8443 = ExposedPort.tcp(8443);    
+                //ExposedPort tcp8443 = ExposedPort.tcp(8443);   
+                  // show java version
+                // > 26 java version http3 with upd 
+                String showjavaversion = ConfigPanel.stjavaversion;
+                Integer intjavaversion = Integer.parseInt(showjavaversion);
+                ExposedPort tcp8443 = null;
+                if(intjavaversion > 24)
+                {
+                    tcp8443 = ExposedPort.tcp(8443);
+                    System.out.print("landingpage is started with Java JDK" + showjavaversion + "\n");
+                    System.out.print("to java > 25 tcp is required for http2" + "\n");
+                    System.out.print("container is started with tcp config on port 80");
+                }
+                else
+                {
+                    tcp8443 = ExposedPort.udp(8443);
+                    System.out.print("landingpage is started with Java > 25" + showjavaversion + "\n");
+                    System.out.print("the landingpage with java version > 25 ist started with port udp over http on port 80 " + "\n");
+                }
+                
+                
+                
                 Ports portBindings = new Ports();
                 portBindings.bind(tcp8443, Ports.Binding.bindPort(8443));     
                 // connect to network like eth0 or eth0.10
