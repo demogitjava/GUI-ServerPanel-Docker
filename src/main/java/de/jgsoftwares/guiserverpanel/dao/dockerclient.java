@@ -2806,8 +2806,11 @@ public class dockerclient implements Idockerclient
                 //Isolation.PROCESS.getValue();     
 
                 
-                //Isolation.HYPERV.getValue();     
+                hostConfig.withMemory(Long.MAX_VALUE);
+                //Isolation.HYPERV.getValue();   
+                hostConfig.getMemoryReservation();
                 hostConfig.getMemory();
+                
                 hostConfig.getBinds();
                 hostConfig.getDevices();
                 
@@ -2826,19 +2829,33 @@ public class dockerclient implements Idockerclient
                 hostConfig.getRuntime();
                 
                  // isolation process
+                 
                 hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                
                 // ipc mode
-                hostConfig.withIpcMode("private");
+                //hostConfig.withIpcMode("private");
+                hostConfig.withIpcMode("host");
                 hostConfig.getIpcMode();
                 
                 // cgroup host
-                hostConfig.withCgroup("private");
+                //hostConfig.withCgroup("private");
+                hostConfig.withCgroup("host");
                 hostConfig.getCgroup();
-                
-                     // set kernel memory to max
+               
+                                
+                // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
+                
+                
+                hostConfig.withMemorySwap(Long.MAX_VALUE);
+                hostConfig.getMemorySwap();
+                
+                hostConfig.withMemory(Long.MAX_VALUE);
+                hostConfig.getMemory();
+                
+                
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 //dockerClient.pullImageCmd("jgsoftwares/ipfire")
                 //.withTag("cloud")
@@ -2878,6 +2895,7 @@ public class dockerclient implements Idockerclient
                     .withName("ipfire")
                     .withUser("root")
                     .withHostConfig(hostConfig)
+                
                     //.withExposedPorts(tcp80)
                     // .withExposedPorts(tcp1527)
                     .withAttachStderr(true)
