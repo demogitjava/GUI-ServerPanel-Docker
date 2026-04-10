@@ -942,6 +942,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
                 
+                
+                hostConfig.withCpuShares(0);
+                hostConfig.getCpuShares();
+                System.out.print("derbydb cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
+                
                 String imageexist = null;
                 String sttag = null;
                 String stforcommit = null;
@@ -1655,6 +1660,10 @@ public class dockerclient implements Idockerclient
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
                 
+                hostConfig.withCpuShares(0);
+                hostConfig.getCpuShares();
+                System.out.print("mysql cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
+                
                   System.out.print("pull image " + "\n");
                         dockerClient.pullImageCmd("jgsoftwares/demomysqlserver-ce")
                                 .withTag("latest")
@@ -1679,6 +1688,8 @@ public class dockerclient implements Idockerclient
                  
                  //.withWorkingDir("/root")
                  .exec();
+            
+          
             
          dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
          dockerClient.startContainerCmd(container.getId()).exec();
@@ -1928,38 +1939,59 @@ public class dockerclient implements Idockerclient
 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 
+                System.out.print("started network config for landingpage " + "\n");
+                System.out.print("used ports are 80 and 1527 for derbydb " + " on java25 port 80 is started with upd for html3" + "\n");
                 // add container to host network
-                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.withNetworkMode(stinterfacename);
                 hostConfig.getNetworkMode();
+                System.out.print("networkmode " + hostConfig.getNetworkMode());
+                
                 
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.getCapAdd();
+                System.out.print("Capability " + hostConfig.getCapAdd().toString() + "\n");
                 
                 hostConfig.isUserDefinedNetwork();
                 
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getPrivileged();
+                System.out.print("Privileged Mode " + hostConfig.getPrivileged() + "\n");
                 //Isolation.PROCESS.getValue();
                
                 
                 // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                System.out.print("start landingpage container with Isolation on linux openwrt only default is supported " + hostConfig.getIsolation() + "\n");
+                
                 // ipc mode
-                hostConfig.withIpcMode("private");
+                hostConfig.withIpcMode("host");
                 hostConfig.getIpcMode();
+                System.out.print("Ipc Mode " + hostConfig.getIpcMode() + "\n");
                 
                 // cgroup host
-                hostConfig.withCgroup("private");
+                hostConfig.withCgroup("host");
                 hostConfig.getCgroup();
+                System.out.print("Cgroup mode " + hostConfig.getCgroup() + "\n");
+                
                 
                 //Isolation.HYPERV.getValue();
-                hostConfig.getMemory(); 
-                hostConfig.getBinds();           
-                hostConfig.getDevices();
+                
+                hostConfig.withMemory(Long.MAX_VALUE);
+                //Isolation.HYPERV.getValue();   
+                hostConfig.getMemoryReservation();
+                hostConfig.getMemory();
+                System.out.print("with memory " + hostConfig.getMemory() + "\n");
+                
+                hostConfig.withMemorySwap(Long.MAX_VALUE);
+                hostConfig.getMemorySwap();
+                System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
+                
+                //hostConfig.getBinds();           
+                //hostConfig.getDevices();
             
                 //hostConfig.withDns(stdns1.toString() + stdns2.toString());
                 
@@ -1968,12 +2000,17 @@ public class dockerclient implements Idockerclient
                 String[] stdns = new String [] {stdns1,stdns2};
                 hostConfig.withDns(stdns);
                 hostConfig.getDns();
+                System.out.print("with dns " + hostConfig.getDns());
+                
                 
                 hostConfig.withDnsSearch(ConfigPanel.styourdomainname);
-                hostConfig.getDnsSearch();        
+                hostConfig.getDnsSearch();    
+                System.out.print("with dns search " + hostConfig.getDnsSearch() + "\n");
                 
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.getRuntime();
+                System.out.print("with runtime " + hostConfig.getRuntime() + "\n");
+                
                // hostConfig.withSysctls(sysctls)
                 /*
                 dockerClient.pullImageCmd(stimage)
@@ -1985,8 +2022,12 @@ public class dockerclient implements Idockerclient
                 // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
+                System.out.print("with kernel memory "+ hostConfig.getKernelMemory() + "\n");
                 
                 
+                hostConfig.withCpuShares(0);
+                hostConfig.getCpuShares();
+                System.out.print("landingpage cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
                 
             //dockerClient = DockerClientBuilder.getInstance().build();  
             getDockerClient(dockerClient);
