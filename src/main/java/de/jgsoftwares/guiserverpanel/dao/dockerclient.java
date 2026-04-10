@@ -429,8 +429,11 @@ public class dockerclient implements Idockerclient
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
                 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("8443:8443"));
+                System.out.print("start Lanserver with hostConfig " + "\n");
                 
-                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                
+                
+                hostConfig.withNetworkMode(stinterfacename);
                 hostConfig.getNetworkMode();
                 
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
@@ -438,24 +441,34 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.getCapAdd();
+                System.out.print("with Capability" + hostConfig.getCapAdd() + "\n");
+                
+                
                 
                 hostConfig.isUserDefinedNetwork();
                 
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getPrivileged();
+                System.out.print("with privileged mode " + hostConfig.getPrivileged() + "\n");
+                
                 //Isolation.PROCESS.getValue();
                 //String ipcmode = "private";
                
                  // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                System.out.print("with isolation on linux openwrt default only is supported " + hostConfig.getIsolation() + "\n");
+                
                 // ipc mode
-                hostConfig.withIpcMode("private");
+                hostConfig.withIpcMode("host");
                 hostConfig.getIpcMode();
+                System.out.print("with ipc mode" + hostConfig.getIpcMode() + "\n");
+                
                 
                 // cgroup host
-                hostConfig.withCgroup("private");
+                hostConfig.withCgroup("host");
                 hostConfig.getCgroup();
+                System.out.print("with cgroup " + hostConfig.getCgroup() + "\n");
                 
               
              
@@ -482,13 +495,32 @@ public class dockerclient implements Idockerclient
                 String[] stdns = new String [] {stdns1,stdns2};
                 hostConfig.withDns(stdns);
                 hostConfig.getDns();
+                System.out.print("with dns " + hostConfig.getDns() + "\n");
+                
                 
                 hostConfig.getDnsSearch();
                 hostConfig.withRuntime(stcomboruntime);
+                System.out.print("with runtime " + hostConfig.getRuntime() + "\n");
               
                   // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
+                System.out.print("with kernel memory "+ hostConfig.getKernelMemory() + "\n");
+                
+                hostConfig.withMemory(Long.MAX_VALUE);
+                //Isolation.HYPERV.getValue();   
+                hostConfig.getMemoryReservation();
+                hostConfig.getMemory();
+                System.out.print("with memory " + hostConfig.getMemory() + "\n");
+                
+                hostConfig.withMemorySwap(Long.MAX_VALUE);
+                hostConfig.getMemorySwap();
+                System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
+
+                hostConfig.withCpuShares(0);
+                hostConfig.getCpuShares();
+                System.out.print("landingpage cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
+                
                 
               
                 
@@ -931,7 +963,6 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDns();
                 System.out.print("dns is set to " + hostConfig.getDns() + "\n");
                 
-                
                 hostConfig.withDnsSearch(ConfigPanel.styourdomainname);
                 hostConfig.getDnsSearch();    
                 System.out.print("with dns search " + hostConfig.getDnsSearch() + "\n");
@@ -939,8 +970,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.getRuntime();
                 System.out.print("with runtime " + hostConfig.getRuntime() + "\n");
-                
-                
+               
                 // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
@@ -951,7 +981,6 @@ public class dockerclient implements Idockerclient
                 hostConfig.getIsolation();
                 System.out.print("start landingpage container with Isolation on linux openwrt only default is supported " + hostConfig.getIsolation() + "\n");
                 
-                
                 // ipc mode
                 hostConfig.withIpcMode("host");
                 hostConfig.getIpcMode();  
@@ -961,14 +990,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCgroup("host");
                 hostConfig.getCgroup();
                 System.out.print("with Cgroup Mode " + hostConfig.getCgroup() + "\n");
-                
-                
+                  
                   // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
                 System.out.print("used kernel memory " + hostConfig.getKernelMemory() + "\n");
-                
-                
                 
                 hostConfig.withCpuShares(0);
                 hostConfig.getCpuShares();
