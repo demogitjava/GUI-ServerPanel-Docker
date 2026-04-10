@@ -891,61 +891,92 @@ public class dockerclient implements Idockerclient
                 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("1527:1527"));
                 
+                System.out.print("start network config for container derbydb " + "\n");
+                System.out.print("port of derbydb is by default set to 1527 " + "\n");
+                
                 // add container to host network
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 hostConfig.getNetworkMode();
+                System.out.print("networkmode " + hostConfig.getNetworkMode());
                 
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.getCapAdd();
+                System.out.print("Capability " + hostConfig.getCapAdd().toString() + "\n");
                 
                 hostConfig.isUserDefinedNetwork();
                 
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getPrivileged();
+                System.out.print("Privileged Mode " + hostConfig.getPrivileged() + "\n");
+                
                 //Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
-                hostConfig.getMemory();     
-                hostConfig.getBinds();
-                hostConfig.getDevices();
+                hostConfig.withMemory(Long.MAX_VALUE);
+                //Isolation.HYPERV.getValue();   
+                hostConfig.getMemoryReservation();
+                hostConfig.getMemory();
+                System.out.print("with memory " + hostConfig.getMemory() + "\n");
+                
+                //hostConfig.getBinds();
+                //hostConfig.getDevices();
                 
                      // add dns String 
                 String[] stdns = new String [] {stdns1,stdns2};
                 hostConfig.withDns(stdns);
                 //hostConfig.withDns(stdns2);
                 hostConfig.getDns();
-                hostConfig.getDnsSearch();
+                System.out.print("dns is set to " + hostConfig.getDns() + "\n");
+                
+                
+                hostConfig.withDnsSearch(ConfigPanel.styourdomainname);
+                hostConfig.getDnsSearch();    
+                System.out.print("with dns search " + hostConfig.getDnsSearch() + "\n");
                 
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.getRuntime();
+                System.out.print("with runtime " + hostConfig.getRuntime() + "\n");
                 
                 
                 // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
-                
+                System.out.print("with kernel memory "+ hostConfig.getKernelMemory() + "\n");
                 
                  // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                System.out.print("start landingpage container with Isolation on linux openwrt only default is supported " + hostConfig.getIsolation() + "\n");
+                
+                
                 // ipc mode
-                hostConfig.withIpcMode("private");
-                hostConfig.getIpcMode();           
+                hostConfig.withIpcMode("host");
+                hostConfig.getIpcMode();  
+                System.out.print("with IpcMode " + hostConfig.getIpcMode() + "\n");
+                
                 // cgroup host
-                hostConfig.withCgroup("private");
+                hostConfig.withCgroup("host");
                 hostConfig.getCgroup();
+                System.out.print("with Cgroup Mode " + hostConfig.getCgroup() + "\n");
+                
                 
                   // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
+                System.out.print("used kernel memory " + hostConfig.getKernelMemory() + "\n");
+                
                 
                 
                 hostConfig.withCpuShares(0);
                 hostConfig.getCpuShares();
                 System.out.print("derbydb cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
+                
+                hostConfig.withMemorySwap(Long.MAX_VALUE);
+                hostConfig.getMemorySwap();
+                System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
                 
                 String imageexist = null;
                 String sttag = null;
