@@ -2781,6 +2781,7 @@ public class dockerclient implements Idockerclient
                 
                 
                
+                System.out.print("start network config docker-java " + "\n");
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
                 
@@ -2790,26 +2791,32 @@ public class dockerclient implements Idockerclient
                
                 
                 // add container to host network
-                hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
+                hostConfig.withNetworkMode(stinterfacename); //.getKernelMemory();
                 hostConfig.getNetworkMode();
+                System.out.print("host network mode " + hostConfig.getNetworkMode() + "\n");
                 
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);  
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.getCapAdd();
+                System.out.print("Capability"  + hostConfig.getCapAdd().toString() + "\n");
+                
                 
                 hostConfig.isUserDefinedNetwork();
                 
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getPrivileged();
                 //Isolation.PROCESS.getValue();     
-
+                System.out.print("Privileged" + hostConfig.getPrivileged());
+                
                 
                 hostConfig.withMemory(Long.MAX_VALUE);
                 //Isolation.HYPERV.getValue();   
                 hostConfig.getMemoryReservation();
                 hostConfig.getMemory();
+                System.out.print("with container memory " + hostConfig.getMemory());
+                
                 
                 hostConfig.getBinds();
                 hostConfig.getDevices();
@@ -2819,42 +2826,61 @@ public class dockerclient implements Idockerclient
                 String[] stdns = new String [] {stdns1,stdns2};
                 hostConfig.withDns(stdns);
                 hostConfig.getDns();
+                System.out.print("with dns " + hostConfig.getDns() + "\n");
+                
                 
                 // add dns search from config panel
                 hostConfig.withDnsSearch(ConfigPanel.styourdomainname);
                 hostConfig.getDnsSearch();
+                System.out.print("with dns search config " + hostConfig.getDnsSearch() + "\n");
                 
                 // docker runtime over ConfigPanel
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.getRuntime();
+                System.out.print("with Docker Container runtime " + hostConfig.getRuntime() + "\n");
+                
                 
                  // isolation process
                  
                 hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                System.out.print("with isolation mode linux only default is supported " + hostConfig.getIsolation() + "\n");
+                
+                
                 
                 // ipc mode
                 //hostConfig.withIpcMode("private");
                 hostConfig.withIpcMode("host");
                 hostConfig.getIpcMode();
+                System.out.print("with IpcMode " + hostConfig.getIpcMode() + "\n");
+                
+                
                 
                 // cgroup host
                 //hostConfig.withCgroup("private");
                 hostConfig.withCgroup("host");
                 hostConfig.getCgroup();
-               
+                System.out.print("with cgroup mode " + hostConfig.getCgroup() + "\n");
                                 
                 // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
+                System.out.print("wiht kernel Memory " + hostConfig.getKernelMemory() + "\n");
+                
                 
                 
                 hostConfig.withMemorySwap(Long.MAX_VALUE);
                 hostConfig.getMemorySwap();
+                System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
                 
                 hostConfig.withMemory(Long.MAX_VALUE);
                 hostConfig.getMemory();
+                System.out.print("with memory " + hostConfig.getMemory() + "\n");
                 
+                
+                hostConfig.withCpuShares(2048);
+                hostConfig.getCpuShares();
+                System.out.print("ipfire cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
                 
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
                 //dockerClient.pullImageCmd("jgsoftwares/ipfire")
