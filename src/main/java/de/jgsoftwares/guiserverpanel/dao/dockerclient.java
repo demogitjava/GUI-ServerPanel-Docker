@@ -435,6 +435,8 @@ public class dockerclient implements Idockerclient
                 
                 hostConfig.withNetworkMode(stinterfacename);
                 hostConfig.getNetworkMode();
+                System.out.print("on interface " + hostConfig.getNetworkMode() + "\n");
+                
                 
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
@@ -3067,7 +3069,7 @@ public class dockerclient implements Idockerclient
         portBindings.bind(tcphttp, Ports.Binding.bindPort(inthttpport));
         
         // add volume - dockersocket 
-        Volume dockersocket = new Volume("/usr/share/apache2/htdocs/");
+        Volume filevolume = new Volume("/usr/share/apache2/htdocs/");
         
         
            // dns server config
@@ -3085,56 +3087,82 @@ public class dockerclient implements Idockerclient
                 stdns2 = publicdnsserverconfig.getStdns2();
         
         
-        Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
-        
-        HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse(inthttpport + ":" + inthttpport));
-                
-        hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
-        hostConfig.getNetworkMode();
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse(inthttpport + ":" + inthttpport));
+
+                hostConfig.withNetworkMode(stinterfacename);
+                hostConfig.getNetworkMode();
+                System.out.print("start network mode for httpfileserver openwrt " + hostConfig.getNetworkMode() + "\n");
         
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
                 hostConfig.withCapAdd(Capability.NET_ADMIN);
                 hostConfig.withCapAdd(Capability.NET_RAW);
                 hostConfig.withCapAdd(Capability.SYS_ADMIN);
                 hostConfig.getCapAdd();
+                System.out.print("with capability " + hostConfig.getCapAdd() + "\n");
                 
                 hostConfig.isUserDefinedNetwork();
                 
                 hostConfig.withPrivileged(Boolean.TRUE);
                 hostConfig.getPrivileged();
+                System.out.print("wiht privilged mode " + hostConfig.getPrivileged() + "\n");
                 
                 //Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
-                hostConfig.withBinds(new Bind("/srv/www/htdocs/", dockersocket));
+                hostConfig.withBinds(new Bind("/srv/www/htdocs/", filevolume));
+                System.out.print("with mount volume for httpfileserver " + "/srv/www/htdocs" + "\n");
                 
+                
+                 hostConfig.withMemory(Long.MAX_VALUE);
+                //Isolation.HYPERV.getValue();   
+                hostConfig.getMemoryReservation();
                 hostConfig.getMemory();
+                System.out.print("with memory " + hostConfig.getMemory() + "\n");
                 
-                hostConfig.getBinds();
-                hostConfig.getDevices();
+                hostConfig.withMemorySwap(Long.MAX_VALUE);
+                hostConfig.getMemorySwap();
+                System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
+
+                hostConfig.withCpuShares(0);
+                hostConfig.getCpuShares();
+                System.out.print("landingpage cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
+                
+                //hostConfig.getBinds();
+                //hostConfig.getDevices();
                 
                  // add dns String 
                 String[] stdns = new String [] {stdns1,stdns2};
                 hostConfig.withDns(stdns);
                 hostConfig.getDns();
+                System.out.print("with dns " + hostConfig.getDns() + "\n");
+                
                 
                 hostConfig.withRuntime(stcomboruntime);
                 hostConfig.getRuntime();
+                System.out.print("with runtime " + hostConfig.getRuntime() + "\n");
+                
                  // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
                 hostConfig.getIsolation();
+                System.out.print("with isolation on openwrt only default is supported " + hostConfig.getIsolation() + "\n");
+                
                 // ipc mode
-                hostConfig.withIpcMode("private");
+                hostConfig.withIpcMode("host");
                 hostConfig.getIpcMode();
+                System.out.print("with ipc mode " + hostConfig.getIpcMode() + "\n");
                 // cgroup host
-                hostConfig.withCgroup("private");
+                hostConfig.withCgroup("host");
                 hostConfig.getCgroup();
+                System.out.print("with cgroup mode " + hostConfig.getCgroup() + "\n");
                 
                   // set kernel memory to max
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
-            //dockerClient = DockerClientBuilder.getInstance().build();  
-            getDockerClient(dockerClient);
-            
+                System.out.print("with kernel memory " + hostConfig.getKernelMemory() + "\n");
+                
+                //dockerClient = DockerClientBuilder.getInstance().build();  
+                getDockerClient(dockerClient);
+
             
             String stcontainername = "openwrthttpfileserver";
             // check image exist
