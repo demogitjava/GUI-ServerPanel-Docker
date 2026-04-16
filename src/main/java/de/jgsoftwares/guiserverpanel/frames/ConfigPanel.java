@@ -138,7 +138,7 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel14.setText("Java openJDK version");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "27", "25", "17", "11", " " }));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "29", "25", "17", "11", " " }));
 
         jLabel15.setForeground(new java.awt.Color(255, 0, 51));
         jLabel15.setText("install ipfire container first  - on panel openwrt - ipfire");
