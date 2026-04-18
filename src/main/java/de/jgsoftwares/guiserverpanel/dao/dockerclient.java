@@ -3040,6 +3040,12 @@ public class dockerclient implements Idockerclient
              
              
              
+             // set network speed to 100 mbit half with 
+             // network interface eth0
+             ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half autoneg off").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half autoneg off" + "\n");
+             
              
               // jgsoftwares/ipfire:cloud 
              dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag("cloud").exec();
