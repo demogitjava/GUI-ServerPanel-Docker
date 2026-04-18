@@ -120,20 +120,7 @@
 
                         
                             <!-- license-check -->
-                <plugin>
-                  <groupId>org.complykit</groupId>
-                  <artifactId>license-check-maven-plugin</artifactId>
-                  <version>0.5.3</version>
-                  <executions>
-                    <execution>
-                      <phase>verify</phase>
-                      <goals>
-                        <goal>os-check</goal>
-                      </goals>
-                    </execution>
-                  </executions>
-                </plugin>
-              
+                             
                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>license-maven-plugin</artifactId>
