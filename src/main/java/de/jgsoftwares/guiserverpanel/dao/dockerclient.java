@@ -3037,8 +3037,15 @@ public class dockerclient implements Idockerclient
             
         
              dockerClient.startContainerCmd(container.getId()).exec();
+             System.out.print("start config for conatiner " + "\n");
+            
              
-             
+             // ethtool -s eth0 advertise 0x004
+               // set network speed to 100 mbit half with 
+             // network interface eth0
+             ExecCreateCmdResponse advertisenetworkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 advertise 0x004").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(advertisenetworkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("advertise network speed 100 mbit half with ethtool -s eth0 advertise 0x004" + "\n");
              
              // set network speed to 100 mbit half with 
              // network interface eth0
@@ -3047,10 +3054,16 @@ public class dockerclient implements Idockerclient
              System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half autoneg off" + "\n");
              
              
-              // jgsoftwares/ipfire:cloud 
+             
+             
+             // local commit container
+             // jgsoftwares/ipfire:cloud 
              dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag("cloud").exec();
              System.out.print("local image commit jgsoftwares/ipfire:cloud");
              System.out.print("restart container openwrt2305host to run iptables in memory of this container" + "\n");
+             
+             
+             
              
         } catch(Exception e)
         {
