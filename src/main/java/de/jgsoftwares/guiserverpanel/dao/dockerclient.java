@@ -3053,7 +3053,15 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half autoneg off" + "\n");
              
+             // delete provider dns2 file
+             ExecCreateCmdResponse setdns1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /var/run/dns1").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(setdns1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete dns1 file form path /var/run/dns1" + "\n");
              
+             // delete provider dns2 file
+             ExecCreateCmdResponse setdns2 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /var/run/dns2").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(setdns2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete dns1 file form path /var/run/dns2" + "\n");
              
              
              // local commit container
