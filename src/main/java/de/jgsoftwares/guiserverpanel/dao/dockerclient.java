@@ -3039,13 +3039,7 @@ public class dockerclient implements Idockerclient
              dockerClient.startContainerCmd(container.getId()).exec();
              System.out.print("start config for conatiner " + "\n");
             
-             
-             // ethtool -s eth0 advertise 0x004
-               // set network speed to 100 mbit half with 
-             // network interface eth0
-             ExecCreateCmdResponse advertisenetworkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 advertise 0x004").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(advertisenetworkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("advertise network speed 100 mbit half with ethtool -s eth0 advertise 0x004" + "\n");
+     
              
              // set network speed to 100 mbit half with 
              // network interface eth0
