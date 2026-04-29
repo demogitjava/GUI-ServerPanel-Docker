@@ -219,6 +219,10 @@ public class dockerclient implements Idockerclient
     public void restartcontainerdockerlclient(String stdockerclient)
     {
         InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stdockerclient.toString()).exec();
+        
+        
+        //ethtool -s eth0 speed 100 duplex half
+        
         dockerClient.restartContainerCmd(container.getId()).exec();
         //System.out.println("Container " + container.getName() + " restarted");
     }
@@ -3043,9 +3047,9 @@ public class dockerclient implements Idockerclient
              
              // set network speed to 100 mbit half with 
              // network interface eth0
-             ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half autoneg off").withAttachStdout(true).withAttachStderr(true).exec();
+             ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half autoneg off" + "\n");
+             System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
              
              // delete provider dns2 file
              ExecCreateCmdResponse setdns1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /var/run/dns1").withAttachStdout(true).withAttachStderr(true).exec();
@@ -3579,6 +3583,14 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(execiptablessave.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("openwrt2305host container command iptables-legacy-save" + "\n");
              System.out.print("restart container openwrt2305host to run iptables in this container memory" + "\n");
+             
+             
+             // set network speed to 100 mbit half with 
+             // network interface eth0
+             ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
+             
              
           } catch(Exception e)
           {
