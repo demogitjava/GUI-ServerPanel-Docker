@@ -3047,9 +3047,9 @@ public class dockerclient implements Idockerclient
              
              // set network speed to 100 mbit half with 
              // network interface eth0
-             ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
+             //ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half").withAttachStdout(true).withAttachStderr(true).exec();
+             //dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             //System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
              
              // delete provider dns2 file
              ExecCreateCmdResponse setdns1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /var/run/dns1").withAttachStdout(true).withAttachStderr(true).exec();
@@ -3587,9 +3587,9 @@ public class dockerclient implements Idockerclient
              
              // set network speed to 100 mbit half with 
              // network interface eth0
-             ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
+             //ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half").withAttachStdout(true).withAttachStderr(true).exec();
+             //dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             //System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
              
              
           } catch(Exception e)
