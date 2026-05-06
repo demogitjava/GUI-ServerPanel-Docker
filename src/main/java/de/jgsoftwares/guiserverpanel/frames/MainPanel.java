@@ -73,7 +73,7 @@ public class MainPanel extends javax.swing.JFrame {
         jButton3.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Docker Panel - Host only - Openwrt23.05");
+        setTitle("Docker Panel - Host only - Openwrt25.12.2");
 
         jToolBar1.setRollover(true);
 
@@ -174,6 +174,8 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, java.awt.BorderLayout.PAGE_END);
+
+        getAccessibleContext().setAccessibleName("Docker Panel - Host only - Openwrt 25.12.2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
