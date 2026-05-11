@@ -2432,6 +2432,24 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(execiptablessave.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("run command iptables-save" + "on container landingpage " + "\n");
              
+             
+             // delete file /etc/board.d/01_leds
+             ExecCreateCmdResponse stdelete01_leds = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/01_leds").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete01_leds.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete file /etc/board.d/01_leds " + "\n");
+             
+             //delete file /etc/board.d/02_network
+             ExecCreateCmdResponse stdelete02_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/02_network").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete02_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete file /etc/board.d/02_network " + "\n");
+             
+             //delete file /etc/board.d/99-default_network
+             ExecCreateCmdResponse stdelete99default_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/99-default_network").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete file /etc/board.d/02_network " + "\n");
+             
+             
+             
              // commit
              // jgsoftwares/openwrt23.05landingpage   java11
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java" +ConfigPanel.stjavaversion).exec();

@@ -314,25 +314,24 @@ public class OpenWrt extends javax.swing.JPanel {
          // " + ConfigPanel.stwanip + " " + "
         // 2. HTML Inhalt setzen
         jeditorPane.setContentType("text/html");
-        jeditorPane.setText("<html><body>" +
-                           "<h1>Ipfire dns config </h1>" +
-                           "<p>https://www.ipfire.org/docs/dns/public-servers</p>" +
-                           "<p>http://demogitjava.ddns.net:8000/ipfire/dnsgoogletls.jpg </p>" +
-                           "<p>gcore</p>" +
-                           "<p>95.85.95.85</p>" +
-                           "<p>2.56.220.2</p>" +
-                           "<p>google</p>" +
-                           "<p>8.8.8.8</p>" +
-                           "<p>dns.google</p>" +
-                           "<p>8.8.4.4</p>" +
-                           "<p>dns.google</p>" +
-                           "<p></p>" +
-                           "<p>ipfire after reboot use gcore and google</p>" +
-                           "<br> " +
-                           "<h1>Ipfire simple manually config</h1>" +
-                           "<p></p>" +
-                           "<br> " +
-                         
+        jeditorPane.setText("<html><head></head><body>" +
+                           "<table>" + 
+                           "<tr>" + 
+                           "<th>Ipfire public dns config </th>" +
+                           "</tr>" +
+                           "<tr>" +
+                           "<td>https://www.ipfire.org/docs/dns/public-servers</td> " +
+                           "</table>" + 
+                           "<p></p>" + "<br>" +
+                           "<h1>setup kernel namespace config and edit passwords with</h1>" +
+                           "<table>" + 
+                           "<tr>" + 
+                           "<th></th>" +
+                           "</tr>" +
+                           "<tr>" +
+                           "<td>setup</td> " +
+                           "</table>" + 
+                
                            "<h1>config network for ipfire</h1>" +
                            "<h1>run command</h1>" +
                            "<p>setup</p>" +
