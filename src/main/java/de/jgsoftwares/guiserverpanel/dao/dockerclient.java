@@ -2476,7 +2476,7 @@ public class dockerclient implements Idockerclient
              //delete file /etc/board.d/99-default_network
              ExecCreateCmdResponse stdelete99default_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/99-default_network").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("delete file /etc/board.d/02_network " + "\n");
+             System.out.print("delete file /etc/board.d/99_network " + "\n");
              
              
              
@@ -2561,7 +2561,7 @@ public class dockerclient implements Idockerclient
     public void ipfirenetworketh0iptablessave()
     {
          String containername = "ipfire";
-            // check image exist
+            // check container exist
             boolean containerexist = false;
             try
             {
@@ -2574,7 +2574,7 @@ public class dockerclient implements Idockerclient
             InspectContainerResponse container = dockerClient.inspectContainerCmd(containername).exec();
             
             
-            String eth0togigabit = "ethtool -s eth0 speed 10000 duplex half";
+            String eth0togigabit = "ethtool -s eth0 speed 10000 duplex half autoneg off";
             ExecCreateCmdResponse exetoolsetspeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", eth0togigabit).withAttachStdout(true).withAttachStderr(true).exec();
             dockerClient.execStartCmd(exetoolsetspeed.getId()).exec(new ExecStartResultCallback(System.out, System.err));
             System.out.print("set network speed to 10 Gib half" + "\n");
@@ -2912,6 +2912,26 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse execiptablessave = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "iptables-legacy-save").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execiptablessave.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("run command iptables-legacy-save on container openwrt2305host" + "\n" + "output iptables " + "\n");
+             
+
+             // delete file /etc/board.d/01_leds
+             ExecCreateCmdResponse stdelete01_leds = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/01_leds").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete01_leds.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete file /etc/board.d/01_leds " + "\n");
+             
+             //delete file /etc/board.d/02_network
+             ExecCreateCmdResponse stdelete02_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/02_network").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete02_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete file /etc/board.d/02_network " + "\n");
+             
+             //delete file /etc/board.d/99-default_network
+             ExecCreateCmdResponse stdelete99default_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/99-default_network").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete file /etc/board.d/99_network " + "\n");
+             
+             
+             
+
              // commit
              // jgsoftwares/openwrt23.05
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05").withTag("iptablesext4").exec();
