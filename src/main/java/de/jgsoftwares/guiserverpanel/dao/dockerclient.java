@@ -2557,6 +2557,36 @@ public class dockerclient implements Idockerclient
         }
     }
     
+    
+    public void ipfirenetworketh0iptablessave()
+    {
+         String containername = "ipfire";
+            // check image exist
+            boolean containerexist = false;
+            try
+            {
+                dockerClient.inspectContainerCmd(containername).exec();
+            } catch(NotFoundException e)
+            {
+                System.out.print("error search image " + e);
+            }
+            
+            InspectContainerResponse container = dockerClient.inspectContainerCmd(containername).exec();
+            
+            
+            String eth0togigabit = "ethtool -s eth0 speed 10000 duplex half";
+            ExecCreateCmdResponse exetoolsetspeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", eth0togigabit).withAttachStdout(true).withAttachStderr(true).exec();
+            dockerClient.execStartCmd(exetoolsetspeed.getId()).exec(new ExecStartResultCallback(System.out, System.err));
+            System.out.print("set network speed to 10 Gib half" + "\n");
+            
+            
+            
+            String iptablessave = "iptables-save";
+            ExecCreateCmdResponse exeiptablesave = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "iptables-save").withAttachStdout(true).withAttachStderr(true).exec();
+            dockerClient.execStartCmd(exeiptablesave.getId()).exec(new ExecStartResultCallback(System.out, System.err));
+            System.out.print("run command iptables save on container ipfire" + "\n");  
+    }
+    
     /**
      *
      * @param stopenwrthost
