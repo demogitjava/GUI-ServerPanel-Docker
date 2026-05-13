@@ -351,11 +351,8 @@ public class OpenWrt extends javax.swing.JPanel {
                            "<h1>routing table config</h1>" +
                            "<p>Kernel IP routing table with router gateway 10.255.255.1</p>" +  
                            "<p>Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</p>" +   
-                           "<p>0.0.0.0         10.255.255.1    0.0.0.0         UG    0      0        0 red0</p>" +   
-                           "<p>10.255.255.1    0.0.0.0         255.255.255.255 UH    0      0        0 red0</p>" +   
-                           "<p>192.168.10.0    192.168.10.56   255.255.255.255 UGH   0      0        0 green0</p>" +   
+                           "<p>0.0.0.0         10.255.255.1    0.0.0.0         UG    0      0        0 eth0</p>" +   
                            "<p>192.168.10.0    192.168.10.56   255.255.255.0   UG    0      0        0 wireguard</p>" +   
-                           "<p>" + ConfigPanel.stwanip + " 10.255.255.1    255.255.255.255 UGH   0      0        0 orange0</p>" +   
                            "<p></p>" +   
                            "<p>routing table only over mainframe panel form the provider</p>" +   
                            "<p>ip route flush table main</p>" +   

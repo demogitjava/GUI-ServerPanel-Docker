@@ -160,6 +160,9 @@ public class MainPanel extends javax.swing.JFrame {
         // add httpfileserver
         jTabbedPane1.add(httpfileserver, "simple http fileserver");
 
+        de.jgsoftwares.guiserverpanel.frames.elsteretr elsteretr = new de.jgsoftwares.guiserverpanel.frames.elsteretr();
+        jTabbedPane1.add(elsteretr, "Elster Etr");
+
         //Ebay ebaypanel = new Ebay();
         //jTabbedPane1.add(ebaypanel, "Ebay");
 
