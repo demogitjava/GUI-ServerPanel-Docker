@@ -68,8 +68,8 @@ public class MainPanel extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree(rootNode);
@@ -94,6 +94,14 @@ public class MainPanel extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton4);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NimROD", "Nimbus", "Metal" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jComboBox1);
+
         jButton2.setText("help");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -104,14 +112,6 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton2);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NimROD", "Nimbus", "Metal" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jComboBox1);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
