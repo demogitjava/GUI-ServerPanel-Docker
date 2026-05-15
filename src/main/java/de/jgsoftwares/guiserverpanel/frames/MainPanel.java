@@ -1,9 +1,11 @@
 package de.jgsoftwares.guiserverpanel.frames;
 
+import de.jgsoftwares.guiserverpanel.dao.dockerclient;
 import java.awt.event.MouseAdapter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.util.HashMap;
+import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -42,10 +44,13 @@ public class MainPanel extends javax.swing.JFrame {
         dockerimages = new DefaultMutableTreeNode("Images");
         dockercontainers = new DefaultMutableTreeNode("Containers");
         initComponents();  
+        
+        
+      
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         
-        //this.pack();
+      
         
        
     
@@ -62,8 +67,9 @@ public class MainPanel extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree(rootNode);
@@ -77,13 +83,16 @@ public class MainPanel extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NimROD", "Nimbus", "Metal" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("restart all containers");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        jToolBar1.add(jComboBox1);
+        jToolBar1.add(jButton4);
 
         jButton2.setText("help");
         jButton2.setFocusable(false);
@@ -95,6 +104,14 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton2);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NimROD", "Nimbus", "Metal" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jComboBox1);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
@@ -287,7 +304,7 @@ public class MainPanel extends javax.swing.JFrame {
                 stdockerclient = strrepeace3.toString();
                 
                 
-                System.out.print("der name ist " + stdockerclient + "\n");
+                System.out.print("the name is " + stdockerclient + "\n");
                 } catch(Exception e)
                 {
                     System.out.print("Fehler " + e); 
@@ -322,6 +339,16 @@ public class MainPanel extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+        // restart all containers
+        System.out.print("restart all containers" + "\n");
+        
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        dclient.restartallcontainers();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
  
 
  
@@ -332,6 +359,7 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;

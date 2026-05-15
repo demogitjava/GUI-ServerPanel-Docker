@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import com.github.dockerjava.api.model.Capability;
 
 import com.github.dockerjava.api.model.Isolation;
+import com.github.dockerjava.api.model.RestartPolicy;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -2629,8 +2630,13 @@ public class dockerclient implements Idockerclient
                 HostConfig hostConfig = HostConfig.newHostConfig();
                         //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                
-                
                         
+                // edit restart policy to allway  
+               
+                RestartPolicy restartPolicy = RestartPolicy.alwaysRestart();
+                hostConfig.withRestartPolicy(restartPolicy);
+                hostConfig.getRestartPolicy();
+                
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 hostConfig.getNetworkMode();
@@ -3710,5 +3716,27 @@ public class dockerclient implements Idockerclient
               
           }
           
+    }
+    
+    @Override
+    public void restartallcontainers()
+    {
+        String containerid = "openwrt2305host";
+            
+        // dockerClient = DockerClientBuilder.getInstance().build();
+        getDockerClient(dockerClient);
+            
+        //String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
+        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + containerid.toString()).exec();
+        // iptables save
+        ExecCreateCmdResponse execrestartallcontainers = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "docker restart $(docker ps -a -q)").withAttachStdout(true).withAttachStderr(true).exec();
+        try {
+            dockerClient.execStartCmd(execrestartallcontainers.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+        } catch (InterruptedException ex) {
+            System.out.print("error run command" + "is container openwrt2305host running !!" + "\n");
+        }
+             System.out.print("openwrt2305host container run command restart all containers" + "\n");
+             
+            
     }
 }

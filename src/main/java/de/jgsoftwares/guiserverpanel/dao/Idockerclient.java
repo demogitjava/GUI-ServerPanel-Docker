@@ -47,4 +47,6 @@ public interface Idockerclient {
     
     public void attachopenwrt2305hostcontainer();
     public void openwrt2305hostsaveiptables();
+    
+    public void restartallcontainers();
 }
