@@ -3535,6 +3535,31 @@ public class dockerclient implements Idockerclient
              System.out.print("delete file /etc/board.d/02_network " + "\n");
              
              
+              String stdmz = ConfigPanel.stwanip;
+             if(stdmz.equals("10.255.255.1"))
+             {
+                    // cat /dev/null > /etc/hosts
+                    String clearapachedmz = "/etc/apache2/apache2.conf";
+                    ExecCreateCmdResponse exeapachedmz = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearapachedmz).withAttachStdout(true).withAttachStderr(true).exec();
+                    dockerClient.execStartCmd(exeapachedmz.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                    System.out.print("flush file /etc/apache2/apache2.conf" + "\n");
+                    
+                    System.out.print("add simple apache2 config to listen apache to dmz" + "\n");
+                    
+                    
+                    String stapachelisten = "LISTEN 10.255.255.1:8000";
+                    ExecCreateCmdResponse apachedmz = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + stapachelisten + " >> /etc/apache2/apache2.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                    dockerClient.execStartCmd(apachedmz.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                    System.out.print("edit /etc/apache2/apache2.conf file to listen to " + stapachelisten + "todmz" + "\n");
+
+                    String strestartapachefileserver = "apachectl restart";
+                    ExecCreateCmdResponse apacherestart = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "" + strestartapachefileserver).withAttachStdout(true).withAttachStderr(true).exec();
+                    dockerClient.execStartCmd(apacherestart.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                    System.out.print("restart apache fileserver with listen to dmz ip " + stapachelisten + "\n");
+                    
+             }
+             
+             
              System.out.print("restart container openwrt2305host to run iptables in memory of this container");
              
              /*
