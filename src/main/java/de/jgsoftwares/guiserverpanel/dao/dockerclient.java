@@ -947,6 +947,12 @@ public class dockerclient implements Idockerclient
                 System.out.print("start network config for container derbydb " + "\n");
                 System.out.print("port of derbydb is by default set to 1527 " + "\n");
                 
+                     // setup ubus socket for container 
+                // bin /var/run/ubus/ubus.sock to container
+                Volume ubussocket = new Volume("/var/run/ubus/ubus.sock");
+                System.out.print("init Volume ubus " + "\n");
+                
+                
                 // add container to host network
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
@@ -1024,6 +1030,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.withMemorySwap(Long.MAX_VALUE);
                 hostConfig.getMemorySwap();
                 System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
+                
+                // bind ubus to container
+                hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));    
+                System.out.print("bind ubus to ubus to host config " + "\n");
+                
                 
                 String imageexist = null;
                 String sttag = null;
@@ -1118,7 +1129,7 @@ public class dockerclient implements Idockerclient
                              .withCmd("/bin/ash", "/root/startderbydb.sh")
                              .withName("openwrtderbydb")
                              .withHostConfig(hostConfig)
-
+                             .withVolumes(ubussocket)
                             // .withExposedPorts(tcp1527)
                             // .withExposedPorts(tcp1527)
                              .withDomainName(styourdomainname)
@@ -2491,13 +2502,11 @@ public class dockerclient implements Idockerclient
              System.out.print("delete file /etc/board.d/99_network " + "\n");
              
              
-              ExecCreateCmdResponse stdstartubus_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ubusd -s /var/run/ubus/ubus.sock").withAttachStdout(true).withAttachStderr(true).exec();
+             ExecCreateCmdResponse stdstartubus_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ubusd -s /var/run/ubus/ubus.sock").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("start ubus socket " + "\n");
              
-             
-             
-             
+
              // commit
              // jgsoftwares/openwrt23.05landingpage   java11
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java" +ConfigPanel.stjavaversion).exec();
