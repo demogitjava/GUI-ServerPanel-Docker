@@ -14,6 +14,7 @@ import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
+import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Capability;
 
 import com.github.dockerjava.api.model.Isolation;
@@ -3215,7 +3216,7 @@ public class dockerclient implements Idockerclient
     {
         
         String sthttpfileserver = null;
-        String sthttpfileservertag = null;
+        String sthttpfileservertag = "shell";
         
         int inthttpport = Integer.parseInt(stport);
         ExposedPort tcphttp = ExposedPort.tcp(inthttpport);
@@ -3225,6 +3226,12 @@ public class dockerclient implements Idockerclient
         // add volume - dockersocket 
         Volume filevolume = new Volume("/usr/share/apache2/htdocs/");
         
+        
+        
+        // setup ubus socket for container 
+        // bin /var/run/ubus/ubus.sock to container
+        Volume ubussocket = new Volume("/var/run/ubus/ubus.sock");
+        System.out.print("init Volume ubus " + "\n");
         
            // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
@@ -3263,9 +3270,10 @@ public class dockerclient implements Idockerclient
                 
                 //Isolation.PROCESS.getValue();
                 //Isolation.HYPERV.getValue();
-                hostConfig.withBinds(new Bind("/srv/www/htdocs/", filevolume));
-                System.out.print("with mount volume for httpfileserver " + "/srv/www/htdocs" + "\n");
                 
+                
+              
+              
                 
                  hostConfig.withMemory(Long.MAX_VALUE);
                 //Isolation.HYPERV.getValue();   
@@ -3314,6 +3322,19 @@ public class dockerclient implements Idockerclient
                 hostConfig.getKernelMemory();
                 System.out.print("with kernel memory " + hostConfig.getKernelMemory() + "\n");
                 
+                
+                  
+                //hostConfig.withBinds(new Bind("/srv/www/htdocs/", filevolume));
+                //hostConfig.getBinds();
+                System.out.print("with mount volume for httpfileserver " + "/srv/www/htdocs" + "\n");
+                
+                
+                // bind ubus to container
+                // bind htdocs to container
+                hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket), new Bind("/srv/www/htdocs/", filevolume));
+                hostConfig.getBinds();
+                System.out.print("bind ubus to ubus to host config " + "\n");
+                 System.out.print("with mount volume for httpfileserver " + "/srv/www/htdocs" + "\n");
                 //dockerClient = DockerClientBuilder.getInstance().build();  
                 getDockerClient(dockerClient);
 
@@ -3334,7 +3355,7 @@ public class dockerclient implements Idockerclient
             }
             else
             {
-               sthttpfileservertag = "shell";
+               //sthttpfileservertag = "shell";
                 //String stjavaversion = ConfigPanel.stjavaversion.toString();
                 sthttpfileserver = "jgsoftwares/openwrthttpfileserver" + ":" + sthttpfileservertag;
                 dockerClient.pullImageCmd(sthttpfileserver).exec(new PullImageResultCallback()).awaitSuccess();
@@ -3344,12 +3365,14 @@ public class dockerclient implements Idockerclient
             // start container 
             CreateContainerResponse container = null;
             System.out.println("start openwrt container " + "\n");
-                    container = dockerClient.createContainerCmd("jgsoftwares/openwrthttpfileserver:shell")
+                    container = dockerClient.createContainerCmd("jgsoftwares/openwrthttpfileserver:" + sthttpfileservertag)
                     //.withCmd("apachectl restart")
                     .withName(stcontainername)
                     .withUser("root")
                     //.withCmd(cmd)
                     .withHostConfig(hostConfig)
+                    .withVolumes(ubussocket)
+                    .withVolumes(filevolume)
                     .withExposedPorts(tcphttp)
                     // .withExposedPorts(tcp1527)
                     .withDomainName(styourdomainname)
@@ -3558,6 +3581,11 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse stdelete99default_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/99-default_network").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("delete file /etc/board.d/02_network " + "\n");
+             
+             
+             ExecCreateCmdResponse stdstartubus_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ubusd -s /var/run/ubus/ubus.sock").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("start ubus socket " + "\n");
              
              
               String stdmz = ConfigPanel.stwanip;
