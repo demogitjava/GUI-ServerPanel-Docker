@@ -76,7 +76,7 @@ public class dockerclient implements Idockerclient
     public static DockerClient dockerClient;
     //DockerClient dockerClient;
 
-   
+    String stimagetag = "cloud";
     
     // List of dockerimages
     // from /var/run/docker.sock
@@ -2027,11 +2027,21 @@ public class dockerclient implements Idockerclient
                 stdns1 = publicdnsserverconfig.getStdns1();
                 stdns2 = publicdnsserverconfig.getStdns2();
                 
+                // setup ubus socket for container 
+                // bin /var/run/ubus/ubus.sock to container
+                Volume ubussocket = new Volume("/var/run/ubus/ubus.sock");
+                System.out.print("init Volume ubus " + "\n");
                 
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
+                
+                
+                // bind ubus to container
+                hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));
+                System.out.print("bind ubus to ubus to host config " + "\n");
+                
                 
                 System.out.print("started network config for landingpage " + "\n");
                 System.out.print("used ports are 80 and 1527 for derbydb " + " on java25 port 80 is started with upd for html3" + "\n");
@@ -2161,6 +2171,7 @@ public class dockerclient implements Idockerclient
                     .withCmd(stshell, struncmdst)   
                     .withName(stcontainername)
                     .withUser("root")
+                    .withVolumes(ubussocket)
                     //.withCmd(cmd)
                     .withHostConfig(hostConfig)
                     .withExposedPorts(tcp80, tcp1527)
@@ -2478,6 +2489,12 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse stdelete99default_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/99-default_network").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("delete file /etc/board.d/99_network " + "\n");
+             
+             
+              ExecCreateCmdResponse stdstartubus_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ubusd -s /var/run/ubus/ubus.sock").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("start ubus socket " + "\n");
+             
              
              
              
@@ -3114,7 +3131,7 @@ public class dockerclient implements Idockerclient
             {         
                 // jgsoftwares/openwrt23.05:nftbridgelayer2ext4 
                
-                String stimagetag = "cloud";
+                stimagetag = "cloud";
                 String stopenwrt2305host = "jgsoftwares/ipfire:" + stimagetag;
                 dockerClient.pullImageCmd("jgsoftwares/ipfire:" + stimagetag).exec(new PullImageResultCallback()).awaitSuccess();
             }
@@ -3124,8 +3141,8 @@ public class dockerclient implements Idockerclient
            // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
            
             CreateContainerResponse container;
-            container = dockerClient.createContainerCmd("jgsoftwares/ipfire:cloud")
-                   
+            container = dockerClient.createContainerCmd("jgsoftwares/ipfire:" + stimagetag)
+                    //.withCmd("/bin/bash", "sh /root/configiptables.v2")
                     .withName("ipfire")
                     .withUser("root")
                     .withHostConfig(hostConfig)
@@ -3168,8 +3185,8 @@ public class dockerclient implements Idockerclient
              
              // local commit container
              // jgsoftwares/ipfire:cloud 
-             dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag("cloud").exec();
-             System.out.print("local image commit jgsoftwares/ipfire:cloud");
+             dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag(stimagetag).exec();
+             System.out.print("local image commit jgsoftwares/ipfire:" + stimagetag);
              System.out.print("restart container openwrt2305host to run iptables in memory of this container" + "\n");
              
              

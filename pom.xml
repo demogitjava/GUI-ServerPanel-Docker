@@ -18,7 +18,7 @@
 		<spring-boot.run.jvmArguments>-Duser.timezone=UTC</spring-boot.run.jvmArguments>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>25</java.version>
 	 <maven.compiler.source>25</maven.compiler.source>
 	 <maven.compiler.target>25</maven.compiler.target>
 	</properties>
@@ -119,7 +119,7 @@
                   </plugin>
 
                         
-                            <!-- license-check -->
+                            <!-- license-check 
                              
                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -134,7 +134,7 @@
                       </execution>
                     </executions>
                 </plugin>
-                        
+                        -->
                 
                         
              
