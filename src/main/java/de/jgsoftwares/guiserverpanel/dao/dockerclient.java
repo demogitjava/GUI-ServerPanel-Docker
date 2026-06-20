@@ -3211,7 +3211,6 @@ public class dockerclient implements Idockerclient
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
-    
     public void starthttpfileserver(String stport)
     {
         
@@ -3604,11 +3603,6 @@ public class dockerclient implements Idockerclient
             {
                 System.out.print("Error " + e);
             }
-    }
-    
-    public void startreverseproxy(String port, List portlist)
-    {
-        
     }
     
     @Override
