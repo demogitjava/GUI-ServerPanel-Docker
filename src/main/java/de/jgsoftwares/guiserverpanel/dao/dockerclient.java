@@ -1034,6 +1034,7 @@ public class dockerclient implements Idockerclient
                 
                 // bind ubus to container
                 hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));    
+                hostConfig.getBinds();
                 System.out.print("bind ubus to ubus to host config " + "\n");
                 
                 
@@ -1332,6 +1333,13 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("delete file /etc/board.d/02_network " + "\n");
             
+             
+             // start ubus
+             ExecCreateCmdResponse stdstartubus_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ubusd -s /var/run/ubus/ubus.sock").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("start ubus socket " + "\n");
+             
+             
              // name for running container 
              // commit container local with setting in /etc
              // restart container settings
@@ -3334,7 +3342,7 @@ public class dockerclient implements Idockerclient
                 hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket), new Bind("/srv/www/htdocs/", filevolume));
                 hostConfig.getBinds();
                 System.out.print("bind ubus to ubus to host config " + "\n");
-                 System.out.print("with mount volume for httpfileserver " + "/srv/www/htdocs" + "\n");
+                System.out.print("with mount volume for httpfileserver " + "/srv/www/htdocs" + "\n");
                 //dockerClient = DockerClientBuilder.getInstance().build();  
                 getDockerClient(dockerClient);
 
