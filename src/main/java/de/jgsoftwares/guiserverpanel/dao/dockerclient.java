@@ -8,6 +8,7 @@ import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.Network;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.HostConfig;
@@ -575,6 +576,7 @@ public class dockerclient implements Idockerclient
                  .withCmd("/bin/ash", "/root/LanServer.sh")
                  .withName("openwrtlanservertcp")
                  .withUser("root") 
+                 .withEnv("NETWORK_IF=eth0")
                  .withHostConfig(hostConfig)
                  .withExposedPorts(tcp8443)
                 // .withExposedPorts(tcp1527)
@@ -1129,6 +1131,7 @@ public class dockerclient implements Idockerclient
 
                         CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:" + sttag)
                              .withCmd("/bin/ash", "/root/startderbydb.sh")
+                             .withEnv("NETWORK_IF=eth0")
                              .withName("openwrtderbydb")
                              .withHostConfig(hostConfig)
                              .withVolumes(ubussocket)
@@ -2057,6 +2060,7 @@ public class dockerclient implements Idockerclient
 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 
+              
                 
                 // bind ubus to container
                 hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));
@@ -2153,9 +2157,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.getCpuShares();
                 System.out.print("landingpage cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
                 
-            //dockerClient = DockerClientBuilder.getInstance().build();  
-            getDockerClient(dockerClient);
+                //dockerClient = DockerClientBuilder.getInstance().build();  
+                getDockerClient(dockerClient);
              
+                // dockerClient.buildImageCmd().getBuildArgs().clear();
+          
            
             // check image exist
             boolean imagenotexist = false;
@@ -2176,18 +2182,31 @@ public class dockerclient implements Idockerclient
                 String stjavaversion = ConfigPanel.stjavaversion.toString();
                 String stlandingpageexist = "jgsoftwares/openwrt23.05landingpage:java" + stjavaversion;
                 dockerClient.pullImageCmd(stlandingpageexist).exec(new PullImageResultCallback()).awaitSuccess();
+                
+                
+                //String imageId = ...;
+                InspectImageResponse response = dockerClient.inspectImageCmd(stlandingpageexist).exec();
+                response.getConfig().getEnv().toString();
+                
+                
+                
             }
           
             
             
             CreateContainerResponse container = null;
 
+               
                switch(contsystem)
                 {
                   
                 case "openwrt":
+                    
+                 
                     System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
+                    .withEnv("NETWORK_IF=eth0")
+                            // JAVA_DEBUG=true
                     .withCmd(stshell, struncmdst)   
                     .withName(stcontainername)
                     .withUser("root")
@@ -2220,6 +2239,10 @@ public class dockerclient implements Idockerclient
                     //.withCmd(stshell, sttime)   
                      
                     .exec();
+                    
+                    
+                    
+                    
                     break;
                 case "oraclelinux":
                    System.out.println("start oracle container " + "\n");
@@ -2779,6 +2802,7 @@ public class dockerclient implements Idockerclient
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:iptablesext4")
                     .withName("openwrt2305host")
                     .withUser("root")
+                    .withEnv("NETWORK_IF=eth0")
                     .withVolumes(dockersocket)
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
@@ -3163,6 +3187,7 @@ public class dockerclient implements Idockerclient
                     //.withCmd("/bin/bash", "sh /root/configiptables.v2")
                     .withName("ipfire")
                     .withUser("root")
+                    .withEnv("NETWORK_IF=eth0")
                     .withHostConfig(hostConfig)
                 
                     //.withExposedPorts(tcp80)
@@ -3377,6 +3402,7 @@ public class dockerclient implements Idockerclient
                     //.withCmd("apachectl restart")
                     .withName(stcontainername)
                     .withUser("root")
+                    .withEnv("NETWORK_IF=eth0")
                     //.withCmd(cmd)
                     .withHostConfig(hostConfig)
                     .withVolumes(ubussocket)

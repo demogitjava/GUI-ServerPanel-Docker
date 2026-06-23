@@ -6,6 +6,7 @@
 package de.jgsoftwares.guiserverpanel.config;
 
 import de.jgsoftwares.guiserverpanel.GUIServerPanel;
+import java.io.IOException;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -51,8 +52,10 @@ public class LookAndFeel
     {
          try
         {
+            
+           
             UIManager.setLookAndFeel("net.sf.nimrod.NimRODLookAndFeel");
-            SwingUtilities.updateComponentTreeUI(GUIServerPanel.mpanel);
+            //SwingUtilities.updateComponentTreeUI(GUIServerPanel.mpanel);
         } catch (Exception e)
         {
             System.out.print("LookAndFeel Error  NomRoD !");
