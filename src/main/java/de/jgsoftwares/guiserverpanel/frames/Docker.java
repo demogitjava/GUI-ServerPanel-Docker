@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import com.github.dockerjava.api.DockerClient;
 
 /**
  *
@@ -122,22 +123,33 @@ public class Docker extends javax.swing.JPanel {
         
         stlogin = jTextField1.getText();
         stpassword2 = jPasswordField1.getText();
-         
-        serverurl = "https://index.docker.io/v1";
+         // https://registry.hub.docker.com
+         // https://index.docker.io/v1\
+        serverurl = "https://registry.hub.docker.com";
         // login over dockerclient api
         //AuthConfig authConfig = new AuthConfig()
         //      .withUsername(stlogin)
         //     .withPassword(stpassword2);
+          //.withRegistryUsername("baeldung")
+    //.withDockerCertPath("/home/baeldung/.docker/certs")
+    //.withDockerConfig("/home/baeldung/.docker/")
+    //.withDockerTlsVerify("1")
         
+        DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
+                .withRegistryEmail(stlogin)
+                .withRegistryPassword(stpassword2)
+                .withDockerHost("tcp://192.168.10.56:2375").build();
+
+    //DockerClient dockerClient = DockerClientBuilder.getInstance(config).build();
         
-      
+      DockerClient dockerClient = DockerClientBuilder.getInstance(config).build();
         
-        clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
-        .withRegistryUrl(serverurl)
-        .withRegistryUsername(stlogin)
-        .withRegistryPassword(stpassword2)
-        .withRegistryEmail(stemail)
-        .build();
+        //clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
+        //.withRegistryUrl(serverurl)
+        //.withRegistryUsername(stlogin)
+        //.withRegistryPassword(stpassword2)
+        //.withRegistryEmail(stemail)
+        //.build();
         
         //return DockerClientBuilder.getInstance(clientConfig).build();
         clientConfig.getDockerConfig();
