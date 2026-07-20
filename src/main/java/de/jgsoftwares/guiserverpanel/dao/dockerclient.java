@@ -1040,6 +1040,11 @@ public class dockerclient implements Idockerclient
                 System.out.print("bind ubus to ubus to host config " + "\n");
                 
                 
+                long lcpuperiod = 1000;
+                hostConfig.withCpuPeriod(lcpuperiod);
+                hostConfig.getCpuPeriod();
+                System.out.print("run cpu period to 1000" + "\n");
+                
                 String imageexist = null;
                 String sttag = null;
                 String stforcommit = null;
@@ -2061,6 +2066,7 @@ public class dockerclient implements Idockerclient
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 
               
+             
                 
                 // bind ubus to container
                 hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));
@@ -2157,6 +2163,30 @@ public class dockerclient implements Idockerclient
                 hostConfig.getCpuShares();
                 System.out.print("landingpage cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
                 
+                
+                //hostConfig.withCpuCount(Long.MIN_VALUE);
+                //hostConfig.getCpuCount();
+                
+                //hostConfig.withCpuPercent(Long.MIN_VALUE);
+                //hostConfig.getCpuPercent();
+              
+                //hostConfig.withCpuQuota(Long.MAX_VALUE);
+                //hostConfig.getCpuQuota();
+                
+                
+                long lcpuperiod = 1000;
+                hostConfig.withCpuPeriod(lcpuperiod);
+                hostConfig.getCpuPeriod();
+                System.out.print("run cpu period to 1000" + "\n");
+                
+
+                //hostConfig.withCpuRealtimePeriod(Long.MIN_VALUE);
+                //hostConfig.getCpuRealtimePeriod();
+                
+                //hostConfig.withCpuRealtimeRuntime(Long.MIN_VALUE);
+                //hostConfig.getCpuRealtimeRuntime();
+                
+                
                 //dockerClient = DockerClientBuilder.getInstance().build();  
                 getDockerClient(dockerClient);
              
@@ -2205,8 +2235,7 @@ public class dockerclient implements Idockerclient
                  
                     System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
-                    .withEnv("NETWORK_IF=eth0")
-                            // JAVA_DEBUG=true
+                    .withEnv("NETWORK_IF=eth0") 
                     .withCmd(stshell, struncmdst)   
                     .withName(stcontainername)
                     .withUser("root")
@@ -2223,13 +2252,11 @@ public class dockerclient implements Idockerclient
                     //.getExposedPorts(extcp1527.getProtocol())
                     .withAttachStderr(true)
                     .withAttachStdin(true)
-                    .withAttachStdout(true)   
-                   
+                    .withAttachStdout(true)
                     // timesettings
                     //.withCmd(stinstall)
                     //.withCmd(sttime)
                     .withWorkingDir("/root")
-                   
                             // 
                             //   jTextArea1.append("opkg install alpine-repositories" +"apk add --allow-untrusted tzdata" + "\n");
                             // jTextArea1.append("add CET-1CEST,M3.5.0,M10.5.0/3 to  /etc/TZ - for germany" + "/n");
@@ -2237,7 +2264,6 @@ public class dockerclient implements Idockerclient
                     
                     //.withCmd(stshell, stinstall)
                     //.withCmd(stshell, sttime)   
-                     
                     .exec();
                     
                     
@@ -2340,6 +2366,7 @@ public class dockerclient implements Idockerclient
                  //       .exec();
          dockerClient.startContainerCmd(container.getId()).exec();
     
+        
           // edit container settings 
              // /etc/TZ
              // /etc/hosts
@@ -3145,6 +3172,11 @@ public class dockerclient implements Idockerclient
                 System.out.print("with memory " + hostConfig.getMemory() + "\n");
                 
                 
+                long lcpuperiod = 1000000;
+                hostConfig.withCpuPeriod(lcpuperiod);
+                hostConfig.getCpuPeriod();
+                System.out.print("run cpu period to " + lcpuperiod + "\n");
+                
                 hostConfig.withCpuShares(2048);
                 hostConfig.getCpuShares();
                 System.out.print("ipfire cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
@@ -3355,6 +3387,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.getKernelMemory();
                 System.out.print("with kernel memory " + hostConfig.getKernelMemory() + "\n");
                 
+                
+                long lcpuperiod = 1000;
+                hostConfig.withCpuPeriod(lcpuperiod);
+                hostConfig.getCpuPeriod();
+                System.out.print("run cpu period to 1000" + "\n");
                 
                   
                 //hostConfig.withBinds(new Bind("/srv/www/htdocs/", filevolume));
@@ -3685,7 +3722,6 @@ public class dockerclient implements Idockerclient
             //        .withTarInputStream(tarArchiveInputStream)
             //        .exec();
             dockerClient.copyArchiveToContainerCmd(containerID)
-                    
                     .withHostResource(resource)
                     .withRemotePath("/usr/share/apache2/htdocs/" + stpath).exec();
             //Landingpage.jLabel1chooser.setText("file upload to landingpagecontainer " + resource + "\n");
