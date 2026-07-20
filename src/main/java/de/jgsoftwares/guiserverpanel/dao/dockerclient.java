@@ -3257,6 +3257,13 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(setdns2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("delete dns1 file form path /var/run/dns2" + "\n");
              
+             // set ethtool to 10000 duplex half
+             String eth0togigabit = "ethtool -s eth0 speed 10000 duplex half autoneg off";
+             ExecCreateCmdResponse exetoolsetspeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", eth0togigabit).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exetoolsetspeed.getId()).exec(new ExecStartResultCallback(System.out, System.err));
+             System.out.print("set network speed to 10 Gib half" + "\n");
+             
+             
              // ethtool -s eth0 port fibre
              // ipfire port to fibre
              ExecCreateCmdResponse stfibre = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 port fibre").withAttachStdout(true).withAttachStderr(true).exec();
