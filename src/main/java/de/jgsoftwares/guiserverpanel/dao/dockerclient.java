@@ -3257,6 +3257,11 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(setdns2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("delete dns1 file form path /var/run/dns2" + "\n");
              
+             // ethtool -s eth0 port fibre
+             // ipfire port to fibre
+             ExecCreateCmdResponse stfibre = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 port fibre").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stfibre.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("run command ethtool -s eth0 port fibre" + "\n");
              
              // local commit container
              // jgsoftwares/ipfire:cloud 
