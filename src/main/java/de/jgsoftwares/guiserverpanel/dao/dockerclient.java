@@ -3264,6 +3264,14 @@ public class dockerclient implements Idockerclient
              System.out.print("set network speed to 10 Gib half" + "\n");
              
              
+               // set ethtool to 10000 duplex half
+             String ststartunbound = "/etc/rc.d/init.d/unbound start";
+             ExecCreateCmdResponse exestartunbound = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ststartunbound).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exestartunbound.getId()).exec(new ExecStartResultCallback(System.out, System.err));
+             System.out.print("start unbound " + "\n");
+             
+             
+             
              // ethtool -s eth0 port fibre
              // ipfire port to fibre
              ExecCreateCmdResponse stfibre = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 port fibre").withAttachStdout(true).withAttachStderr(true).exec();
