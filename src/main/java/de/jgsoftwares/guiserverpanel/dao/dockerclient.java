@@ -1040,10 +1040,16 @@ public class dockerclient implements Idockerclient
                 System.out.print("bind ubus to ubus to host config " + "\n");
                 
                 
-                long lcpuperiod = 1000;
+                 long lcpuperiod = 1000;
                 hostConfig.withCpuPeriod(lcpuperiod);
                 hostConfig.getCpuPeriod();
                 System.out.print("run cpu period to 1000" + "\n");
+                
+                long lcpuquota = -50000;
+                hostConfig.withCpuQuota(lcpuquota);
+                hostConfig.getCpuQuota();
+                System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
+                
                 
                 String imageexist = null;
                 String sttag = null;
@@ -2066,6 +2072,7 @@ public class dockerclient implements Idockerclient
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                 
               
+                
              
                 
                 // bind ubus to container
@@ -2164,6 +2171,8 @@ public class dockerclient implements Idockerclient
                 System.out.print("landingpage cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
                 
                 
+              
+                
                 //hostConfig.withCpuCount(Long.MIN_VALUE);
                 //hostConfig.getCpuCount();
                 
@@ -2178,6 +2187,12 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCpuPeriod(lcpuperiod);
                 hostConfig.getCpuPeriod();
                 System.out.print("run cpu period to 1000" + "\n");
+                
+                
+                long lcpuquota = -50000;
+                hostConfig.withCpuQuota(lcpuquota);
+                hostConfig.getCpuQuota();
+                System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
                 
 
                 //hostConfig.withCpuRealtimePeriod(Long.MIN_VALUE);
@@ -3177,6 +3192,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.getCpuPeriod();
                 System.out.print("run cpu period to " + lcpuperiod + "\n");
                 
+                //long lcpuquota = -50000;
+                //hostConfig.withCpuQuota(lcpuquota);
+                //hostConfig.getCpuQuota();
+                //System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
+                
                 hostConfig.withCpuShares(2048);
                 hostConfig.getCpuShares();
                 System.out.print("ipfire cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
@@ -3221,7 +3241,6 @@ public class dockerclient implements Idockerclient
                     .withUser("root")
                     .withEnv("NETWORK_IF=eth0")
                     .withHostConfig(hostConfig)
-                
                     //.withExposedPorts(tcp80)
                     // .withExposedPorts(tcp1527)
                     .withAttachStderr(true)
@@ -3413,7 +3432,12 @@ public class dockerclient implements Idockerclient
                 hostConfig.getCpuPeriod();
                 System.out.print("run cpu period to 1000" + "\n");
                 
-                  
+                long lcpuquota = -50000;
+                hostConfig.withCpuQuota(lcpuquota);
+                hostConfig.getCpuQuota();
+                System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
+                
+                
                 //hostConfig.withBinds(new Bind("/srv/www/htdocs/", filevolume));
                 //hostConfig.getBinds();
                 System.out.print("with mount volume for httpfileserver " + "/srv/www/htdocs" + "\n");
