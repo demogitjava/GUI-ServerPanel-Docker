@@ -52,6 +52,15 @@ public class PublicDNSServerconfig
                 setStdns2(stdns2);
                 break;
             }
+               case "ipfire":
+            {
+                System.out.print("ipfire " + "\n");
+                stdns1 = "81.3.27.54";
+                stdns2 = "2001:678:b28::54";
+                setStdns1(stdns1);
+                setStdns2(stdns2);
+                break;
+            }
             
             default:
                 break;

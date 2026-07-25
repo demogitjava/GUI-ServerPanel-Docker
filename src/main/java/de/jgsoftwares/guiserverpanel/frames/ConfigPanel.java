@@ -136,7 +136,12 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel13.setText("public dns server");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "gcore", "google", "cloudflare", " " }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ipfire", "gcore", "google", "cloudflare", " " }));
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Java openJDK version");
 
@@ -389,6 +394,10 @@ public class ConfigPanel extends javax.swing.JPanel {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

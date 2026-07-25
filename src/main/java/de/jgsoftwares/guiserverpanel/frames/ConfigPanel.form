@@ -315,14 +315,18 @@
     <Component class="javax.swing.JComboBox" name="jComboBox5">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="gcore"/>
-            <StringItem index="1" value="google"/>
-            <StringItem index="2" value="cloudflare"/>
-            <StringItem index="3" value=" "/>
+          <StringArray count="5">
+            <StringItem index="0" value="ipfire"/>
+            <StringItem index="1" value="gcore"/>
+            <StringItem index="2" value="google"/>
+            <StringItem index="3" value="cloudflare"/>
+            <StringItem index="4" value=" "/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox5ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
