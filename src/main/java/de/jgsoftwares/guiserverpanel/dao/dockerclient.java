@@ -1040,7 +1040,7 @@ public class dockerclient implements Idockerclient
                 System.out.print("bind ubus to ubus to host config " + "\n");
                 
                 
-                 long lcpuperiod = 1000;
+                long lcpuperiod = 1000;
                 hostConfig.withCpuPeriod(lcpuperiod);
                 hostConfig.getCpuPeriod();
                 System.out.print("run cpu period to 1000" + "\n");
@@ -3191,6 +3191,11 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCpuPeriod(lcpuperiod);
                 hostConfig.getCpuPeriod();
                 System.out.print("run cpu period to " + lcpuperiod + "\n");
+                
+                long lcpuquota = -50000;
+                hostConfig.withCpuQuota(lcpuquota);
+                hostConfig.getCpuQuota();
+                System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
                 
                 //long lcpuquota = -50000;
                 //hostConfig.withCpuQuota(lcpuquota);
