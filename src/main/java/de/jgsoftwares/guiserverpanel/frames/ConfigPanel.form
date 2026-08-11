@@ -77,9 +77,11 @@
                           </Group>
                       </Group>
                   </Group>
+                  <Component id="jLabel19" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -89,12 +91,10 @@
                               <Component id="jLabel15" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jLabel10" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" pref="395" max="-2" attributes="0"/>
                           <Component id="jLabel18" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="49" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jLabel19" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -380,22 +380,6 @@
         <Property name="text" type="java.lang.String" value="iptables settings."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="run as last the openwrt2305host container for iptables firewall"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel12">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="if openwrt2305host container is running restart with iptables is possible"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -410,6 +394,16 @@
           <Color blue="33" green="0" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="dmz fqdn - in this case ipfire.demogitjava.ddns.net"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="wg0 - http://217.160.255.254:8000/ipfire/configiptableswg0.v2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="wireguard - http://217.160.255.254:8000/ipfire/configiptables.v2"/>
       </Properties>
     </Component>
   </SubComponents>

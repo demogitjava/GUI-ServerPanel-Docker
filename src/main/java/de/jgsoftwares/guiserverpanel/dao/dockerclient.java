@@ -11,6 +11,7 @@ import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.github.dockerjava.api.model.Bind;
+import com.github.dockerjava.api.model.Links;
 import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
@@ -19,6 +20,8 @@ import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Capability;
 
 import com.github.dockerjava.api.model.Isolation;
+import com.github.dockerjava.api.model.Link;
+import com.github.dockerjava.api.model.Links;
 import com.github.dockerjava.api.model.RestartPolicy;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
@@ -2201,6 +2204,7 @@ public class dockerclient implements Idockerclient
                 //hostConfig.withCpuRealtimeRuntime(Long.MIN_VALUE);
                 //hostConfig.getCpuRealtimeRuntime();
                 
+            
                 
                 //dockerClient = DockerClientBuilder.getInstance().build();  
                 getDockerClient(dockerClient);
@@ -2250,7 +2254,7 @@ public class dockerclient implements Idockerclient
                  
                     System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
-                    .withEnv("NETWORK_IF=eth0") 
+                    .withEnv("NETWORK_IF=vlanlandingpage") 
                     .withCmd(stshell, struncmdst)   
                     .withName(stcontainername)
                     .withUser("root")
@@ -2580,7 +2584,7 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("start ubus socket " + "\n");
              
-
+             
              // commit
              // jgsoftwares/openwrt23.05landingpage   java11
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java" +ConfigPanel.stjavaversion).exec();

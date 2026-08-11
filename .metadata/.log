@@ -1,0 +1,141 @@
+!SESSION 2026-07-26 14:19:48.605 -----------------------------------------------
+eclipse.buildId=4.40.0.20260604-0652
+java.version=21.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2026-07-26 14:20:02.441
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2026-07-26 14:20:27.404
+!MESSAGE Logback config file: /root/git/GUI-ServerPanel-Docker/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.101.20251017-1242.xml
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-07-26 14:22:23.553
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-07-26 14:22:23.557
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!SUBENTRY 2 unknown 0 0 2026-07-26 14:22:23.558
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-07-26 14:22:23.558
+!MESSAGE /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-07-26 14:22:27.179
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-07-26 14:22:27.180
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!SUBENTRY 2 unknown 0 0 2026-07-26 14:22:27.180
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-07-26 14:22:27.180
+!MESSAGE /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-07-26 14:22:31.631
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-07-26 14:22:31.632
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!SUBENTRY 2 unknown 0 0 2026-07-26 14:22:31.632
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-07-26 14:22:31.632
+!MESSAGE /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-07-26 14:23:06.257
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-07-26 14:23:06.258
+!MESSAGE Invalid project description for project 'GUI-ServerPanel-Docker' at 'file:/root/git/GUI-ServerPanel-Docker' 
+!SUBENTRY 2 unknown 0 0 2026-07-26 14:23:06.258
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-07-26 14:23:06.258
+!MESSAGE /root/git/GUI-ServerPanel-Docker overlaps the workspace location: /root/git/GUI-ServerPanel-Docker
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:00.517
+!MESSAGE Plugin is modifying compileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:00.519
+!MESSAGE Plugin is modifying compileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:00.521
+!MESSAGE Plugin is modifying testCompileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:00.523
+!MESSAGE Plugin is modifying testCompileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:16.979
+!MESSAGE Plugin is modifying compileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:16.981
+!MESSAGE Plugin is modifying compileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addCompileSourceRoot()/removeCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:16.990
+!MESSAGE Plugin is modifying testCompileSourceRoots through clear(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2026-07-26 14:25:16.991
+!MESSAGE Plugin is modifying testCompileSourceRoots through add(), which will not work in Maven 4.0.0. Use MavenProject.addTestCompileSourceRoot()/removeTestCompileSourceRoot() methods instead. If using a plugin, please upgrade to the latest version or report the issue to the plugin maintainer. To disable these warnings, set -Dmaven.project.sourceRoots.warningsDisabled=true on the command line, in the .mvn/maven.config file, or in project POM properties.

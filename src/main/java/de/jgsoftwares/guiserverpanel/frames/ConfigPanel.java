@@ -74,10 +74,10 @@ public class ConfigPanel extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         jTextField4.setText("jTextField4");
 
@@ -158,17 +158,15 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel10.setText("iptables settings.");
 
-        jLabel11.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel11.setText("run as last the openwrt2305host container for iptables firewall");
-
-        jLabel12.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel12.setText("if openwrt2305host container is running restart with iptables is possible");
-
         jLabel18.setForeground(new java.awt.Color(255, 0, 51));
         jLabel18.setText("dmz 10.255.255.1 ");
 
         jLabel19.setForeground(new java.awt.Color(255, 0, 51));
         jLabel19.setText("dmz fqdn - in this case ipfire.demogitjava.ddns.net");
+
+        jLabel11.setText("wg0 - http://217.160.255.254:8000/ipfire/configiptableswg0.v2");
+
+        jLabel12.setText("wireguard - http://217.160.255.254:8000/ipfire/configiptables.v2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -211,9 +209,11 @@ public class ConfigPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBox3, 0, 204, Short.MAX_VALUE)
                                     .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
+                            .addComponent(jLabel11)
                             .addComponent(jLabel9)
                             .addComponent(jLabel17)
                             .addComponent(jLabel4)
@@ -222,10 +222,8 @@ public class ConfigPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 49, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
