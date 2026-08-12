@@ -579,7 +579,7 @@ public class dockerclient implements Idockerclient
                  .withCmd("/bin/ash", "/root/LanServer.sh")
                  .withName("openwrtlanservertcp")
                  .withUser("root") 
-                 .withEnv("NETWORK_IF=eth0")
+                 .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                  .withHostConfig(hostConfig)
                  .withExposedPorts(tcp8443)
                 // .withExposedPorts(tcp1527)
@@ -1145,7 +1145,7 @@ public class dockerclient implements Idockerclient
 
                         CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05derbydb:" + sttag)
                              .withCmd("/bin/ash", "/root/startderbydb.sh")
-                             .withEnv("NETWORK_IF=eth0")
+                             .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                              .withName("openwrtderbydb")
                              .withHostConfig(hostConfig)
                              .withVolumes(ubussocket)
@@ -1808,7 +1808,7 @@ public class dockerclient implements Idockerclient
                  //.withCmd("/bin/ash", "/root/LanServer.sh")
                  .withName("mysqlserver")
                  .withUser("root") 
-              
+                 .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                  .withHostConfig(hostConfig)
                 
                  .withExposedPorts(tcp3306)
@@ -2254,7 +2254,7 @@ public class dockerclient implements Idockerclient
                  
                     System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
-                    .withEnv("NETWORK_IF=vlanlandingpage") 
+                    .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                     .withCmd(stshell, struncmdst)   
                     .withName(stcontainername)
                     .withUser("root")
@@ -2587,6 +2587,7 @@ public class dockerclient implements Idockerclient
              
              // commit
              // jgsoftwares/openwrt23.05landingpage   java11
+             
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java" +ConfigPanel.stjavaversion).exec();
              System.out.print("local image commit jgsoftwares/openwrt23.05landingpage:java11" + "\n");
          
@@ -3248,7 +3249,7 @@ public class dockerclient implements Idockerclient
                     //.withCmd("/bin/bash", "sh /root/configiptables.v2")
                     .withName("ipfire")
                     .withUser("root")
-                    .withEnv("NETWORK_IF=eth0")
+                    .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
                     // .withExposedPorts(tcp1527)
@@ -3492,7 +3493,7 @@ public class dockerclient implements Idockerclient
                     //.withCmd("apachectl restart")
                     .withName(stcontainername)
                     .withUser("root")
-                    .withEnv("NETWORK_IF=eth0")
+                    .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                     //.withCmd(cmd)
                     .withHostConfig(hostConfig)
                     .withVolumes(ubussocket)

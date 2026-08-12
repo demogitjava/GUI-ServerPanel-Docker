@@ -29,6 +29,9 @@ public class ConfigPanel extends javax.swing.JPanel {
     public static String stcombotimezone;
     
     public static String stjavaversion;
+    
+    public static String stcontainerinterface;
+    
     Process process;
     /**
      * Creates new form ConfigPanel
@@ -78,6 +81,9 @@ public class ConfigPanel extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         jTextField4.setText("jTextField4");
 
@@ -133,6 +139,11 @@ public class ConfigPanel extends javax.swing.JPanel {
         jLabel8.setText("timezone - openwrt:");
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Europe/Berlin", "Europe/Paris", "Europe/London", "Europe/Madrid", "Europe/Rom", "Europe/Istanbul" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("public dns server");
 
@@ -167,6 +178,17 @@ public class ConfigPanel extends javax.swing.JPanel {
         jLabel11.setText("wg0 - http://217.160.255.254:8000/ipfire/configiptableswg0.v2");
 
         jLabel12.setText("wireguard - http://217.160.255.254:8000/ipfire/configiptables.v2");
+
+        jLabel20.setText("used container interface");
+
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "vlan0 ", "eth0" }));
+
+        jButton2.setText("?");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -204,11 +226,16 @@ public class ConfigPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel14))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel14)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBox3, 0, 204, Short.MAX_VALUE)
-                                    .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +250,7 @@ public class ConfigPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 49, Short.MAX_VALUE)))
+                        .addGap(0, 58, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -275,7 +302,12 @@ public class ConfigPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(1, 1, 1)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
@@ -368,6 +400,13 @@ public class ConfigPanel extends javax.swing.JPanel {
         */
         stjavaversion = String.valueOf(jComboBox6.getSelectedItem());
         
+        /*
+            set interface to container with
+            NETWORK_IF 
+            eth0 
+            vlan0
+        */
+        stcontainerinterface = String.valueOf(jComboBox7.getSelectedItem());
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -397,9 +436,23 @@ public class ConfigPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        JOptionPane.showMessageDialog(new JFrame(), "run container with vlan0 no named pipes are config run command on the host plaform " + "\n" + "\n" +
+                "ip link add link eth0 name vlan0 type vlan id 0" + "\n" +
+                "ifconfig vlan0 up" + "\n" + "\n" +
+                "ip addr add 10.255.255.1/32 dev vlan0 scope host" + "\n");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -408,6 +461,7 @@ public class ConfigPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -420,6 +474,7 @@ public class ConfigPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
