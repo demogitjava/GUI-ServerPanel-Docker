@@ -930,7 +930,7 @@ public class dockerclient implements Idockerclient
                 
               
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
-
+                network.getInternal().equals(false);
                 
                       // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
@@ -949,6 +949,7 @@ public class dockerclient implements Idockerclient
                 
                 
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("1527:1527"));
+             
                 
                 System.out.print("start network config for container derbydb " + "\n");
                 System.out.print("port of derbydb is by default set to 1527 " + "\n");
@@ -963,6 +964,7 @@ public class dockerclient implements Idockerclient
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename).getKernelMemory();
                 hostConfig.getNetworkMode();
+                
                 System.out.print("networkmode " + hostConfig.getNetworkMode());
                 
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
@@ -2048,11 +2050,11 @@ public class dockerclient implements Idockerclient
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp80, Ports.Binding.bindPort(80));
                 portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                portBindings.getBindings();
                 
-                
+             
                  // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
-           
                 String stdnsserver = ConfigPanel.stpubdnsserver;
                 // returns string dnspulicserver ipdns1 ipdns2
 
@@ -2071,10 +2073,11 @@ public class dockerclient implements Idockerclient
                 
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
-
-                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
+                network.getInternal().equals(false);
                 
-              
+     
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
+
                 
              
                 
@@ -2204,7 +2207,7 @@ public class dockerclient implements Idockerclient
                 //hostConfig.withCpuRealtimeRuntime(Long.MIN_VALUE);
                 //hostConfig.getCpuRealtimeRuntime();
                 
-            
+          
                 
                 //dockerClient = DockerClientBuilder.getInstance().build();  
                 getDockerClient(dockerClient);
@@ -2255,7 +2258,7 @@ public class dockerclient implements Idockerclient
                     System.out.println("start openwrt container " + "\n");
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
                     .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
-                    .withCmd(stshell, struncmdst)   
+                    .withCmd(stshell, struncmdst)
                     .withName(stcontainername)
                     .withUser("root")
                     .withVolumes(ubussocket)
@@ -3098,15 +3101,18 @@ public class dockerclient implements Idockerclient
                 System.out.print("start network config docker-java " + "\n");
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+                network.getInternal().equals(false);
                 
                 HostConfig hostConfig = HostConfig.newHostConfig();
                         //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
-                        
+                
                
                 
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename); //.getKernelMemory();
                 hostConfig.getNetworkMode();
+                
+                
                 System.out.print("host network mode " + hostConfig.getNetworkMode() + "\n");
                 
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
@@ -3363,10 +3369,13 @@ public class dockerclient implements Idockerclient
         
         
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+                network.getInternal().equals(false);
+                
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse(inthttpport + ":" + inthttpport));
-
+               
                 hostConfig.withNetworkMode(stinterfacename);
                 hostConfig.getNetworkMode();
+                
                 System.out.print("start network mode for httpfileserver openwrt " + hostConfig.getNetworkMode() + "\n");
         
                 //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)

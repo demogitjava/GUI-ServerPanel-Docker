@@ -181,7 +181,7 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel20.setText("used container interface");
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "vlan0 ", "eth0" }));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "vlan0", "eth0" }));
 
         jButton2.setText("?");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

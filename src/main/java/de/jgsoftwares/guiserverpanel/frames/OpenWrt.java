@@ -24,9 +24,17 @@ import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.api.model.StreamType;
 import java.awt.Container;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 
 public class OpenWrt extends javax.swing.JPanel {
 
@@ -291,13 +299,16 @@ public class OpenWrt extends javax.swing.JPanel {
         
         JEditorPane jeditorPane = new JEditorPane();
         JScrollPane jscrollpane3 = new JScrollPane(jeditorPane);
+   
         
-        jeditorPane.setEditable(false); // Als Viewer, nicht Editor
-
+        
+        String stroutingtable = new String("");
+    
          // " + ConfigPanel.stwanip + " " + "
         // 2. HTML Inhalt setzen
         jeditorPane.setContentType("text/html");
-        jeditorPane.setText("<html><head></head><body>" +
+        jeditorPane.setText("<html><head></head>"
+                            + "<body>" +
                            "<table>" + 
                            "<tr>" + 
                            "<th>Ipfire public dns config </th>" +
@@ -306,37 +317,34 @@ public class OpenWrt extends javax.swing.JPanel {
                            "<td>https://www.ipfire.org/docs/dns/public-servers</td> " +
                            "</table>" + 
                            "<p></p>" + "<br>" +
-                           "<h1>setup kernel namespace config and edit passwords with</h1>" +
+                           "<h1></h1>" +
                            "<table>" + 
                            "<tr>" + 
                            "<th></th>" +
                            "</tr>" +
                            "<tr>" +
-                           "<td>setup</td> " +
+                           "<td></td> " +
                            "</table>" + 
                 
-                           "<h1>config network for ipfire</h1>" +
-                           "<h1>run command</h1>" +
-                           "<p>setup</p>" +
+                           "<h1>Hostpanel -- config used image openwrt-25.12.4-x86-generic-generic-ext4-combined-efi.img.gz  </h1>" +
+                           "<h1></h1>" +
+                           "<p>commands has to be run over the main panel or the tyyd</p>" +
+                           "<p>disable server</p>" +
+                           "<p>/etc/init.d/odhcpd disable</p>" +
+                           "<p>/etc/init.d/odhcpd stop</p>" +
+                           "<br> " +
+                           "<br> " +
+                           "<br> " +
+                           "<br> " +
+                           "<h1>Ipfire simple file config over vpn - wireguard </h1>" +
+                           "<h1></h1>" +
+                           "<p></p>" +
+                
                            "<h1>routing table config</h1>" +
-                           "<p>Kernel IP routing table with router gateway 10.255.255.1</p>" +  
-                           "<p>Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</p>" +   
-                           "<p>0.0.0.0         10.255.255.1    0.0.0.0         UG    0      0        0 eth0</p>" +   
-                           "<p>192.168.10.0    192.168.10.56   255.255.255.0   UG    0      0        0 wireguard</p>" +   
-                           "<p></p>" +   
-                           "<p>routing table only over mainframe panel form the provider</p>" +   
-                           "<p>ip route flush table main</p>" +   
-                           "<p>ip route add 0.0.0.0/0 via 10.255.255.1 dev red0</p>" +   
-                           "<p>ip route add 10.255.255.1/32 via 0.0.0.0 dev red0</p>" +   
-                           "<p>ip route add 192.168.10.0/32 via 192.168.10.56 dev green0</p>" +   
-                           "<p>ip route add 192.168.10.0/24 via 192.168.10.56 dev wireguard</p>" +   
-                           "<p>ip route add 217.160.255.254/24 via 10.255.255.1 dev orange0</p>" +  
-                           "<p></p>" +  
+                           "<p>over host the default table is set</p>" +
                            "<br> " +
-                           "<h1>add ipfirehub </h1>" +
-                           "<p>brctl addbr ipfirehub</p>" +
-                           "<p>ifconfig ipfirehub up</p>" +
                            "<br> " +
+                           "<h1>Firewall Config </h1>" + 
                            "<h1>vi /var/ipfire/firewall/config</h1>" + 
                            "<p>5,REJECT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,RED,ON,UDP,,9092,ON,,,TGT_PORT,9092,dropbittorent,,,,,,,,,,00:00,00:00,,AUTO,,dnat,,,,,second</p>" +
                            "<p>6,ACCEPT,FORWARDFW,ON,src_addr," + ConfigPanel.stwanip + "/32,std_net_tgt,RED,,TCP,,80,ON,,,cust_srv,HTTP,HTTP,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second </p>" +
@@ -345,6 +353,7 @@ public class OpenWrt extends javax.swing.JPanel {
                            "<p>3,ACCEPT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,ORANGE,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second</p>" +
                            "<p>2,ACCEPT,FORWARDFW,ON,std_net_src,ALL,std_net_tgt,ORANGE,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second</p>" +
                            "<br> " +
+                                   
                            "<h1>vi /var/ipfire/firewall/input</h1>" + 
                            "<p>8,ACCEPT,INPUTFW,ON,std_net_src,ALL,ipfire,ORANGE,,TCP,,51820,ON,,,cust_srv,SSH,ssh,,,,,,,,,,00:00,00:00,ON,ORANGE,,snat,,,,,second,</p>" +
                            "<p>4,ACCEPT,INPUTFW,ON,src_addr," + ConfigPanel.stwanip + "/32,ipfire,RED1,ON,TCP,,1527,ON,,,TGT_PORT,1527,DerbyDB,,,,,,,,,,00:00,00:00,ON,RED,,snat,,,,,second</p>" +
@@ -508,8 +517,10 @@ public class OpenWrt extends javax.swing.JPanel {
         
         containerPane.add(jscrollpane3, "Center");
         
+       
+        jframeconfigipfire.setSize(800,600);
         jframeconfigipfire.setVisible(true);
-        jframeconfigipfire.pack();
+        //jframeconfigipfire.pack();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
