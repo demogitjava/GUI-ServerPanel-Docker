@@ -90,6 +90,8 @@ public class ConfigPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
 
         jTextField4.setText("jTextField4");
 
@@ -122,7 +124,7 @@ public class ConfigPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("run container over");
+        jLabel6.setText("run container ");
 
         jButton3.setText("?");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +134,11 @@ public class ConfigPanel extends javax.swing.JPanel {
         });
 
         jButton4.setText("?");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "openwrt", "oraclelinux", "alpinelinux", " " }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +213,10 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel25.setText("for docker engine 29 --  dockerd --firewall-backend=nftables ");
 
+        jLabel26.setText("run your container in swarm mode ");
+
+        jLabel27.setText("docker swarm init");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,6 +266,8 @@ public class ConfigPanel extends javax.swing.JPanel {
                     .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel26)
                             .addComponent(jLabel12)
                             .addComponent(jLabel25)
                             .addComponent(jLabel24)
@@ -339,7 +352,7 @@ public class ConfigPanel extends javax.swing.JPanel {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
@@ -355,6 +368,10 @@ public class ConfigPanel extends javax.swing.JPanel {
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25)
+                .addGap(3, 3, 3)
+                .addComponent(jLabel26)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel27)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1))
         );
@@ -483,6 +500,16 @@ public class ConfigPanel extends javax.swing.JPanel {
                 "ip addr add 10.255.255.1/32 dev vlan0 scope host" + "\n");
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+         JOptionPane.showMessageDialog(new JFrame(), "docker_compose run a simple docker container as service " + "\n" +
+         "docker swarm init " + "\n" + "from console is requred" + "\n" +
+         "--------------------------" + "\n" + 
+         "docker run start a simple container " + "\n" + "like " + 
+                 "docker run -i " + "\n");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -514,6 +541,8 @@ public class ConfigPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

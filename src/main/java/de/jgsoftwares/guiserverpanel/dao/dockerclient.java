@@ -2,6 +2,8 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
+import com.github.dockerjava.api.command.CreateServiceResponse;
+import com.github.dockerjava.api.command.StartContainerCmd;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
@@ -18,17 +20,27 @@ import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.Capability;
+import com.github.dockerjava.api.model.ContainerSpec;
+import com.github.dockerjava.api.model.EndpointResolutionMode;
+import com.github.dockerjava.api.model.EndpointSpec;
 
 import com.github.dockerjava.api.model.Isolation;
 import com.github.dockerjava.api.model.Link;
 import com.github.dockerjava.api.model.Links;
+import com.github.dockerjava.api.model.NetworkAttachmentConfig;
+import com.github.dockerjava.api.model.PortConfig;
+import com.github.dockerjava.api.model.PortConfigProtocol;
 import com.github.dockerjava.api.model.RestartPolicy;
+import com.github.dockerjava.api.model.ServiceModeConfig;
+import com.github.dockerjava.api.model.ServiceSpec;
+import com.github.dockerjava.api.model.TaskSpec;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
+import com.google.common.collect.Lists;
 import de.jgsoftwares.guiserverpanel.frames.ConfigPanel;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stcomboruntime;
 import static de.jgsoftwares.guiserverpanel.frames.ConfigPanel.stinterfacename;
@@ -2080,6 +2092,7 @@ public class dockerclient implements Idockerclient
 
                 
              
+               
                 
                 // bind ubus to container
                 hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));
@@ -2245,9 +2258,86 @@ public class dockerclient implements Idockerclient
             }
           
             
-            
+            // docker run  
             CreateContainerResponse container = null;
+          
+            // ##############################################
+            // service
+            // run container 
+            // with docker swarm 
+            // or 
+            // docker run 
+            if(ConfigPanel.stcomborunorcompose.equals("docker_compose"))
+            {
+                System.out.print("docker swarm init is required to start container as service " + "\n");
+                System.out.print("docker compse run container as service " + "\n");
+                
+                
+                
+                
+                
+               // TaskSpec taskSpec = new TaskSpec()
+                // .withContainerSpec(containerSpec).withImage(DEFAULT_IMAGE))
+        //.withContainerSpec(containerSpec)
+       // .withNetworks(Collections.singletonList(
+        //        new NetworkAttachmentConfig().withTarget("host")
+       // )
+        
+       // );
+                 /*
+                                                
+                  dockerClient.createServiceCmd(new ServiceSpec()
+             
+                         
+                .withName("service_landingpage")
+                .withEndpointSpec(new EndpointSpec()
+                        //.withMode(EndpointResolutionMode.VIP)
+                        .withPorts(Lists.<PortConfig>newArrayList(new PortConfig()
+                                        .withPublishMode(PortConfig.PublishMode.host)
+                                        .withTargetPort(80)
+                                        .withProtocol(PortConfigProtocol.TCP)
+                        )))
+                .withTaskTemplate((new TaskSpec()
+                       .withContainerSpec(new ContainerSpec()
+                      .withImage(stimage+":" + stimagetag))))
+                .withNetworks(Collections.singletonList(
+                new NetworkAttachmentConfig().withTarget("host")))
+                )
+                //.withAuthConfig(authConfig)
+                .exec();
+                
+       */
+                 
+                 
+                 // 1. Define the container requirements (Image, commands, etc.)
+ContainerSpec containerSpec = new ContainerSpec()
+    .withImage(stimage+":" + stimagetag);
 
+// 2. Define the task specification
+TaskSpec taskSpec = new TaskSpec()
+    .withNetworks(Collections.singletonList(
+                new NetworkAttachmentConfig().withTarget("host")))  
+    .withContainerSpec(containerSpec);
+  
+// 3. Define the overall service specification (Name, tasks, etc.)
+ServiceSpec serviceSpec = new ServiceSpec()
+    .withName("landingpage-service")
+    .withTaskTemplate(taskSpec);
+   
+// 4. Execute the command via the Docker client
+CreateServiceResponse response = dockerClient.createServiceCmd(serviceSpec)
+    .exec();
+                 
+               
+               
+              }  
+            else
+            {
+                // docker run container 
+                // without servcie
+                //
+                
+                
                
                switch(contsystem)
                 {
@@ -2255,7 +2345,10 @@ public class dockerclient implements Idockerclient
                 case "openwrt":
                     
                  
+                    //GenericContainer container 
                     System.out.println("start openwrt container " + "\n");
+                   
+                   
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
                     .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                     .withCmd(stshell, struncmdst)
@@ -2288,7 +2381,8 @@ public class dockerclient implements Idockerclient
                     //.withCmd(stshell, sttime)   
                     .exec();
                     
-                    
+        
+
                     
                     
                     break;
@@ -2345,6 +2439,14 @@ public class dockerclient implements Idockerclient
                     System.out.println("Error no system selected " + "\n");
                     break;
                 } 
+                
+            }
+            // ##############################################
+            // ##############################################
+             
+             
+            
+
 
             
             /*container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
@@ -2387,7 +2489,9 @@ public class dockerclient implements Idockerclient
                  //       .withName("oraclelinuxlanservertcp")
                  //       .exec();
          dockerClient.startContainerCmd(container.getId()).exec();
-    
+        
+            
+     
         
           // edit container settings 
              // /etc/TZ
@@ -2595,6 +2699,21 @@ public class dockerclient implements Idockerclient
              System.out.print("local image commit jgsoftwares/openwrt23.05landingpage:java11" + "\n");
          
              System.out.print("restart container openwrt2305host to run iptables on this container in memory " + "\n");
+               
+            
+              // docker container run 
+            //else
+           // {
+                
+             // end service
+             // end else if jcompbobox run container 
+             //}
+             
+            // docker run container 
+            // without swarm
+          
+             
+             
              
         } catch(Exception e)
         {
