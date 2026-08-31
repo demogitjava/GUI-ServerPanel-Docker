@@ -90,7 +90,6 @@ public class ConfigPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
 
         jTextField4.setText("jTextField4");
@@ -213,8 +212,6 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel25.setText("for docker engine 29 --  dockerd --firewall-backend=nftables ");
 
-        jLabel26.setText("run your container in swarm mode ");
-
         jLabel27.setText("docker swarm init");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -267,7 +264,6 @@ public class ConfigPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel27)
-                            .addComponent(jLabel26)
                             .addComponent(jLabel12)
                             .addComponent(jLabel25)
                             .addComponent(jLabel24)
@@ -368,12 +364,11 @@ public class ConfigPanel extends javax.swing.JPanel {
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25)
-                .addGap(3, 3, 3)
-                .addComponent(jLabel26)
-                .addGap(7, 7, 7)
-                .addComponent(jLabel27)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(9, 9, 9))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -541,7 +536,6 @@ public class ConfigPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
