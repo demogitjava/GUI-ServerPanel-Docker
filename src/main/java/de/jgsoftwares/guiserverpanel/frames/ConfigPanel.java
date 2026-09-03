@@ -267,7 +267,6 @@ public class ConfigPanel extends javax.swing.JPanel {
                             .addComponent(jLabel12)
                             .addComponent(jLabel25)
                             .addComponent(jLabel24)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22)
                             .addComponent(jLabel11)
                             .addComponent(jLabel9)
@@ -281,7 +280,8 @@ public class ConfigPanel extends javax.swing.JPanel {
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel21))
-                        .addGap(0, 63, Short.MAX_VALUE)))
+                        .addGap(0, 63, Short.MAX_VALUE))
+                    .addComponent(jSeparator1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -422,7 +422,7 @@ public class ConfigPanel extends javax.swing.JPanel {
         stcomborunorcompose = String.valueOf(jComboBox2.getSelectedItem());
         if(stcomborunorcompose.equals("docker_compose"))
         {
-            JOptionPane.showMessageDialog(new JFrame(), "only docker run supported!");
+            JOptionPane.showMessageDialog(new JFrame(), "only docker run supported!" + "\n" + "in swarm mode join swarm is supported " + "\n");
         }
         
         

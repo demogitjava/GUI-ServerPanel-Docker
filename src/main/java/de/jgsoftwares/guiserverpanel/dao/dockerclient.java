@@ -33,6 +33,7 @@ import com.github.dockerjava.api.model.PortConfigProtocol;
 import com.github.dockerjava.api.model.RestartPolicy;
 import com.github.dockerjava.api.model.ServiceModeConfig;
 import com.github.dockerjava.api.model.ServiceSpec;
+import com.github.dockerjava.api.model.SwarmSpec;
 import com.github.dockerjava.api.model.TaskSpec;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
@@ -1173,7 +1174,38 @@ public class dockerclient implements Idockerclient
                              //.withStdinOpen(Boolean.TRUE)
                              //.withWorkingDir("/root")
                              .exec();
-                         dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();     
+                         dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec(); 
+                         
+                                // ##############################################
+            // service
+            // run container 
+            // with docker swarm 
+            // or 
+            // docker run 
+            if(ConfigPanel.stcomborunorcompose.equals("docker_compose"))
+            {
+                
+                /*
+                SwarmSpec swarmSpec = new SwarmSpec();
+                swarmSpec.getCaConfig();
+                swarmSpec.getOrchestration();
+                swarmSpec.getRaft();
+               
+                dockerClient.initializeSwarmCmd(swarmSpec);
+                dockerClient.joinSwarmCmd();
+                
+                dockerClient.inspectSwarmCmd();
+                
+                */
+            }  
+            else
+            {
+                // docker run container 
+                // without servcie
+                //
+            }
+                         
+                         
                          dockerClient.startContainerCmd(container.getId()).exec();
             
                           // edit container settings 
@@ -2058,12 +2090,14 @@ public class dockerclient implements Idockerclient
                 
                 
                 ExposedPort tcp1527 = ExposedPort.tcp(1527);
+                
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp80, Ports.Binding.bindPort(80));
                 portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
-                portBindings.getBindings();
                 
+                portBindings.getBindings();
+          
              
                  // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
@@ -2086,7 +2120,7 @@ public class dockerclient implements Idockerclient
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
                 network.getInternal().equals(false);
-                
+            
      
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
 
@@ -2260,86 +2294,8 @@ public class dockerclient implements Idockerclient
             
             // docker run  
             CreateContainerResponse container = null;
-          
-            // ##############################################
-            // service
-            // run container 
-            // with docker swarm 
-            // or 
-            // docker run 
-            if(ConfigPanel.stcomborunorcompose.equals("docker_compose"))
-            {
-                System.out.print("docker swarm init is required to start container as service " + "\n");
-                System.out.print("docker compse run container as service " + "\n");
-                
-                
-                
-                
-                
-               // TaskSpec taskSpec = new TaskSpec()
-                // .withContainerSpec(containerSpec).withImage(DEFAULT_IMAGE))
-        //.withContainerSpec(containerSpec)
-       // .withNetworks(Collections.singletonList(
-        //        new NetworkAttachmentConfig().withTarget("host")
-       // )
-        
-       // );
-                 /*
-                                                
-                  dockerClient.createServiceCmd(new ServiceSpec()
-             
-                         
-                .withName("service_landingpage")
-                .withEndpointSpec(new EndpointSpec()
-                        //.withMode(EndpointResolutionMode.VIP)
-                        .withPorts(Lists.<PortConfig>newArrayList(new PortConfig()
-                                        .withPublishMode(PortConfig.PublishMode.host)
-                                        .withTargetPort(80)
-                                        .withProtocol(PortConfigProtocol.TCP)
-                        )))
-                .withTaskTemplate((new TaskSpec()
-                       .withContainerSpec(new ContainerSpec()
-                      .withImage(stimage+":" + stimagetag))))
-                .withNetworks(Collections.singletonList(
-                new NetworkAttachmentConfig().withTarget("host")))
-                )
-                //.withAuthConfig(authConfig)
-                .exec();
-                
-       */
-                 
-                 
-                 // 1. Define the container requirements (Image, commands, etc.)
-ContainerSpec containerSpec = new ContainerSpec()
-    .withImage(stimage+":" + stimagetag);
-
-// 2. Define the task specification
-TaskSpec taskSpec = new TaskSpec()
-    .withNetworks(Collections.singletonList(
-                new NetworkAttachmentConfig().withTarget("host")))  
-    .withContainerSpec(containerSpec);
-  
-// 3. Define the overall service specification (Name, tasks, etc.)
-ServiceSpec serviceSpec = new ServiceSpec()
-    .withName("landingpage-service")
-    .withTaskTemplate(taskSpec);
-   
-// 4. Execute the command via the Docker client
-CreateServiceResponse response = dockerClient.createServiceCmd(serviceSpec)
-    .exec();
-                 
-               
-               
-              }  
-            else
-            {
-                // docker run container 
-                // without servcie
-                //
-                
-                
-               
-               switch(contsystem)
+      
+            switch(contsystem)
                 {
                   
                 case "openwrt":
@@ -2357,7 +2313,8 @@ CreateServiceResponse response = dockerClient.createServiceCmd(serviceSpec)
                     .withVolumes(ubussocket)
                     //.withCmd(cmd)
                     .withHostConfig(hostConfig)
-                    .withExposedPorts(tcp80, tcp1527)
+                    .withExposedPorts(tcp80, tcp1527)        
+                    //.withIpv4Address(ConfigPanel.stwanip) // not host only user defined network 
                     //.getExposedPorts(stgetexposedport)
                     // .withExposedPorts(tcp1527)
                     .withDomainName(styourdomainname)
@@ -2439,8 +2396,49 @@ CreateServiceResponse response = dockerClient.createServiceCmd(serviceSpec)
                     System.out.println("Error no system selected " + "\n");
                     break;
                 } 
+               
+               dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            
+            // Network network = dockerClient.inspectNetworkCmd().withNetworkId("none").exec();
+            // dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();
+
+            
+            //DefaultDockerClientConfig build = DefaultDockerClientConfig.createDefaultConfigBuilder().withDockerHost("tcp://docker:2375").build();
+            //DockerClient docker = DockerClientBuilder.getInstance(build).build();
+            //docker.execCreateCmd("containerName").withCmd("sh", "-c", "cd /root/Downloads && ./myScript.sh").exec();
+    
+         
+             // create container from image
+              //  CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:hostopenwrtext4")            
+                //        .withExposedPorts(tcp8443)
+                 //       .withHostConfig(hostConfig) //.withPortBindings(portBindings))
+                 //       .withName("oraclelinuxlanservertcp")
+                 //       .exec();
+                 
+           
+                  // ##############################################
+            // service
+            // run container 
+            // with docker swarm 
+            // or 
+            // docker run 
+            if(ConfigPanel.stcomborunorcompose.equals("docker_compose"))
+            {
+              
                 
+                de.jgsoftwares.guiserverpanel.dao.docker_compose dcompose = new de.jgsoftwares.guiserverpanel.dao.docker_compose();
+                dcompose.composelandingpage();
+            }  
+            else
+            {
+                // docker run container 
+                // without servcie
+                //
             }
+                 
+         dockerClient.startContainerCmd(container.getId()).exec();
+                
+         
             // ##############################################
             // ##############################################
              
@@ -2471,24 +2469,7 @@ CreateServiceResponse response = dockerClient.createServiceCmd(serviceSpec)
                     .exec();
                 */
             
-            dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
             
-            // Network network = dockerClient.inspectNetworkCmd().withNetworkId("none").exec();
-            // dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();
-
-            
-            //DefaultDockerClientConfig build = DefaultDockerClientConfig.createDefaultConfigBuilder().withDockerHost("tcp://docker:2375").build();
-            //DockerClient docker = DockerClientBuilder.getInstance(build).build();
-            //docker.execCreateCmd("containerName").withCmd("sh", "-c", "cd /root/Downloads && ./myScript.sh").exec();
-    
-         
-             // create container from image
-              //  CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_lanservertcp:hostopenwrtext4")            
-                //        .withExposedPorts(tcp8443)
-                 //       .withHostConfig(hostConfig) //.withPortBindings(portBindings))
-                 //       .withName("oraclelinuxlanservertcp")
-                 //       .exec();
-         dockerClient.startContainerCmd(container.getId()).exec();
         
             
      
@@ -3650,6 +3631,35 @@ CreateServiceResponse response = dockerClient.createServiceCmd(serviceSpec)
                     
                   
                     dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+                    
+                        // service
+            // run container 
+            // with docker swarm 
+            // or 
+            // docker run 
+            if(ConfigPanel.stcomborunorcompose.equals("docker_compose"))
+            {
+                
+                /*
+                SwarmSpec swarmSpec = new SwarmSpec();
+                swarmSpec.getCaConfig();
+                swarmSpec.getOrchestration();
+                swarmSpec.getRaft();
+               
+                dockerClient.initializeSwarmCmd(swarmSpec);
+                dockerClient.joinSwarmCmd();
+                
+                dockerClient.inspectSwarmCmd();
+                
+                   */
+            }  
+            else
+            {
+                // docker run container 
+                // without servcie
+                //
+            }
+                    
                     dockerClient.startContainerCmd(container.getId()).exec();
                     
             // container config 

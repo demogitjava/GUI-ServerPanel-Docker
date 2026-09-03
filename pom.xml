@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0" xmlns:pom="http://maven.apache.org/POM/4.0.0">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.jgsoftware.guiserverpanel</groupId>
@@ -19,8 +19,8 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 		<java.version>25</java.version>
-	 <maven.compiler.source>28</maven.compiler.source>
-	 <maven.compiler.target>28</maven.compiler.target>
+	 <maven.compiler.source>17</maven.compiler.source>
+	 <maven.compiler.target>17</maven.compiler.target>
 	</properties>
         
         
@@ -135,14 +135,15 @@
                     </executions>
                 </plugin>
                         -->
-                
-                        
-             
-                    
-                
-         
-            
-    </plugins>
+		 <plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-compiler-plugin</artifactId>
+		  <version>3.15.0</version>
+		  <configuration>
+		   <debug>true</debug>
+		  </configuration>
+		 </plugin>
+		</plugins>
 
 	</build>
 

@@ -6,6 +6,23 @@ Simple GUI Docker  Panel
 ![enter image description here](https://github.com/demogitjava/demodatabase/blob/master/GUI-ServerPanel/ServerGUI-Panel.jpg?raw=true)
 
 
+for docker swarm 
+dmz config on ipfire to 10.255.255.1
+create swarm with 
+docker swarm init
+
+delete network 
+docker network rm docker_gwbridge
+docker network rm ingress 
+
+create ingress network docker
+
+    docker network create --driver overlay --ingress --subnet 10.255.255.1/24 --gateway 10.255.255.1 ingress
+
+
+
+
+
 the docker socket file has to on path
 
 the url is changed to tcp for wireguard vpn
@@ -134,3 +151,4 @@ for DarkTabaco
 compile project with
 
 > mvn package
+
