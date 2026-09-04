@@ -18,7 +18,7 @@ docker network rm ingress
 
 create ingress network docker
 
-    docker network create --driver overlay --ingress --subnet 10.255.255.0/24 --scope global --gateway 10.255.255.1 ingress
+    docker network create --driver overlay --ingress --subnet 10.255.255.0/24 --scope global --gateway 10.255.255.1 --opt com.docker.network.driver.mtu=1500 ingress
 
 
     mainpanel
