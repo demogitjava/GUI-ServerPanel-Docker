@@ -8,6 +8,7 @@ Simple GUI Docker  Panel
 
 for docker swarm 
 dmz config on ipfire to 10.255.255.1
+
 create swarm with 
 docker swarm init
 
@@ -17,10 +18,78 @@ docker network rm ingress
 
 create ingress network docker
 
-    docker network create --driver overlay --ingress --subnet 10.255.255.1/24 --gateway 10.255.255.1 ingress
+    docker network create --driver overlay --ingress --subnet 10.255.255.0/24 --scope global --gateway 10.255.255.1 ingress
 
 
+mainpanel
+network config
+root@demogitjava:~# docker network inspect ingress
+[
+    {
+        "Name": "ingress",
+        "Id": "iwizhgp20glnkq2dtm0rgkyiq",
+        "Created": "2026-09-04T08:31:47.021051136Z",
+        "Scope": "swarm",
+        "Driver": "overlay",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "10.255.255.0/24",
+                    "Gateway": "10.255.255.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": true,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": null,
+        "Options": {
+            "com.docker.network.driver.overlay.vxlanid_list": "4098"
+        },
+        "Labels": null
+    }
+]
 
+root@demogitjava:~# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         10.255.255.1    0.0.0.0         UG    0      0        0 eth0
+192.168.10.0    0.0.0.0         255.255.255.0   U     0      0        0 wg0
+root@demogitjava:~# 
+root@demogitjava:~# service
+Usage: service <service> [command]
+/etc/init.d/boot                   enabled         stopped
+/etc/init.d/cron                   enabled         stopped
+/etc/init.d/dnsmasq               disabled         stopped
+/etc/init.d/dockerd                enabled         stopped
+/etc/init.d/done                   enabled         stopped
+/etc/init.d/dropbear               enabled         stopped
+/etc/init.d/firewall               enabled         stopped
+/etc/init.d/gpio_switch            enabled         stopped
+/etc/init.d/led                   disabled         stopped
+/etc/init.d/log                   disabled         stopped
+/etc/init.d/network               disabled         stopped
+/etc/init.d/odhcpd                disabled         stopped
+/etc/init.d/packet_steering        enabled         stopped
+/etc/init.d/rpcd                   enabled         running
+/etc/init.d/sysctl                 enabled         stopped
+/etc/init.d/sysfixtime             enabled         stopped
+/etc/init.d/sysntpd                enabled         stopped
+/etc/init.d/system                 enabled         stopped
+/etc/init.d/ttyd                  disabled         running
+/etc/init.d/ucitrack               enabled         stopped
+/etc/init.d/uhttpd                disabled         running
+/etc/init.d/umount                 enabled         stopped
+/etc/init.d/urandom_seed           enabled         stopped
+/etc/init.d/urngd                  enabled         running
+root@demogitjava:~# 
 
 
 the docker socket file has to on path
