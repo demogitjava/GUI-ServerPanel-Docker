@@ -21,6 +21,12 @@ docker gwbridge
 
     docker network create --subnet 10.255.255.0/24 --opt com.docker.network.bridge.name=docker_gwbridge --opt com.docker.network.bridge.enable_icc=true --opt com.docker.network.bridge.enable_ip_masquerade=true docker_gwbridge
 
+add interface to docker_gwbridge 
+
+    root@demogitjava:~# brctl addif docker_gwbridge vlan0
+    root@demogitjava:~# brctl show
+    bridge name     bridge id               STP enabled     interfaces
+    docker_gwbridge         8000.024222a8b2fb       no              vlan0
 
 
 
@@ -232,6 +238,7 @@ for DarkTabaco
 compile project with
 
 > mvn package
+
 
 
 
