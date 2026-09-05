@@ -16,6 +16,14 @@ delete network
 docker network rm docker_gwbridge
 docker network rm ingress 
 
+
+docker gwbridge
+
+    docker network create --subnet 10.255.255.0/24 --opt com.docker.network.bridge.name=docker_gwbridge --opt com.docker.network.bridge.enable_icc=true --opt com.docker.network.bridge.enable_ip_masquerade=true docker_gwbridge
+
+
+
+
 create ingress network docker
 
     docker network create --driver overlay --ingress --subnet 10.255.255.0/24 --scope global --gateway 10.255.255.1 --opt com.docker.network.driver.mtu=1500 ingress
@@ -57,11 +65,14 @@ create ingress network docker
         }
     ]
 
-    root@demogitjava:~# route -n
+    docker_gwbridge /24 subnet 
+     root@demogitjava:~# route -n
     Kernel IP routing table
     Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
     0.0.0.0         10.255.255.1    0.0.0.0         UG    0      0        0 eth0
+    10.255.255.0    0.0.0.0         255.255.255.0   U     0      0        0 docker_gwbridge
     192.168.10.0    0.0.0.0         255.255.255.0   U     0      0        0 wg0
+    root@demogitjava:~# 
 
     root@demogitjava:~# 
     root@demogitjava:~# service
@@ -221,5 +232,6 @@ for DarkTabaco
 compile project with
 
 > mvn package
+
 
 
