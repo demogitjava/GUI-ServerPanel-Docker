@@ -2,12 +2,31 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.CreateServiceResponse;
 import com.github.dockerjava.api.model.ContainerSpec;
+import com.github.dockerjava.api.model.EndpointSpec;
+import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.Mount;
+import com.github.dockerjava.api.model.MountType;
 import com.github.dockerjava.api.model.NetworkAttachmentConfig;
+import com.github.dockerjava.api.model.PortConfig;
+import com.github.dockerjava.api.model.PortConfigProtocol;
 import com.github.dockerjava.api.model.ServiceSpec;
 import com.github.dockerjava.api.model.TaskSpec;
 import com.github.dockerjava.core.DockerClientBuilder;
+import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
+import de.jgsoftwares.guiserverpanel.frames.ConfigPanel;
 import java.util.Collections;
+import java.util.List;
+import javax.swing.JList;
+
+import com.github.dockerjava.api.model.ContainerSpec;
+import com.github.dockerjava.api.model.NetworkSettings;
+import com.github.dockerjava.api.model.ServiceModeConfig;
+import com.github.dockerjava.api.model.ServiceReplicatedModeOptions;
+
+import com.github.dockerjava.api.model.TaskSpec;
+import com.github.dockerjava.api.model.ServiceSpec;
 
 /**
  *
@@ -15,6 +34,8 @@ import java.util.Collections;
  */
 public class docker_compose 
 {
+     
+     
     public docker_compose()
     {
         
@@ -22,35 +43,8 @@ public class docker_compose
     
     public void composelandingpage()
     {
-        
-        // docker network create --scope=host --gateway 10.255.255.1 --subnet 10.255.255.1/32 --scope=global --attachable=true -d overlay netlandingpage
-        // docker network connect netlandingpage openwrtlandingpagedebug
-        
-        /*
-        DockerClient dockerClient = DockerClientBuilder.getInstance().build();
 
-      
-        ContainerSpec containerSpec = new ContainerSpec()
-              
-                .withImage("jgsoftwares/openwrt23.05landingpage:java25");
 
-     
-        TaskSpec taskSpec = (TaskSpec) new TaskSpec()
-                .withContainerSpec(containerSpec)
-                .withNetworks(Collections.singletonList(
-                        new NetworkAttachmentConfig().withTarget("landingpage"))
-                )
-                .getNetworks();
-
-    
-        ServiceSpec serviceSpec = new ServiceSpec()
-                .withName("service_landingpage") // Schema für Stacks: stackName_serviceName
-                .withTaskTemplate(taskSpec);
-
-       
-        dockerClient.createServiceCmd(serviceSpec).exec();
-        
-               */   
     }
     
 }

@@ -2338,7 +2338,7 @@ public class dockerclient implements Idockerclient
                     //.withCmd(stshell, sttime)   
                     .exec();
                     
-        
+                 
 
                     
                     
@@ -2425,18 +2425,21 @@ public class dockerclient implements Idockerclient
             if(ConfigPanel.stcomborunorcompose.equals("docker_compose"))
             {
               
+                dockerClient.removeContainerCmd("openwrtlandingpagedebug").exec();
                 
                 de.jgsoftwares.guiserverpanel.dao.docker_compose dcompose = new de.jgsoftwares.guiserverpanel.dao.docker_compose();
                 dcompose.composelandingpage();
+                
             }  
             else
             {
                 // docker run container 
                 // without servcie
                 //
+                dockerClient.startContainerCmd(container.getId()).exec();
             }
                  
-         dockerClient.startContainerCmd(container.getId()).exec();
+         
                 
          
             // ##############################################
