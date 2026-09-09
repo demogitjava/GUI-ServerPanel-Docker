@@ -2815,6 +2815,11 @@ public class dockerclient implements Idockerclient
                 // add volume - dockersocket 
                 Volume dockersocket = new Volume("/var/run/docker.sock");
                 
+                Volume ubussocket = new Volume("/var/run/ubus/ubus.sock");
+                System.out.print("init Volume ubus " + "\n");
+                
+                Volume vlttyd = new Volume("/etc/init.d/ttyd");
+                System.out.print("init Volume ubus " + "\n");
                 
                 // network none
                 // connect to network like eth0 or eth0.10
@@ -2876,8 +2881,15 @@ public class dockerclient implements Idockerclient
                 hostConfig.getDns();
                 hostConfig.getDnsSearch();
                 
-                //Isolation.HYPERV.getValue();
+                hostConfig.withMemory(Long.MAX_VALUE);
+                //Isolation.HYPERV.getValue();   
+                hostConfig.getMemoryReservation();
                 hostConfig.getMemory();
+                System.out.print("with memory " + hostConfig.getMemory() + "\n");
+                
+                hostConfig.withMemorySwap(Long.MAX_VALUE);
+                hostConfig.getMemorySwap();
+                System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
                 
                 // isolation process
                 hostConfig.withIsolation(Isolation.DEFAULT);
@@ -2917,7 +2929,16 @@ public class dockerclient implements Idockerclient
                 .exec(new PullImageResultCallback())
                 .awaitCompletion(30, TimeUnit.SECONDS);
                 */
+                long lcpuperiod = 1000;
+                hostConfig.withCpuPeriod(lcpuperiod);
+                hostConfig.getCpuPeriod();
+                System.out.print("run cpu period to 1000" + "\n");
                 
+                
+                long lcpuquota = -50000;
+                hostConfig.withCpuQuota(lcpuquota);
+                hostConfig.getCpuQuota();
+                System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
                 
             String stcontainername = "openwrt2305host";
             // check image exist
@@ -2955,8 +2976,8 @@ public class dockerclient implements Idockerclient
             CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/openwrt23.05:iptablesext4")
                     .withName("openwrt2305host")
                     .withUser("root")
-                    .withEnv("NETWORK_IF=eth0")
-                    .withVolumes(dockersocket)
+                    .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface)
+                    .withVolumes(dockersocket, ubussocket, vlttyd)
                     .withHostConfig(hostConfig)
                     //.withExposedPorts(tcp80)
                     //.withExposedPorts(tcp1527)
@@ -3147,6 +3168,10 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("delete file /etc/board.d/99_network " + "\n");
              
+             // start ttyd 
+             ExecCreateCmdResponse ststartttyd_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "sh /etc/init.d/ttyd").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(ststartttyd_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("start ttyd with sh /etc/init.d/ttyd  " + "\n");
              
              
 

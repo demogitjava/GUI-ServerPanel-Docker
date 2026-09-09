@@ -224,7 +224,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
       <Properties>
-        <Property name="text" type="java.lang.String" value="with ipfre openwrt2303host container isn&apos;t needed "/>
+        <Property name="text" type="java.lang.String" value="mount /etc/init.d/ttyd to container for console access "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">

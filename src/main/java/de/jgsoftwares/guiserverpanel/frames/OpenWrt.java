@@ -123,7 +123,7 @@ public class OpenWrt extends javax.swing.JPanel {
             }
         });
 
-        jLabel17.setText("with ipfre openwrt2303host container isn't needed ");
+        jLabel17.setText("mount /etc/init.d/ttyd to container for console access ");
 
         jLabel18.setText(" if wireguard from ipfire used with interface wg0 script for wg0");
 
