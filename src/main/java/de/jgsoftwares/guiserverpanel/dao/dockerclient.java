@@ -2913,9 +2913,15 @@ public class dockerclient implements Idockerclient
                 hostConfig.withKernelMemory(Long.MAX_VALUE);
                 hostConfig.getKernelMemory();
                 
-                // mount docker socket
-                hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
+                // mount docker socket and ttyd
+                hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket), new Bind("/etc/init.d/ttyd", vlttyd));
                 //Collections.singletonMap("/tmp", "rw,noexec,nosuid,size=50m")
+                
+                // mount ttyd 
+                //  Volume vlttyd = new Volume("/etc/init.d/ttyd");
+                
+               
+                //hostConfig.withBinds(new Bind("/etc/init.d/ttyd", vlttyd));
                 
                 // run in memory with tmpfs
                 hostConfig.withTmpFs(Collections.singletonMap("/opt/docker", "rw,noexec,nosuid,size=50m"));
