@@ -2914,7 +2914,8 @@ public class dockerclient implements Idockerclient
                 hostConfig.getKernelMemory();
                 
                 // mount docker socket and ttyd
-                hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket), new Bind("/etc/init.d/ttyd", vlttyd));
+                //hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket), new Bind("/etc/init.d/ttyd", vlttyd));
+                hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
                 //Collections.singletonMap("/tmp", "rw,noexec,nosuid,size=50m")
                 
                 // mount ttyd 
@@ -2945,6 +2946,14 @@ public class dockerclient implements Idockerclient
                 hostConfig.withCpuQuota(lcpuquota);
                 hostConfig.getCpuQuota();
                 System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
+                
+                String stusermode = "root";
+                String[] stuser = new String [] {stusermode};
+                hostConfig.withUsernsMode(stdns2);
+                hostConfig.getUsernsMode();
+                System.out.print("start container with UsersMode " + stusermode + "\n");
+                
+                
                 
             String stcontainername = "openwrt2305host";
             // check image exist
@@ -2985,6 +2994,7 @@ public class dockerclient implements Idockerclient
                     .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface)
                     .withVolumes(dockersocket, ubussocket, vlttyd)
                     .withHostConfig(hostConfig)
+                    .withUser(stusermode)
                     //.withExposedPorts(tcp80)
                     //.withExposedPorts(tcp1527)
                     .withAttachStderr(true)
@@ -3123,10 +3133,15 @@ public class dockerclient implements Idockerclient
              //ExecCreateCmdResponse execaddstringsearchdomain = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "search " + ConfigPanel.styourdomainname + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              //dockerClient.execStartCmd(execaddstringsearchdomain.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
             
-             // interface name
-             ExecCreateCmdResponse execaddstringinterface = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "interface orange0 " + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execaddstringinterface.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("write String interface orange0 /etc/resolv.conf" + "\n");
+             ///nameserver dnsip1
+             ExecCreateCmdResponse execaddstringpublicdnsip1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns1 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringpublicdnsip1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("write String to "  + stdns1 + " >> /etc/resolv.conf" + "to openwrt2305host container " + "\n");
+            
+             //nameserver dnsip2
+             ExecCreateCmdResponse execaddstringpublicdnsip2 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns2 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringpublicdnsip2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("write String to" +  stdns2 + " >> /etc/resolv.conf" + " to container openwrt2305host " + "\n");
              
              // dnsec
              ExecCreateCmdResponse execaddstringdnssearch = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "DNSSEC=yes" + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
@@ -3174,13 +3189,19 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("delete file /etc/board.d/99_network " + "\n");
              
-             // start ttyd 
-             ExecCreateCmdResponse ststartttyd_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "sh /etc/init.d/ttyd").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(ststartttyd_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("start ttyd with sh /etc/init.d/ttyd  " + "\n");
              
              
+             //install ttyd
+             ExecCreateCmdResponse execinstallttyd = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install ttyd").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstallttyd.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("install ttyd package to openwrt2305host container" + "\n");
 
+             
+               //nameserver start ttyd
+             ExecCreateCmdResponse execstartttyd = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "chmod +x /etc/init.d/ttyd && /etc/init.d/ttyd start").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execstartttyd.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("install ttyd package to openwrt2305host container" + "\n");
+             
              // commit
              // jgsoftwares/openwrt23.05
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05").withTag("iptablesext4").exec();
@@ -3388,6 +3409,272 @@ public class dockerclient implements Idockerclient
             container = dockerClient.createContainerCmd("jgsoftwares/ipfire:" + stimagetag)
                     //.withCmd("/bin/bash", "sh /root/configiptables.v2")
                     .withName("ipfire")
+                    .withUser("root")
+                    .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
+                    .withHostConfig(hostConfig)
+                    //.withExposedPorts(tcp80)
+                    // .withExposedPorts(tcp1527)
+                    .withAttachStderr(true)
+                    .withAttachStdin(true)
+                    .withAttachStdout(true)
+                    .withDomainName(styourdomainname)
+                    //.withIpv4Address(stwanip)
+                    .withStdinOpen(Boolean.TRUE) 
+                    //.withWorkingDir("/root")
+                    .exec();
+            
+             dockerClient.connectToNetworkCmd().withContainerId(container.getId()).withNetworkId(network.getId()).exec();    
+            
+        
+             dockerClient.startContainerCmd(container.getId()).exec();
+             System.out.print("start config for conatiner " + "\n");
+            
+     
+             
+             // set network speed to 100 mbit half with 
+             // network interface eth0
+             //ExecCreateCmdResponse networkspeedeth0 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 speed 100 duplex half").withAttachStdout(true).withAttachStderr(true).exec();
+             //dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             //System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
+             
+             // delete provider dns2 file
+             ExecCreateCmdResponse setdns1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /var/run/dns1").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(setdns1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete dns1 file form path /var/run/dns1" + "\n");
+             
+             // delete provider dns2 file
+             ExecCreateCmdResponse setdns2 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /var/run/dns2").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(setdns2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("delete dns1 file form path /var/run/dns2" + "\n");
+             
+             // set ethtool to 10000 duplex half
+             String eth0togigabit = "ethtool -s eth0 speed 10000 duplex half autoneg off";
+             ExecCreateCmdResponse exetoolsetspeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", eth0togigabit).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exetoolsetspeed.getId()).exec(new ExecStartResultCallback(System.out, System.err));
+             System.out.print("set network speed to 10 Gib half" + "\n");
+             
+             
+               // set ethtool to 10000 duplex half
+             String ststartunbound = "/etc/rc.d/init.d/unbound start";
+             ExecCreateCmdResponse exestartunbound = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ststartunbound).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exestartunbound.getId()).exec(new ExecStartResultCallback(System.out, System.err));
+             System.out.print("start unbound " + "\n");
+             
+             
+             
+             // ethtool -s eth0 port fibre
+             // ipfire port to fibre
+             ExecCreateCmdResponse stfibre = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ethtool -s eth0 port fibre").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(stfibre.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("run command ethtool -s eth0 port fibre" + "\n");
+             
+             // local commit container
+             // jgsoftwares/ipfire:cloud 
+             dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag(stimagetag).exec();
+             System.out.print("local image commit jgsoftwares/ipfire:" + stimagetag);
+             System.out.print("restart container openwrt2305host to run iptables in memory of this container" + "\n");
+             
+             
+             
+             
+        } catch(Exception e)
+        {
+            System.out.print("Fehler " + e);
+        }
+      }
+     
+      /*
+        start ipfire in host mode
+    */
+     public void startipfiredockergwbridge()
+    {
+          try
+          {
+        
+                // ipfire http port 
+                // access to ipfire container over vpn
+                // https://192.168.10.56:444
+                ExposedPort tcp444 = ExposedPort.tcp(444);
+                // port 53 for dhcp
+                //ExposedPort tcp53 = ExposedPort.tcp(53);
+                
+                Ports portBindings = new Ports();
+                //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                portBindings.bind(tcp444, Ports.Binding.bindPort(444));
+                //portBindings.bind(tcp53, Ports.Binding.bindPort(53));
+                
+             
+                 // dns server config
+                de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
+           
+                String stdnsserver = ConfigPanel.stpubdnsserver;
+                // returns string dnspulicserver ipdns1 ipdns2
+
+                String stdns1 = null;
+                String stdns2 = null;
+
+                publicdnsserverconfig.publicdns(stdnsserver, stdns1, stdns2);
+
+                stdns1 = publicdnsserverconfig.getStdns1();
+                stdns2 = publicdnsserverconfig.getStdns2();
+                
+                
+               
+                System.out.print("start network config docker-java " + "\n");
+                // connect to network like eth0 or eth0.10
+                Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
+                network.getInternal().equals(false);
+                
+                HostConfig hostConfig = HostConfig.newHostConfig();
+                        //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
+                
+
+                // add container to docker_gwbridge
+                hostConfig.withNetworkMode("docker_gwbridge"); //.getKernelMemory();
+                hostConfig.getNetworkMode();
+                
+                
+                System.out.print("host network mode " + hostConfig.getNetworkMode() + "\n");
+                
+                //hostConfig.withCapAdd(com.github.dockerjava.api.model.Capability.NET_ADMIN)
+                hostConfig.withCapAdd(Capability.NET_ADMIN);  
+                hostConfig.withCapAdd(Capability.NET_RAW);
+                hostConfig.withCapAdd(Capability.SYS_ADMIN);
+                hostConfig.getCapAdd();
+                System.out.print("Capability"  + hostConfig.getCapAdd().toString() + "\n");
+                
+                
+                hostConfig.isUserDefinedNetwork();
+                
+                hostConfig.withPrivileged(Boolean.TRUE);
+                hostConfig.getPrivileged();
+                //Isolation.PROCESS.getValue();     
+                System.out.print("Privileged" + hostConfig.getPrivileged());
+                
+                
+                hostConfig.withMemory(Long.MAX_VALUE);
+                //Isolation.HYPERV.getValue();   
+                hostConfig.getMemoryReservation();
+                hostConfig.getMemory();
+                System.out.print("with container memory " + hostConfig.getMemory());
+                
+                
+                hostConfig.getBinds();
+                hostConfig.getDevices();
+                
+                // set container with dns over config panel
+                     // add dns String 
+                String[] stdns = new String [] {stdns1,stdns2};
+                hostConfig.withDns(stdns);
+                hostConfig.getDns();
+                System.out.print("with dns " + hostConfig.getDns() + "\n");
+                
+                
+                // add dns search from config panel
+                hostConfig.withDnsSearch(ConfigPanel.styourdomainname);
+                hostConfig.getDnsSearch();
+                System.out.print("with dns search config " + hostConfig.getDnsSearch() + "\n");
+                
+                // docker runtime over ConfigPanel
+                hostConfig.withRuntime(stcomboruntime);
+                hostConfig.getRuntime();
+                System.out.print("with Docker Container runtime " + hostConfig.getRuntime() + "\n");
+                
+                
+                 // isolation process
+                 
+                hostConfig.withIsolation(Isolation.DEFAULT);
+                hostConfig.getIsolation();
+                System.out.print("with isolation mode linux only default is supported " + hostConfig.getIsolation() + "\n");
+                
+                
+                
+                // ipc mode
+                //hostConfig.withIpcMode("private");
+                hostConfig.withIpcMode("host");
+                hostConfig.getIpcMode();
+                System.out.print("with IpcMode " + hostConfig.getIpcMode() + "\n");
+                
+                
+                
+                // cgroup host
+                //hostConfig.withCgroup("private");
+                hostConfig.withCgroup("host");
+                hostConfig.getCgroup();
+                System.out.print("with cgroup mode " + hostConfig.getCgroup() + "\n");
+                                
+                // set kernel memory to max
+                hostConfig.withKernelMemory(Long.MAX_VALUE);
+                hostConfig.getKernelMemory();
+                System.out.print("wiht kernel Memory " + hostConfig.getKernelMemory() + "\n");
+                
+                
+                
+                hostConfig.withMemorySwap(Long.MAX_VALUE);
+                hostConfig.getMemorySwap();
+                System.out.print("with memory Swap " + hostConfig.getMemorySwap() + "\n");
+                
+                hostConfig.withMemory(Long.MAX_VALUE);
+                hostConfig.getMemory();
+                System.out.print("with memory " + hostConfig.getMemory() + "\n");
+                
+                
+                long lcpuperiod = 1000000;
+                hostConfig.withCpuPeriod(lcpuperiod);
+                hostConfig.getCpuPeriod();
+                System.out.print("run cpu period to " + lcpuperiod + "\n");
+                
+                long lcpuquota = -50000;
+                hostConfig.withCpuQuota(lcpuquota);
+                hostConfig.getCpuQuota();
+                System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
+                
+                //long lcpuquota = -50000;
+                //hostConfig.withCpuQuota(lcpuquota);
+                //hostConfig.getCpuQuota();
+                //System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
+                
+                hostConfig.withCpuShares(2048);
+                hostConfig.getCpuShares();
+                System.out.print("ipfire cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
+                
+                // jgsoftwares/openwrt23.05:nftbridgelayer2ext4
+                //dockerClient.pullImageCmd("jgsoftwares/ipfire")
+                //.withTag("cloud")
+                //.exec(new PullImageResultCallback())
+                //.awaitCompletion(30, TimeUnit.SECONDS);
+               
+            String stcontainername = "ipfire";
+            // check image exist
+            boolean imagenotexist = false;
+            try
+            {
+                dockerClient.inspectContainerCmd(stcontainername).exec();
+            } catch(NotFoundException e)
+            {
+                System.out.print("error search image " + e);
+            }
+            if(imagenotexist == true)
+            {
+                System.out.print("ipfire image exist" + "\n");
+            }
+            else
+            {         
+                // jgsoftwares/openwrt23.05:nftbridgelayer2ext4 
+               
+                stimagetag = "cloud";
+                String stopenwrt2305host = "jgsoftwares/ipfire:" + stimagetag;
+                dockerClient.pullImageCmd("jgsoftwares/ipfire:" + stimagetag).exec(new PullImageResultCallback()).awaitSuccess();
+            }
+                
+           // dockerClient = DockerClientBuilder.getInstance().build();  
+            getDockerClient(dockerClient);
+           // Volume vmdockersoc = new Volume("/var/run/docker.sock:/var/run/docker.sock");
+           
+            CreateContainerResponse container;
+            container = dockerClient.createContainerCmd("jgsoftwares/ipfire:" + stimagetag)
+                    //.withCmd("/bin/bash", "sh /root/configiptables.v2")
+                    .withName("ipfire_dockergwbridge")
                     .withUser("root")
                     .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface) 
                     .withHostConfig(hostConfig)
