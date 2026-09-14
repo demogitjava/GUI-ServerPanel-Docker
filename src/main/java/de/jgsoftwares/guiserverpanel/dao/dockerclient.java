@@ -62,12 +62,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JList;
 
 
 /**
@@ -77,10 +79,12 @@ import java.util.logging.Logger;
 public class dockerclient implements Idockerclient
 {
 
+    ArrayList<String> arraylistdistfeed = null;
+    
     Process process;
     BufferedReader reader;
 
-    // model for dockerclient for images and containers
+    // model for dockerclient for images and contai ners
     com.github.dockerjava.api.model.Image mdimage;
     com.github.dockerjava.api.model.Container mdcontainer;
 
@@ -100,6 +104,8 @@ public class dockerclient implements Idockerclient
     // from /var/run/docker.sock
     public List<Image> dockerimages;
     public List<Container> dockercontainers;
+    
+    
     
     public dockerclient()
     {
@@ -1403,6 +1409,43 @@ public class dockerclient implements Idockerclient
              System.out.print("start ubus socket " + "\n");
              
              
+             /*
+             
+                openwrt edit update url on 
+                /etc/opkg/distfeed.conf
+             
+             */
+             
+              ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+             // edit openwrt2305 feed to http 217.160.255.254
+             //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
+             //clear disfeed
+             ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+             
+             
+             
+             //arrayfeed = new ArrayList();
+             // get ArrayList size
+             for(int i = 0; i <  arrayfeed.size(); i++)
+             {
+                 
+                 String staddtofeed = (String) arrayfeed.get(i);
+                 
+                 ExecCreateCmdResponse execaddstringdistfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "" +  staddtofeed + " >> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                 dockerClient.execStartCmd(execaddstringdistfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 System.out.print("add String to /etc/opkg/disfeed.conf" + staddtofeed + "\n");
+             
+             }
+             
+               /*
+                opkg update
+             */
+             ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("update container with opkg update" + "\n");
+             
              // name for running container 
              // commit container local with setting in /etc
              // restart container settings
@@ -2675,6 +2718,35 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("start ubus socket " + "\n");
              
+              ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+             // edit openwrt2305 feed to http 217.160.255.254
+             //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
+             //clear disfeed
+             ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+             
+             
+             
+             //arrayfeed = new ArrayList();
+             // get ArrayList size
+             for(int i = 0; i <  arrayfeed.size(); i++)
+             {
+                 
+                 String staddtofeed = (String) arrayfeed.get(i);
+                 
+                 ExecCreateCmdResponse execaddstringdistfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "" +  staddtofeed + " >> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                 dockerClient.execStartCmd(execaddstringdistfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 System.out.print("add String to /etc/opkg/disfeed.conf" + staddtofeed + "\n");
+             
+             }
+             
+               /*
+                opkg update
+             */
+             ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("update container with opkg update" + "\n");
              
              // commit
              // jgsoftwares/openwrt23.05landingpage   java11
@@ -3126,6 +3198,7 @@ public class dockerclient implements Idockerclient
              //nameserver dnsip1
              //ExecCreateCmdResponse execaddstringpublicdnsip1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns1 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              //dockerClient.execStartCmd(execaddstringpublicdnsip1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             
              //nameserver dnsip2
              //ExecCreateCmdResponse execaddstringpublicdnsip2 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns2 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              //dockerClient.execStartCmd(execaddstringpublicdnsip2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
@@ -3190,17 +3263,55 @@ public class dockerclient implements Idockerclient
              System.out.print("delete file /etc/board.d/99_network " + "\n");
              
              
-             
+             /*
              //install ttyd
              ExecCreateCmdResponse execinstallttyd = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install ttyd").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execinstallttyd.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("install ttyd package to openwrt2305host container" + "\n");
 
              
-               //nameserver start ttyd
+             //nameserver start ttyd
              ExecCreateCmdResponse execstartttyd = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "chmod +x /etc/init.d/ttyd && /etc/init.d/ttyd start").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execstartttyd.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("install ttyd package to openwrt2305host container" + "\n");
+             */
+            
+             ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+             // edit openwrt2305 feed to http 217.160.255.254
+             //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
+             //clear disfeed
+             ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+             
+             
+             
+             //arrayfeed = new ArrayList();
+             // get ArrayList size
+             for(int i = 0; i <  arrayfeed.size(); i++)
+             {
+                 
+                 String staddtofeed = (String) arrayfeed.get(i);
+                 
+                 ExecCreateCmdResponse execaddstringdistfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "" +  staddtofeed + " >> /etc/opkg/disfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                 dockerClient.execStartCmd(execaddstringdistfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 System.out.print("add String to /etc/opkg/disfeed.conf" + staddtofeed + "\n");
+             
+             }
+             
+             //nameserver dnsip1
+             //ExecCreateCmdResponse execaddstringpublicdnsip1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns1 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             //dockerClient.execStartCmd(execaddstringpublicdnsip1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             
+             
+             /*
+                opkg update
+             */
+             ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("update container with opkg update" + "\n");
+             
+             
              
              // commit
              // jgsoftwares/openwrt23.05
@@ -3208,6 +3319,8 @@ public class dockerclient implements Idockerclient
              System.out.print("local image commit jgsoftwares/openwrt23.05:iptablesext4");
              
 
+            
+             
         } catch(Exception e)
         {
             System.out.print("Fehler " + e);
@@ -4199,6 +4312,45 @@ public class dockerclient implements Idockerclient
              
              System.out.print("restart container openwrt2305host to run iptables in memory of this container");
              
+             
+               /*
+             
+                openwrt edit update url on 
+                /etc/opkg/distfeeds.conf
+             /etc/opkg/distfeeds.conf
+             */
+             
+              ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+             // edit openwrt2305 feed to http 217.160.255.254
+             //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
+             //clear disfeed
+             ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":>  /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+             
+             
+             
+             //arrayfeed = new ArrayList();
+             // get ArrayList size
+             for(int i = 0; i <  arrayfeed.size(); i++)
+             {
+                 
+                 String staddtofeed = (String) arrayfeed.get(i);
+                 
+                 ExecCreateCmdResponse execaddstringdistfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "" +  staddtofeed + " >> /etc/opkg/disfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                 dockerClient.execStartCmd(execaddstringdistfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 System.out.print("add String to /etc/opkg/disfeed.conf" + staddtofeed + "\n");
+             
+             }
+             
+               /*
+                opkg update
+             */
+             ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("update container with opkg update" + "\n");
+             
+             
              /*
              
                  sthttpfileservertag = "shell";
@@ -4395,4 +4547,61 @@ public class dockerclient implements Idockerclient
              
             
     }
+    
+    /**
+     *  
+     *  /etc/opkg/distfeeds.conf
+     * @param arraylistdistfeed
+     * @param containerid
+     * @return 
+     */
+    @Override
+    public ArrayList<String> openwrt2305disfeedtohttp(ArrayList<String> arraylistdistfeed)
+    {
+        
+        /*
+            edit from 
+            src/gz openwrt_core https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/packages
+            src/gz openwrt_base https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/base
+            src/gz openwrt_luci https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/luci
+            src/gz openwrt_packages https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/packages
+            src/gz openwrt_routing https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/routing
+            src/gz openwrt_telephony https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/telephony
+        
+        
+            to 
+            src/gz openwrt_core http://217.160.255.254:8000/openwrt/23.05.packages/packages/
+            src/gz openwrt_base http://217.160.255.254:8000/openwrt/23.05.packages/base/
+            src/gz openwrt_luci http://217.160.255.254:8000/openwrt/23.05.packages/luci/
+            src/gz openwrt_packages http://217.160.255.254:8000/openwrt/23.05.packages/packages/
+            src/gz openwrt_routing http://217.160.255.254:8000/openwrt/23.05.packages/routing/
+            src/gz openwrt_telephony http://217.160.255.254:8000/openwrt/23.05.packages/telephony/
+        
+        */
+        
+        
+        System.out.print("edit file distfeed to jgsoftwares http fileserver " + "\n");
+        
+        // clear file
+        // :> /pfad/zur/datei
+                
+        arraylistdistfeed = new ArrayList<>();
+        
+        String openwt_core = new String("src/gz openwrt_core " + "http://217.160.255.254:8000/openwrt/23.05.packages/packages");
+        String openwrt_base = new String("src/gz openwrt_base " + "http://217.160.255.254:8000/openwrt/23.05.packages/base");
+        String openwrt_luci = new String("src/gz openwrt_luci" + "http://217.160.255.254:8000/openwrt/23.05.packages/luci");
+        String openwrt_packages = new String("src/gz openwrt_packages " + "http://217.160.255.254:8000/openwrt/23.05.packages/packages");
+        String openwrt_routing = new String("src/gz openwrt_routing " + "http://217.160.255.254:8000/openwrt/23.05.packages/routing");
+        String openwrt_telephony = new String("src/gz openwrt_telephony " + "http://217.160.255.254:8000/openwrt/23.05.packages/telephony");
+        
+        arraylistdistfeed.add(openwt_core);
+        arraylistdistfeed.add(openwrt_base);
+        arraylistdistfeed.add(openwrt_luci);
+        arraylistdistfeed.add(openwrt_packages);
+        arraylistdistfeed.add(openwrt_routing);
+        arraylistdistfeed.add(openwrt_telephony);
+        
+        return arraylistdistfeed;    
+    }
+    
 }

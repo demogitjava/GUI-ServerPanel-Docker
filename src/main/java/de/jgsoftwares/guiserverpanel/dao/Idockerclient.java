@@ -4,6 +4,7 @@ import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,4 +50,6 @@ public interface Idockerclient {
     public void openwrt2305hostsaveiptables();
     
     public void restartallcontainers();
+    
+    public ArrayList<String> openwrt2305disfeedtohttp(ArrayList<String> arraylistdistfeed);
 }
