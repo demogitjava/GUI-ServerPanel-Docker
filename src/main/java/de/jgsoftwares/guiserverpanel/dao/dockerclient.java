@@ -1416,7 +1416,8 @@ public class dockerclient implements Idockerclient
              
              */
              
-              ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+             de.jgsoftwares.guiserverpanel.config.containerconfig openwrtcontainerconfig = new de.jgsoftwares.guiserverpanel.config.containerconfig();
+             ArrayList arrayfeed = openwrtcontainerconfig.openwrt2305disfeedtohttp(arraylistdistfeed);
              // edit openwrt2305 feed to http 217.160.255.254
              //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
              //clear disfeed
@@ -2159,6 +2160,8 @@ public class dockerclient implements Idockerclient
                 // bin /var/run/ubus/ubus.sock to container
                 Volume ubussocket = new Volume("/var/run/ubus/ubus.sock");
                 System.out.print("init Volume ubus " + "\n");
+     
+                
                 
                 // connect to network like eth0 or eth0.10
                 Network network = dockerClient.inspectNetworkCmd().withNetworkId(stinterfacename).exec();
@@ -2167,10 +2170,7 @@ public class dockerclient implements Idockerclient
      
                 HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
 
-                
-             
-               
-                
+
                 // bind ubus to container
                 hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));
                 System.out.print("bind ubus to ubus to host config " + "\n");
@@ -2718,7 +2718,9 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("start ubus socket " + "\n");
              
-              ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+             
+             de.jgsoftwares.guiserverpanel.config.containerconfig openwrtcontainerconfig = new de.jgsoftwares.guiserverpanel.config.containerconfig();
+             ArrayList arrayfeed = openwrtcontainerconfig.openwrt2305disfeedtohttp(arraylistdistfeed);
              // edit openwrt2305 feed to http 217.160.255.254
              //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
              //clear disfeed
@@ -2890,8 +2892,18 @@ public class dockerclient implements Idockerclient
                 Volume ubussocket = new Volume("/var/run/ubus/ubus.sock");
                 System.out.print("init Volume ubus " + "\n");
                 
-                Volume vlttyd = new Volume("/etc/init.d/ttyd");
-                System.out.print("init Volume ubus " + "\n");
+                //Volume vlttyd = new Volume("/etc/init.d/ttyd");
+                //System.out.print("init Volume ubus " + "\n");
+                
+                
+                ExposedPort tcp7681 = ExposedPort.tcp(7681);
+                
+                Ports portBindings = new Ports();
+                //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                portBindings.bind(tcp7681, Ports.Binding.bindPort(7681));
+      
+                
+                portBindings.getBindings();
                 
                 // network none
                 // connect to network like eth0 or eth0.10
@@ -2915,7 +2927,8 @@ public class dockerclient implements Idockerclient
                 stdns2 = publicdnsserverconfig.getStdns2();
                 
                 
-                HostConfig hostConfig = HostConfig.newHostConfig();
+                HostConfig hostConfig = HostConfig.newHostConfig().withPortBindings(PortBinding.parse("8081:8081"));
+               // HostConfig hostConfig = HostConfig.newHostConfig();
                         //.withPortBindings(PortBinding.parse("80:80"), PortBinding.parse("1527:1527"));
                
                         
@@ -2986,8 +2999,8 @@ public class dockerclient implements Idockerclient
                 hostConfig.getKernelMemory();
                 
                 // mount docker socket and ttyd
-                //hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket), new Bind("/etc/init.d/ttyd", vlttyd));
-                hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
+                hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket), new Bind("/var/run/ubus/ubus.sock", ubussocket));
+                //hostConfig.withBinds(new Bind("/var/run/docker.sock", dockersocket));
                 //Collections.singletonMap("/tmp", "rw,noexec,nosuid,size=50m")
                 
                 // mount ttyd 
@@ -3064,8 +3077,9 @@ public class dockerclient implements Idockerclient
                     .withName("openwrt2305host")
                     .withUser("root")
                     .withEnv("NETWORK_IF=" + ConfigPanel.stcontainerinterface)
-                    .withVolumes(dockersocket, ubussocket, vlttyd)
+                    .withVolumes(dockersocket, ubussocket)
                     .withHostConfig(hostConfig)
+                    .withExposedPorts(tcp7681) 
                     .withUser(stusermode)
                     //.withExposedPorts(tcp80)
                     //.withExposedPorts(tcp1527)
@@ -3276,13 +3290,14 @@ public class dockerclient implements Idockerclient
              System.out.print("install ttyd package to openwrt2305host container" + "\n");
              */
             
-             ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+             de.jgsoftwares.guiserverpanel.config.containerconfig openwrtcontainerconfig = new de.jgsoftwares.guiserverpanel.config.containerconfig();
+             ArrayList arrayfeed = openwrtcontainerconfig.openwrt2305disfeedtohttp(arraylistdistfeed);
              // edit openwrt2305 feed to http 217.160.255.254
              //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
              //clear disfeed
              ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+             System.out.print("clear file /etc/opkg/distfeeds.conf" + "\n");
              
              
              
@@ -3299,20 +3314,26 @@ public class dockerclient implements Idockerclient
              
              }
              
+             
+             // install ttyd 
+             // with config IPTABLES 
+             
+             
              //nameserver dnsip1
              //ExecCreateCmdResponse execaddstringpublicdnsip1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns1 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
              //dockerClient.execStartCmd(execaddstringpublicdnsip1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              
-             
+            
              /*
                 opkg update
              */
              ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("update container with opkg update" + "\n");
+   
              
              
-             
+
              // commit
              // jgsoftwares/openwrt23.05
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05").withTag("iptablesext4").exec();
@@ -4319,8 +4340,9 @@ public class dockerclient implements Idockerclient
                 /etc/opkg/distfeeds.conf
              /etc/opkg/distfeeds.conf
              */
-             
-              ArrayList arrayfeed = openwrt2305disfeedtohttp(arraylistdistfeed);
+               
+             de.jgsoftwares.guiserverpanel.config.containerconfig containerconfig = new de.jgsoftwares.guiserverpanel.config.containerconfig();
+             ArrayList arrayfeed = containerconfig.openwrt2305disfeedtohttp(arraylistdistfeed);
              // edit openwrt2305 feed to http 217.160.255.254
              //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
              //clear disfeed
@@ -4547,61 +4569,5 @@ public class dockerclient implements Idockerclient
              
             
     }
-    
-    /**
-     *  
-     *  /etc/opkg/distfeeds.conf
-     * @param arraylistdistfeed
-     * @param containerid
-     * @return 
-     */
-    @Override
-    public ArrayList<String> openwrt2305disfeedtohttp(ArrayList<String> arraylistdistfeed)
-    {
-        
-        /*
-            edit from 
-            src/gz openwrt_core https://downloads.openwrt.org/releases/23.05.5/targets/x86/64/packages
-            src/gz openwrt_base https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/base
-            src/gz openwrt_luci https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/luci
-            src/gz openwrt_packages https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/packages
-            src/gz openwrt_routing https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/routing
-            src/gz openwrt_telephony https://downloads.openwrt.org/releases/23.05.5/packages/x86_64/telephony
-        
-        
-            to 
-            src/gz openwrt_core http://217.160.255.254:8000/openwrt/23.05.packages/packages/
-            src/gz openwrt_base http://217.160.255.254:8000/openwrt/23.05.packages/base/
-            src/gz openwrt_luci http://217.160.255.254:8000/openwrt/23.05.packages/luci/
-            src/gz openwrt_packages http://217.160.255.254:8000/openwrt/23.05.packages/packages/
-            src/gz openwrt_routing http://217.160.255.254:8000/openwrt/23.05.packages/routing/
-            src/gz openwrt_telephony http://217.160.255.254:8000/openwrt/23.05.packages/telephony/
-        
-        */
-        
-        
-        System.out.print("edit file distfeed to jgsoftwares http fileserver " + "\n");
-        
-        // clear file
-        // :> /pfad/zur/datei
-                
-        arraylistdistfeed = new ArrayList<>();
-        
-        String openwt_core = new String("src/gz openwrt_core " + "http://217.160.255.254:8000/openwrt/23.05.packages/packages");
-        String openwrt_base = new String("src/gz openwrt_base " + "http://217.160.255.254:8000/openwrt/23.05.packages/base");
-        String openwrt_luci = new String("src/gz openwrt_luci" + "http://217.160.255.254:8000/openwrt/23.05.packages/luci");
-        String openwrt_packages = new String("src/gz openwrt_packages " + "http://217.160.255.254:8000/openwrt/23.05.packages/packages");
-        String openwrt_routing = new String("src/gz openwrt_routing " + "http://217.160.255.254:8000/openwrt/23.05.packages/routing");
-        String openwrt_telephony = new String("src/gz openwrt_telephony " + "http://217.160.255.254:8000/openwrt/23.05.packages/telephony");
-        
-        arraylistdistfeed.add(openwt_core);
-        arraylistdistfeed.add(openwrt_base);
-        arraylistdistfeed.add(openwrt_luci);
-        arraylistdistfeed.add(openwrt_packages);
-        arraylistdistfeed.add(openwrt_routing);
-        arraylistdistfeed.add(openwrt_telephony);
-        
-        return arraylistdistfeed;    
-    }
-    
+  
 }

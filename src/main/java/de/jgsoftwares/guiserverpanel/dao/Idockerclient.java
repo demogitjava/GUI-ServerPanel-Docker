@@ -50,6 +50,5 @@ public interface Idockerclient {
     public void openwrt2305hostsaveiptables();
     
     public void restartallcontainers();
-    
-    public ArrayList<String> openwrt2305disfeedtohttp(ArrayList<String> arraylistdistfeed);
+
 }

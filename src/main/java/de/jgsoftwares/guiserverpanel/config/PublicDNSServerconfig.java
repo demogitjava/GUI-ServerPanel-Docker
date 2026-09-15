@@ -27,7 +27,9 @@ public class PublicDNSServerconfig
         {
             case "gcore":
             {
-                System.out.print("gcore public dns selected" + "\n");
+                System.out.print("""
+                                 gcore public dns selected
+                                 """);
                 stdns1 = "95.85.95.85";        
                 stdns2 = "2.56.220.2";
                 setStdns1(stdns1);
@@ -36,7 +38,9 @@ public class PublicDNSServerconfig
             }
             case "google":
             {
-                System.out.print("google public dns selected " + "\n");
+                System.out.print("""
+                                 google public dns selected 
+                                 """);
                 stdns1 = "8.8.8.8";
                 stdns2 = "8.8.4.4";
                 setStdns1(stdns1);
@@ -45,7 +49,9 @@ public class PublicDNSServerconfig
             }    
             case "cloudflare":
             {
-                System.out.print("cloudflasre public dns selected " + "\n");
+                System.out.print("""
+                                 cloudflasre public dns selected 
+                                 """);
                 stdns1 = "1.1.1.1";
                 stdns2 = "1.0.0.1";
                 setStdns1(stdns1);
@@ -54,7 +60,9 @@ public class PublicDNSServerconfig
             }
                case "ipfire":
             {
-                System.out.print("ipfire " + "\n");
+                System.out.print("""
+                                 ipfire 
+                                 """);
                 stdns1 = "81.3.27.54";
                 stdns2 = "2001:678:b28::54";
                 setStdns1(stdns1);
@@ -69,19 +77,38 @@ public class PublicDNSServerconfig
         return stdnsserver + stdns1 + stdns2;  
     }
     
-     public String getStdns1() {
+    /**
+     *
+     * @return
+     */
+    public String getStdns1() {
         return stdns1;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStdns2() {
         return stdns2;
     }
     
-       public void setStdns1(String stdns1) {
+    /**
+     *
+     * @param stdns1
+     */
+    public void setStdns1(String stdns1) {
         this.stdns1 = stdns1;
     }
 
+    /**
+     *
+     * @param stdns2
+     */
     public void setStdns2(String stdns2) {
         this.stdns2 = stdns2;
     }
+    
+    
+    
 }
