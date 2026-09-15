@@ -1427,7 +1427,9 @@ public class dockerclient implements Idockerclient
              // opkg update && opkg install zoneinfo-all
              ExecCreateCmdResponse execrunzoneinfo = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && opkg install zoneinfo-all").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execrunzoneinfo.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("run command opkg update && opkg install zoneinfo-all" + "\n");
+             System.out.print("""
+                              run command opkg update && opkg install zoneinfo-all
+                              """);
              
              // install iptables firewall package
             // create dir
@@ -1435,40 +1437,54 @@ public class dockerclient implements Idockerclient
             // opkg install iptables-legacy
             ExecCreateCmdResponse execreatedir = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "mkdir /var/run/").withAttachStdout(true).withAttachStderr(true).exec();
             dockerClient.execStartCmd(execreatedir.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-            System.out.print("create a diretory /var/run " + "\n");    
+            System.out.print("""
+                             create a diretory /var/run 
+                             """);    
             
             
             ExecCreateCmdResponse execinstalliptables = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install iptables-legacy").withAttachStdout(true).withAttachStderr(true).exec();
             dockerClient.execStartCmd(execinstalliptables.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-            System.out.print("install package iptables-legacy " + "\n");
+            System.out.print("""
+                             install package iptables-legacy 
+                             """);
             
             // iptables save
             ExecCreateCmdResponse execiptablessave = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "iptables-legacy-save").withAttachStdout(true).withAttachStderr(true).exec();
             dockerClient.execStartCmd(execiptablessave.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
             System.out.print("run command in container " + "iptables-legacy-save");
-            System.out.print("restart container openwrt2305host to run iptables in memory" + "\n");
+            System.out.print("""
+                             restart container openwrt2305host to run iptables in memory
+                             """);
              
             
                  // delete file /etc/board.d/01_leds
              ExecCreateCmdResponse stdelete01_leds = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/01_leds").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete01_leds.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("delete file /etc/board.d/01_leds " + "\n");
+             System.out.print("""
+                              delete file /etc/board.d/01_leds 
+                              """);
              
              //delete file /etc/board.d/02_network
              ExecCreateCmdResponse stdelete02_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/02_network").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete02_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("delete file /etc/board.d/02_network " + "\n");
+             System.out.print("""
+                              delete file /etc/board.d/02_network 
+                              """);
              
              //delete file /etc/board.d/99-default_network
              ExecCreateCmdResponse stdelete99default_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /etc/board.d/99-default_network").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("delete file /etc/board.d/02_network " + "\n");
+             System.out.print("""
+                              delete file /etc/board.d/02_network 
+                              """);
             
              
              // start ubus
              ExecCreateCmdResponse stdstartubus_network = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "ubusd -s /var/run/ubus/ubus.sock").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("start ubus socket " + "\n");
+             System.out.print("""
+                              start ubus socket 
+                              """);
              
              
              /*
@@ -1485,7 +1501,9 @@ public class dockerclient implements Idockerclient
              //clear disfeed
              ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+             System.out.print("""
+                              clear file /etc/opkg/disfeed
+                              """);
              
              
              
@@ -1507,7 +1525,9 @@ public class dockerclient implements Idockerclient
              */
              ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("update container with opkg update" + "\n");
+             System.out.print("""
+                              update container with opkg update
+                              """);
              
              // name for running container 
              // commit container local with setting in /etc
@@ -1527,7 +1547,9 @@ public class dockerclient implements Idockerclient
                   //  }
                    // else
                    // {
-                        System.out.print("pull image " + "\n");
+                        System.out.print("""
+                                         pull image 
+                                         """);
                         dockerClient.pullImageCmd("jgsoftwares/oraclelinux_openjdk_derbydb")
                                 .withTag("openwrtext4")
                                 .exec(new PullImageResultCallback())
@@ -1536,7 +1558,9 @@ public class dockerclient implements Idockerclient
                          //  start container openwrt             
                         //dockerClient = DockerClientBuilder.getInstance().build();
                          getDockerClient(dockerClient);
-                        System.out.print("start container " + "\n");
+                        System.out.print("""
+                                         start container 
+                                         """);
 
                         // openwrtext4
                         CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/oraclelinux_openjdk_derbydb:openwrtext4")
@@ -1692,7 +1716,9 @@ public class dockerclient implements Idockerclient
                     //}
                    // else
                     //{
-                        System.out.print("pull image " + "\n");
+                        System.out.print("""
+                                         pull image 
+                                         """);
                         dockerClient.pullImageCmd("jgsoftwares/alpinelinux_derbydb")
                                 .withTag("openwrtedgehost")
                                 .exec(new PullImageResultCallback())
@@ -1702,7 +1728,9 @@ public class dockerclient implements Idockerclient
                           //  start container openwrt             
                         //dockerClient = DockerClientBuilder.getInstance().build();
                          getDockerClient(dockerClient);
-                        System.out.print("start container " + "\n");
+                        System.out.print("""
+                                         start container 
+                                         """);
 
                         // openwrtext4
                         CreateContainerResponse container = dockerClient.createContainerCmd("jgsoftwares/alpinelinux_derbydb:openwrtedgehost")
@@ -1947,7 +1975,9 @@ public class dockerclient implements Idockerclient
                 hostConfig.getCpuShares();
                 System.out.print("mysql cpushare - firewall config to " + hostConfig.getCpuShares() + "\n");
                 
-                  System.out.print("pull image " + "\n");
+                  System.out.print("""
+                                   pull image 
+                                   """);
                         dockerClient.pullImageCmd("jgsoftwares/demomysqlserver-ce")
                                 .withTag("latest")
                                 .exec(new PullImageResultCallback())
@@ -2183,14 +2213,18 @@ public class dockerclient implements Idockerclient
                 {
                     tcp80 = ExposedPort.tcp(80);
                     System.out.print("landingpage is started with Java JDK" + showjavaversion + "\n");
-                    System.out.print("to java > 25 tcp is required for http2" + "\n");
+                    System.out.print("""
+                                     to java > 25 tcp is required for http2
+                                     """);
                     System.out.print("container is started with tcp config on port 80");
                 }
                 else
                 {
                     tcp80 = ExposedPort.udp(80);
                     System.out.print("landingpage is started with Java > 25" + showjavaversion + "\n");
-                    System.out.print("the landingpage with java version > 25 ist started with port udp over http on port 80 " + "\n");
+                    System.out.print("""
+                                     the landingpage with java version > 25 ist started with port udp over http on port 80 
+                                     """);
                 }
                 
                 
@@ -2221,7 +2255,9 @@ public class dockerclient implements Idockerclient
                 // setup ubus socket for container 
                 // bin /var/run/ubus/ubus.sock to container
                 Volume ubussocket = new Volume("/var/run/ubus/ubus.sock");
-                System.out.print("init Volume ubus " + "\n");
+                System.out.print("""
+                                 init Volume ubus 
+                                 """);
      
                 
                 
@@ -2235,11 +2271,17 @@ public class dockerclient implements Idockerclient
 
                 // bind ubus to container
                 hostConfig.withBinds(new Bind("/var/run/ubus/ubus.sock", ubussocket));
-                System.out.print("bind ubus to ubus to host config " + "\n");
+                System.out.print("""
+                                 bind ubus to ubus to host config 
+                                 """);
                 
                 
-                System.out.print("started network config for landingpage " + "\n");
-                System.out.print("used ports are 80 and 1527 for derbydb " + " on java25 port 80 is started with upd for html3" + "\n");
+                System.out.print("""
+                                 started network config for landingpage 
+                                 """);
+                System.out.print("""
+                                 used ports are 80 and 1527 for derbydb  on java25 port 80 is started with upd for html3
+                                 """);
                 // add container to host network
                 hostConfig.withNetworkMode(stinterfacename);
                 hostConfig.getNetworkMode();
@@ -2344,7 +2386,9 @@ public class dockerclient implements Idockerclient
                 long lcpuperiod = 1000;
                 hostConfig.withCpuPeriod(lcpuperiod);
                 hostConfig.getCpuPeriod();
-                System.out.print("run cpu period to 1000" + "\n");
+                System.out.print("""
+                                 run cpu period to 1000
+                                 """);
                 
                 
                 long lcpuquota = -50000;
@@ -2378,7 +2422,9 @@ public class dockerclient implements Idockerclient
             }
             if(imagenotexist == true)
             {
-                System.out.print("landingpage image exist" + "\n");
+                System.out.print("""
+                                 landingpage image exist
+                                 """);
             }
             else
             {
@@ -2407,7 +2453,9 @@ public class dockerclient implements Idockerclient
                     
                  
                     //GenericContainer container 
-                    System.out.println("start openwrt container " + "\n");
+                    System.out.println("""
+                                       start openwrt container 
+                                       """);
                    
                    
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
@@ -2449,7 +2497,9 @@ public class dockerclient implements Idockerclient
                     
                     break;
                 case "oraclelinux":
-                   System.out.println("start oracle container " + "\n");
+                   System.out.println("""
+                                      start oracle container 
+                                      """);
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
                     //.withCmd(stshell, struncmdst)
                     .withName(stcontainername)
@@ -2473,7 +2523,9 @@ public class dockerclient implements Idockerclient
                     .exec();
                     break;
                 case "alpinelinux":
-                   System.out.println("start alpine linux container " + "\n");
+                   System.out.println("""
+                                      start alpine linux container 
+                                      """);
                     container = dockerClient.createContainerCmd(stimage+":" + stimagetag)
                     //.withCmd(stshell, struncmdst)
                     .withName(stcontainername)
@@ -2498,7 +2550,9 @@ public class dockerclient implements Idockerclient
                     break;
                
                 default:
-                    System.out.println("Error no system selected " + "\n");
+                    System.out.println("""
+                                       Error no system selected 
+                                       """);
                     break;
                 } 
                
@@ -2604,28 +2658,36 @@ public class dockerclient implements Idockerclient
              String clearsysctl = "/etc/sysctl.conf";
              ExecCreateCmdResponse execlearsysctl = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearsysctl).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execlearsysctl.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-              System.out.print("flush file /etc/sysctl.conf" + "\n");     
+              System.out.print("""
+                               flush file /etc/sysctl.conf
+                               """);     
             
              // resolv.conf
              // cat /dev/null > /etc/resolv.conf
              String clearresolvconf = "/etc/resolv.conf";
              ExecCreateCmdResponse execlearresolvconf = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearresolvconf).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execlearresolvconf.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("flush file /etc/resolv.conf" + "\n");
+             System.out.print("""
+                              flush file /etc/resolv.conf
+                              """);
              
               // TZ
              // cat /dev/null > /etc/TZ
              String cleartimezone = "/etc/TZ";
              ExecCreateCmdResponse execleartimezone = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + cleartimezone).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execleartimezone.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("flush file /etc/TZ" + "\n");
+             System.out.print("""
+                              flush file /etc/TZ
+                              """);
              
              // clear /etc/hostname
              // cat /dev/null > /etc/hostname
              String clearhostname = "/etc/hostname";
              ExecCreateCmdResponse execlearhostname = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearhostname).withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execlearhostname.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("flush file /etc/hostname " + "\n");
+             System.out.print("""
+                              flush file /etc/hostname 
+                              """);
              
              /*
              
