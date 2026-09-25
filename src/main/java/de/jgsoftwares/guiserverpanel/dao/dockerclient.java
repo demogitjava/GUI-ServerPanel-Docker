@@ -4731,7 +4731,7 @@ public class dockerclient implements Idockerclient
         // Initialize the Docker client
         //DockerClient dockerClient = DockerClientBuilder.getInstance().build();
         String containerId = "openwrt2305host";
-    
+     
         try {
             dockerClientnetty.attachContainerCmd(containerId)
                     .withStdIn(System.in)
