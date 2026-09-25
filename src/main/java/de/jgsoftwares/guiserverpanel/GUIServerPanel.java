@@ -1,15 +1,20 @@
 package de.jgsoftwares.guiserverpanel;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.*;
 
 public class GUIServerPanel implements i_GuiServerPanel
 { 
   public static de.jgsoftwares.guiserverpanel.frames.MainPanel mpanel;
 
-    /**
-     *
-     */
-
+  //public static ScriptEngineManager manager;
+  //public static ScriptEngine engine;
+  
+  /**
+   *
+  */
   public GUIServerPanel()
   {
         NtpClient ntpclient;
@@ -40,11 +45,19 @@ public class GUIServerPanel implements i_GuiServerPanel
         {
             System.out.print("LookAndFeel Error NomRoD !");
         }     
-       
         
-            
-            
-                  
+        /*
+        manager = new ScriptEngineManager();
+        // Nashorn-Engine
+        engine = manager.getEngineByName("nashorn");
+      
+        try {
+            engine.eval("print('nashorn javascript egnine is loaded');"); 
+        } catch (ScriptException e) {
+            System.out.print("Error " + e);
+        }
+        */ 
+        
         GUIServerPanel.showFrame();
         
        // SpringApplication.run(GUIServerPanel.class, args);

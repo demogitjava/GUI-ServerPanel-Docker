@@ -80,6 +80,7 @@ public class OpenWrt extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -151,6 +152,13 @@ public class OpenWrt extends javax.swing.JPanel {
             }
         });
 
+        jButton7.setText("attach container openwrt2305host");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,14 +166,6 @@ public class OpenWrt extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -209,7 +209,18 @@ public class OpenWrt extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(215, 215, 215)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel8))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -218,23 +229,24 @@ public class OpenWrt extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addGap(67, 67, 67)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2)
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 23, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19)
@@ -637,6 +649,13 @@ public class OpenWrt extends javax.swing.JPanel {
         jframeconfigipfire.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        de.jgsoftwares.guiserverpanel.dao.dockerclient dockerClient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+        dockerClient.attachopenwrt2305host();
+       
+    }//GEN-LAST:event_jButton7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -645,6 +664,7 @@ public class OpenWrt extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;

@@ -94,6 +94,40 @@
 	  <version>3.7.0</version>
 	  <type>jar</type>
 	 </dependency>
+         
+         <dependency>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
+            <version>15.7</version> <!-- Oder die aktuellste Version prüfen -->
+        </dependency>
+	 <dependency>
+	  <groupId>com.github.docker-java</groupId>
+	  <artifactId>docker-java-api</artifactId>
+	  <version>3.7.0</version>
+	  <type>jar</type>
+	</dependency>
+        <!-- Source: https://mvnrepository.com/artifact/com.github.docker-java/docker-java-transport-httpclient5 -->
+       <dependency>
+           <groupId>com.github.docker-java</groupId>
+           <artifactId>docker-java-transport-httpclient5</artifactId>
+           <version>3.7.1</version>
+           <scope>compile</scope>
+       </dependency>
+	 <dependency>
+	  <groupId>org.apache.tomcat.embed</groupId>
+	  <artifactId>tomcat-embed-core</artifactId>
+	  <version>9.0.26</version>
+	  <type>jar</type>
+	 </dependency>
+         
+          <!-- Netty Transport Layer -->
+    <dependency>
+        <groupId>com.github.docker-java</groupId>
+        <artifactId>docker-java-transport-netty</artifactId>
+        <version>3.4.0</version>
+    </dependency>
+         
+         
 	</dependencies>
 
 	

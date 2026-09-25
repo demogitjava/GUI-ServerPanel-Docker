@@ -1,6 +1,5 @@
 package de.jgsoftwares.guiserverpanel.dao;
 
-import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
@@ -21,7 +20,6 @@ import com.github.dockerjava.api.model.Isolation;
 import com.github.dockerjava.api.model.RestartPolicy;
 import com.github.dockerjava.api.model.Volume;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
-import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
@@ -41,10 +39,7 @@ import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,6 +48,31 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+
+
+
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.async.ResultCallback;
+import com.github.dockerjava.api.model.Frame;
+import com.github.dockerjava.core.DockerClientBuilder;
+import java.io.Closeable;
+import java.io.IOException;
+
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.AttachContainerCmd;
+import com.github.dockerjava.api.command.DockerCmdExecFactory;
+import com.github.dockerjava.api.model.StreamType;
+import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.DockerClientConfig;
+import com.github.dockerjava.core.DefaultDockerClientConfig;
+import com.github.dockerjava.core.command.AttachContainerResultCallback;
+import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
+import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
+import com.github.dockerjava.transport.DockerHttpClient;
+import java.time.Duration;
 
 /**
  *
@@ -4567,7 +4587,6 @@ public class dockerclient implements Idockerclient
             //        .withTarInputStream(tarArchiveInputStream)
             //        .exec();
             dockerClient.copyArchiveToContainerCmd(containerID)
-                    
                     .withHostResource(resource)
                     .withRemotePath("/root").exec();
             Landingpage.jLabel1chooser.setText("file upload to landingpagecontainer " + resource + "\n");
@@ -4618,17 +4637,7 @@ public class dockerclient implements Idockerclient
         
     }
 
-    
-    @Override
-    public void attachopenwrt2305hostcontainer()
-    {
-        
-       
-
-                
-
-
-    }
+   
     
     // delete file form dockercontainer httpfileserver
     @Override
@@ -4693,5 +4702,54 @@ public class dockerclient implements Idockerclient
              
             
     }
-  
+    
+    
+    @Override 
+    public void attachopenwrt2305host()
+    {
+
+        //String containername = "openwrt2305host";
+   
+        
+         DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
+                // Optional: Explizite Angabe des Docker-Hosts, falls nötig
+                .withDockerHost("tcp://192.168.10.56:2375") 
+                .build();
+
+        // 2. Netty-Transport-Factory instanziieren und Timeouts konfigurieren
+        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory()
+                .withConnectTimeout(5000) // Verbindungstimeout in ms
+                .withReadTimeout(30000);  // Read-Timeout in ms
+
+        // 3. DockerClient-Instanz über den Builder mit Netty erstellen
+        DockerClient dockerClientnetty = DockerClientBuilder.getInstance(config)
+                .withDockerCmdExecFactory(nettyFactory)
+                .build();
+        
+       // getDockerClient();
+        
+        // Initialize the Docker client
+        //DockerClient dockerClient = DockerClientBuilder.getInstance().build();
+        String containerId = "openwrt2305host";
+    
+        try {
+            dockerClientnetty.attachContainerCmd(containerId)
+                    .withStdIn(System.in)
+                    .withStdOut(true)
+                    .withStdErr(true)
+                    .withFollowStream(true)
+                    .exec(new AttachContainerResultCallback() {
+                        @Override
+                        public void onNext(Frame item) {
+                            // Read output from STDOUT/STDERR here
+                            System.out.print(new String(item.getPayload()));
+                        }
+                    })
+                    .awaitCompletion();
+        } catch (InterruptedException ex) {
+            System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+    }
+       
 }
