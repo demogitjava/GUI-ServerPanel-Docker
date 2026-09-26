@@ -50,6 +50,6 @@ public interface Idockerclient {
     public void openwrt2305hostsaveiptables();
     
     public void restartallcontainers();
-    public void attachopenwrt2305host();
+    public void attachopenwrt2305host(String stdmzcontainerattach, String stcontainername);
 
 }

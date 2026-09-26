@@ -73,6 +73,7 @@ import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
 import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
 import com.github.dockerjava.transport.DockerHttpClient;
 import java.time.Duration;
+import javax.swing.JButton;
 
 /**
  *
@@ -4705,51 +4706,12 @@ public class dockerclient implements Idockerclient
     
     
     @Override 
-    public void attachopenwrt2305host()
+    public void attachopenwrt2305host(String stdmzcontainerattach, String stcontainername)
     {
-
-        //String containername = "openwrt2305host";
-   
-        
-         DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                // Optional: Explizite Angabe des Docker-Hosts, falls nötig
-                .withDockerHost("tcp://192.168.10.56:2375") 
-                .build();
-
-        // 2. Netty-Transport-Factory instanziieren und Timeouts konfigurieren
-        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory()
-                .withConnectTimeout(5000) // Verbindungstimeout in ms
-                .withReadTimeout(30000);  // Read-Timeout in ms
-
-        // 3. DockerClient-Instanz über den Builder mit Netty erstellen
-        DockerClient dockerClientnetty = DockerClientBuilder.getInstance(config)
-                .withDockerCmdExecFactory(nettyFactory)
-                .build();
-        
-       // getDockerClient();
-        
-        // Initialize the Docker client
-        //DockerClient dockerClient = DockerClientBuilder.getInstance().build();
-        String containerId = "openwrt2305host";
-     
-        try {
-            dockerClientnetty.attachContainerCmd(containerId)
-                    .withStdIn(System.in)
-                    .withStdOut(true)
-                    .withStdErr(true)
-                    .withFollowStream(true)
-                    .exec(new AttachContainerResultCallback() {
-                        @Override
-                        public void onNext(Frame item) {
-                            // Read output from STDOUT/STDERR here
-                            System.out.print(new String(item.getPayload()));
-                        }
-                    })
-                    .awaitCompletion();
-        } catch (InterruptedException ex) {
-            System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-        
+        // load dockerattachcontainer
+        // start thread for stdin and stdout over console
+        de.jgsoftwares.guiserverpanel.dao.dockerattachopenwrt2305host dockerattachopenwrt2305host = new de.jgsoftwares.guiserverpanel.dao.dockerattachopenwrt2305host(stdmzcontainerattach, stcontainername);
     }
-       
+    
+  
 }
