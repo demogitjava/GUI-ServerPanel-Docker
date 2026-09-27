@@ -20,42 +20,15 @@ import java.io.PipedOutputStream;
  *
  * @author hoscho
  */
-public class dockerattachopenwrt2305host implements Runnable
+public class dockerattachopenwrt2305host //implements Runnable
 {
     String containerId;
     DockerClient dockerClientnetty;
     
     String stcontainername;
 
-  
-    
-    public dockerattachopenwrt2305host(String stdmzcontainerattach, String stcontainername)
-    {
-        String stconnectdockerhost = "tcp://" + stdmzcontainerattach + ":2375";
-  
-        DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .withDockerHost(stconnectdockerhost)
-                .build();
-
-      
-        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory();
-                //.withConnectTimeout(5000) // Verbindungstimeout in ms
-                //.withReadTimeout(30000);  // Read-Timeout in ms
-
-       
-        dockerClientnetty = DockerClientBuilder.getInstance(config)
-                .withDockerCmdExecFactory(nettyFactory)
-                .build();
-        
-        containerId = stcontainername;
-        
-       
-        setStcontainername(stcontainername);
-        //String containerId = "openwrt2305host";
-        this.run();
-        
-    
-    }
+    /**
+     *
     
     @Override
     public void run()
@@ -84,6 +57,68 @@ public class dockerattachopenwrt2305host implements Runnable
        
         
     }
+     */
+    public dockerattachopenwrt2305host(String stdmzcontainerattach, String stcontainername)
+    {
+        String stconnectdockerhost = "tcp://" + stdmzcontainerattach + ":2375";
+  
+        DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
+                .withDockerHost(stconnectdockerhost)
+                .build();
+
+      
+        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory();
+                //.withConnectTimeout(5000) // Verbindungstimeout in ms
+                //.withReadTimeout(30000);  // Read-Timeout in ms
+
+       
+        dockerClientnetty = DockerClientBuilder.getInstance(config)
+                .withDockerCmdExecFactory(nettyFactory)
+                .build();
+        
+        containerId = stcontainername;
+        
+       
+        setStcontainername(stcontainername);
+        //String containerId = "openwrt2305host";
+        //this.run();
+        
+         Thread thread = new Thread("attach container host") 
+         {
+             
+            @Override
+            public void run(){
+                containerId = getStcontainername();
+
+                    try {
+                        dockerClientnetty.attachContainerCmd(containerId)
+                                .withStdIn(System.in)
+                                .withStdOut(true)
+                                .withStdErr(true)
+                                .withFollowStream(true)
+                                .exec(new AttachContainerResultCallback() 
+                                {
+                                    @Override
+                                    public void onNext(Frame item) {
+                                        // Read output from STDOUT/STDERR here
+                                        System.out.print(new String(item.getPayload()));
+                                    }
+                                })      
+                                .awaitCompletion();
+
+                    } catch (InterruptedException ex) {
+                        System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    }
+            }
+         };
+
+
+         thread.start();
+         System.out.println(thread.getName());
+    
+    }
+    
+ 
     
     private String getStcontainername() {
         return stcontainername;
