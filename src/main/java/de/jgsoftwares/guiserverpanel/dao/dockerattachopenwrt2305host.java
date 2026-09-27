@@ -2,12 +2,15 @@ package de.jgsoftwares.guiserverpanel.dao;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.DockerCmdExecFactory;
+import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.AttachContainerResultCallback;
+import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
+import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -129,6 +132,24 @@ public class dockerattachopenwrt2305host //implements Runnable
     }
     
     
+    
+    // set config for docker_gwbridge
+    // run commands to disable network interfaces
+    // the container is only over vpn available
+    public void commandforattachcontainer()
+    {
+         
+        // disable interfaces 
+        // the console only available over vpn 
+        ExecCreateCmdResponse execdisableinterfaces = dockerClient.execCreateCmd("openwrt2305host").withCmd("sh", "-c", "ifconfig lo down && ifconfig eth0 down && ip addr flush dev lo && ip addr flush eth0").withAttachStdout(true).withAttachStderr(true).exec();
+        try {
+            dockerClient.execStartCmd(execdisableinterfaces.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+        } catch (InterruptedException ex) {
+            System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        System.out.print("disable interfaces only shell access over vpn" + "\n");
+        
+    }
 
    
     

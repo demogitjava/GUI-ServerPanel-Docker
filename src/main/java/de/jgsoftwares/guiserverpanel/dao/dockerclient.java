@@ -64,6 +64,7 @@ import java.io.IOException;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.AttachContainerCmd;
 import com.github.dockerjava.api.command.DockerCmdExecFactory;
+import com.github.dockerjava.api.model.ContainerNetwork;
 import com.github.dockerjava.api.model.StreamType;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
@@ -73,6 +74,8 @@ import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
 import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
 import com.github.dockerjava.transport.DockerHttpClient;
 import java.time.Duration;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.JButton;
 
 /**
@@ -4710,8 +4713,39 @@ public class dockerclient implements Idockerclient
     {
         // load dockerattachcontainer
         // start thread for stdin and stdout over console
-        de.jgsoftwares.guiserverpanel.dao.dockerattachopenwrt2305host dockerattachopenwrt2305host = new de.jgsoftwares.guiserverpanel.dao.dockerattachopenwrt2305host(stdmzcontainerattach, stcontainername);
+        
+        // check docker network 
+        // 
+          de.jgsoftwares.guiserverpanel.dao.dockerattachopenwrt2305host dockerattachopenwrt2305host = new de.jgsoftwares.guiserverpanel.dao.dockerattachopenwrt2305host(stdmzcontainerattach, stcontainername);
+      
+         String containerid = "openwrt2305host";
+            
+        // dockerClient = DockerClientBuilder.getInstance().build();
+        getDockerClient(dockerClient);
+            
+        //String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
+        InspectContainerResponse container = dockerClient.inspectContainerCmd("" + containerid.toString()).exec();
+     
+        Map<String, ContainerNetwork> networks = container.getNetworkSettings().getNetworks();
+
+        String stnetwork = null;
+        for (Map.Entry entry : networks.entrySet())
+        {
+            System.out.println("key: " + entry.getKey() + "; value: " + entry.getValue().toString());
+            if(entry.getKey().equals("docker_gwbridge"))
+            {
+                System.out.print("network is docker_gwbridge" + "\n");
+                stnetwork = (String) entry.getKey();
+                dockerattachopenwrt2305host.commandforattachcontainer();
+            }
+            else
+            {
+                System.out.print("container is not running on the docker_gwbridge network" + "\n" + "no command are running " + " \n");
+            }
+            
+        } 
     }
+    
     
   
 }
