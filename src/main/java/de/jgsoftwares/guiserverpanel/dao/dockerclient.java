@@ -1593,7 +1593,7 @@ public class dockerclient implements Idockerclient
                               """);
              
              // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
                               install openwrt package 
@@ -2947,7 +2947,7 @@ public class dockerclient implements Idockerclient
              System.out.print("update container with opkg update" + "\n");
              
              // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
                               install openwrt package 
@@ -3540,7 +3540,7 @@ public class dockerclient implements Idockerclient
              System.out.print("update container with opkg update" + "\n");
    
                        // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
                               install openwrt package 
@@ -4590,7 +4590,7 @@ public class dockerclient implements Idockerclient
              
              
                        // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
                               install openwrt package 
