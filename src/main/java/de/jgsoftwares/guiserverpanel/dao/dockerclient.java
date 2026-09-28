@@ -841,10 +841,49 @@ public class dockerclient implements Idockerclient
                               delete file /etc/board.d/02_network 
                               """);
             
+             ArrayList arrayfeed = new ArrayList();
+             // get ArrayList size
+             for(int i = 0; i <  arrayfeed.size(); i++)
+             {
+                 
+                 String staddtofeed = (String) arrayfeed.get(i);
+                 
+                 ExecCreateCmdResponse execaddstringdistfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "" +  staddtofeed + " >> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                 dockerClient.execStartCmd(execaddstringdistfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 System.out.print("add String to /etc/opkg/disfeed.conf" + staddtofeed + "\n");
+             
+             }
+             
+               /*
+                opkg update
+             */
+             ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("update container with opkg update" + "\n");
+             
+             // install package amd64-microcode
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("""
+                              install openwrt package 
+                              opkg install amd64-microcode
+                              """);
+             
+             
+             
+             // commit
+             // jgsoftwares/openwrt23.05landingpage   java11
+             dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java" +ConfigPanel.stjavaversion).exec();
+             System.out.print("""
+                              local image commit jgsoftwares/openwrt23.05landingpage:java11
+                              """);
+             System.out.print("""
+                              restart container openwrt2305host to run iptables on this container in memory 
+                              """);
 
              
-                 break;
-                }
+                break;
+             }
                 
                 case "oraclelinux":
                 {
@@ -1552,6 +1591,15 @@ public class dockerclient implements Idockerclient
              System.out.print("""
                               update container with opkg update
                               """);
+             
+             // install package amd64-microcode
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("""
+                              install openwrt package 
+                              opkg install amd64-microcode
+                              """);
+             
              
              // name for running container 
              // commit container local with setting in /etc
@@ -2898,13 +2946,25 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("update container with opkg update" + "\n");
              
+             // install package amd64-microcode
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("""
+                              install openwrt package 
+                              opkg install amd64-microcode
+                              """);
+             
+             
+             
              // commit
              // jgsoftwares/openwrt23.05landingpage   java11
-             
              dockerClient.commitCmd(stcontainername).withRepository("jgsoftwares/openwrt23.05landingpage").withTag("java" +ConfigPanel.stjavaversion).exec();
-             System.out.print("local image commit jgsoftwares/openwrt23.05landingpage:java11" + "\n");
-         
-             System.out.print("restart container openwrt2305host to run iptables on this container in memory " + "\n");
+             System.out.print("""
+                              local image commit jgsoftwares/openwrt23.05landingpage:java11
+                              """);
+             System.out.print("""
+                              restart container openwrt2305host to run iptables on this container in memory 
+                              """);
                
             
               // docker container run 
@@ -3479,6 +3539,13 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("update container with opkg update" + "\n");
    
+                       // install package amd64-microcode
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("""
+                              install openwrt package 
+                              opkg install amd64-microcode
+                              """);
              
              
 
@@ -4453,8 +4520,9 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stdelete99default_network.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("start ubus socket " + "\n");
              
+     
              
-              String stdmz = ConfigPanel.stwanip;
+             String stdmz = ConfigPanel.stwanip;
              if(stdmz.equals("10.255.255.1"))
              {
                     // cat /dev/null > /etc/hosts
@@ -4519,6 +4587,17 @@ public class dockerclient implements Idockerclient
              ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("update container with opkg update" + "\n");
+             
+             
+                       // install package amd64-microcode
+             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("""
+                              install openwrt package 
+                              opkg install amd64-microcode
+                              """);
+             
+             
              
              
              /*
