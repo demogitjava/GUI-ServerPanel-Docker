@@ -9,12 +9,18 @@ import javax.swing.JScrollPane;
  */
 public class WelcomePanel extends javax.swing.JPanel {
 
+    
+    
+    int welcomepanel = 0;
     /**
      * Creates new form WelcomePanel
      */
     public WelcomePanel() {
         initComponents();
        
+        // load navpanel
+        de.jgsoftwares.guiserverpanel.frames.ipfire.SouthPanel southnavpanel = new de.jgsoftwares.guiserverpanel.frames.ipfire.SouthPanel();
+        
         
     }
 
@@ -34,7 +40,7 @@ public class WelcomePanel extends javax.swing.JPanel {
 
         jTextArea1.setColumns(30);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Welcome Installer of ipfire\nthis is a simple installation wizard for ipfire \nrunning on host network \n- container name -   -> ipfire \n\na vpn connection is requried \nthe config file is copy to contianer by name \n\n\nfirewall - config\nfirewall - input\nfirewall - output\niptables\nQoS\nwiregaurd with scan token\nvlans\nipfire settings \n- squid  - running on docker_gwbridge ipfire container\n");
+        jTextArea1.setText("Welcome Installer of ipfire\nthis is a simple installation wizard for ipfire \nrunning on host network \n- container name -   -> ipfire \n\na vpn connection is requried \nthe config file is copy to contianer by name \n\n\nfirewall - config\nfirewall - input\nfirewall - output\niptables\nQoS\nwiregaurd with scan token\nvlans\nipfire settings \n- squid  - running on docker_gwbridge ipfire container\n\nto get your server online the localhost at \nthe image is neeeded to get your server online\n\nat last edit /etc/resolv.conf to gcore \nnameserver 95.85.95.85\nnameserver 2.56.220.2  \n");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

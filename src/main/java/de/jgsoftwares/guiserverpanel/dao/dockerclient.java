@@ -861,14 +861,14 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("update container with opkg update" + "\n");
              
-             // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             // install package kmod-ixgbe
+             // driver Intel 10 Gigabit Ethernet 
+             ExecCreateCmdResponse execkmodixgbe = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && insmod ixgbe").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execkmodixgbe.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
-                              install openwrt package 
-                              opkg install amd64-microcode
+                              load module with command
+                              insmod ixgbe
                               """);
-             
              
              
              // commit
@@ -1592,12 +1592,13 @@ public class dockerclient implements Idockerclient
                               update container with opkg update
                               """);
              
-             // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+              // install package kmod-ixgbe
+             // driver Intel 10 Gigabit Ethernet 
+             ExecCreateCmdResponse execkmodixgbe = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && insmod ixgbe").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execkmodixgbe.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
-                              install openwrt package 
-                              opkg install amd64-microcode
+                              load module with command
+                              insmod ixgbe
                               """);
              
              
@@ -2715,6 +2716,30 @@ public class dockerclient implements Idockerclient
              // /etc/sysctl.conf
      
              
+             de.jgsoftwares.guiserverpanel.config.containerconfig openwrtcontainerconfig = new de.jgsoftwares.guiserverpanel.config.containerconfig();
+             ArrayList arrayfeed = openwrtcontainerconfig.openwrt2305disfeedtohttp(arraylistdistfeed);
+             // edit openwrt2305 feed to http 217.160.255.254
+             //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
+             //clear disfeed
+             ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+             
+             
+             
+             //arrayfeed = new ArrayList();
+             // get ArrayList size
+             for(int i = 0; i <  arrayfeed.size(); i++)
+             {
+                 
+                 String staddtofeed = (String) arrayfeed.get(i);
+                 
+                 ExecCreateCmdResponse execaddstringdistfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "" +  staddtofeed + " >> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
+                 dockerClient.execStartCmd(execaddstringdistfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+                 System.out.print("add String to /etc/opkg/disfeed.conf" + staddtofeed + "\n");
+               
+             }
+             System.out.print("edit openwrtlandingpagedebug /etc/opgk/disfeed.conf to ip 217.160.255.254");
               /*
                 
                 clear files in the docker container 
@@ -2915,43 +2940,22 @@ public class dockerclient implements Idockerclient
              System.out.print("start ubus socket " + "\n");
              
              
-             de.jgsoftwares.guiserverpanel.config.containerconfig openwrtcontainerconfig = new de.jgsoftwares.guiserverpanel.config.containerconfig();
-             ArrayList arrayfeed = openwrtcontainerconfig.openwrt2305disfeedtohttp(arraylistdistfeed);
-             // edit openwrt2305 feed to http 217.160.255.254
-             //openwrt2305disfeedtohttp(stcontainername, arraylistdistfeed);
-             //clear disfeed
-             ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", ":> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-             System.out.print("clear file /etc/opkg/disfeed" + "\n");
+           
              
-             
-             
-             //arrayfeed = new ArrayList();
-             // get ArrayList size
-             for(int i = 0; i <  arrayfeed.size(); i++)
-             {
-                 
-                 String staddtofeed = (String) arrayfeed.get(i);
-                 
-                 ExecCreateCmdResponse execaddstringdistfeed = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "" +  staddtofeed + " >> /etc/opkg/distfeeds.conf").withAttachStdout(true).withAttachStderr(true).exec();
-                 dockerClient.execStartCmd(execaddstringdistfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-                 System.out.print("add String to /etc/opkg/disfeed.conf" + staddtofeed + "\n");
-             
-             }
-             
-               /*
+             /*
                 opkg update
              */
              ExecCreateCmdResponse exeopkgupdate = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("update container with opkg update" + "\n");
              
-             // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             // install package kmod-ixgbe
+             // driver Intel 10 Gigabit Ethernet 
+             ExecCreateCmdResponse execkmodixgbe = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && insmod ixgbe").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execkmodixgbe.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
-                              install openwrt package 
-                              opkg install amd64-microcode
+                              load module with command
+                              insmod ixgbe
                               """);
              
              
@@ -3539,12 +3543,13 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(exeopkgupdate.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("update container with opkg update" + "\n");
    
-                       // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+              // install package kmod-ixgbe
+             // driver Intel 10 Gigabit Ethernet 
+             ExecCreateCmdResponse execkmodixgbe = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && insmod ixgbe").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execkmodixgbe.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
-                              install openwrt package 
-                              opkg install amd64-microcode
+                              load module with command
+                              insmod ixgbe
                               """);
              
              
@@ -4589,12 +4594,13 @@ public class dockerclient implements Idockerclient
              System.out.print("update container with opkg update" + "\n");
              
              
-                       // install package amd64-microcode
-             ExecCreateCmdResponse execinstallamd64microcode = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg install amd64-microcode && reboot").withAttachStdout(true).withAttachStderr(true).exec();
-             dockerClient.execStartCmd(execinstallamd64microcode.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+              // install package kmod-ixgbe
+             // driver Intel 10 Gigabit Ethernet 
+             ExecCreateCmdResponse execkmodixgbe = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "opkg update && insmod ixgbe").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execkmodixgbe.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("""
-                              install openwrt package 
-                              opkg install amd64-microcode
+                              load module with command
+                              insmod ixgbe
                               """);
              
              

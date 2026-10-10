@@ -45,7 +45,7 @@
           <Properties>
             <Property name="columns" type="int" value="30"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Welcome Installer of ipfire&#xa;this is a simple installation wizard for ipfire &#xa;running on host network &#xa;- container name -   -&gt; ipfire &#xa;&#xa;a vpn connection is requried &#xa;the config file is copy to contianer by name &#xa;&#xa;&#xa;firewall - config&#xa;firewall - input&#xa;firewall - output&#xa;iptables&#xa;QoS&#xa;wiregaurd with scan token&#xa;vlans&#xa;ipfire settings &#xa;- squid  - running on docker_gwbridge ipfire container&#xa;"/>
+            <Property name="text" type="java.lang.String" value="Welcome Installer of ipfire&#xa;this is a simple installation wizard for ipfire &#xa;running on host network &#xa;- container name -   -&gt; ipfire &#xa;&#xa;a vpn connection is requried &#xa;the config file is copy to contianer by name &#xa;&#xa;&#xa;firewall - config&#xa;firewall - input&#xa;firewall - output&#xa;iptables&#xa;QoS&#xa;wiregaurd with scan token&#xa;vlans&#xa;ipfire settings &#xa;- squid  - running on docker_gwbridge ipfire container&#xa;&#xa;to get your server online the localhost at &#xa;the image is neeeded to get your server online&#xa;&#xa;at last edit /etc/resolv.conf to gcore &#xa;nameserver 95.85.95.85&#xa;nameserver 2.56.220.2  &#xa;"/>
           </Properties>
         </Component>
       </SubComponents>

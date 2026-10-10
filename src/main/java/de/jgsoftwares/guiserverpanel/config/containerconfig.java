@@ -73,6 +73,10 @@ public class containerconfig implements Icontainerconfig
         String openwrt_telephony = """
                 src/gz openwrt_telephony http://217.160.255.254:8000/openwrt/23.05.packages/telephony""";
         
+        String openwrt_kmod = """
+                              src/gz openwrt_kmod http://217.160.255.254:8000/openwrt/23.05.packages/kmod/
+                              """;
+        
         //String openwt_core = new String("src/gz openwrt_core " + "http://217.160.255.254:8000/openwrt/23.05.packages/packages");
         //String openwrt_base = new String("src/gz openwrt_base " + "http://217.160.255.254:8000/openwrt/23.05.packages/base");
         //String openwrt_luci = new String("src/gz openwrt_luci" + "http://217.160.255.254:8000/openwrt/23.05.packages/luci");
@@ -86,6 +90,7 @@ public class containerconfig implements Icontainerconfig
         arraylistdistfeed.add(openwrt_packages);
         arraylistdistfeed.add(openwrt_routing);
         arraylistdistfeed.add(openwrt_telephony);
+        arraylistdistfeed.add(openwrt_kmod);
         
         return arraylistdistfeed;    
     }

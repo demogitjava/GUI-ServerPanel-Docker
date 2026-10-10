@@ -1,20 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package de.jgsoftwares.guiserverpanel.frames.ipfire;
+
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 /**
  *
- * @author root
+ * @author hoscho
  */
 public class SouthPanel extends javax.swing.JPanel {
 
+   
+    
+    public static int pageindex;
+    
+   
     /**
      * Creates new form SouthPanel
      */
     public SouthPanel() {
         initComponents();
+       
+        
+        
     }
 
     /**
@@ -80,20 +88,57 @@ public class SouthPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // next button
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        pageindex = Ipfire_installerframe.panelindex;
+    
+        
+        
+        de.jgsoftwares.guiserverpanel.frames.ipfire.Ipfire_installerframe installerframe = new de.jgsoftwares.guiserverpanel.frames.ipfire.Ipfire_installerframe();
+        installerframe.getPanelindex();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    
+     public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1, Integer panelindex) {
+        String stpanelindex = String.valueOf(panelindex);
+        jLabel1.setText(stpanelindex);
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+    
+    
+    public void pagevalueindex(int pageindex)
+    {
+       
+        setjLabel1(jLabel1, pageindex);
+   
+    }
+    
+    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
