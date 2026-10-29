@@ -19,8 +19,11 @@ docker network rm ingress
 docker gwbridge
 
     docker network create --subnet 10.255.255.0/24 --opt com.docker.network.bridge.name=docker_gwbridge --opt com.docker.network.bridge.enable_icc=true --scope global --opt com.docker.network.bridge.enable_ip_masquerade=true docker_gwbridge
-    docker network create --driver overlay --ingress --subnet 10.255.255.0/24 --scope global --gateway 10.255.255.1 --internal=true --opt com.docker.network.driver.mtu=1500 --opt com.docker.network.driver.overlay.vxlanid_list=0 ingress
-
+ 
+NETWORK ID     NAME              DRIVER    SCOPE
+4a339xxxxxxx   docker_gwbridge   bridge    global
+a54a7xxxxxxx   host              host      local
+5a17bxxxxxxx   none              null      local
 
 add interface to docker_gwbridge 
 
@@ -31,45 +34,6 @@ add interface to docker_gwbridge
 
 
 
-create ingress network docker
-
-    docker network create --driver overlay --ingress --subnet 10.255.255.0/24 --scope global --gateway 10.255.255.1 --internal=true --opt com.docker.network.driver.mtu=1500 --opt com.docker.network.driver.overlay.vxlanid_list=0 ingress
-
-    mainpanel
-    network config
-    root@demogitjava:~# docker network inspect ingress
-    [
-        {
-            "Name": "ingress",
-            "Id": "iwizhgp20glnkq2dtm0rgkyiq",
-            "Created": "2026-09-04T08:31:47.021051136Z",
-            "Scope": "swarm",
-            "Driver": "overlay",
-            "EnableIPv6": false,
-            "IPAM": {
-                "Driver": "default",
-                "Options": null,
-                "Config": [
-                    {
-                        "Subnet": "10.255.255.0/24",
-                        "Gateway": "10.255.255.1"
-                    }
-                ]
-            },
-            "Internal": false,
-            "Attachable": false,
-            "Ingress": true,
-            "ConfigFrom": {
-                "Network": ""
-            },
-            "ConfigOnly": false,
-            "Containers": null,
-            "Options": {
-                "com.docker.network.driver.overlay.vxlanid_list": "4098"
-            },
-            "Labels": null
-        }
-    ]
 
     docker_gwbridge /24 subnet 
      root@demogitjava:~# route -n

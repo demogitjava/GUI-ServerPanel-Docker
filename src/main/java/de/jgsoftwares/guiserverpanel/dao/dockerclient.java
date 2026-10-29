@@ -3791,6 +3791,16 @@ public class dockerclient implements Idockerclient
              //dockerClient.execStartCmd(networkspeedeth0.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              //System.out.print("set network speed to 100 mbit half with ethtool -- command -- ethtool -s eth0 speed 100 duplex half" + "\n");
              
+               // resolv.conf
+             // cat /dev/null > /etc/resolv.conf
+             String clearresolvconf = "/etc/resolv.conf";
+             ExecCreateCmdResponse execlearresolvconf = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "cat /dev/null > " + clearresolvconf).withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execlearresolvconf.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("""
+                              flush file /etc/resolv.conf
+                              """);
+             
+             
              // delete provider dns2 file
              ExecCreateCmdResponse setdns1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "rm -rf /var/run/dns1").withAttachStdout(true).withAttachStderr(true).exec();
              dockerClient.execStartCmd(setdns1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
@@ -3822,6 +3832,17 @@ public class dockerclient implements Idockerclient
              dockerClient.execStartCmd(stfibre.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
              System.out.print("run command ethtool -s eth0 port fibre" + "\n");
              
+             
+             //nameserver dnsip1
+             ExecCreateCmdResponse execaddstringpublicdnsip1 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns1 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringpublicdnsip1.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("write String to "  + stdns1 + " >> /etc/resolv.conf" + "to ipfire container " + "\n");
+            
+             //nameserver dnsip2
+             ExecCreateCmdResponse execaddstringpublicdnsip2 = dockerClient.execCreateCmd(container.getId()).withCmd("sh", "-c", "echo " + "nameserver " + stdns2 + " >> /etc/resolv.conf").withAttachStdout(true).withAttachStderr(true).exec();
+             dockerClient.execStartCmd(execaddstringpublicdnsip2.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("write String to" +  stdns2 + " >> /etc/resolv.conf" + " to ipfire landingapge " + "\n");
+             
              // local commit container
              // jgsoftwares/ipfire:cloud 
              dockerClient.commitCmd("ipfire").withRepository("jgsoftwares/ipfire").withTag(stimagetag).exec();
@@ -3849,15 +3870,25 @@ public class dockerclient implements Idockerclient
                 // access to ipfire container over vpn
                 // https://192.168.10.56:444
                 ExposedPort tcp444 = ExposedPort.tcp(444);
+                
+                // dns 
+                ExposedPort tcp53 = ExposedPort.tcp(53);
+                ExposedPort udp53 = ExposedPort.udp(53);
+                
+                 ExposedPort tcp853 = ExposedPort.tcp(853);
                 // port 53 for dhcp
                 //ExposedPort tcp53 = ExposedPort.tcp(53);
                 
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                // ipfire apache
                 portBindings.bind(tcp444, Ports.Binding.bindPort(444));
-                //portBindings.bind(tcp53, Ports.Binding.bindPort(53));
+                //tcp udp dns 
+                portBindings.bind(tcp53, Ports.Binding.bindPort(53));
+                portBindings.bind(udp53, Ports.Binding.bindPort(53));
+                // dns tls 853
+                portBindings.bind(tcp853, Ports.Binding.bindPort(853));
                 
-             
                  // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
            
