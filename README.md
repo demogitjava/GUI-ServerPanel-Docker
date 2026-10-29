@@ -19,11 +19,10 @@ docker network rm ingress
 docker gwbridge
 
     docker network create --subnet 10.255.255.0/24 --opt com.docker.network.bridge.name=docker_gwbridge --opt com.docker.network.bridge.enable_icc=true --scope global --opt com.docker.network.bridge.enable_ip_masquerade=true docker_gwbridge
- 
-NETWORK ID     NAME              DRIVER    SCOPE
-4a339xxxxxxx   docker_gwbridge   bridge    global
-a54a7xxxxxxx   host              host      local
-5a17bxxxxxxx   none              null      local
+    NETWORK ID     NAME              DRIVER    SCOPE
+    4a339xxxxxxx   docker_gwbridge   bridge    global
+    a54a7xxxxxxx   host              host      local
+    5a17bxxxxxxx   none              null      local
 
 add interface to docker_gwbridge 
 
@@ -202,6 +201,7 @@ for DarkTabaco
 compile project with
 
 > mvn package
+
 
 
 
