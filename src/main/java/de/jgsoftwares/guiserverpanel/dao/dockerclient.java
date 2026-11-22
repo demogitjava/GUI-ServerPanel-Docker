@@ -3930,6 +3930,16 @@ public class dockerclient implements Idockerclient
                 // wiregaurd 
                 ExposedPort udp51820 = ExposedPort.udp(51820); 
                 
+                // docker ports
+                ExposedPort tcp2375 = ExposedPort.tcp(2375); 
+                ExposedPort tcp2377 = ExposedPort.tcp(2377); 
+                // 7946
+                ExposedPort tcp7946 = ExposedPort.tcp(7946); 
+                ExposedPort udp7946 = ExposedPort.udp(7946); 
+                // 4789
+                ExposedPort tcp4789 = ExposedPort.tcp(4789); 
+                ExposedPort udp4789 = ExposedPort.udp(4789); 
+                
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp25, Ports.Binding.bindPort(25));
@@ -3984,6 +3994,15 @@ public class dockerclient implements Idockerclient
                 
                 // wireguard 
                 portBindings.bind(udp51820, Ports.Binding.bindPort(51820));
+                
+                // docker ports
+                portBindings.bind(tcp2375, Ports.Binding.bindPort(2375));
+                portBindings.bind(tcp2377, Ports.Binding.bindPort(2377));
+                portBindings.bind(tcp7946, Ports.Binding.bindPort(7946));
+                portBindings.bind(udp7946, Ports.Binding.bindPort(7946));
+                portBindings.bind(tcp4789, Ports.Binding.bindPort(4789));
+                portBindings.bind(udp4789, Ports.Binding.bindPort(4789));
+                
                 
                  // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
