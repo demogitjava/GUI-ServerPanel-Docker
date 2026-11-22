@@ -119,7 +119,7 @@ public class dockerclient implements Idockerclient
        //dockerClient = DockerClientBuilder.getInstance().build();  
        
         DockerClientConfig dockerClientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
-        .withDockerHost("tcp://192.168.10.56:2375")
+        .withDockerHost("tcp://10.255.255.1:2375")
         .withDockerTlsVerify(false)
         .build(); 
         
@@ -3866,28 +3866,124 @@ public class dockerclient implements Idockerclient
           try
           {
         
-                // ipfire http port 
-                // access to ipfire container over vpn
-                // https://192.168.10.56:444
-                ExposedPort tcp444 = ExposedPort.tcp(444);
+              
+                
+                // smtp 
+                ExposedPort tcp25 = ExposedPort.tcp(25);
                 
                 // dns 
                 ExposedPort tcp53 = ExposedPort.tcp(53);
                 ExposedPort udp53 = ExposedPort.udp(53);
                 
-                 ExposedPort tcp853 = ExposedPort.tcp(853);
+                // ntp time
+                ExposedPort udp123 = ExposedPort.udp(123); 
+                
+                // chrony
+                ExposedPort udp323 = ExposedPort.udp(323); 
+                
+                 // http 1 - http2
+                ExposedPort tcp80 = ExposedPort.tcp(80);
+                // http 3
+                ExposedPort udp80 = ExposedPort.udp(80);
+                
+                // https
+                ExposedPort tcp443 = ExposedPort.tcp(443);
+                
+                // ipfire http port 
+                // access to ipfire container over vpn
+                // https://192.168.10.56:444
+                ExposedPort tcp444 = ExposedPort.tcp(444);
+                
+                 // email smtp
+                ExposedPort tcp465 = ExposedPort.tcp(465);
+                ExposedPort tcp587 = ExposedPort.tcp(587);
+
+                // tls
+                ExposedPort tcp853 = ExposedPort.tcp(853);
                 // port 53 for dhcp
                 //ExposedPort tcp53 = ExposedPort.tcp(53);
                 
+                // pop3
+                ExposedPort tcp995 = ExposedPort.tcp(995);
+                 
+                // apache fileserver 
+                // tcp 8000
+                // udp 8000 http3
+                ExposedPort tcp8000 = ExposedPort.tcp(8000);
+                ExposedPort udp8000 = ExposedPort.udp(8000); 
+                
+                
+                 
+                // elster or openwrt - luci web
+                ExposedPort udp8081 = ExposedPort.udp(8081); 
+                ExposedPort tcp8081 = ExposedPort.udp(8081); 
+                
+                // ttypd
+                ExposedPort tcp7681 = ExposedPort.udp(7681); 
+                
+                  // website builder
+                ExposedPort tcp8442 = ExposedPort.tcp(8442);
+                
+                // dns over tls
+                ExposedPort tcp8953 = ExposedPort.udp(8953); 
+                
+                // wiregaurd 
+                ExposedPort udp51820 = ExposedPort.udp(51820); 
+                
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
-                // ipfire apache
-                portBindings.bind(tcp444, Ports.Binding.bindPort(444));
+                portBindings.bind(tcp25, Ports.Binding.bindPort(25));
+               
                 //tcp udp dns 
                 portBindings.bind(tcp53, Ports.Binding.bindPort(53));
                 portBindings.bind(udp53, Ports.Binding.bindPort(53));
+                
+                // http 2 - tcp
+                portBindings.bind(tcp80, Ports.Binding.bindPort(80));
+                // http3 - udp
+                portBindings.bind(udp80, Ports.Binding.bindPort(80));
+                
+                // ntp time 
+                portBindings.bind(udp123, Ports.Binding.bindPort(123));
+                
+                // chrony 
+                portBindings.bind(udp323, Ports.Binding.bindPort(323));
+                
+                // https 
+                portBindings.bind(tcp443, Ports.Binding.bindPort(443));
+                
+                // ipfire apache
+                portBindings.bind(tcp444, Ports.Binding.bindPort(444));
+                
+                // smtp
+                portBindings.bind(tcp465, Ports.Binding.bindPort(465));
+                portBindings.bind(tcp587, Ports.Binding.bindPort(587));
+                
                 // dns tls 853
                 portBindings.bind(tcp853, Ports.Binding.bindPort(853));
+                
+                // pop3
+                portBindings.bind(tcp995, Ports.Binding.bindPort(995));
+                 
+                // http fileserver 
+                portBindings.bind(tcp8000, Ports.Binding.bindPort(8000));
+                portBindings.bind(udp8000, Ports.Binding.bindPort(8000));
+                
+                // openwrt webluci - or elster
+                portBindings.bind(udp8081, Ports.Binding.bindPort(8081));
+                portBindings.bind(tcp8081, Ports.Binding.bindPort(8081));
+                
+                // ttypd
+                portBindings.bind(tcp7681, Ports.Binding.bindPort(7681));
+                
+                // websitebuilder
+                portBindings.bind(tcp8442, Ports.Binding.bindPort(8442));
+                
+                // dns tls
+                portBindings.bind(tcp8953, Ports.Binding.bindPort(8953));
+                
+                // wireguard 
+                portBindings.bind(udp51820, Ports.Binding.bindPort(51820));
                 
                  // dns server config
                 de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig publicdnsserverconfig = new de.jgsoftwares.guiserverpanel.config.PublicDNSServerconfig();
