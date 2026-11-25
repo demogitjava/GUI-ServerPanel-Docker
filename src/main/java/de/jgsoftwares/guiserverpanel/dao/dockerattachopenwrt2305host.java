@@ -70,7 +70,7 @@ public class dockerattachopenwrt2305host //implements Runnable
                 .build();
 
       
-        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(50);
+        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(0);
                 //.withConnectTimeout(5000) // Verbindungstimeout in ms
                 //.withReadTimeout(30000);  // Read-Timeout in ms
 
