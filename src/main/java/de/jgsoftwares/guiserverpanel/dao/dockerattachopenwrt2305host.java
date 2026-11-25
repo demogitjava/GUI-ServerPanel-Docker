@@ -10,14 +10,6 @@ import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.AttachContainerResultCallback;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
-import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 
 /**
  *
@@ -70,7 +62,7 @@ public class dockerattachopenwrt2305host //implements Runnable
                 .build();
 
       
-        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(0);
+        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(null);
                 //.withConnectTimeout(5000) // Verbindungstimeout in ms
                 //.withReadTimeout(30000);  // Read-Timeout in ms
 
