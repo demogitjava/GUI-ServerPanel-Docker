@@ -79,6 +79,12 @@ public class dockerattachopenwrt2305host //implements Runnable
                 .withDockerCmdExecFactory(nettyFactory)
                 .build();
         
+       
+        ExecCreateCmdResponse execlearhost = dockerClientnetty.execCreateCmd("openwrt2305host").withCmd("sh", "-c", "ip link set dev lo mtu 1500 && ifconfig lo down && ip addr del 127.0.0.1/8 dev lo").withAttachStdout(true).withAttachStderr(true).exec();
+        dockerClientnetty.execStartCmd(execlearhost.getId()).exec(new ExecStartResultCallback(System.out, System.err));
+        //System.out.print("flush file /etc/host");
+        
+
         containerId = stcontainername;
         
        
@@ -139,16 +145,7 @@ public class dockerattachopenwrt2305host //implements Runnable
     public void commandforattachcontainer()
     {
          
-        // disable interfaces 
-        // the console only available over vpn 
-        ExecCreateCmdResponse execdisableinterfaces = dockerClient.execCreateCmd("openwrt2305host").withCmd("sh", "-c", "ifconfig lo down && ifconfig eth0 down && ip addr flush dev lo && ip addr flush eth0").withAttachStdout(true).withAttachStderr(true).exec();
-        try {
-            dockerClient.execStartCmd(execdisableinterfaces.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
-        } catch (InterruptedException ex) {
-            System.getLogger(dockerclient.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-        System.out.print("disable interfaces only shell access over vpn" + "\n");
-        
+      
     }
 
    
