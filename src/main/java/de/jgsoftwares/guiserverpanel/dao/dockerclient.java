@@ -19,8 +19,6 @@ import com.github.dockerjava.api.model.Capability;
 import com.github.dockerjava.api.model.Isolation;
 import com.github.dockerjava.api.model.RestartPolicy;
 import com.github.dockerjava.api.model.Volume;
-import com.github.dockerjava.core.DefaultDockerClientConfig;
-import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.core.command.PullImageResultCallback;
 import de.jgsoftwares.guiserverpanel.frames.ConfigPanel;
@@ -54,29 +52,14 @@ import java.io.PipedOutputStream;
 
 
 
-import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.async.ResultCallback;
-import com.github.dockerjava.api.model.Frame;
-import com.github.dockerjava.core.DockerClientBuilder;
-import java.io.Closeable;
 import java.io.IOException;
 
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.AttachContainerCmd;
-import com.github.dockerjava.api.command.DockerCmdExecFactory;
 import com.github.dockerjava.api.model.ContainerNetwork;
-import com.github.dockerjava.api.model.StreamType;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
-import com.github.dockerjava.core.command.AttachContainerResultCallback;
-import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
-import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
-import com.github.dockerjava.transport.DockerHttpClient;
-import java.time.Duration;
 import java.util.Map;
-import java.util.Set;
-import javax.swing.JButton;
 
 /**
  *
