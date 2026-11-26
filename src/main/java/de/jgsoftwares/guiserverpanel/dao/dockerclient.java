@@ -55,10 +55,12 @@ import java.io.PipedOutputStream;
 import java.io.IOException;
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.DockerCmdExecFactory;
 import com.github.dockerjava.api.model.ContainerNetwork;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
+import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
 import java.util.Map;
 
 /**
@@ -101,16 +103,34 @@ public class dockerclient implements Idockerclient
        // over docker.sock
        //dockerClient = DockerClientBuilder.getInstance().build();  
        
-        DockerClientConfig dockerClientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
-        .withDockerHost("tcp://10.255.255.1:2375")
-        .withDockerTlsVerify(false)
-        .build(); 
         
-        
-       // DockerClient dockerClient = DockerClientImpl.getInstance(dockerClientConfig);
-       //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
-       setDockerClient(dockerClient, dockerClientConfig);
+       /*
+            DockerClientConfig dockerClientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
+            .withDockerHost("tcp://10.255.255.1:2375")
+            .withDockerTlsVerify(false)
+            .build(); 
 
+        
+            // DockerClient dockerClient = DockerClientImpl.getInstance(dockerClientConfig);
+            //dockerClient = DockerClientBuilder.getInstance("tcp://192.168.10.56:2375").build();
+            setDockerClient(dockerClient, dockerClientConfig);
+        */
+        
+        DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
+                .withDockerHost("tcp://10.255.255.1:2375")
+                .build();
+
+      
+        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(null);
+                //.withConnectTimeout(5000) // Verbindungstimeout in ms
+                //.withReadTimeout(30000);  // Read-Timeout in ms
+
+       
+        dockerClient = DockerClientBuilder.getInstance(config)
+                .withDockerCmdExecFactory(nettyFactory)
+                .build();
+        
+        
        dockerimages = dockerClient.listImagesCmd().exec();
        dockercontainers = dockerClient.listContainersCmd().exec();
     }
@@ -248,6 +268,11 @@ public class dockerclient implements Idockerclient
     public void removecontainerdockerclient(String stdockerclient)
     {
         InspectContainerResponse container = dockerClient.inspectContainerCmd("" + stdockerclient.toString()).exec();
+
+        // stop container
+        dockerClient.stopContainerCmd(container.getId()).exec();
+        
+        // remove container command
         dockerClient.removeContainerCmd(container.getId()).exec();
         //System.out.println("Container " + container.getName() + " removed");
     }
