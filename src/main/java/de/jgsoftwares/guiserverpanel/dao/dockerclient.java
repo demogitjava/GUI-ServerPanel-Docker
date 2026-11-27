@@ -63,6 +63,18 @@ import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
 import java.util.Map;
 
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.CreateNetworkResponse;
+import com.github.dockerjava.api.model.Network;
+import com.github.dockerjava.api.model.Network.Ipam;
+import com.github.dockerjava.api.model.Network.Ipam.Config;
+
+import com.github.dockerjava.api.command.CreateContainerResponse;
+import com.github.dockerjava.api.model.ContainerNetwork;
+import com.github.dockerjava.api.model.HostConfig;
+
+import com.github.dockerjava.core.command.CreateContainerCmdImpl.NetworkingConfig;
+
 /**
  *
  * @author hoscho
@@ -96,6 +108,7 @@ public class dockerclient implements Idockerclient
     public List<Image> dockerimages;
     public List<Container> dockercontainers;
     
+
     
     
     public dockerclient()
@@ -2310,12 +2323,12 @@ public class dockerclient implements Idockerclient
                 
                 
                 
-                ExposedPort tcp1527 = ExposedPort.tcp(1527);
+                //ExposedPort tcp1527 = ExposedPort.tcp(1527);
                 
                 Ports portBindings = new Ports();
                 //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 portBindings.bind(tcp80, Ports.Binding.bindPort(80));
-                portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
+                //portBindings.bind(tcp1527, Ports.Binding.bindPort(1527));
                 
                 portBindings.getBindings();
           
@@ -2478,6 +2491,9 @@ public class dockerclient implements Idockerclient
                 System.out.print("cpuQuota " + hostConfig.withCpuQuota(Long.MIN_VALUE));
                 
 
+               
+                
+                
                 //hostConfig.withCpuRealtimePeriod(Long.MIN_VALUE);
                 //hostConfig.getCpuRealtimePeriod();
                 
@@ -2523,12 +2539,14 @@ public class dockerclient implements Idockerclient
                 
             }
           
-            
+            String networkName = "vlanlandingpage-net";
+            String staticIp = "10.255.255.1";
+
             // docker run  
             CreateContainerResponse container = null;
       
             switch(contsystem)
-                {
+            {
                   
                 case "openwrt":
                     
@@ -2547,7 +2565,9 @@ public class dockerclient implements Idockerclient
                     .withVolumes(ubussocket)
                     //.withCmd(cmd)
                     .withHostConfig(hostConfig)
-                    .withExposedPorts(tcp80, tcp1527)        
+                    
+                    //.withExposedPorts(tcp80, tcp1527)    
+                    .withExposedPorts(tcp80)  
                     //.withIpv4Address(ConfigPanel.stwanip) // not host only user defined network 
                     //.getExposedPorts(stgetexposedport)
                     // .withExposedPorts(tcp1527)

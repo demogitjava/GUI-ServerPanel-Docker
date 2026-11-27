@@ -193,7 +193,12 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel20.setText("used container interface");
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "vlan0", "eth0" }));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "docker_gwbridge", "vlan0", "eth0" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("?");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -504,6 +509,10 @@ public class ConfigPanel extends javax.swing.JPanel {
          "docker run start a simple container " + "\n" + "like " + 
                  "docker run -i " + "\n");
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
