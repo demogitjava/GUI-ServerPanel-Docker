@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.ExecCreateCmdResponse;
+import com.github.dockerjava.api.model.AuthResponse;
+import com.github.dockerjava.core.command.ExecStartResultCallback;
+import static de.jgsoftwares.guiserverpanel.dao.dockerclient.dockerClient;
 
 /**
  *
@@ -53,6 +57,10 @@ public class Docker extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -74,10 +82,21 @@ public class Docker extends javax.swing.JPanel {
         });
 
         jButton2.setText("logout");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
+
+        jLabel3.setText("email");
+
+        jLabel4.setText("docker url - https://index.docker.io/v1/ ");
+
+        jLabel5.setText("url to ip 10.255.255.1:2375");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,6 +109,18 @@ public class Docker extends javax.swing.JPanel {
             .addComponent(jTextField1)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTextField2)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,11 +133,19 @@ public class Docker extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -119,13 +158,15 @@ public class Docker extends javax.swing.JPanel {
         String stpassword2 = null;
         String serverurl = null;
         String stemail = null;
-        
+         
         
         stlogin = jTextField1.getText();
         stpassword2 = jPasswordField1.getText();
          // https://registry.hub.docker.com
          // https://index.docker.io/v1\
-        serverurl = "https://registry.hub.docker.com";
+        serverurl = "https://index.docker.io/v1";
+        
+        stemail = jTextField2.getText();
         // login over dockerclient api
         //AuthConfig authConfig = new AuthConfig()
         //      .withUsername(stlogin)
@@ -135,14 +176,33 @@ public class Docker extends javax.swing.JPanel {
     //.withDockerConfig("/home/baeldung/.docker/")
     //.withDockerTlsVerify("1")
         
-        DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .withRegistryEmail(stlogin)
-                .withRegistryPassword(stpassword2)
-                .withDockerHost("tcp://192.168.10.56:2375").build();
+        //DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
+        //        .withRegistryEmail(stlogin)
+        //        .withRegistryPassword(stpassword2)
+        //        .withDockerHost("tcp://10.255.255.1:2375").build();
 
+        
+        AuthConfig authConfig = new AuthConfig()
+        .withUsername(stlogin)
+        .withPassword(stpassword2)
+        .withEmail(stemail) // Optional for most modern registries
+        .withRegistryAddress("https://index.docker.io/v1/"); // Or "registry.example.com"
+
+        
+
+        AuthResponse response = dockerClient.authCmd()
+                .withAuthConfig(authConfig)
+                .exec();
+        
+        
+        
+        System.out.println("Login status: " + response.getStatus());
+        
+        
+          
     //DockerClient dockerClient = DockerClientBuilder.getInstance(config).build();
         
-      DockerClient dockerClient = DockerClientBuilder.getInstance(config).build();
+      //DockerClient dockerClient = DockerClientBuilder.getInstance(authConfig).build();
         
         //clientConfig = DefaultDockerClientConfig.createDefaultConfigBuilder()
         //.withRegistryUrl(serverurl)
@@ -152,10 +212,15 @@ public class Docker extends javax.swing.JPanel {
         //.build();
         
         //return DockerClientBuilder.getInstance(clientConfig).build();
-        clientConfig.getDockerConfig();
+       // clientConfig.getDockerConfig();
               
          
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            de.jgsoftwares.guiserverpanel.dao.dockerclient dockerclient = new de.jgsoftwares.guiserverpanel.dao.dockerclient();
+            dockerclient.logoutfromdocker();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -163,6 +228,9 @@ public class Docker extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -170,5 +238,6 @@ public class Docker extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

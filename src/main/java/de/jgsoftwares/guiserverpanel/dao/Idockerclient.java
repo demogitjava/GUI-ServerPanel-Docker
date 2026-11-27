@@ -51,5 +51,5 @@ public interface Idockerclient {
     
     public void restartallcontainers();
     public void attachopenwrt2305host(String stdmzcontainerattach, String stcontainername);
-
+    public void logoutfromdocker();
 }

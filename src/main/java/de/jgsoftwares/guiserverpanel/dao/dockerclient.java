@@ -1,15 +1,12 @@
 package de.jgsoftwares.guiserverpanel.dao;
 
-import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.ExposedPort;
-import com.github.dockerjava.api.model.Network;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.exception.NotFoundException;
-import com.github.dockerjava.api.model.HostConfig;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import java.io.BufferedReader;
@@ -54,9 +51,7 @@ import java.io.PipedOutputStream;
 
 import java.io.IOException;
 
-import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.DockerCmdExecFactory;
-import com.github.dockerjava.api.model.ContainerNetwork;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
@@ -64,16 +59,12 @@ import com.github.dockerjava.netty.NettyDockerCmdExecFactory;
 import java.util.Map;
 
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.command.CreateNetworkResponse;
 import com.github.dockerjava.api.model.Network;
-import com.github.dockerjava.api.model.Network.Ipam;
-import com.github.dockerjava.api.model.Network.Ipam.Config;
 
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.model.ContainerNetwork;
 import com.github.dockerjava.api.model.HostConfig;
 
-import com.github.dockerjava.core.command.CreateContainerCmdImpl.NetworkingConfig;
 
 /**
  *
@@ -5006,5 +4997,28 @@ public class dockerclient implements Idockerclient
     }
     
     
+    @Override 
+    public void logoutfromdocker()
+    {
+         try
+            {
+                 String containerid = "openwrt2305host";
+            
+                 //sdockerClient = (DockerClient) DockerClientBuilder.getInstance();
+                  getDockerClient(dockerClient);
+                
+                
+                String containerID = dockerClient.inspectContainerCmd(containerid).getContainerId();
+                
+                
+                 ExecCreateCmdResponse execclearfeed = dockerClient.execCreateCmd(containerID).withCmd("sh", "-c", "docker logout").withAttachStdout(false).withAttachStderr(false).exec();
+             dockerClient.execStartCmd(execclearfeed.getId()).exec(new ExecStartResultCallback(System.out, System.err)).awaitCompletion();
+             System.out.print("docker logout over container openwrt2305host");
+            } catch(Exception e)
+            {
+                
+            }
+        
+    }
   
 }
