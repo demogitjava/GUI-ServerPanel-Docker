@@ -66,6 +66,12 @@ import com.github.dockerjava.api.model.ContainerNetwork;
 import com.github.dockerjava.api.model.HostConfig;
 
 
+import com.github.dockerjava.api.model.Info;
+import com.github.dockerjava.api.model.InfoRegistryConfig;
+import com.github.dockerjava.api.model.InfoRegistryConfig.IndexConfig;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author hoscho
@@ -120,8 +126,8 @@ public class dockerclient implements Idockerclient
             setDockerClient(dockerClient, dockerClientConfig);
         */
         
-        
       
+
         
         //------------------------
         
@@ -145,8 +151,26 @@ public class dockerclient implements Idockerclient
                 .withDockerCmdExecFactory(nettyFactory)
                 .build();
         
+        // insecure registry
+        Info info = dockerClient.infoCmd().exec();
+        InfoRegistryConfig registryConfig = info.getRegistryConfig();
         
-        // close localhost config
+        
+        ArrayList arrayregistry = (ArrayList) registryConfig.getInsecureRegistryCIDRs();
+        arrayregistry.removeAll(registryConfig.getInsecureRegistryCIDRs());
+        
+      
+      
+        
+        
+        
+        List<String> insecureCidrs = registryConfig.getInsecureRegistryCIDRs();
+        System.out.println("Insecure Registry CIDRs: " + insecureCidrs);
+        
+        insecureCidrs.add("10.255.255.1/32");
+       
+      
+        
         
         
         
