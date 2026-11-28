@@ -120,12 +120,23 @@ public class dockerclient implements Idockerclient
             setDockerClient(dockerClient, dockerClientConfig);
         */
         
+        
+      
+        
+        //------------------------
+        
+        // active config
         DockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
                 .withDockerHost("tcp://10.255.255.1:2375")
                 .build();
-
-      
-        DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(null);
+       
+        config.getDockerHost();
+        
+                
+        //DockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(null);
+        NettyDockerCmdExecFactory nettyFactory = new NettyDockerCmdExecFactory().withConnectTimeout(null);
+        nettyFactory.init(config);
+        
                 //.withConnectTimeout(5000) // Verbindungstimeout in ms
                 //.withReadTimeout(30000);  // Read-Timeout in ms
 
@@ -133,6 +144,10 @@ public class dockerclient implements Idockerclient
         dockerClient = DockerClientBuilder.getInstance(config)
                 .withDockerCmdExecFactory(nettyFactory)
                 .build();
+        
+        
+        // close localhost config
+        
         
         
        dockerimages = dockerClient.listImagesCmd().exec();
