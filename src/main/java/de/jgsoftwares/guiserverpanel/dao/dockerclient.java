@@ -168,7 +168,7 @@ public class dockerclient implements Idockerclient
         System.out.println("Insecure Registry CIDRs: " + insecureCidrs);
         
         insecureCidrs.add("10.255.255.1/32");
-       
+        System.out.print("insecureCidrs 10.255.255.1/32");
       
         
         

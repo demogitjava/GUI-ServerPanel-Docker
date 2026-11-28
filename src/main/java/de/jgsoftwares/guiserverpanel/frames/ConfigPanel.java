@@ -175,7 +175,7 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel16.setText("list iptables rules with");
 
-        jLabel17.setText("iptables -L -n");
+        jLabel17.setText("iptables -L -v --line-numbers");
 
         jLabel9.setText("openwrt containers run with full config settings like date and ");
 
@@ -217,7 +217,7 @@ public class ConfigPanel extends javax.swing.JPanel {
 
         jLabel25.setText("for docker engine 29 --  dockerd --firewall-backend=nftables ");
 
-        jLabel27.setText("docker swarm init");
+        jLabel27.setText("docker swarm leave --force");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
